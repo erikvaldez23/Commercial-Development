@@ -101,7 +101,7 @@ const HeroSection = () => {
         color: "white",
         position: "relative",
         overflow: "hidden",
-        minHeight: "90vh",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -130,7 +130,7 @@ const HeroSection = () => {
       />
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>
-        <Box sx={{ py: { xs: 6, md: 8 }, textAlign: "center" }}>
+        <Box sx={{ py: { xs: 6, md: 8 }, textAlign: "center", justifyContent: "center" }}>
           <Box
             component={motion.div}
             initial={{ opacity: 0 }}

@@ -7,36 +7,52 @@ import {
   Link,
   useMediaQuery,
   useTheme,
+  Container,
+  Divider,
 } from "@mui/material";
-import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { motion } from "framer-motion";
 import { Link as RouterLink } from "react-router-dom";
 
+// Updated content for a financial real estate investment company
 const quickLinksData = [
   {
-    title: "Services",
+    title: "Investment Opportunities",
     links: [
-      { text: "Vehicle Window Tinting", to: "/services/vehicle-window-tinting" },
-      { text: "Tesla Window Tinting", to: "/services/tesla-window-tinting" },
-      { text: "Commercial Window Tinting", to: "/services/commercial-window-tinting" },
-      { text: "Residential Window Tinting", to: "/services/residential-window-tinting" },
-      { text: "Vehicle Paint Correction", to: "/services/vehicle-paint-correction" },
-      { text: "Vehicle Paint Protection", to: "/services/vehicle-paint-protection" },
-      { text: "Headlight & Tailight Services", to: "/services/headlight-services" },
-      { text: "Windshield Protection Film", to: "/services/windshield-protection-film" },
+      { text: "Commercial Real Estate Funds", to: "/investments/commercial-real-estate" },
+      { text: "Multifamily Property Portfolios", to: "/investments/multifamily-properties" },
+      { text: "Real Estate Development Projects", to: "/investments/development-projects" },
+      { text: "Retail & Office Investments", to: "/investments/retail-office" },
+      { text: "Industrial Property Funds", to: "/investments/industrial-properties" },
+      { text: "Hospitality & Resort Ventures", to: "/investments/hospitality-resorts" },
+      { text: "Mixed-Use Development Opportunities", to: "/investments/mixed-use" },
+      { text: "International Real Estate Markets", to: "/investments/international" },
     ],
   },
   {
-    title: "Quick Links",
+    title: "Investor Resources",
     links: [
-      { text: "Frequently Asked Questions", to: "/support" },
-      { text: "Gallery", to: "/gallery" },
-      { text: "Blogs (Coming Soon!)", to: "/blogs" },
-      { text: "Vehicle Window Tint Viewer", to: "/simulators/vehicle-window-tinting" },
-      { text: "Tesla Window Tint Viewer", to: "/simulators/tesla-window-tinting" },
-      { text: "Paint Protection Film Viewer", to: "/simulators/vehicle-paint-protection" },
-      { text: "Commercial Window Film Viewer", to: "/simulators/commercial-window-tinting" },
-      { text: "Residential Window Film Viewer", to: "/simulators/residential-window-tinting" },
+      { text: "Investment Strategy Guides", to: "/resources/strategy-guides" },
+      { text: "Market Research & Analysis", to: "/resources/market-research" },
+      { text: "Due Diligence Toolkit", to: "/resources/due-diligence" },
+      { text: "ROI Calculator", to: "/tools/roi-calculator" },
+      { text: "Cash Flow Projections", to: "/tools/cash-flow-projections" },
+      { text: "Tax Benefits Analysis", to: "/tools/tax-benefits" },
+      { text: "Portfolio Diversification Planner", to: "/tools/portfolio-planner" },
+      { text: "Investment Property Locator", to: "/tools/property-locator" },
+    ],
+  },
+  {
+    title: "For Investors",
+    links: [
+      { text: "Current Investor Login", to: "/investor-portal" },
+      { text: "Performance Reports", to: "/reports/performance" },
+      { text: "Quarterly Investor Updates", to: "/reports/quarterly-updates" },
+      { text: "Investment Webinars", to: "/events/webinars" },
+      { text: "Financial Education Center", to: "/education" },
+      { text: "Schedule a Consultation", to: "/consultation" },
+      { text: "Investment FAQ", to: "/resources/faq" },
+      { text: "Contact Investor Relations", to: "/contact/investor-relations" },
     ],
   },
 ];
@@ -44,93 +60,194 @@ const quickLinksData = [
 const QuickLinks = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMedium = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Box
       id="quick-links"
       sx={{
         width: "100%",
-        textAlign: "center",
-        background: "#000",
+        background: "linear-gradient(to right, #0e1724, #111f30)",
         color: "#fff",
-        py: 2,
-        px: { xs: 2, md: 6 },
+        py: { xs: 6, md: 8 },
+        borderTop: "1px solid rgba(201, 180, 154, 0.15)",
       }}
     >
-      <Grid container spacing={4} justifyContent="center">
-        {quickLinksData.map((column, index) => (
-          <Grid item xs={12} sm={6} md={4} key={index}>
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2, duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <Paper
-                elevation={4}
-                sx={{
-                  p: 3,
-                  // Set a responsive minimum width on the Paper container
-                  minWidth: { xs: "320px", sm: "400px", md: "auto" },
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 2,
-                  borderRadius: 3,
-                  background: "#000",
-                  backdropFilter: "blur(8px)",
-                  boxShadow: "0 10px 25px rgba(0,0,0,0.35)",
-                  transition: "transform 0.3s ease, box-shadow 0.3s ease",
-                }}
+      <Container maxWidth="lg">
+        <Box sx={{ mb: 5, textAlign: "center" }}>
+          <Typography 
+            variant="h5" 
+            component={motion.h2}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            sx={{ 
+              color: "#fff",
+              fontWeight: 600,
+              position: "relative",
+              display: "inline-block",
+              mb: 1
+            }}
+          >
+            Investment Resources & Opportunities
+          </Typography>
+          <Typography 
+            variant="body1"
+            component={motion.p}
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            sx={{ 
+              color: "rgba(255, 255, 255, 0.7)",
+              maxWidth: "700px",
+              mx: "auto", 
+              mb: 2
+            }}
+          >
+            Access our comprehensive collection of investment tools, opportunities, and educational resources
+          </Typography>
+          <Divider 
+            component={motion.div}
+            initial={{ width: 0 }}
+            whileInView={{ width: "80px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            sx={{ 
+              mx: "auto", 
+              borderColor: "#c9b49a", 
+              borderWidth: 2,
+              opacity: 0.8
+            }} 
+          />
+        </Box>
+        
+        <Grid container spacing={3} justifyContent="center">
+          {quickLinksData.map((column, index) => (
+            <Grid item xs={12} md={4} key={index}>
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.15, duration: 0.6 }}
+                viewport={{ once: true }}
               >
-                <Typography
-                  variant="h6"
+                <Paper
+                  elevation={0}
                   sx={{
-                    fontWeight: "bold",
-                    borderBottom: "2px solid",
-                    borderColor: "#2794d2",
-                    color: "#fff",
-                    pb: 1,
-                    mb: 2,
+                    p: 4,
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    borderRadius: 1,
+                    background: "rgba(255, 255, 255, 0.02)",
+                    backdropFilter: "blur(10px)",
+                    border: "1px solid rgba(255, 255, 255, 0.05)",
+                    transition: "transform 0.3s ease, box-shadow 0.3s ease",
+                    "&:hover": {
+                      boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
+                      transform: "translateY(-5px)",
+                      background: "rgba(255, 255, 255, 0.03)",
+                    },
                   }}
                 >
-                  {column.title}
-                </Typography>
-
-                {column.links.map((link, linkIndex) => (
-                  <Link
-                    key={linkIndex}
-                    component={RouterLink}
-                    to={link.to}
-                    underline="none"
+                  <Typography
+                    variant="h6"
                     sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1,
-                      fontSize: "1rem",
-                      fontWeight: 500,
-                      color: "rgba(255,255,255,0.85)",
-                      transition: "all 0.3s ease",
-                      // Force links to remain on one line:
-                      whiteSpace: "nowrap",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      lineHeight: 1.4,
-                      "&:hover": {
-                        color: "#2794d2",
-                        transform: "translateX(5px)",
-                      },
+                      fontWeight: 600,
+                      color: "#c9b49a",
+                      pb: 2,
+                      mb: 3,
+                      position: "relative",
+                      "&:after": {
+                        content: '""',
+                        position: "absolute",
+                        bottom: 0,
+                        left: 0,
+                        width: "40px",
+                        height: "2px",
+                        background: "linear-gradient(to right, #c9b49a, rgba(201, 180, 154, 0.3))",
+                      }
                     }}
                   >
-                    <ArrowRightAltIcon fontSize="small" />
-                    {link.text}
-                  </Link>
-                ))}
-              </Paper>
-            </motion.div>
-          </Grid>
-        ))}
-      </Grid>
+                    {column.title}
+                  </Typography>
+
+                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+                    {column.links.map((link, linkIndex) => (
+                      <Link
+                        key={linkIndex}
+                        component={RouterLink}
+                        to={link.to}
+                        underline="none"
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          fontSize: { xs: "0.95rem", md: "1rem" },
+                          color: "rgba(255, 255, 255, 0.75)",
+                          transition: "all 0.25s ease",
+                          pl: 0.5,
+                          borderLeft: "2px solid transparent",
+                          "&:hover": {
+                            color: "#fff",
+                            borderLeft: "2px solid #c9b49a",
+                            pl: 1.5,
+                            "& .arrow-icon": {
+                              opacity: 1,
+                              transform: "translateX(0)",
+                            }
+                          },
+                        }}
+                      >
+                        <Box sx={{ 
+                          display: "flex", 
+                          justifyContent: "space-between", 
+                          alignItems: "center",
+                          width: "100%"
+                        }}>
+                          <Typography variant="body2" sx={{ fontWeight: 500 }}>
+                            {link.text}
+                          </Typography>
+                          <ArrowForwardIosIcon 
+                            className="arrow-icon"
+                            sx={{ 
+                              fontSize: 14,
+                              opacity: 0,
+                              transform: "translateX(-10px)",
+                              transition: "all 0.25s ease",
+                              color: "#c9b49a"
+                            }} 
+                          />
+                        </Box>
+                      </Link>
+                    ))}
+                  </Box>
+                </Paper>
+              </motion.div>
+            </Grid>
+          ))}
+        </Grid>
+        
+        <Box 
+          component={motion.div}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.6 }}
+          viewport={{ once: true }}
+          sx={{ 
+            mt: 6, 
+            textAlign: "center",
+            p: 3,
+            borderRadius: 1,
+            background: "rgba(201, 180, 154, 0.05)",
+            border: "1px solid rgba(201, 180, 154, 0.15)"
+          }}
+        >
+          <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
+            Need specialized investment guidance? <Link component={RouterLink} to="/contact" sx={{ color: "#c9b49a", fontWeight: 600 }}>Contact our financial advisors</Link> for personalized portfolio recommendations.
+          </Typography>
+        </Box>
+      </Container>
     </Box>
   );
 };

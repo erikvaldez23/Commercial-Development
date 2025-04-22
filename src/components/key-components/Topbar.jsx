@@ -7,6 +7,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { styled } from "@mui/system";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "/greenark-logo1.png";
@@ -28,6 +29,18 @@ const Topbar = () => {
   const isMobile = useMediaQuery("(max-width:768px)");
   const [activeItem, setActiveItem] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogoClick = () => {
+    if (location.pathname === "/") {
+      // Already on homepage — scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Navigate to homepage
+      navigate("/");
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,13 +58,13 @@ const Topbar = () => {
         background: isScrolled ? "rgba(0, 0, 0, 0.85)" : "transparent",
         backdropFilter: isScrolled ? "blur(8px)" : "none",
         padding: isScrolled ? "0.25rem 2rem" : "0.5rem 2rem",
-        borderBottom: isScrolled
-          ? "1px solid rgba(201,180,154, 0.1)"
-          : "1px solid rgba(255, 255, 255, 0.05)",
+        // borderBottom: isScrolled
+        //   ? "1px solid rgba(201,180,154, 0.1)"
+        //   : "1px solid rgba(255, 255, 255, 0.05)",
         transition: "all 0.3s ease",
       }}
     >
-      <Toolbar disableGutters sx={{ height: "120px"  }}>
+      <Toolbar disableGutters sx={{ height: "120px" }}>
         <Box
           sx={{
             width: "100%",
@@ -65,18 +78,31 @@ const Topbar = () => {
         >
           {/* Logo + Glow */}
           <Box
+            onClick={handleLogoClick}
             component={motion.div}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
+            whileHover={{
+              y: [0, -10, 0], // Moves up then down (bounce)
+              transition: {
+                duration: 0.6,
+                ease: "easeInOut",
+              },
+            }}
             transition={{ duration: 0.6 }}
             display="flex"
             alignItems="center"
             position="relative"
+            sx={{ cursor: "pointer" }}
           >
             <Box
               component={motion.div}
               animate={{ opacity: [0.4, 0.6, 0.4] }}
-              transition={{ duration: 3, repeat: Infinity, repeatType: "reverse" }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
               sx={{
                 position: "absolute",
                 width: "100px",
@@ -124,7 +150,7 @@ const Topbar = () => {
                       sx={{
                         color: activeItem === label ? "#c9b49a" : "#ffffff",
                         fontWeight: 500,
-                        fontSize: { xs: "0.9rem", md: "1.2rem" },
+                        fontSize: { xs: "0.9rem", md: "1.4rem" },
                         letterSpacing: "0.5px",
                         padding: "0.5rem 0.75rem",
                         transition: "color 0.3s ease",
@@ -155,14 +181,17 @@ const Topbar = () => {
               </Box>
 
               <Box sx={{ ml: 4 }}>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.98 }}
+                >
                   <Button
                     sx={{
                       background:
                         "linear-gradient(90deg, #c9b49a 0%, #bca486 100%)",
                       color: "#0a0f14",
                       fontWeight: 600,
-                      fontSize: { xs: "0.9rem", md: "1rem" },
+                      fontSize: { xs: "0.9rem", md: "1.4rem" },
                       padding: "0.5rem 1.5rem",
                       borderRadius: "30px",
                       textTransform: "none",
