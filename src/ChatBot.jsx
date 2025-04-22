@@ -23,7 +23,7 @@ export default function Chatbot({ open, onClose }) {
       setMessages([
         {
           sender: "bot",
-          text: "👋 Hi there! Welcome to Tint Tek +. Ask me anything about our window tinting services!",
+          text: "👋 Hi there! Welcome to Green Ark Investments. Ask me anything!",
         },
       ]);
     }
@@ -215,7 +215,7 @@ export default function Chatbot({ open, onClose }) {
               },
             }}
           />
-          <IconButton onClick={sendMessage} sx={{ color: "#2794d2", ml: 1 }}>
+          <IconButton onClick={sendMessage} sx={{ color: "#c9b49a", ml: 1 }}>
             <SendIcon />
           </IconButton>
         </Box>

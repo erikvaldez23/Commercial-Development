@@ -48,11 +48,6 @@ const serviceOptions = {
     ],
     filmTypes: [
       {
-        name: "Llumar ATC",
-        description:
-          "A budget-friendly dyed-stable film that blocks 99% of harmful UV rays and enhances Tesla aesthetics.",
-      },
-      {
         name: "Llumar CTX",
         description:
           "CTX film combines advanced ceramic technology with excellent heat and UV protection. It blocks up to 60% of infrared heat while maintaining a clear, non-reflective appearance. Perfect for those seeking superior comfort and privacy without darkening windows too much, CTX is ideal for moderate climates where effective heat rejection and UV protection are key.",
@@ -410,7 +405,7 @@ const ServicesOffered = ({ serviceId }) => {
     <Box
       sx={{
         py: 6,
-        px: isMobile ? 1 : 4,
+        px: isMobile ? 1.2 : 4,
         backgroundColor: "#000",
         color: "#fff",
         width: "100vw",
@@ -462,7 +457,7 @@ const ServicesOffered = ({ serviceId }) => {
           </List>
         )}
 
-        <Typography variant="h5" fontWeight="bold" sx={{ mt: 4, mb: 2 }}>
+        <Typography variant="h5" fontWeight="bold" sx={{ mt: 4, mb: 2, textAlign: serviceId === "tesla-window-tinting"? "center" : "left" }}>
           The <strong>main types of film</strong> we use:
         </Typography>
 

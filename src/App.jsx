@@ -12,29 +12,18 @@ import "./App.css";
 import Topbar from "./components/key-components/Topbar";
 import Hero from "./components/hero/Hero";
 import Testimonials from "./components/landing/Testimonials";
-import Services from "./components/landing/Services";
 import Contact from "./components/key-components/Contact";
 import Vision from "./components/landing/Vision";
 import Footer from "./components/key-components/Footer";
 import ServicesPage from "./components/ServicesPage";
 import Chatbot from "./ChatBot";
-import WhyChooseUs from "./components/landing/WhyChooseUs";
-import Gallery from "./components/sub-pages/Gallery";
+import WhatWeDo from "./components/landing/WhatWeDo";
 import ScrollToTop from "./components/ScrollToTop";
 import PrivacyPolicy from "./components/PrivacyPolicy";
 import NotFound from "./components/NotFound";
 import CallToAction from "./components/key-components/CallToAction";
-import Blog from "./components/Blog";
-import BlogDetail from "./components/BlogDetail";
-import PricingComponent from "./components/Pricing";
-import FAQ from "./components/sub-pages/FAQ";
 import QuickLinks from "./components/key-components/QuickLinks";
-import FAQSection from "./components/FAQSection";
-import CommercialSimulator from "./components/simulators/CommercialSimulator";
-import ResidentialSimulator from "./components/simulators/ResidentialSimulator";
-import TeslaTintingPage from "./components/simulators/TeslaSimulatorPage";
-import VehicleTintingPage from "./components/simulators/VehicleSimulatorPage";
-import PPFpage from "./components/simulators/PPFpage";
+import WhyInvestWithUs from "./components/landing/WhyInvestWithUs"
 
 // Theme Config
 const theme = createTheme({
@@ -90,44 +79,18 @@ function App() {
             element={
               <>
                 <Hero />
-                <Services />
-                <WhyChooseUs />
-                <Testimonials />
-                <Vision />
+                <WhatWeDo />
+                <WhyInvestWithUs />
                 <CallToAction />
-                <Contact />
+                {/* <Contact /> */}
                 <QuickLinks />
                 <Footer />
               </>
             }
           />
           <Route path="/services/:serviceId" element={<ServicesPage />} />
-          <Route path="/blog/:id" element={<BlogDetail />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route path="/support" element={<FAQ />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/blog" element={<Blog />} />
           <Route path="*" element={<NotFound />} />
-          <Route
-            path="/simulators/commercial-window-tinting"
-            element={<CommercialSimulator />}
-          />
-          <Route
-            path="/simulators/residential-window-tinting"
-            element={<ResidentialSimulator />}
-          />
-          <Route
-            path="/simulators/tesla-window-tinting"
-            element={<TeslaTintingPage />}
-          />
-          <Route
-            path="/simulators/vehicle-window-tinting"
-            element={<VehicleTintingPage />}
-          />
-          <Route
-            path="/simulators/vehicle-paint-protection"
-            element={<PPFpage />}
-          />
         </Routes>
         <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
         {!chatbotOpen && (
@@ -142,17 +105,17 @@ function App() {
             <IconButton
               onClick={handleOpenChatbot}
               sx={{
-                backgroundColor: "#2794d2",
+                backgroundColor: "#c9b49a",
                 color: "white",
                 "&:hover": {
-                  backgroundColor: "#1976c9",
+                  backgroundColor: "#000",
                 },
-                width: 50,
-                height: 50,
+                width: 70,
+                height: 70,
                 boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
               }}
             >
-              <ChatIcon />
+              <ChatIcon sx={{fontSize: 40}}/>
             </IconButton>
           </Box>
         )}

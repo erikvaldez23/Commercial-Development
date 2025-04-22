@@ -143,7 +143,7 @@ const Footer = () => {
             underline="hover"
             sx={{ fontSize: isMobile ? "13px" : "14px" }}
           >
-            www.tinttekplus.com
+            www.greenarkinvestments.com
           </Link>
           <Link
             href="#/privacy-policy"
@@ -164,7 +164,7 @@ const Footer = () => {
             opacity: 0.7,
           }}
         >
-          © {new Date().getFullYear()} Tint Tek + . All rights reserved.
+          © {new Date().getFullYear()} Green Ark Investments . All rights reserved.
         </Typography>
       </Container>
     </Box>
