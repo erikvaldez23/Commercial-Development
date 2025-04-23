@@ -11,9 +11,6 @@ import ChatIcon from "@mui/icons-material/Chat";
 import "./App.css";
 import Topbar from "./components/key-components/Topbar";
 import Hero from "./components/hero/Hero";
-import Testimonials from "./components/landing/Testimonials";
-import Contact from "./components/key-components/Contact";
-import Vision from "./components/landing/Vision";
 import Footer from "./components/key-components/Footer";
 import ServicesPage from "./components/ServicesPage";
 import Chatbot from "./ChatBot";
@@ -24,12 +21,14 @@ import NotFound from "./components/NotFound";
 import CallToAction from "./components/key-components/CallToAction";
 import QuickLinks from "./components/key-components/QuickLinks";
 import WhyInvestWithUs from "./components/landing/WhyInvestWithUs"
+import Offer from "./components/sub-pages/Offer"
+import About from "./components/sub-pages/About"
 
 // Theme Config
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#007bff",
+      main: "#c9b49a",
     },
   },
 });
@@ -82,14 +81,14 @@ function App() {
                 <WhatWeDo />
                 <WhyInvestWithUs />
                 <CallToAction />
-                {/* <Contact /> */}
                 <QuickLinks />
-                <Footer />
               </>
             }
           />
           <Route path="/services/:serviceId" element={<ServicesPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/what-we-offer" element={<Offer />} />
+          <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
@@ -119,6 +118,7 @@ function App() {
             </IconButton>
           </Box>
         )}
+        <Footer />
       </Router>
     </ThemeProvider>
   );

@@ -13,11 +13,11 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "/greenark-logo1.png";
 
 const navItems = [
-  "What We Offer",
-  "How it Works",
-  "About Us",
-  "Portfolio",
-  "Team",
+  { label: "What We Offer", path: "/what-we-offer" },
+  { label: "How it Works", path: "/how-it-works" },
+  { label: "About Us", path: "/about-us" },
+  { label: "Portfolio", path: "/portfolio" },
+  { label: "Team", path: "/team" },
 ];
 
 const NavButton = styled(motion.div)({
@@ -64,7 +64,7 @@ const Topbar = () => {
         transition: "all 0.3s ease",
       }}
     >
-      <Toolbar disableGutters sx={{ height: "120px" }}>
+      <Toolbar disableGutters sx={{ height: "100px" }}>
         <Box
           sx={{
             width: "100%",
@@ -137,46 +137,52 @@ const Topbar = () => {
                   gap: { xs: 1, md: 3 },
                 }}
               >
-                {navItems.map((label, index) => (
-                  <NavButton
-                    key={label}
-                    onHoverStart={() => setActiveItem(label)}
-                    onHoverEnd={() => setActiveItem(null)}
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index + 0.3 }}
+                {navItems.map((item, index) => (
+                  <Link
+                    key={item.label}
+                    to={item.path}
+                    style={{ textDecoration: "none" }}
                   >
-                    <Typography
-                      sx={{
-                        color: activeItem === label ? "#c9b49a" : "#ffffff",
-                        fontWeight: 500,
-                        fontSize: { xs: "0.9rem", md: "1.4rem" },
-                        letterSpacing: "0.5px",
-                        padding: "0.5rem 0.75rem",
-                        transition: "color 0.3s ease",
-                      }}
+                    <NavButton
+                      onHoverStart={() => setActiveItem(item.label)}
+                      onHoverEnd={() => setActiveItem(null)}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index + 0.3 }}
                     >
-                      {label}
-                    </Typography>
-                    <AnimatePresence>
-                      {activeItem === label && (
-                        <motion.div
-                          initial={{ width: 0, opacity: 0 }}
-                          animate={{ width: "100%", opacity: 1 }}
-                          exit={{ width: 0, opacity: 0 }}
-                          style={{
-                            height: "2px",
-                            background:
-                              "linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,1) 50%, rgba(201,180,154,0) 100%)",
-                            position: "absolute",
-                            bottom: "0",
-                            left: "0",
-                          }}
-                          transition={{ duration: 0.2 }}
-                        />
-                      )}
-                    </AnimatePresence>
-                  </NavButton>
+                      <Typography
+                        sx={{
+                          color:
+                            activeItem === item.label ? "#c9b49a" : "#ffffff",
+                          fontWeight: 500,
+                          fontSize: { xs: "0.9rem", md: "1.4rem" },
+                          letterSpacing: "0.5px",
+                          padding: "0.5rem 0.75rem",
+                          transition: "color 0.3s ease",
+                        }}
+                      >
+                        {item.label}
+                      </Typography>
+                      <AnimatePresence>
+                        {activeItem === item.label && (
+                          <motion.div
+                            initial={{ width: 0, opacity: 0 }}
+                            animate={{ width: "100%", opacity: 1 }}
+                            exit={{ width: 0, opacity: 0 }}
+                            style={{
+                              height: "2px",
+                              background:
+                                "linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,1) 50%, rgba(201,180,154,0) 100%)",
+                              position: "absolute",
+                              bottom: "0",
+                              left: "0",
+                            }}
+                            transition={{ duration: 0.2 }}
+                          />
+                        )}
+                      </AnimatePresence>
+                    </NavButton>
+                  </Link>
                 ))}
               </Box>
 

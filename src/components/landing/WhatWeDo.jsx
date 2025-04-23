@@ -41,7 +41,7 @@ const WhatWeDo = () => {
           variant="h3"
           fontWeight={700}
           textAlign="center"
-          color="#00ffb4"
+          color="#c9b49a"
           sx={{ mb: 2 }}
         >
           WHAT WE DO
@@ -66,18 +66,18 @@ const WhatWeDo = () => {
               transition={{ duration: 0.6, delay: i * 0.2 }}
               viewport={{ once: true }}
               style={{
-                border: "1px solid rgba(0,255,180,0.2)",
+                border: "1px solid rgba(201,180,154,0.2)",
                 borderRadius: "16px",
                 padding: "2rem",
                 background: "rgba(255,255,255,0.02)",
-                boxShadow: "0 0 24px rgba(0,255,180,0.1)",
+                boxShadow: "0 0 24px rgba(201,180,154,0.1)",
                 height: "100%",
               }}
             >
               <Typography
                 variant="h5"
                 fontWeight={600}
-                color="#00ffb4"
+                color="#c9b49a"
                 gutterBottom
               >
                 {item.title}
@@ -93,7 +93,7 @@ const WhatWeDo = () => {
       {/* Divider */}
       <Divider
         sx={{
-          borderColor: "rgba(255,255,255,0.1)",
+          borderColor: "rgba(201,180,154,0.2)",
           my: 8,
           width: "60%",
           mx: "auto",
@@ -108,7 +108,7 @@ const WhatWeDo = () => {
         viewport={{ once: true }}
         style={{ textAlign: "center", maxWidth: 900, margin: "0 auto" }}
       >
-        <Typography variant="h4" fontWeight={700} color="#00ffb4" gutterBottom>
+        <Typography variant="h4" fontWeight={700} color="#c9b49a" gutterBottom>
           OUR STRATEGIES
         </Typography>
         <Typography

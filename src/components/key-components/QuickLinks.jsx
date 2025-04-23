@@ -67,9 +67,9 @@ const QuickLinks = () => {
       id="quick-links"
       sx={{
         width: "100%",
-        background: "linear-gradient(to right, #0e1724, #111f30)",
+        background: "#1a1a1a",
         color: "#fff",
-        py: { xs: 6, md: 8 },
+        py: { xs: 6, md: 4 },
         borderTop: "1px solid rgba(201, 180, 154, 0.15)",
       }}
     >

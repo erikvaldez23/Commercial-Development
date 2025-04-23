@@ -9,8 +9,14 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaTiktok } from "react-icons/fa";
-import logo from "/tinttek-logo1.png"; // Ensure correct path
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaTiktok,
+} from "react-icons/fa";
+import logo from "/temp-logo.png"; // Ensure correct path
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Footer = () => {
@@ -61,7 +67,14 @@ const Footer = () => {
             }}
             onClick={handleLogoClick} // ✅ Click to Navigate or Scroll
           >
-            <img src={logo} alt="Company Logo" style={{ height: isMobile ? "40px" : "50px" }} />
+            <img
+              src={logo}
+              alt="Company Logo"
+              style={{
+                height: isMobile ? "40px" : "120px",
+                filter: "invert(1)",
+              }}
+            />
           </Box>
 
           {/* Social Media Icons */}
@@ -107,18 +120,6 @@ const Footer = () => {
             >
               <FaTiktok size={isMobile ? 22 : 24} />
             </IconButton>
-
-            {/* <IconButton
-              color="inherit"
-              sx={{
-                transition: "color 0.3s",
-                "&:hover": { color: "#007bff" },
-              }}
-              href="https://twitter.com"
-              target="_blank"
-            >
-              <FaTwitter size={isMobile ? 22 : 24} />
-            </IconButton> */}
           </Box>
         </Box>
 
@@ -164,7 +165,8 @@ const Footer = () => {
             opacity: 0.7,
           }}
         >
-          © {new Date().getFullYear()} Green Ark Investments . All rights reserved.
+          © {new Date().getFullYear()} Green Ark Investments . All rights
+          reserved.
         </Typography>
       </Container>
     </Box>
