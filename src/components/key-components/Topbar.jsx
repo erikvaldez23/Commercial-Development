@@ -15,7 +15,7 @@ import logo from "/greenark-logo1.png";
 const navItems = [
   { label: "What We Offer", path: "/what-we-offer" },
   { label: "How it Works", path: "/how-it-works" },
-  { label: "About Us", path: "/about-us" },
+  { label: "About Us", path: "/about" },
   { label: "Portfolio", path: "/portfolio" },
   { label: "Team", path: "/team" },
 ];

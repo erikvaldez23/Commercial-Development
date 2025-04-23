@@ -16,7 +16,7 @@ const NotFound = () => {
         backgroundColor: "#f9f9f9",
       }}
     >
-      <Topbar notFound={true} />
+      {/* <Topbar notFound={true} /> */}
 
       {/* Main 404 Section */}
       <Box

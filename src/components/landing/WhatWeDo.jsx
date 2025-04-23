@@ -22,7 +22,7 @@ const sections = [
 
 const WhatWeDo = () => {
   return (
-    <Box
+    <Box id="what-we-do"
       sx={{
         background: "linear-gradient(to bottom, #0f0f0f, #1a1a1a)",
         py: 12,

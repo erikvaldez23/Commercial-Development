@@ -5,6 +5,13 @@ import { motion } from "framer-motion";
 const HeroSection = () => {
   const canvasRef = useRef(null);
 
+  const learnMoreScroll = () => {
+    document.getElementById("what-we-do")?.scrollIntoView({
+      behavior: "smooth",
+      block: "start", // Aligns the element to the top of the viewport
+    });
+  };
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
@@ -517,6 +524,7 @@ const HeroSection = () => {
                   },
                   transition: "all 0.3s ease",
                 }}
+                onClick={learnMoreScroll}
               >
                 Learn More
               </Button>

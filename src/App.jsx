@@ -23,6 +23,9 @@ import QuickLinks from "./components/key-components/QuickLinks";
 import WhyInvestWithUs from "./components/landing/WhyInvestWithUs"
 import Offer from "./components/sub-pages/Offer"
 import About from "./components/sub-pages/About"
+import How from "./components/sub-pages/How"
+import Portfolio from "./components/sub-pages/Portfolio"
+import Team from "./components/sub-pages/Team"
 
 // Theme Config
 const theme = createTheme({
@@ -89,6 +92,9 @@ function App() {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/what-we-offer" element={<Offer />} />
           <Route path="/about" element={<About />} />
+          <Route path="/how-it-works" element={<How />} />
+          <Route path="/portfolio" element={<Portfolio />} />
+          <Route path="/team" element={<Team />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
