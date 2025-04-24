@@ -25,6 +25,7 @@ import About from "./components/sub-pages/About"
 import How from "./components/sub-pages/How"
 import Portfolio from "./components/sub-pages/Portfolio"
 import Team from "./components/sub-pages/Team"
+import Contact from "./components/key-components/Contact"
 
 // Theme Config
 const theme = createTheme({
@@ -84,6 +85,7 @@ function App() {
                 <WhyInvestWithUs />
                 <CallToAction />
                 <QuickLinks />
+                <Contact />
               </>
             }
           />
@@ -93,6 +95,7 @@ function App() {
           <Route path="/how-it-works" element={<How />} />
           <Route path="/portfolio" element={<Portfolio />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />

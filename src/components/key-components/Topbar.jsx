@@ -22,6 +22,7 @@ const navItems = [
   { label: "About Us", path: "/about" },
   { label: "Portfolio", path: "/portfolio" },
   { label: "Team", path: "/team" },
+  { label: "Contact", path: "contact", isAnchor: true },
 ];
 
 const NavButton = styled(motion.div)({
@@ -146,10 +147,25 @@ const Topbar = () => {
                 }}
               >
                 {navItems.map((item, index) => (
-                  <Link
+                  <Box
                     key={item.label}
-                    to={item.path}
-                    style={{ textDecoration: "none" }}
+                    component="div"
+                    onClick={() => {
+                      if (item.isAnchor) {
+                        if (location.pathname === "/") {
+                          // Scroll to contact section
+                          document
+                            .getElementById("contact")
+                            ?.scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          // Go to homepage and let useEffect handle the scroll
+                          navigate("/", { state: { scrollTo: "contact" } });
+                        }
+                      } else {
+                        navigate(item.path);
+                      }
+                    }}
+                    sx={{ textDecoration: "none", cursor: "pointer" }}
                   >
                     <NavButton
                       onHoverStart={() => setActiveItem(item.label)}
@@ -190,7 +206,7 @@ const Topbar = () => {
                         )}
                       </AnimatePresence>
                     </NavButton>
-                  </Link>
+                  </Box>
                 ))}
               </Box>
 

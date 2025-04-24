@@ -139,7 +139,8 @@ export default function AboutUs() {
             mb: 8,
             display: 'flex',
             alignItems: 'center',
-            background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/api/placeholder/1920/1080)`,
+            // background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/api/placeholder/1920/1080)`,
+            background: "url(/dark-background.jpg)",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
@@ -360,7 +361,7 @@ export default function AboutUs() {
                   <Grid item xs={12} md={6}>
                     <Box sx={{ mb: 3 }}>
                       <Typography variant="h6" sx={{ color: primaryColor, fontWeight: 600 }}>2008</Typography>
-                      <Typography variant="body1" sx={{ mt: 1 }}>
+                      <Typography variant="body1" sx={{ mt: 1, color: "#fff" }}>
                         Founded as a boutique investment firm focused on distressed commercial properties in the wake of the financial crisis.
                       </Typography>
                     </Box>

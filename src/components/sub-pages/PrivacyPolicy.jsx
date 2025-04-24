@@ -27,7 +27,7 @@ const PrivacyPolicy = () => {
           "2. Contact Information (email, and phone number)",
           "3. City Location",
           "4. Website usage data",
-        ]
+        ],
       ],
     },
     {
@@ -61,9 +61,9 @@ const PrivacyPolicy = () => {
           "To outside auditors who have agreed to keep the information confidential",
           "As necessary to enforce the Terms of Service",
           "As necessary to maintain, safeguard and preserve all the rights and property of Green Ark.",
-          "SMS Consent will not be shared, sold, or disclosed with any third party or any other individual."
-        ]
-      ]
+          "SMS Consent will not be shared, sold, or disclosed with any third party or any other individual.",
+        ],
+      ],
     },
     {
       title: "Non-Marketing Purposes",
@@ -99,7 +99,7 @@ const PrivacyPolicy = () => {
       title: "Security",
       content: [
         'Green Ark takes precautions to protect your information. When you submit sensitive information via the website, your information is protected both online and offline. Wherever we collect sensitive information (e.g. credit card information), that information is encrypted and transmitted to us in a secure way. You can verify this by looking for a lock icon in the address bar and looking for "https" at the beginning of the address of the webpage.',
-        "While we use encryption to protect sensitive information transmitted online, we also protect your information offline. Only employees who need the information to perform a specific job (for example, billing or customer service) are granted access to personally identifiable information. The computers and servers in which we store personally identifiable information are kept in a secure environment. This is all done to prevent any loss, misuse, unauthorized access, disclosure or modification of the user's personal information under our control."
+        "While we use encryption to protect sensitive information transmitted online, we also protect your information offline. Only employees who need the information to perform a specific job (for example, billing or customer service) are granted access to personally identifiable information. The computers and servers in which we store personally identifiable information are kept in a secure environment. This is all done to prevent any loss, misuse, unauthorized access, disclosure or modification of the user's personal information under our control.",
       ],
     },
     {
@@ -116,8 +116,8 @@ const PrivacyPolicy = () => {
           "Email: info@tinttekplus.com",
           "Telephone Number: +1 (972) 362-8468",
           "Mailing Address: Tint Tek Plus 2518 West Kingsley Rd, Garland, TX 75041",
-        ]
-      ]
+        ],
+      ],
     },
   ];
 
