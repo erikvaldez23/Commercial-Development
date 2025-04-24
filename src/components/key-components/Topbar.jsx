@@ -6,7 +6,11 @@ import {
   Button,
   Typography,
   useMediaQuery,
+  Dialog,
+  DialogContent,
+  IconButton,
 } from "@mui/material";
+import { FaTimes } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { styled } from "@mui/system";
 import { motion, AnimatePresence } from "framer-motion";
@@ -31,6 +35,10 @@ const Topbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const handleLogoClick = () => {
     if (location.pathname === "/") {
@@ -205,9 +213,42 @@ const Topbar = () => {
                         boxShadow: "0 0 15px rgba(201,180,154,0.4)",
                       },
                     }}
+                    onClick={handleOpen}
                   >
                     Get Started
                   </Button>
+                  {open && (
+                    <Dialog
+                      open={open}
+                      onClose={handleClose}
+                      maxWidth="md"
+                      fullWidth
+                    >
+                      <DialogContent sx={{ position: "relative", padding: 0 }}>
+                        <IconButton
+                          onClick={handleClose}
+                          sx={{
+                            position: "absolute",
+                            top: 10,
+                            right: 10,
+                            backgroundColor: "white",
+                            "&:hover": { backgroundColor: "lightgray" },
+                          }}
+                        >
+                          <FaTimes />
+                        </IconButton>
+
+                        <iframe
+                          src=""
+                          width="100%"
+                          height="800px"
+                          style={{ border: "none" }}
+                          title="Fast Quote"
+                          loading="lazy"
+                        />
+                      </DialogContent>
+                    </Dialog>
+                  )}
                 </motion.div>
               </Box>
             </>

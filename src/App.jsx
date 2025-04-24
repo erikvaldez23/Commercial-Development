@@ -12,11 +12,10 @@ import "./App.css";
 import Topbar from "./components/key-components/Topbar";
 import Hero from "./components/hero/Hero";
 import Footer from "./components/key-components/Footer";
-import ServicesPage from "./components/ServicesPage";
 import Chatbot from "./ChatBot";
 import WhatWeDo from "./components/landing/WhatWeDo";
 import ScrollToTop from "./components/ScrollToTop";
-import PrivacyPolicy from "./components/PrivacyPolicy";
+import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
 import NotFound from "./components/NotFound";
 import CallToAction from "./components/key-components/CallToAction";
 import QuickLinks from "./components/key-components/QuickLinks";
@@ -88,7 +87,6 @@ function App() {
               </>
             }
           />
-          <Route path="/services/:serviceId" element={<ServicesPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/what-we-offer" element={<Offer />} />
           <Route path="/about" element={<About />} />

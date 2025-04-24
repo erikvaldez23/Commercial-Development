@@ -1,9 +1,22 @@
-import React, { useEffect, useRef } from "react";
-import { Box, Typography, Container, Button } from "@mui/material";
+import React, { useEffect, useRef, useState } from "react";
+import {
+  Box,
+  Typography,
+  Container,
+  Button,
+  Dialog,
+  DialogContent,
+  IconButton,
+} from "@mui/material";
+import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const HeroSection = () => {
   const canvasRef = useRef(null);
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const learnMoreScroll = () => {
     document.getElementById("what-we-do")?.scrollIntoView({
@@ -504,6 +517,7 @@ const HeroSection = () => {
                   },
                   transition: "all 0.3s ease",
                 }}
+                onClick={handleOpen}
               >
                 Start Investing
               </Button>
@@ -528,6 +542,38 @@ const HeroSection = () => {
               >
                 Learn More
               </Button>
+              {open && (
+                <Dialog
+                  open={open}
+                  onClose={handleClose}
+                  maxWidth="md"
+                  fullWidth
+                >
+                  <DialogContent sx={{ position: "relative", padding: 0 }}>
+                    <IconButton
+                      onClick={handleClose}
+                      sx={{
+                        position: "absolute",
+                        top: 10,
+                        right: 10,
+                        backgroundColor: "white",
+                        "&:hover": { backgroundColor: "lightgray" },
+                      }}
+                    >
+                      <FaTimes />
+                    </IconButton>
+
+                    <iframe
+                      src=""
+                      width="100%"
+                      height="800px"
+                      style={{ border: "none" }}
+                      title="Fast Quote"
+                      loading="lazy"
+                    />
+                  </DialogContent>
+                </Dialog>
+              )}
             </Box>
           </motion.div>
         </Box>
