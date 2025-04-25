@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   Box, 
   Typography, 
@@ -106,9 +106,16 @@ const StyledTabs = styled(Tabs)({
   },
 });
 
+// Company color
+const primaryColor = "#c9b49a";
+const darkBg = "#121212";
+const darkPaper = "#1E1E1E";
+const darkerGray = "#333333";
+
 export default function Offer() {
   const theme = useTheme();
   const [activeTab, setActiveTab] = useState(0);
+  const [loaded, setLoaded] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
   const handleChange = (event, newValue) => {
@@ -119,93 +126,69 @@ export default function Offer() {
     setActiveTab(event.target.value);
   };
 
+    useEffect(() => {
+      setLoaded(true);
+    }, []);
+
   return (
     <Box sx={{ bgcolor: '#0f0f0f', color: 'white' }}>
       {/* Hero Section with 3D-like elements */}
-      <Box
-        sx={{
-          position: 'relative',
-          height: '70vh',
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
-      >
-        {/* Background elements */}
-        <Box
-          sx={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(135deg, #121212 0%, #000000 100%)',
-            zIndex: 0,
+      <Fade in={loaded} timeout={1000}>
+        <Box 
+          sx={{ 
+            height: isMobile ? '50vh' : '70vh', 
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            // background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/api/placeholder/1920/1080)`,
+            background: "url(/dark-background.jpg)",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
-          {/* Decorative blurred elements */}
-          <Box 
-            sx={{ 
-              position: 'absolute', 
-              width: '400px', 
-              height: '400px', 
-              borderRadius: '50%', 
-              background: 'radial-gradient(circle, rgba(201,180,154,0.1) 0%, rgba(0,0,0,0) 70%)',
-              filter: 'blur(60px)',
-              top: '-100px',
-              left: '-100px',
-            }} 
-          />
-          <Box 
-            sx={{ 
-              position: 'absolute', 
-              width: '500px', 
-              height: '500px', 
-              borderRadius: '50%', 
-              background: 'radial-gradient(circle, rgba(201,180,154,0.08) 0%, rgba(0,0,0,0) 70%)',
-              filter: 'blur(80px)',
-              bottom: '-100px',
-              right: '-100px',
-            }} 
-          />
-        </Box>
-
-        {/* Hero Content */}
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <GoldText variant="h2" component="h1" fontWeight={700} gutterBottom>
-              Strategic Investments
-            </GoldText>
-            <Typography variant="h3" fontWeight={700} gutterBottom sx={{ mb: 3 }}>
-              for Exceptional Returns
-            </Typography>
-            <Typography variant="h6" sx={{ color: 'rgba(255,255,255,0.8)', maxWidth: 800, mx: 'auto', mb: 6 }}>
-              Unlocking opportunity through strategic, data-driven real estate investments tailored to deliver value and long-term performance.
-            </Typography>
-            
-            <GoldButton 
-              endIcon={<ArrowRightIcon />}
-              sx={{ mt: 4 }}
-            >
-              Explore Our Offerings
-            </GoldButton>
-          </motion.div>
-        </Container>
-
-        {/* Bottom quote */}
-        <Box sx={{ position: 'absolute', bottom: 80, width: '100%', textAlign: 'center', zIndex: 2 }}>
-          <Container>
-            <GoldText variant="h4" fontStyle="italic" gutterBottom>
-              "Our vision is grounded in experience, driven by data, and inspired by opportunity."
-            </GoldText>
-            <Typography variant="body1" sx={{ color: 'rgba(255,255,255,0.6)', fontSize: "1.5rem" }}>
-              — CEO
-            </Typography>
+          <Container maxWidth="lg">
+            <Box sx={{ maxWidth: isMobile ? '100%' : '60%' }}>
+              <Typography 
+                variant="overline" 
+                sx={{ 
+                  color: primaryColor, 
+                  fontWeight: 600,
+                  letterSpacing: 3
+                }}
+              >
+                WHAT WE OFFER
+              </Typography>
+              <Typography 
+                variant="h2" 
+                sx={{ 
+                  fontWeight: 700, 
+                  mb: 2,
+                  fontSize: isMobile ? '2.5rem' : '3.5rem'
+                }}
+              >
+                Strategic Investments for Exceptional Returns
+              </Typography>
+              <Typography 
+                variant="h5" 
+                sx={{ 
+                  fontWeight: 300,
+                  mb: 4,
+                  opacity: 0.9
+                }}
+              >
+                Unlocking opportunities through strategic, data-driven real estate investments tailored to deliver value and long term performance 
+              </Typography>
+              <Box 
+                sx={{ 
+                  width: '100px', 
+                  height: '4px', 
+                  bgcolor: primaryColor 
+                }} 
+              />
+            </Box>
           </Container>
         </Box>
-      </Box>
+      </Fade>
 
       <Matter />
 

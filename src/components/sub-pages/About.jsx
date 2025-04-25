@@ -76,25 +76,25 @@ export default function AboutUs() {
       name: "Team Member",
       position: "Chief Executive Officer",
       image: "/api/placeholder/150/150",
-      bio: "With over 20 years of experience in commercial real estate investments, Alexandra leads our company vision and strategic growth initiatives.",
+      bio: "Bio",
     },
     {
       name: "Team Member",
       position: "Chief Investment Officer",
       image: "/api/placeholder/150/150",
-      bio: "Marcus oversees our investment portfolio with a keen eye for emerging market opportunities and value-driven acquisitions.",
+      bio: "Bio",
     },
     {
       name: "Team Member",
       position: "Head of Operations",
       image: "/api/placeholder/150/150",
-      bio: "Sarah ensures the seamless execution of our development projects and property management initiatives across all markets.",
+      bio: "Bio",
     },
     {
       name: "Team Member",
       position: "Director of Acquisitions",
       image: "/api/placeholder/150/150",
-      bio: "David leads our acquisition team in identifying and securing prime commercial properties that align with our investment criteria.",
+      bio: "Bio",
     }
   ];
 
@@ -127,7 +127,6 @@ export default function AboutUs() {
       bgcolor: darkBg, 
       color: 'white',
       minHeight: '100vh',
-      pt: 2,
       pb: 10
     }}>
       {/* Hero Section */}

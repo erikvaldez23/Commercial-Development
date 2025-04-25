@@ -21,7 +21,6 @@ const navItems = [
   { label: "How it Works", path: "/how-it-works" },
   { label: "About Us", path: "/about" },
   { label: "Portfolio", path: "/portfolio" },
-  { label: "Team", path: "/team" },
   { label: "Contact", path: "contact", isAnchor: true },
 ];
 
