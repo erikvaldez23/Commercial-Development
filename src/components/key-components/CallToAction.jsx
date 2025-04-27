@@ -27,42 +27,42 @@ const CallToAction = () => {
 
   // Content mapping based on serviceId
   const contentMap = {
-    "commercial-window-tinting": {
-      headline: "Professional Investment Solutions for Maximum Returns",
-      paragraph: "Our expert team specializes in premium commercial real estate opportunities with proven track records of sustainable growth and above-market returns.",
-      backgroundImage: "/images/commercial-real-estate.jpg",
-      ctaText: "Explore Opportunities"
-    },
-    "windshield-protection-film": {
-      headline: "Secure Your Financial Future Today",
-      paragraph: "Build wealth through our carefully selected portfolio of diversified real estate investments, designed to provide both capital appreciation and passive income.",
-      backgroundImage: "/images/financial-growth.jpg",
-      ctaText: "Start Investing"
-    },
-    "headlight-services": {
-      headline: "Illuminate Your Investment Portfolio",
-      paragraph: "Discover how strategic real estate investments can enhance your portfolio's performance with stable returns and inflation-protected growth.",
-      backgroundImage: "/images/modern-city.jpg",
-      ctaText: "Get Financial Analysis"
-    },
-    "vehicle-paint-protection": {
-      headline: "Shield Your Wealth Through Real Estate",
-      paragraph: "Protect and grow your capital with our premium real estate investment vehicles, designed for sophisticated investors seeking long-term appreciation.",
-      backgroundImage: "/images/luxury-property.jpg",
-      ctaText: "Protect Your Assets"
-    },
-    "ceramic-coating": {
-      headline: "Premium Investment Solutions",
-      paragraph: "Access exclusive real estate opportunities with our institutional-grade investment platform, featuring properties in high-growth markets across the nation.",
-      backgroundImage: "/images/premium-property.jpg",
-      ctaText: "Request Portfolio"
-    },
-    "vehicle-paint-correction": {
-      headline: "Restore Your Investment Potential",
-      paragraph: "Revitalize your financial strategy with carefully selected real estate assets that deliver consistent returns in fluctuating market conditions.",
-      backgroundImage: "/images/skyline.jpg",
-      ctaText: "Schedule Consultation"
-    },
+    // "commercial-window-tinting": {
+    //   headline: "Professional Investment Solutions for Maximum Returns",
+    //   paragraph: "Our expert team specializes in premium commercial real estate opportunities with proven track records of sustainable growth and above-market returns.",
+    //   backgroundImage: "/images/commercial-real-estate.jpg",
+    //   ctaText: "Explore Opportunities"
+    // },
+    // "windshield-protection-film": {
+    //   headline: "Secure Your Financial Future Today",
+    //   paragraph: "Build wealth through our carefully selected portfolio of diversified real estate investments, designed to provide both capital appreciation and passive income.",
+    //   backgroundImage: "/images/financial-growth.jpg",
+    //   ctaText: "Start Investing"
+    // },
+    // "headlight-services": {
+    //   headline: "Illuminate Your Investment Portfolio",
+    //   paragraph: "Discover how strategic real estate investments can enhance your portfolio's performance with stable returns and inflation-protected growth.",
+    //   backgroundImage: "/images/modern-city.jpg",
+    //   ctaText: "Get Financial Analysis"
+    // },
+    // "vehicle-paint-protection": {
+    //   headline: "Shield Your Wealth Through Real Estate",
+    //   paragraph: "Protect and grow your capital with our premium real estate investment vehicles, designed for sophisticated investors seeking long-term appreciation.",
+    //   backgroundImage: "/images/luxury-property.jpg",
+    //   ctaText: "Protect Your Assets"
+    // },
+    // "ceramic-coating": {
+    //   headline: "Premium Investment Solutions",
+    //   paragraph: "Access exclusive real estate opportunities with our institutional-grade investment platform, featuring properties in high-growth markets across the nation.",
+    //   backgroundImage: "/images/premium-property.jpg",
+    //   ctaText: "Request Portfolio"
+    // },
+    // "vehicle-paint-correction": {
+    //   headline: "Restore Your Investment Potential",
+    //   paragraph: "Revitalize your financial strategy with carefully selected real estate assets that deliver consistent returns in fluctuating market conditions.",
+    //   backgroundImage: "/images/skyline.jpg",
+    //   ctaText: "Schedule Consultation"
+    // },
     default: {
       headline: "Elevate Your Investment Strategy",
       paragraph: "Gain exclusive access to institutional-quality real estate opportunities with our carefully curated investment platform designed for discerning investors.",
@@ -213,10 +213,10 @@ const CallToAction = () => {
               
               {/* Investment features */}
               {[
-                { title: "High-Yield Properties", desc: "8-12% annual returns" },
-                { title: "Tax Advantages", desc: "Optimize your investment strategy" },
-                { title: "Professional Management", desc: "Hands-off passive income" },
-                { title: "Portfolio Diversification", desc: "Across multiple markets" }
+                { title: "Benefit 1", desc: "Description" },
+                { title: "Benefit 2", desc: "Description" },
+                { title: "Benefit 3", desc: "Description" },
+                { title: "Benefit 4", desc: "Description" }
               ].map((feature, index) => (
                 <Box 
                   key={index} 

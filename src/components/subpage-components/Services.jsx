@@ -86,7 +86,7 @@ const OfferingCard = styled(Card)(({ theme }) => ({
   borderRadius: "16px",
   border: "1px solid rgba(201,180,154,0.1)",
   transition: "all 0.3s ease",
-  height: "100%",
+  height: "250px",
   "&:hover": {
     borderColor: "rgba(201,180,154,0.3)",
     transform: "translateY(-4px)",
