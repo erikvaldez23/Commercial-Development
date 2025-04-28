@@ -17,13 +17,14 @@ import { styled, useTheme } from "@mui/system";
 import logo from "/greenark-logo1.png";
 import { motion } from "framer-motion";
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom"; // 👈 at the top
 
 // Your nav items
 const navItems = [
-  { label: "How It Works", path: "/how-it-works" },
-  { label: "What We Offer", path: "/what-we-offer " },
-  { label: "Our story", path: "/about" },
-  { label: "Portfolio", path: "/portfolio" },
+  { label: "How It Works", path: "/#/how-it-works" },
+  { label: "What We Offer", path: "/#/what-we-offer " },
+  { label: "Our story", path: "/#/about" },
+  { label: "Portfolio", path: "/#/portfolio" },
   { label: "Get in touch", path: "/contact", isAnchor: true },
 ];
 
@@ -99,9 +100,11 @@ const MenuButton = styled(IconButton)(({ theme }) => ({
   },
 }));
 
-const AnimatedLogo = () => {
+const AnimatedLogo = ({ handleClick }) => {
   return (
-    <Box sx={{ 
+    <Box 
+    onClick={handleClick}
+    sx={{ 
       position: 'relative', 
       display: 'flex', 
       alignItems: 'center', 
@@ -151,6 +154,7 @@ export default function FuturisticTopbar() {
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const navigate = useNavigate(); // 👈 hook from react-router-dom
   
   // Enhanced scroll effect
   useEffect(() => {
@@ -179,7 +183,17 @@ export default function FuturisticTopbar() {
       setMobileOpen(false);
     }
   };
+
+  const handleLogoClick = () => {
+    if (window.location.hash === "#/" || window.location.hash === "" || window.location.pathname === "/") {
+      // ✅ Already on home page, scroll to top
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      navigate("/");
+    }
+  };
   
+
   // Mobile drawer content
   const drawer = (
     <Box 
@@ -286,7 +300,7 @@ export default function FuturisticTopbar() {
           <Fade in={true} timeout={1000}>
             <NavWrapper>
               {/* Animated Logo */}
-              <AnimatedLogo />
+              <AnimatedLogo handleClick={handleLogoClick}/>
               
               {/* Links with hover effects */}
               {navItems.map((item, index) => (

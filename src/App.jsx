@@ -106,16 +106,14 @@ export default function App() {
 
         <Topbar handleOpenChatbot={handleOpenChatbot} />
 
-        {loading ? (
-          <Loader />
-        ) : (
           <>
+          {loading && (window.location.hash === "#/" || window.location.hash === "" || window.location.pathname === "/") && <Loader />}
             <Routes>
               <Route
                 path="/"
                 element={
                   <>
-                    <Hero />
+                    <Hero loadingDone={!loading}/>
                     <WhatWeDo />
                     <WhyInvestWithUs />
                     <CallToAction />
@@ -163,7 +161,6 @@ export default function App() {
 
             <Footer />
           </>
-        )}
       </Router>
     </ThemeProvider>
   );

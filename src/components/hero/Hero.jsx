@@ -1,4 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
+// src/components/hero/HeroSection.jsx
+import React, { useState } from "react";
 import {
   Box,
   Typography,
@@ -12,7 +13,7 @@ import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "/greenark-logo1.png";
 
-const HeroSection = () => {
+export default function HeroSection({ loadingDone }) {
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -21,8 +22,29 @@ const HeroSection = () => {
   const learnMoreScroll = () => {
     document.getElementById("what-we-do")?.scrollIntoView({
       behavior: "smooth",
-      block: "start", // Aligns the element to the top of the viewport
+      block: "start",
     });
+  };
+
+  // Motion Variants
+  const containerVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
+  };
+
+  const lineVariants = {
+    hidden: { width: 0 },
+    visible: { width: "120px", transition: { delay: 0.3, duration: 1 } },
+  };
+
+  const textVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.4, duration: 0.8 } },
+  };
+
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.8 } },
   };
 
   return (
@@ -38,17 +60,6 @@ const HeroSection = () => {
         justifyContent: "center",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          zIndex: 1,
-        }}
-      />
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>
         <Box
           sx={{
@@ -57,11 +68,19 @@ const HeroSection = () => {
             justifyContent: "center",
           }}
         >
+          {/* Blurred Glow */}
           <Box
             component={motion.div}
             initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5, duration: 2 }}
+            animate={
+              loadingDone ? { opacity: [0.4, 0.7, 0.4] } : { opacity: 0 }
+            }
+            transition={{
+              delay: 0.5,
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
             sx={{
               position: "absolute",
               top: "-5%",
@@ -76,47 +95,52 @@ const HeroSection = () => {
               zIndex: -1,
             }}
           />
+
+          {/* Center Logo */}
           <Box
             component="img"
             src={logo}
             alt="Company Logo"
             sx={{
               position: "absolute",
-              top: "-25%", // Adjust this if you want it closer or farther
+              top: "-25%",
               left: "50%",
               transform: "translateX(-50%)",
-              width: { xs: "100px", md: "300px" }, // Responsive sizing
+              width: { xs: "100px", md: "300px" },
               height: "auto",
               zIndex: 2,
-              pointerEvents: "none", // so it doesn't block button clicks
-              opacity: 0.9, // slight transparency if you want
+              pointerEvents: "none",
+              opacity: 0.9,
             }}
           />
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <Box
-              component={motion.div}
-              initial={{ width: 0 }}
-              animate={{ width: "120px" }}
-              transition={{ delay: 0.3, duration: 1 }}
-              sx={{
-                height: "3px",
-                background:
-                  "linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,1) 50%, rgba(201,180,154,0) 100%)",
-                mx: "auto",
-                mb: 4,
-              }}
-            />
 
+          {/* Animated Line */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={loadingDone ? { scaleX: 1 } : { scaleX: 0 }}
+            transition={{ delay: 0.3, duration: 1 }}
+            style={{
+              height: "3px",
+              width: "120px",
+              background:
+                "linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,1) 50%, rgba(201,180,154,0) 100%)",
+              transformOrigin: "center",
+              marginTop: "1rem", // 🔥 more space above
+              marginBottom: "1rem", // 🔥 more space below
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          />
+
+          {/* Animated Heading */}
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={loadingDone ? "visible" : "hidden"}
+          >
             <Typography
-              component={motion.h1}
+              component="h1"
               variant="h1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
               sx={{
                 fontWeight: 900,
                 fontSize: { xs: "3.5rem", sm: "3.5rem", md: "7.5rem" },
@@ -129,50 +153,44 @@ const HeroSection = () => {
               }}
             >
               INVEST IN SUSTAINABLE <br /> REAL ESTATE
-              {/* <Box
-                component="span"
-                sx={{
-                  display: "inline-block",
-                  color: "#c9b49a",
-                  WebkitTextFillColor: "#c9b49a",
-                }}
-              >
-                .
-              </Box> */}
             </Typography>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
+          {/* Subheading */}
+          <motion.div
+            variants={textVariants}
+            initial="hidden"
+            animate={loadingDone ? "visible" : "hidden"}
+          >
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: { xs: "1.1rem", md: "2rem" },
+                fontWeight: 300,
+                color: "rgba(255,255,255,0.85)",
+                maxWidth: "700px",
+                margin: "0 auto",
+                mb: 5,
+                lineHeight: 1.7,
+              }}
             >
-              <Typography
-                variant="body1"
-                sx={{
-                  fontSize: { xs: "1.1rem", md: "2rem" },
-                  fontWeight: 300,
-                  color: "rgba(255,255,255,0.85)",
-                  maxWidth: "700px",
-                  margin: "0 auto",
-                  mb: 5,
-                  lineHeight: 1.7,
-                }}
-              >
-                Green Ark is redefining real estate investments — blending
-                modern innovation with lasting impact for a sustainable future.
-              </Typography>
-            </motion.div>
+              Green Ark is redefining real estate investments — blending modern
+              innovation with lasting impact for a sustainable future.
+            </Typography>
+          </motion.div>
 
+          {/* CTA Buttons */}
+          <motion.div
+            variants={buttonVariants}
+            initial="hidden"
+            animate={loadingDone ? "visible" : "hidden"}
+          >
             <Box
-              component={motion.div}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6, duration: 0.8 }}
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 gap: 1,
-                flexWrap: "wrap", // optional for mobile
+                flexWrap: "wrap",
               }}
             >
               <Button
@@ -218,44 +236,37 @@ const HeroSection = () => {
               >
                 Learn More
               </Button>
-              {open && (
-                <Dialog
-                  open={open}
-                  onClose={handleClose}
-                  maxWidth="md"
-                  fullWidth
-                >
-                  <DialogContent sx={{ position: "relative", padding: 0 }}>
-                    <IconButton
-                      onClick={handleClose}
-                      sx={{
-                        position: "absolute",
-                        top: 10,
-                        right: 10,
-                        backgroundColor: "white",
-                        "&:hover": { backgroundColor: "lightgray" },
-                      }}
-                    >
-                      <FaTimes />
-                    </IconButton>
-
-                    <iframe
-                      src=""
-                      width="100%"
-                      height="800px"
-                      style={{ border: "none" }}
-                      title="Fast Quote"
-                      loading="lazy"
-                    />
-                  </DialogContent>
-                </Dialog>
-              )}
             </Box>
           </motion.div>
         </Box>
       </Container>
+
+      {/* Dialog Modal */}
+      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+        <DialogContent sx={{ position: "relative", padding: 0 }}>
+          <IconButton
+            onClick={handleClose}
+            sx={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              backgroundColor: "white",
+              "&:hover": { backgroundColor: "lightgray" },
+            }}
+          >
+            <FaTimes />
+          </IconButton>
+
+          <iframe
+            src=""
+            width="100%"
+            height="800px"
+            style={{ border: "none" }}
+            title="Fast Quote"
+            loading="lazy"
+          />
+        </DialogContent>
+      </Dialog>
     </Box>
   );
-};
-
-export default HeroSection;
+}
