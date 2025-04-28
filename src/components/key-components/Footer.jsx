@@ -68,7 +68,7 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: "#0a0a0a",
+        background: "transparent",
         color: "#f5f5f5",
         pt: isMobile ? 6 : 8,
         pb: isMobile ? 4 : 5,

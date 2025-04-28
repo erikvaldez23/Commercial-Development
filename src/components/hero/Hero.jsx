@@ -10,9 +10,9 @@ import {
 } from "@mui/material";
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
+import logo from "/greenark-logo1.png";
 
 const HeroSection = () => {
-  const canvasRef = useRef(null);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => setOpen(true);
@@ -25,338 +25,10 @@ const HeroSection = () => {
     });
   };
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-    let animationFrameId;
-    let shootingStars = [];
-    let mouseX = 0;
-    let mouseY = 0;
-    let lastTime = 0;
-
-    // Track mouse position for interactive effects
-    const handleMouseMove = (e) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-
-    // Set canvas size with device pixel ratio for crisp rendering
-    const setCanvasDimensions = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const displayWidth = window.innerWidth;
-      const displayHeight = Math.max(window.innerHeight * 1, 500);
-
-      canvas.width = displayWidth * dpr;
-      canvas.height = displayHeight * dpr;
-      canvas.style.width = `${displayWidth}px`;
-      canvas.style.height = `${displayHeight}px`;
-
-      ctx.scale(dpr, dpr);
-      canvasWidth = displayWidth;
-      canvasHeight = displayHeight;
-    };
-
-    let canvasWidth, canvasHeight;
-    setCanvasDimensions();
-    window.addEventListener("resize", setCanvasDimensions);
-
-    // Create layers for parallax effect
-    const starLayers = [
-      {
-        count: 100,
-        speed: 0.05,
-        size: { min: 0.2, max: 0.8 },
-        brightness: { min: 0.3, max: 0.5 },
-      },
-      {
-        count: 70,
-        speed: 0.1,
-        size: { min: 0.5, max: 1.2 },
-        brightness: { min: 0.4, max: 0.7 },
-      },
-      {
-        count: 30,
-        speed: 0.2,
-        size: { min: 0.8, max: 1.5 },
-        brightness: { min: 0.5, max: 0.9 },
-      },
-    ];
-
-    const stars = [];
-
-    class Star {
-      constructor(layer) {
-        this.layer = layer;
-        this.speed = layer.speed;
-        this.reset();
-        this.flickerSpeed = Math.random() * 0.02 + 0.005;
-        this.flickerPhase = Math.random() * Math.PI * 2; // Random starting phase
-      }
-
-      reset() {
-        this.x = Math.random() * canvasWidth;
-        this.y = Math.random() * canvasHeight;
-        this.radius =
-          Math.random() * (this.layer.size.max - this.layer.size.min) +
-          this.layer.size.min;
-        this.baseAlpha =
-          Math.random() *
-            (this.layer.brightness.max - this.layer.brightness.min) +
-          this.layer.brightness.min;
-        this.alpha = this.baseAlpha;
-        // Random color tint for more realistic night sky
-        this.hue = Math.random() > 0.9 ? Math.random() * 60 + 180 : 0; // Occasionally blue, mostly white
-        this.saturation = this.hue ? Math.random() * 30 + 10 : 0;
-      }
-
-      update(deltaTime, mouseX, mouseY) {
-        // Subtle flicker effect
-        this.alpha =
-          this.baseAlpha +
-          Math.sin(Date.now() * this.flickerSpeed + this.flickerPhase) * 0.2;
-
-        // Subtle mouse interaction - stars slightly move away from cursor
-        if (mouseX && mouseY) {
-          const dx = this.x - mouseX;
-          const dy = this.y - mouseY;
-          const distance = Math.sqrt(dx * dx + dy * dy);
-          if (distance < 100) {
-            const pushFactor = (1 - distance / 100) * 0.5 * this.layer.speed;
-            this.x += (dx / distance) * pushFactor;
-            this.y += (dy / distance) * pushFactor;
-          }
-        }
-      }
-
-      draw() {
-        // Create a subtle glow effect
-        const gradient = ctx.createRadialGradient(
-          this.x,
-          this.y,
-          0,
-          this.x,
-          this.y,
-          this.radius * 2
-        );
-
-        const color = this.hue
-          ? `hsla(${this.hue}, ${this.saturation}%, 90%, ${this.alpha})`
-          : `rgba(255, 255, 255, ${this.alpha})`;
-
-        const glowColor = this.hue
-          ? `hsla(${this.hue}, ${this.saturation}%, 90%, 0)`
-          : `rgba(255, 255, 255, 0)`;
-
-        gradient.addColorStop(0, color);
-        gradient.addColorStop(1, glowColor);
-
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius * 2, 0, Math.PI * 2);
-        ctx.fillStyle = gradient;
-        ctx.fill();
-
-        // Bright center
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.radius * 0.5, 0, Math.PI * 2);
-        ctx.fillStyle = this.hue
-          ? `hsla(${this.hue}, ${this.saturation / 2}%, 98%, ${Math.min(
-              1,
-              this.alpha * 2
-            )})`
-          : `rgba(255, 255, 255, ${Math.min(1, this.alpha * 2)})`;
-        ctx.fill();
-      }
-    }
-
-    class ShootingStar {
-      constructor() {
-        this.reset();
-      }
-
-      reset() {
-        // Starting position varies across the entire top of the canvas
-        this.x = Math.random() * canvasWidth * 1.5 - canvasWidth * 0.25;
-        this.y = Math.random() * canvasHeight * 0.3; // Top third
-        this.length = Math.random() * 100 + 120;
-        this.speed = Math.random() * 2.5 + 1.5;
-        this.angle = Math.PI / 4 + (Math.random() - 0.5) * 0.2;
-        this.life = 0;
-        this.maxLife = 120 + Math.random() * 60;
-
-        // Trail particles
-        this.particles = [];
-        this.particleCount = Math.floor(Math.random() * 10) + 15;
-
-        // Color variation
-        this.hue = Math.random() > 0.8 ? Math.random() * 60 + 200 : 0; // Occasionally blue, mostly white
-        this.saturation = this.hue ? Math.random() * 50 + 30 : 0;
-      }
-
-      update(deltaTime) {
-        const speedFactor = deltaTime / 16.667; // Normalize for 60fps
-
-        this.x += Math.cos(this.angle) * this.speed * speedFactor;
-        this.y += Math.sin(this.angle) * this.speed * speedFactor;
-        this.life += speedFactor;
-
-        // Add particles along the trail
-        if (this.life < this.maxLife * 0.8 && Math.random() > 0.7) {
-          this.particles.push({
-            x: this.x - Math.cos(this.angle) * (Math.random() * 20),
-            y: this.y - Math.sin(this.angle) * (Math.random() * 20),
-            size: Math.random() * 1.5 + 0.5,
-            life: 0,
-            maxLife: Math.random() * 50 + 30,
-          });
-        }
-
-        // Update particles
-        for (let i = this.particles.length - 1; i >= 0; i--) {
-          const p = this.particles[i];
-          p.life += speedFactor;
-          if (p.life >= p.maxLife) {
-            this.particles.splice(i, 1);
-          }
-        }
-      }
-
-      draw() {
-        // Draw particles first so they appear behind the main trail
-        for (const p of this.particles) {
-          const alpha = 1 - p.life / p.maxLife;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-          ctx.fillStyle = this.hue
-            ? `hsla(${this.hue}, ${this.saturation}%, 90%, ${alpha * 0.5})`
-            : `rgba(255, 255, 255, ${alpha * 0.5})`;
-          ctx.fill();
-        }
-
-        // Calculate fade based on life
-        let alpha = 1;
-        if (this.life < this.maxLife * 0.2) {
-          // Fade in
-          alpha = this.life / (this.maxLife * 0.2);
-        } else if (this.life > this.maxLife * 0.8) {
-          // Fade out
-          alpha = 1 - (this.life - this.maxLife * 0.8) / (this.maxLife * 0.2);
-        }
-
-        // Draw main trail
-        const endX = this.x - Math.cos(this.angle) * this.length;
-        const endY = this.y - Math.sin(this.angle) * this.length;
-
-        // Create gradient for the shooting star trail
-        const gradient = ctx.createLinearGradient(this.x, this.y, endX, endY);
-
-        const headColor = this.hue
-          ? `hsla(${this.hue}, ${this.saturation}%, 95%, ${alpha})`
-          : `rgba(255, 255, 255, ${alpha})`;
-
-        const tailColor = this.hue
-          ? `hsla(${this.hue}, ${this.saturation - 20}%, 80%, 0)`
-          : `rgba(255, 255, 255, 0)`;
-
-        gradient.addColorStop(0, headColor);
-        gradient.addColorStop(1, tailColor);
-
-        // Draw glow effect first
-        ctx.lineWidth = 4;
-        ctx.strokeStyle = this.hue
-          ? `hsla(${this.hue}, ${this.saturation - 20}%, 90%, ${alpha * 0.3})`
-          : `rgba(255, 255, 255, ${alpha * 0.3})`;
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-
-        // Draw main trail
-        ctx.lineWidth = 2;
-        ctx.strokeStyle = gradient;
-        ctx.beginPath();
-        ctx.moveTo(this.x, this.y);
-        ctx.lineTo(endX, endY);
-        ctx.stroke();
-
-        // Draw bright head
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, 2, 0, Math.PI * 2);
-        ctx.fillStyle = headColor;
-        ctx.fill();
-      }
-    }
-
-    // Initialize stars in layers
-    starLayers.forEach((layer) => {
-      for (let i = 0; i < layer.count; i++) {
-        stars.push(new Star(layer));
-      }
-    });
-
-    // Track last shooting star time
-    let lastShootingStarTime = Date.now() - 5000;
-
-    const animate = (timestamp) => {
-      const deltaTime = timestamp - lastTime || 16.67;
-      lastTime = timestamp;
-
-      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-
-      // Add subtle background gradient
-      const gradient = ctx.createLinearGradient(0, 0, 0, canvasHeight);
-      gradient.addColorStop(0, "rgba(0, 0, 0, 1)");
-      gradient.addColorStop(1, "rgba(0, 0, 0, 1)");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-
-      // Update and draw stars
-      stars.forEach((star) => {
-        star.update(deltaTime, mouseX, mouseY);
-        star.draw();
-      });
-
-      // Update and draw shooting stars
-      shootingStars.forEach((star) => {
-        if (star.life <= star.maxLife) {
-          star.update(deltaTime);
-          star.draw();
-        }
-      });
-
-      // Filter out old shooting stars
-      shootingStars = shootingStars.filter((s) => s.life <= s.maxLife);
-
-      // Add new shooting stars with improved timing
-      const now = Date.now();
-      const timeSinceLastStar = now - lastShootingStarTime;
-      const chanceMultiplier = Math.min(timeSinceLastStar / 8000, 5); // Increases chance over time
-
-      if (
-        Math.random() < 0.001 * chanceMultiplier &&
-        shootingStars.length < 3
-      ) {
-        shootingStars.push(new ShootingStar());
-        lastShootingStarTime = now;
-      }
-
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animate(0);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener("resize", setCanvasDimensions);
-      window.removeEventListener("mousemove", handleMouseMove);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
-
   return (
     <Box
       sx={{
-        background: "#000",
+        background: "transparent",
         color: "white",
         position: "relative",
         overflow: "hidden",
@@ -366,17 +38,6 @@ const HeroSection = () => {
         justifyContent: "center",
       }}
     >
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-        }}
-      />
-
       <Box
         sx={{
           position: "absolute",
@@ -415,7 +76,22 @@ const HeroSection = () => {
               zIndex: -1,
             }}
           />
-
+          <Box
+            component="img"
+            src={logo}
+            alt="Company Logo"
+            sx={{
+              position: "absolute",
+              top: "-25%", // Adjust this if you want it closer or farther
+              left: "50%",
+              transform: "translateX(-50%)",
+              width: { xs: "100px", md: "300px" }, // Responsive sizing
+              height: "auto",
+              zIndex: 2,
+              pointerEvents: "none", // so it doesn't block button clicks
+              opacity: 0.9, // slight transparency if you want
+            }}
+          />
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -442,8 +118,8 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
               sx={{
-                fontWeight: 800,
-                fontSize: { xs: "2.5rem", sm: "3.5rem", md: "4.5rem" },
+                fontWeight: 900,
+                fontSize: { xs: "3.5rem", sm: "3.5rem", md: "7.5rem" },
                 mb: 2,
                 background: "linear-gradient(90deg, #ffffff 0%, #c9b49a 100%)",
                 WebkitBackgroundClip: "text",
@@ -452,7 +128,7 @@ const HeroSection = () => {
                 letterSpacing: "0.5px",
               }}
             >
-              Invest in Sustainable <br /> Real Estate
+              INVEST IN SUSTAINABLE <br /> REAL ESTATE
               {/* <Box
                 component="span"
                 sx={{
@@ -471,9 +147,9 @@ const HeroSection = () => {
               transition={{ delay: 0.3, duration: 0.8 }}
             >
               <Typography
-                variant="h5"
+                variant="body1"
                 sx={{
-                  fontSize: { xs: "1.1rem", md: "1.4rem" },
+                  fontSize: { xs: "1.1rem", md: "2rem" },
                   fontWeight: 300,
                   color: "rgba(255,255,255,0.85)",
                   maxWidth: "700px",
@@ -506,7 +182,7 @@ const HeroSection = () => {
                     "linear-gradient(90deg, #c9b49a 0%, #bca486 100%)",
                   color: "#0a0f14",
                   borderRadius: "30px",
-                  fontSize: { xs: "0.9rem", md: "1rem" },
+                  fontSize: { xs: "0.9rem", md: "1.5rem" },
                   fontWeight: 600,
                   py: 1.5,
                   px: 4,
@@ -527,7 +203,7 @@ const HeroSection = () => {
                   border: "3px solid #c9b49a",
                   color: "#c9b49a",
                   borderRadius: "30px",
-                  fontSize: { xs: "0.9rem", md: "1rem" },
+                  fontSize: { xs: "0.9rem", md: "1.5rem" },
                   fontWeight: 600,
                   py: 1.5,
                   px: 4,

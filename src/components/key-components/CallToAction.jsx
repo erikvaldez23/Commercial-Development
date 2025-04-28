@@ -15,6 +15,7 @@ import {
 import { motion } from "framer-motion";
 import CloseIcon from "@mui/icons-material/Close";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import StarryBackground from "../reusable-components/StarryBackground";
 
 const CallToAction = () => {
   const theme = useTheme();
@@ -84,12 +85,12 @@ const CallToAction = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          backgroundImage: `linear-gradient(to right, rgba(14, 23, 36, 0.95), rgba(14, 23, 36, 0.8)), url('${content.backgroundImage}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
+          background: "transparent",
           zIndex: -1,
         }}
-      />
+      >
+        {/* <StarryBackground /> */}
+       </Box> 
 
       <Container maxWidth="lg">
         <Grid 

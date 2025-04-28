@@ -67,10 +67,9 @@ const QuickLinks = () => {
       id="quick-links"
       sx={{
         width: "100%",
-        background: "#1a1a1a",
+        background: "transparent",
         color: "#fff",
         py: { xs: 6, md: 4 },
-        borderTop: "1px solid rgba(201, 180, 154, 0.15)",
       }}
     >
       <Container maxWidth="lg">

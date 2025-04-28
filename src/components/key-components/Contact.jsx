@@ -195,7 +195,7 @@ export default function ContactForm() {
   const handleCloseSnackbar = () => setIsSubmitted(false);
 
   return (
-    <Box sx={{ width: "100%", background: 'linear-gradient(135deg, #121212 0%, #1e1e24 100%)' }}>
+    <Box sx={{ width: "100%", background: 'transparent' }}>
       <Box sx={{ maxWidth: "90rem", mx: "auto", px: 4, py: 8, color: 'white' }} id="contact">
         {/* Header Section */}
         <Box sx={{ textAlign: "center", mb: 6 }}>

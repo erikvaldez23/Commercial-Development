@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { 
-  Box, 
-  Typography, 
-  Grid, 
-  Paper, 
-  useMediaQuery, 
+import {
+  Box,
+  Typography,
+  Grid,
+  Paper,
+  useMediaQuery,
   useTheme,
   Container,
-  Avatar
+  Avatar,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { motion } from "framer-motion";
+import StarryBackground from "../reusable-components/StarryBackground";
 
 // Styled components
 const GradientTypography = styled(Typography)(({ theme }) => ({
@@ -22,7 +23,8 @@ const GradientTypography = styled(Typography)(({ theme }) => ({
 }));
 
 const PillarCard = styled(Paper)(({ theme }) => ({
-  background: "linear-gradient(145deg, rgba(40,40,50,0.8) 0%, rgba(30,30,40,0.6) 100%)",
+  background:
+    "linear-gradient(145deg, rgba(40,40,50,0.8) 0%, rgba(30,30,40,0.6) 100%)",
   borderRadius: theme.spacing(2),
   padding: theme.spacing(3),
   height: "100%",
@@ -33,11 +35,12 @@ const PillarCard = styled(Paper)(({ theme }) => ({
     transform: "translateY(-5px)",
     boxShadow: "0 15px 30px rgba(0,0,0,0.2), 0 0 20px rgba(201,180,154,0.1)",
     borderColor: "rgba(201,180,154,0.3)",
-  }
+  },
 }));
 
 const IconAvatar = styled(Avatar)(({ theme }) => ({
-  background: "linear-gradient(45deg, rgba(201,180,154,0.2) 0%, rgba(201,180,154,0.1) 100%)",
+  background:
+    "linear-gradient(45deg, rgba(201,180,154,0.2) 0%, rgba(201,180,154,0.1) 100%)",
   width: theme.spacing(7),
   height: theme.spacing(7),
   marginBottom: theme.spacing(2),
@@ -89,42 +92,21 @@ const WhyInvestWithUs = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const isMedium = useMediaQuery(theme.breakpoints.down("lg"));
-  
+
   return (
     <Box
       sx={{
         position: "relative",
-        background: "linear-gradient(135deg, #121212 0%, #1e1e24 100%)",
+        background: "transparent",
         py: { xs: 4, md: 6 },
         px: { xs: 2, md: 4 },
         color: "white",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       {/* Background decorative elements */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: -100,
-          left: -100,
-          width: 300,
-          height: 300,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(201,180,154,0.08) 0%, rgba(201,180,154,0) 70%)",
-        }}
-      />
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: -150,
-          right: -150,
-          width: 400,
-          height: 400,
-          borderRadius: "50%",
-          background: "radial-gradient(circle, rgba(201,180,154,0.08) 0%, rgba(201,180,154,0) 70%)",
-        }}
-      />
-      
+      {/* <StarryBackground /> */}
+
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         {/* Header section */}
         <Box sx={{ textAlign: "center", mb: { xs: 6, md: 10 } }}>
@@ -135,32 +117,34 @@ const WhyInvestWithUs = () => {
           >
             Why Invest With Us
           </GradientTypography>
-          
+
           <Box
             sx={{
               mx: "auto",
               width: 60,
               height: 3,
               mb: 3,
-              background: "linear-gradient(to right, rgba(201,180,154,0.8), rgba(201,180,154,0.2))",
-              borderRadius: 2
+              background:
+                "linear-gradient(to right, rgba(201,180,154,0.8), rgba(201,180,154,0.2))",
+              borderRadius: 2,
             }}
           />
-          
+
           <Typography
             variant="h6"
-            sx={{ 
+            sx={{
               color: "rgba(255,255,255,0.8)",
               maxWidth: 800,
               mx: "auto",
               fontWeight: 400,
-              lineHeight: 1.6
+              lineHeight: 1.6,
             }}
           >
-            Our holistic approach blends decades of experience, global reach, and sustainable vision to deliver long-term value and impact.
+            Our holistic approach blends decades of experience, global reach,
+            and sustainable vision to deliver long-term value and impact.
           </Typography>
         </Box>
-        
+
         {/* Pillars grid */}
         <Grid container spacing={4} justifyContent="center">
           {pillars.map((pillar, index) => (
@@ -168,34 +152,44 @@ const WhyInvestWithUs = () => {
               <motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.15, ease: "easeOut" }}
+                transition={{
+                  duration: 0.7,
+                  delay: index * 0.15,
+                  ease: "easeOut",
+                }}
                 viewport={{ once: true, margin: "-50px" }}
               >
                 <PillarCard elevation={0}>
-                  <Box sx={{ display: "flex", flexDirection: isMedium ? "row" : "column", alignItems: isMedium ? "flex-start" : "center" }}>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexDirection: isMedium ? "row" : "column",
+                      alignItems: isMedium ? "flex-start" : "center",
+                    }}
+                  >
                     <IconAvatar sx={{ mr: isMedium ? 2 : 0 }}>
                       {pillar.icon}
                     </IconAvatar>
-                    
+
                     <Box sx={{ textAlign: isMedium ? "left" : "center" }}>
                       <Typography
                         variant="h6"
                         fontWeight={600}
-                        sx={{ 
+                        sx={{
                           color: "#c9b49a",
                           mb: 1.5,
                           letterSpacing: 0.5,
-                          fontSize: { xs: "1.1rem", md: "1.25rem" }
+                          fontSize: { xs: "1.1rem", md: "1.25rem" },
                         }}
                       >
                         {pillar.title}
                       </Typography>
-                      
+
                       <Typography
-                        sx={{ 
+                        sx={{
                           color: "rgba(255,255,255,0.7)",
                           lineHeight: 1.7,
-                          fontSize: { xs: "0.95rem", md: "1rem" }
+                          fontSize: { xs: "0.95rem", md: "1rem" },
                         }}
                       >
                         {pillar.description}

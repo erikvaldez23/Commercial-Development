@@ -1,69 +1,96 @@
+// src/App.jsx
+import React, { useState, useEffect } from "react";
 import {
   HashRouter as Router,
   Routes,
   Route,
   useLocation,
 } from "react-router-dom";
-import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import { useState, useEffect } from "react";
-import { Box, IconButton } from "@mui/material";
+import {
+  CssBaseline,
+  ThemeProvider,
+  createTheme,
+  Box,
+  IconButton,
+} from "@mui/material";
 import ChatIcon from "@mui/icons-material/Chat";
+
 import "./App.css";
+
+// core components
 import Topbar from "./components/key-components/Topbar";
-import Hero from "./components/hero/Hero";
 import Footer from "./components/key-components/Footer";
+import Loader from "./components/loader/Loader";
 import Chatbot from "./ChatBot";
+
+// landing & sub-pages
+import Hero from "./components/hero/Hero";
 import WhatWeDo from "./components/landing/WhatWeDo";
-import ScrollToTop from "./components/ScrollToTop";
-import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
-import NotFound from "./components/NotFound";
+import WhyInvestWithUs from "./components/landing/WhyInvestWithUs";
 import CallToAction from "./components/key-components/CallToAction";
 import QuickLinks from "./components/key-components/QuickLinks";
-import WhyInvestWithUs from "./components/landing/WhyInvestWithUs"
-import Offer from "./components/sub-pages/Offer"
-import About from "./components/sub-pages/About"
-import How from "./components/sub-pages/How"
-import Portfolio from "./components/sub-pages/Portfolio"
-import Team from "./components/sub-pages/Team"
-import Contact from "./components/key-components/Contact"
+import Contact from "./components/key-components/Contact";
+import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
+import Offer from "./components/sub-pages/Offer";
+import About from "./components/sub-pages/About";
+import How from "./components/sub-pages/How";
+import Portfolio from "./components/sub-pages/Portfolio";
+import Team from "./components/sub-pages/Team";
+import NotFound from "./components/NotFound";
+import ScrollToTop from "./components/ScrollToTop";
+import StarryBackground from "./components/reusable-components/StarryBackground";
 
-// Theme Config
+// theme
 const theme = createTheme({
   palette: {
-    primary: {
-      main: "#c9b49a",
-    },
+    primary: { main: "#c9b49a" },
   },
 });
 
-// Scroll Handler
+// allow scrolling-to-anchor on navigation
 const ScrollHandler = () => {
   const location = useLocation();
-
   useEffect(() => {
     if (location.state?.scrollTo) {
-      const sectionId = location.state.scrollTo;
+      const id = location.state.scrollTo;
       setTimeout(() => {
-        const targetSection = document.getElementById(sectionId);
-        if (targetSection) {
+        const el = document.getElementById(id);
+        if (el) {
           const offset = 100;
-          const targetPosition =
-            targetSection.getBoundingClientRect().top + window.scrollY - offset;
-          window.scrollTo({ top: targetPosition, behavior: "smooth" });
+          const top = el.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: "smooth" });
         }
       }, 100);
     }
   }, [location]);
-
   return null;
 };
 
-function App() {
-  // ✅ Chatbot state
+export default function App() {
   const [chatbotOpen, setChatbotOpen] = useState(false);
+  const [pageLoaded, setPageLoaded] = useState(false);
+  const [animationDone, setAnimationDone] = useState(false);
+
+  const loading = !(pageLoaded && animationDone);
 
   const handleOpenChatbot = () => setChatbotOpen(true);
   const handleCloseChatbot = () => setChatbotOpen(false);
+
+  useEffect(() => {
+    if (document.readyState === "complete") {
+      setPageLoaded(true);
+      return;
+    }
+    const onLoad = () => setPageLoaded(true);
+    window.addEventListener("load", onLoad);
+    return () => window.removeEventListener("load", onLoad);
+  }, []);
+
+  useEffect(() => {
+    const minTime = 2000;
+    const timer = setTimeout(() => setAnimationDone(true), minTime);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
@@ -72,63 +99,72 @@ function App() {
         <ScrollToTop />
         <ScrollHandler />
 
-        {/* ✅ Pass handleOpenChatbot to Topbar */}
+        {/* 🔥 Add StarryBackground globally */}
+        <Box sx={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: -999 }}>
+          <StarryBackground />
+        </Box>
+
         <Topbar handleOpenChatbot={handleOpenChatbot} />
 
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Hero />
-                <WhatWeDo />
-                <WhyInvestWithUs />
-                <CallToAction />
-                <QuickLinks />
-                <Contact />
-              </>
-            }
-          />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/what-we-offer" element={<Offer />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/how-it-works" element={<How />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/team" element={<Team />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-        <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
-        {!chatbotOpen && (
-          <Box
-            sx={{
-              position: "fixed",
-              bottom: 20,
-              right: 20,
-              zIndex: (theme) => theme.zIndex.modal + 5,
-            }}
-          >
-            <IconButton
-              onClick={handleOpenChatbot}
-              sx={{
-                backgroundColor: "#c9b49a",
-                color: "white",
-                "&:hover": {
-                  backgroundColor: "#000",
-                },
-                width: 70,
-                height: 70,
-                boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
-              }}
-            >
-              <ChatIcon sx={{fontSize: 40}}/>
-            </IconButton>
-          </Box>
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Hero />
+                    <WhatWeDo />
+                    <WhyInvestWithUs />
+                    <CallToAction />
+                    <QuickLinks />
+                    <Contact />
+                  </>
+                }
+              />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/what-we-offer" element={<Offer />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/how-it-works" element={<How />} />
+              <Route path="/portfolio" element={<Portfolio />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+
+            <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
+
+            {!chatbotOpen && (
+              <Box
+                sx={{
+                  position: "fixed",
+                  bottom: 20,
+                  right: 20,
+                  zIndex: (theme) => theme.zIndex.modal + 5,
+                }}
+              >
+                <IconButton
+                  onClick={handleOpenChatbot}
+                  sx={{
+                    backgroundColor: "#c9b49a",
+                    color: "white",
+                    "&:hover": { backgroundColor: "#000" },
+                    width: 70,
+                    height: 70,
+                    boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
+                  }}
+                >
+                  <ChatIcon sx={{ fontSize: 40 }} />
+                </IconButton>
+              </Box>
+            )}
+
+            <Footer />
+          </>
         )}
-        <Footer />
       </Router>
     </ThemeProvider>
   );
 }
-
-export default App;
