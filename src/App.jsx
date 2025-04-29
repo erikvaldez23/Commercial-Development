@@ -100,67 +100,79 @@ export default function App() {
         <ScrollHandler />
 
         {/* 🔥 Add StarryBackground globally */}
-        <Box sx={{ position: "fixed", top: 0, left: 0, width: "100%", height: "100%", zIndex: -999 }}>
+        <Box
+          sx={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            zIndex: -999,
+          }}
+        >
           <StarryBackground />
         </Box>
 
         <Topbar handleOpenChatbot={handleOpenChatbot} />
 
-          <>
-          {loading && (window.location.hash === "#/" || window.location.hash === "" || window.location.pathname === "/") && <Loader />}
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <Hero loadingDone={!loading}/>
-                    <WhatWeDo />
-                    <WhyInvestWithUs />
-                    <CallToAction />
-                    <QuickLinks />
-                    <Contact />
-                  </>
-                }
-              />
-              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-              <Route path="/what-we-offer" element={<Offer />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/how-it-works" element={<How />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/team" element={<Team />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
+        <>
+          {loading &&
+            (window.location.hash === "#/" ||
+              window.location.hash === "" ||
+              window.location.pathname === "/") && <Loader />}
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <>
+                  <Hero loadingDone={!loading} />
+                  <WhatWeDo />
+                  <WhyInvestWithUs />
+                  <CallToAction />
+                  <QuickLinks />
+                  <Contact />
+                </>
+              }
+            />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/what-we-offer" element={<Offer />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/how-it-works" element={<How />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
 
-            <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
+          <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
 
-            {!chatbotOpen && (
-              <Box
+          {!chatbotOpen && (
+            <Box
+              sx={{
+                position: "fixed",
+                bottom: 20,
+                right: 20,
+                zIndex: (theme) => theme.zIndex.modal + 5,
+              }}
+            >
+              <IconButton
+                onClick={handleOpenChatbot}
                 sx={{
-                  position: "fixed",
-                  bottom: 20,
-                  right: 20,
-                  zIndex: (theme) => theme.zIndex.modal + 5,
+                  backgroundColor: "#c9b49a",
+                  color: "white",
+                  "&:hover": { backgroundColor: "#000" },
+                  width: 70,
+                  height: 70,
+                  boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
                 }}
               >
-                <IconButton
-                  onClick={handleOpenChatbot}
-                  sx={{
-                    backgroundColor: "#c9b49a",
-                    color: "white",
-                    "&:hover": { backgroundColor: "#000" },
-                    width: 70,
-                    height: 70,
-                    boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
-                  }}
-                >
-                  <ChatIcon sx={{ fontSize: 40 }} />
-                </IconButton>
-              </Box>
-            )}
+                <ChatIcon sx={{ fontSize: 40 }} />
+              </IconButton>
+            </Box>
+          )}
 
-            <Footer />
-          </>
+          <Footer />
+        </>
       </Router>
     </ThemeProvider>
   );

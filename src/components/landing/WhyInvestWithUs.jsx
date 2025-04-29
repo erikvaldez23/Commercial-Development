@@ -23,13 +23,14 @@ const GradientTypography = styled(Typography)(({ theme }) => ({
 }));
 
 const PillarCard = styled(Paper)(({ theme }) => ({
-  background:
-    "linear-gradient(145deg, rgba(40,40,50,0.8) 0%, rgba(30,30,40,0.6) 100%)",
-  borderRadius: theme.spacing(2),
+  background: "rgba(255, 255, 255, 0.04)",
+  backdropFilter: "blur(20px) saturate(180%)", 
+  WebkitBackdropFilter: "blur(20px) saturate(180%)", 
+  boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37)`, 
+  border: `1px solid rgba(255, 255, 255, 0.18)`, 
+  borderRadius: "20px",
   padding: theme.spacing(3),
   height: "100%",
-  backdropFilter: "blur(8px)",
-  border: "1px solid rgba(201,180,154,0.1)",
   transition: "all 0.3s ease-in-out",
   "&:hover": {
     transform: "translateY(-5px)",

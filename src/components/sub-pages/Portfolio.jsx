@@ -119,7 +119,7 @@ export default function Portfolio() {
     }, []);
 
   return (
-    <Box sx={{ bgcolor: '#0f0f0f', color: 'white' }}>
+    <Box sx={{ background: "transparent", color: 'white' }}>
       {/* Hero Section with 3D-like elements */}
       <Fade in={loaded} timeout={1000}>
         <Box 
@@ -128,10 +128,7 @@ export default function Portfolio() {
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            // background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/api/placeholder/1920/1080)`,
-            background: "url(/dark-background.jpg)",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            background: "transparent",
           }}
         >
           <Container maxWidth="lg">

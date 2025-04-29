@@ -124,7 +124,7 @@ export default function AboutUs() {
 
   return (
     <Box sx={{ 
-      bgcolor: darkBg, 
+      background: 'transparent', 
       color: 'white',
       minHeight: '100vh',
       pb: 10
@@ -139,9 +139,7 @@ export default function AboutUs() {
             display: 'flex',
             alignItems: 'center',
             // background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/api/placeholder/1920/1080)`,
-            background: "url(/dark-background.jpg)",
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
+            background: "transparent",
           }}
         >
           <Container maxWidth="lg">
