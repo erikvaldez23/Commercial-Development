@@ -19,14 +19,35 @@ const quickLinksData = [
   {
     title: "Investment Opportunities",
     links: [
-      { text: "Commercial Real Estate Funds", to: "/investments/commercial-real-estate" },
-      { text: "Multifamily Property Portfolios", to: "/investments/multifamily-properties" },
-      { text: "Real Estate Development Projects", to: "/investments/development-projects" },
+      {
+        text: "Commercial Real Estate Funds",
+        to: "/investments/commercial-real-estate",
+      },
+      {
+        text: "Multifamily Property Portfolios",
+        to: "/investments/multifamily-properties",
+      },
+      {
+        text: "Real Estate Development Projects",
+        to: "/investments/development-projects",
+      },
       { text: "Retail & Office Investments", to: "/investments/retail-office" },
-      { text: "Industrial Property Funds", to: "/investments/industrial-properties" },
-      { text: "Hospitality & Resort Ventures", to: "/investments/hospitality-resorts" },
-      { text: "Mixed-Use Development Opportunities", to: "/investments/mixed-use" },
-      { text: "International Real Estate Markets", to: "/investments/international" },
+      {
+        text: "Industrial Property Funds",
+        to: "/investments/industrial-properties",
+      },
+      {
+        text: "Hospitality & Resort Ventures",
+        to: "/investments/hospitality-resorts",
+      },
+      {
+        text: "Mixed-Use Development Opportunities",
+        to: "/investments/mixed-use",
+      },
+      {
+        text: "International Real Estate Markets",
+        to: "/investments/international",
+      },
     ],
   },
   {
@@ -38,7 +59,10 @@ const quickLinksData = [
       { text: "ROI Calculator", to: "/tools/roi-calculator" },
       { text: "Cash Flow Projections", to: "/tools/cash-flow-projections" },
       { text: "Tax Benefits Analysis", to: "/tools/tax-benefits" },
-      { text: "Portfolio Diversification Planner", to: "/tools/portfolio-planner" },
+      {
+        text: "Portfolio Diversification Planner",
+        to: "/tools/portfolio-planner",
+      },
       { text: "Investment Property Locator", to: "/tools/property-locator" },
     ],
   },
@@ -74,54 +98,55 @@ const QuickLinks = () => {
     >
       <Container maxWidth="lg">
         <Box sx={{ mb: 5, textAlign: "center" }}>
-          <Typography 
-            variant="h5" 
+          <Typography
+            variant="h5"
             component={motion.h2}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
-            sx={{ 
+            sx={{
               color: "#fff",
               fontWeight: 600,
               position: "relative",
               display: "inline-block",
-              mb: 1
+              mb: 1,
             }}
           >
             Investment Resources & Opportunities
           </Typography>
-          <Typography 
+          <Typography
             variant="body1"
             component={motion.p}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            sx={{ 
+            sx={{
               color: "rgba(255, 255, 255, 0.7)",
               maxWidth: "700px",
-              mx: "auto", 
-              mb: 2
+              mx: "auto",
+              mb: 2,
             }}
           >
-            Access our comprehensive collection of investment tools, opportunities, and educational resources
+            Access our comprehensive collection of investment tools,
+            opportunities, and educational resources
           </Typography>
-          <Divider 
+          <Divider
             component={motion.div}
             initial={{ width: 0 }}
             whileInView={{ width: "80px" }}
             transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
-            sx={{ 
-              mx: "auto", 
-              borderColor: "#c9b49a", 
+            sx={{
+              mx: "auto",
+              borderColor: "#c9b49a",
               borderWidth: 2,
-              opacity: 0.8
-            }} 
+              opacity: 0.8,
+            }}
           />
         </Box>
-        
+
         <Grid container spacing={3} justifyContent="center">
           {quickLinksData.map((column, index) => (
             <Grid item xs={12} md={4} key={index}>
@@ -138,10 +163,12 @@ const QuickLinks = () => {
                     height: "100%",
                     display: "flex",
                     flexDirection: "column",
-                    borderRadius: 1,
-                    background: "rgba(255, 255, 255, 0.02)",
-                    backdropFilter: "blur(10px)",
-                    border: "1px solid rgba(255, 255, 255, 0.05)",
+                    borderRadius: "20px",
+                    background: "rgba(255, 255, 255, 0.04)",
+                    backdropFilter: "blur(20px) saturate(180%)", // ← Blur + Saturation boost for "glass" look
+                    WebkitBackdropFilter: "blur(20px) saturate(180%)", // ← Safari support
+                    boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37)`, // ← A little stronger shadow
+                    border: `1px solid rgba(255, 255, 255, 0.18)`, // ← Faint border
                     transition: "transform 0.3s ease, box-shadow 0.3s ease",
                     "&:hover": {
                       boxShadow: "0 10px 30px rgba(0, 0, 0, 0.2)",
@@ -165,14 +192,17 @@ const QuickLinks = () => {
                         left: 0,
                         width: "40px",
                         height: "2px",
-                        background: "linear-gradient(to right, #c9b49a, rgba(201, 180, 154, 0.3))",
-                      }
+                        background:
+                          "linear-gradient(to right, #c9b49a, rgba(201, 180, 154, 0.3))",
+                      },
                     }}
                   >
                     {column.title}
                   </Typography>
 
-                  <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+                  <Box
+                    sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}
+                  >
                     {column.links.map((link, linkIndex) => (
                       <Link
                         key={linkIndex}
@@ -194,28 +224,30 @@ const QuickLinks = () => {
                             "& .arrow-icon": {
                               opacity: 1,
                               transform: "translateX(0)",
-                            }
+                            },
                           },
                         }}
                       >
-                        <Box sx={{ 
-                          display: "flex", 
-                          justifyContent: "space-between", 
-                          alignItems: "center",
-                          width: "100%"
-                        }}>
+                        <Box
+                          sx={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            width: "100%",
+                          }}
+                        >
                           <Typography variant="body2" sx={{ fontWeight: 500 }}>
                             {link.text}
                           </Typography>
-                          <ArrowForwardIosIcon 
+                          <ArrowForwardIosIcon
                             className="arrow-icon"
-                            sx={{ 
+                            sx={{
                               fontSize: 14,
                               opacity: 0,
                               transform: "translateX(-10px)",
                               transition: "all 0.25s ease",
-                              color: "#c9b49a"
-                            }} 
+                              color: "#c9b49a",
+                            }}
                           />
                         </Box>
                       </Link>
@@ -226,24 +258,35 @@ const QuickLinks = () => {
             </Grid>
           ))}
         </Grid>
-        
-        <Box 
+
+        <Box
           component={motion.div}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
           viewport={{ once: true }}
-          sx={{ 
-            mt: 6, 
+          sx={{
+            mt: 6,
             textAlign: "center",
             p: 3,
             borderRadius: 1,
             background: "rgba(201, 180, 154, 0.05)",
-            border: "1px solid rgba(201, 180, 154, 0.15)"
+            border: "1px solid rgba(201, 180, 154, 0.15)",
           }}
         >
-          <Typography variant="body2" sx={{ color: "rgba(255, 255, 255, 0.7)" }}>
-            Need specialized investment guidance? <Link component={RouterLink} to="/contact" sx={{ color: "#c9b49a", fontWeight: 600 }}>Contact our financial advisors</Link> for personalized portfolio recommendations.
+          <Typography
+            variant="body2"
+            sx={{ color: "rgba(255, 255, 255, 0.7)" }}
+          >
+            Need specialized investment guidance?{" "}
+            <Link
+              component={RouterLink}
+              to="/contact"
+              sx={{ color: "#c9b49a", fontWeight: 600 }}
+            >
+              Contact our financial advisors
+            </Link>{" "}
+            for personalized portfolio recommendations.
           </Typography>
         </Box>
       </Container>

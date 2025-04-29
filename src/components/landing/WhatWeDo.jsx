@@ -41,7 +41,6 @@ const sections = [
   },
 ];
 
-// SVG icons in Apple style (mimicking SF Symbols)
 const AppleIcons = {
   "graph.circle.fill": (
     <svg viewBox="0 0 24 24" fill="currentColor" width="36" height="36">
@@ -126,10 +125,7 @@ const WhatWeDo = () => {
       }}
     >
       {/* Hero Background */}
-      {/* <StarryBackground /> */}
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
-        {/* Title Section with Apple-style animation */}
         <motion.div
           style={{
             opacity: titleOpacity,
@@ -143,7 +139,7 @@ const WhatWeDo = () => {
             sx={{
               mb: 2,
               fontSize: { xs: "2.5rem", md: "3.5rem" },
-              background: `linear-gradient(to right, ${colors.text}, ${colors.accent})`,
+              background: "linear-gradient(to right, #c9b49a, #e2c799)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               letterSpacing: "-0.5px",
@@ -192,7 +188,7 @@ const WhatWeDo = () => {
                     sx={{
                       borderRadius: "20px",
                       p: 4,
-                      background: "rgba(255, 255, 255, 0.02)", // ← More transparent and lighter
+                      background: "rgba(255, 255, 255, 0.04)", // ← More transparent and lighter
                       backdropFilter: "blur(20px) saturate(180%)", // ← Blur + Saturation boost for "glass" look
                       WebkitBackdropFilter: "blur(20px) saturate(180%)", // ← Safari support
                       boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37)`, // ← A little stronger shadow
@@ -350,7 +346,7 @@ const WhatWeDo = () => {
                   sx={{
                     py: 1.5,
                     px: 4,
-                    background: colors.accent,
+                    background: "linear-gradient(to right, #c9b49a, #e2c799)",
                     color: "#000000",
                     border: "none",
                     borderRadius: "25px",

@@ -58,6 +58,7 @@ export default function HeroSection({ loadingDone }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        marginTop: "35px"
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>

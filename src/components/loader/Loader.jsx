@@ -5,48 +5,45 @@ import { motion } from "framer-motion";
 export default function FuturisticLoader() {
   const theme = useTheme();
   const containerRef = useRef(null);
-  
+
   // Particle effect setup
   useEffect(() => {
     if (!containerRef.current) return;
-    
+
     const container = containerRef.current;
-    const particleCount = 100;
+    const particleCount = 150; // More particles for stronger hyperspace feel
     const particles = [];
-    
+
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'particle';
-      
-      // Random position, size, and animation delay
-      const size = Math.random() * 4 + 1;
+
+      // Random position, size, and initial scale
+      const size = Math.random() * 2 + 1;
       const posX = Math.random() * window.innerWidth;
       const posY = Math.random() * window.innerHeight;
       const delay = Math.random() * 5;
-      
+
       particle.style.width = `${size}px`;
       particle.style.height = `${size}px`;
       particle.style.left = `${posX}px`;
       particle.style.top = `${posY}px`;
       particle.style.animationDelay = `${delay}s`;
-      
+
       container.appendChild(particle);
       particles.push(particle);
     }
-    
+
     return () => {
       particles.forEach(p => p.remove());
     };
   }, []);
 
+  // Variants
   const hexagonVariants = {
     rotate: {
       rotate: 360,
-      transition: {
-        duration: 20,
-        ease: "linear",
-        repeat: Infinity
-      }
+      transition: { duration: 20, ease: "linear", repeat: Infinity }
     }
   };
 
@@ -54,22 +51,18 @@ export default function FuturisticLoader() {
     pulse: {
       scale: [1, 1.05, 1],
       opacity: [0.7, 1, 0.7],
-      transition: {
-        duration: 2,
-        ease: "easeInOut",
-        repeat: Infinity
-      }
+      transition: { duration: 2, ease: "easeInOut", repeat: Infinity }
     }
   };
-  
+
   const textVariants = {
     glow: {
-      textShadow: ["0 0 8px rgba(107, 255, 193, 0.7)", "0 0 18px rgba(107, 255, 193, 0.9)", "0 0 8px rgba(107, 255, 193, 0.7)"],
-      transition: {
-        duration: 1.5,
-        repeat: Infinity,
-        ease: "easeInOut"
-      }
+      textShadow: [
+        "0 0 8px rgba(107, 255, 193, 0.7)",
+        "0 0 18px rgba(107, 255, 193, 0.9)",
+        "0 0 8px rgba(107, 255, 193, 0.7)"
+      ],
+      transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
     }
   };
 
@@ -78,7 +71,7 @@ export default function FuturisticLoader() {
       sx={{
         position: "fixed",
         inset: 0,
-        background: "linear-gradient(135deg, #051014 0%, #0A2A2F 100%)",
+        background: "#000000",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -87,38 +80,43 @@ export default function FuturisticLoader() {
         perspective: "1000px",
         "& .particle": {
           position: "absolute",
-          background: "rgba(107, 255, 193, 0.5)",
+          background: "white",
           borderRadius: "50%",
           pointerEvents: "none",
-          animation: "float 8s ease-in-out infinite"
+          animation: "hyperspace 2s linear infinite",
+          opacity: 0.8
         },
-        "@keyframes float": {
-          "0%, 100%": {
-            transform: "translateY(0) translateX(0)",
-            opacity: 0
+        "@keyframes hyperspace": {
+          "0%": {
+            transform: "translateZ(0px) scale(1)",
+            opacity: 0.3
           },
-          "50%": {
-            transform: "translateY(-100px) translateX(20px)",
-            opacity: 0.8
+          "70%": {
+            transform: "translateZ(500px) scale(2)",
+            opacity: 1
+          },
+          "100%": {
+            transform: "translateZ(1000px) scale(4)",
+            opacity: 0
           }
         }
       }}
       ref={containerRef}
     >
-      {/* Grid lines */}
+      {/* Optional faint grid overlay */}
       <Box
         sx={{
           position: "absolute",
           inset: 0,
           backgroundImage: `
-            linear-gradient(rgba(107, 255, 193, 0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(107, 255, 193, 0.2) 1px, transparent 1px)
+            linear-gradient(rgba(107, 255, 193, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(107, 255, 193, 0.05) 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
-          opacity: 0.3
+          opacity: 0.1
         }}
       />
-      
+
       {/* Outer hexagon */}
       <motion.div
         variants={hexagonVariants}
@@ -131,7 +129,7 @@ export default function FuturisticLoader() {
           backgroundSize: "cover"
         }}
       />
-      
+
       {/* Middle hexagon */}
       <motion.div
         variants={hexagonVariants}
@@ -145,7 +143,7 @@ export default function FuturisticLoader() {
           transform: "rotate(180deg)"
         }}
       />
-      
+
       {/* Inner hexagon */}
       <motion.div
         variants={pulseVariants}
@@ -158,7 +156,7 @@ export default function FuturisticLoader() {
           backgroundSize: "cover"
         }}
       />
-      
+
       {/* Core glow */}
       <Box
         component={motion.div}
@@ -182,8 +180,8 @@ export default function FuturisticLoader() {
           background: "radial-gradient(circle, rgba(107, 255, 193, 0.2) 0%, rgba(107, 255, 193, 0.1) 70%, transparent 100%)"
         }}
       />
-      
-      {/* Company name */}
+
+      {/* Company Name */}
       <Box
         sx={{
           position: "relative",
@@ -207,7 +205,7 @@ export default function FuturisticLoader() {
         >
           GREEN ARK
         </Typography>
-        
+
         <Typography
           component={motion.div}
           animate={{
@@ -229,7 +227,7 @@ export default function FuturisticLoader() {
         >
           INITIALIZING SYSTEMS
         </Typography>
-        
+
         {/* Progress bar */}
         <Box
           sx={{
@@ -264,6 +262,7 @@ export default function FuturisticLoader() {
     </Box>
   );
 }
+
 
 
 // import React, { useEffect, useRef, useState } from "react";

@@ -29,10 +29,12 @@ import { Building, Mail, Phone, User, MessageSquare, Settings } from "lucide-rea
 
 // Styled components
 const StyledCard = styled(Card)(({ theme }) => ({
-  background: 'linear-gradient(145deg, #1a1a1a 0%, #111111 100%)',
-  borderRadius: theme.spacing(2),
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
-  border: `1px solid ${alpha(theme.palette.primary.main, 0.1)}`,
+  background: "rgba(255, 255, 255, 0.04)", // ← More transparent and lighter
+  borderRadius: "20px",
+  backdropFilter: "blur(20px) saturate(180%)", // ← Blur + Saturation boost for "glass" look
+  WebkitBackdropFilter: "blur(20px) saturate(180%)", // ← Safari support
+  boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37)`, // ← A little stronger shadow
+  border: `1px solid rgba(255, 255, 255, 0.18)`, // ← Faint border
   overflow: 'hidden',
   position: 'relative',
   '&::before': {
@@ -312,7 +314,7 @@ export default function ContactForm() {
                   <FormControl component="fieldset">
                     <FormLabel sx={{ color: alpha('#fff', 0.7) }}>Preferred Contact Method</FormLabel>
                     <RadioGroup row name="contactPreference" value={formData.contactPreference} onChange={handleChange}>
-                      <FormControlLabel value="email" control={<Radio sx={{ color: '#fff' }} />} label="Email" />
+                      <FormControlLabel value="email" control={<Radio sx={{ color: '#fff'}} />} label="Email" />
                       <FormControlLabel value="phone" control={<Radio sx={{ color: '#fff' }} />} label="Phone" />
                       <FormControlLabel value="either" control={<Radio sx={{ color: '#fff' }} />} label="Either" />
                     </RadioGroup>
