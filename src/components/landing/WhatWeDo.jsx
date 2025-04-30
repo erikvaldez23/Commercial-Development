@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -7,7 +7,7 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import StarryBackground from "../reusable-components/StarryBackground";
 
 // Apple-inspired color palette
@@ -89,11 +89,63 @@ const itemVariants = {
   },
 };
 
+// Particle effect component
+const ParticleEffect = ({ scrollYProgress }) => {
+  // Create multiple particles with different animations
+  const particles = Array.from({ length: 12 }, (_, i) => {
+    const delay = i * 0.1;
+    const size = Math.random() * (20 - 5) + 5;
+    const xPos = Math.random() * 100;
+    
+    const y = useTransform(
+      scrollYProgress, 
+      [0, 0.5, 1], 
+      [`${i * -20}%`, `${i * -10}%`, `${i * -5}%`]
+    );
+    
+    const opacity = useTransform(
+      scrollYProgress, 
+      [0, 0.2, 0.8, 1], 
+      [0, 0.6, 0.3, 0]
+    );
+    
+    return (
+      <motion.div
+        key={i}
+        style={{
+          position: "absolute",
+          width: `${size}px`,
+          height: `${size}px`,
+          borderRadius: "50%",
+          background: i % 2 === 0 ? "#c9b49a" : "#e2c799",
+          left: `${xPos}%`,
+          opacity,
+          y,
+          filter: `blur(${size / 3}px)`,
+        }}
+        animate={{
+          x: [0, Math.random() * 20 - 10, 0],
+        }}
+        transition={{
+          duration: 3 + Math.random() * 2,
+          repeat: Infinity,
+          repeatType: "reverse",
+          delay,
+        }}
+      />
+    );
+  });
+
+  return <>{particles}</>;
+};
+
 const WhatWeDo = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const ref = useRef(null);
-  const videoRef = useRef(null);
+  const headerRef = useRef(null);
+  const isInView = useInView(headerRef, { once: false, amount: 0.3 });
+  
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -112,6 +164,29 @@ const WhatWeDo = () => {
   );
   const titleY = useTransform(scrollYProgress, [0, 0.2, 0.3], [30, 10, 0]);
 
+  // Entrance animation for the section
+  const entranceVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" }
+    }
+  };
+
+  // Reveal animation for cards
+  const revealVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: (i) => ({ 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        delay: 0.2 + i * 0.15,
+        duration: 0.7, 
+        ease: [0.215, 0.61, 0.355, 1] // Cubic bezier for a nice bounce effect
+      }
+    }),
+  };
+
   return (
     <Box
       ref={ref}
@@ -124,9 +199,64 @@ const WhatWeDo = () => {
         overflow: "hidden",
       }}
     >
-      {/* Hero Background */}
+      {/* Connect particles effect */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: "-50px", // Overlap with the hero section
+          left: 0,
+          right: 0,
+          height: "200px",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <ParticleEffect scrollYProgress={scrollYProgress} />
+      </Box>
+
+      {/* Transition gradient at the top */}
+      <Box
+        component={motion.div}
+        style={{
+          opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0]),
+          y: useTransform(scrollYProgress, [0, 0.5], [0, -50]),
+        }}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "150px",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* Section Background */}
+      <Box
+        component={motion.div}
+        style={{
+          scale: backgroundScale,
+          opacity: useTransform(scrollYProgress, [0, 0.3], [0, 0.2]),
+        }}
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: "radial-gradient(circle at center, rgba(201,180,154,0.08) 0%, rgba(0,0,0,0) 70%)",
+          zIndex: 0,
+        }}
+      />
+
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <motion.div
+          ref={headerRef}
+          initial="hidden"
+          animate={isInView ? "visible" : "hidden"}
+          variants={entranceVariants}
           style={{
             opacity: titleOpacity,
             y: titleY,
@@ -167,122 +297,130 @@ const WhatWeDo = () => {
           </Typography>
         </motion.div>
 
-        {/* Apple-style Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <Grid container spacing={3}>
-            {sections.map((item, i) => (
-              <Grid key={i} item xs={12} md={4}>
-                <motion.div
-                  variants={itemVariants}
-                  whileHover={{
-                    y: -8,
-                    transition: { duration: 0.3, ease: "easeOut" },
+        {/* Cards Section */}
+        <Grid container spacing={3}>
+          {sections.map((item, i) => (
+            <Grid key={i} item xs={12} md={4}>
+              <motion.div
+                custom={i}
+                variants={revealVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{
+                  y: -8,
+                  transition: { duration: 0.3, ease: "easeOut" },
+                }}
+              >
+                <Box
+                  sx={{
+                    borderRadius: "20px",
+                    p: 4,
+                    background: "rgba(255, 255, 255, 0.04)", // ← More transparent and lighter
+                    backdropFilter: "blur(20px) saturate(180%)", // ← Blur + Saturation boost for "glass" look
+                    WebkitBackdropFilter: "blur(20px) saturate(180%)", // ← Safari support
+                    boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37)`, // ← A little stronger shadow
+                    border: `1px solid rgba(255, 255, 255, 0.18)`, // ← Faint border
+                    height: "330px",
+                    transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                    overflow: "hidden",
+                    position: "relative",
+                    "&:hover": {
+                      boxShadow: `0 10px 40px rgba(0, 0, 0, 0.2), 0 0 20px ${colors.accent}22`,
+                      "& .icon-wrapper": {
+                        color: colors.accent,
+                        transform: "translateY(-3px)",
+                      },
+                    },
                   }}
                 >
+                  {/* Apple-style Icon */}
+                  <Box
+                    className="icon-wrapper"
+                    sx={{
+                      mb: 3,
+                      color: colors.text,
+                      transition: "all 0.3s ease",
+                    }}
+                  >
+                    {AppleIcons[item.icon]}
+                  </Box>
+
+                  <Typography
+                    variant="h5"
+                    fontWeight={600}
+                    gutterBottom
+                    sx={{
+                      mb: 2,
+                      letterSpacing: "-0.3px",
+                    }}
+                  >
+                    {item.title}
+                  </Typography>
+
+                  <Typography
+                    sx={{
+                      color: colors.subtext,
+                      lineHeight: 1.7,
+                      fontWeight: 400,
+                      letterSpacing: "0.15px",
+                    }}
+                  >
+                    {item.content}
+                  </Typography>
+
+                  {/* Apple-style subtle link */}
                   <Box
                     sx={{
-                      borderRadius: "20px",
-                      p: 4,
-                      background: "rgba(255, 255, 255, 0.04)", // ← More transparent and lighter
-                      backdropFilter: "blur(20px) saturate(180%)", // ← Blur + Saturation boost for "glass" look
-                      WebkitBackdropFilter: "blur(20px) saturate(180%)", // ← Safari support
-                      boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37)`, // ← A little stronger shadow
-                      border: `1px solid rgba(255, 255, 255, 0.18)`, // ← Faint border
-                      height: "330px",
-                      transition:
-                        "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
-                      overflow: "hidden",
-                      position: "relative",
+                      mt: 3,
+                      display: "flex",
+                      alignItems: "center",
+                      color: colors.accent,
+                      fontWeight: 500,
+                      cursor: "pointer",
+                      transition: "all 0.2s ease",
                       "&:hover": {
-                        boxShadow: `0 10px 40px rgba(0, 0, 0, 0.2), 0 0 20px ${colors.accent}22`,
-                        "& .icon-wrapper": {
-                          color: colors.accent,
-                          transform: "translateY(-3px)",
-                        },
+                        gap: 1,
                       },
                     }}
                   >
-                    {/* Apple-style Icon */}
-                    <Box
-                      className="icon-wrapper"
-                      sx={{
-                        mb: 3,
-                        color: colors.text,
-                        transition: "all 0.3s ease",
-                      }}
-                    >
-                      {AppleIcons[item.icon]}
-                    </Box>
-
                     <Typography
-                      variant="h5"
-                      fontWeight={600}
-                      gutterBottom
+                      variant="body2"
                       sx={{
-                        mb: 2,
-                        letterSpacing: "-0.3px",
-                      }}
-                    >
-                      {item.title}
-                    </Typography>
-
-                    <Typography
-                      sx={{
-                        color: colors.subtext,
-                        lineHeight: 1.7,
-                        fontWeight: 400,
-                        letterSpacing: "0.15px",
-                      }}
-                    >
-                      {item.content}
-                    </Typography>
-
-                    {/* Apple-style subtle link */}
-                    <Box
-                      sx={{
-                        mt: 3,
-                        display: "flex",
-                        alignItems: "center",
-                        color: colors.accent,
                         fontWeight: 500,
-                        cursor: "pointer",
-                        transition: "all 0.2s ease",
-                        "&:hover": {
-                          gap: 1,
-                        },
+                        fontSize: "0.95rem",
                       }}
                     >
-                      <Typography
-                        variant="body2"
-                        sx={{
-                          fontWeight: 500,
-                          fontSize: "0.95rem",
-                        }}
-                      >
-                        Learn more
-                      </Typography>
-                      <Box
-                        sx={{ ml: 0.5, display: "flex", alignItems: "center" }}
-                      >
-                        {AppleIcons["arrow.right"]}
-                      </Box>
+                      Learn more
+                    </Typography>
+                    <Box
+                      sx={{ ml: 0.5, display: "flex", alignItems: "center" }}
+                    >
+                      {AppleIcons["arrow.right"]}
                     </Box>
                   </Box>
-                </motion.div>
-              </Grid>
-            ))}
-          </Grid>
-        </motion.div>
+                </Box>
+              </motion.div>
+            </Grid>
+          ))}
+        </Grid>
 
         {/* Final Section with Apple-style */}
         <Box sx={{ mt: 12, mb: 4, position: "relative" }}>
           {/* Apple-style glow element */}
           <Box
+            component={motion.div}
+            initial={{ opacity: 0 }}
+            whileInView={{ 
+              opacity: [0, 0.5, 0.3],
+              transition: { 
+                duration: 3,
+                times: [0, 0.5, 1],
+                repeat: Infinity,
+                repeatType: "reverse"
+              }
+            }}
+            viewport={{ once: false }}
             sx={{
               position: "absolute",
               width: "300px",
@@ -370,6 +508,6 @@ const WhatWeDo = () => {
       </Container>
     </Box>
   );
-};
+}
 
 export default WhatWeDo;

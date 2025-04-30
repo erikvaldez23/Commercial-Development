@@ -11,7 +11,7 @@ export default function FuturisticLoader() {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    const particleCount = 150; // More particles for stronger hyperspace feel
+    const particleCount = 500;
     const particles = [];
 
     for (let i = 0; i < particleCount; i++) {

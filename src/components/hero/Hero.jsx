@@ -1,5 +1,5 @@
 // src/components/hero/HeroSection.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -12,12 +12,24 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "/greenark-logo1.png";
+import TransitionElement from "../animations/TransitionElement";
 
 export default function HeroSection({ loadingDone }) {
   const [open, setOpen] = useState(false);
+  const [showTransition, setShowTransition] = useState(false);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  useEffect(() => {
+    // Show transition element after the hero animations
+    if (loadingDone) {
+      const timer = setTimeout(() => {
+        setShowTransition(true);
+      }, 800);
+      return () => clearTimeout(timer);
+    }
+  }, [loadingDone]);
 
   const learnMoreScroll = () => {
     document.getElementById("what-we-do")?.scrollIntoView({
@@ -47,20 +59,44 @@ export default function HeroSection({ loadingDone }) {
     visible: { opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.8 } },
   };
 
+  // Add the scroll indicator animation
+  const scrollIndicatorVariants = {
+    initial: { y: 0, opacity: 0 },
+    animate: {
+      y: [0, 10, 0],
+      opacity: [0, 1, 0],
+      transition: {
+        y: {
+          repeat: Infinity,
+          duration: 2,
+          ease: "easeInOut",
+        },
+        opacity: {
+          repeat: Infinity,
+          duration: 2,
+          ease: "easeInOut",
+        },
+      },
+    },
+  };
+
   return (
     <Box
       sx={{
         background: "transparent",
         color: "white",
         position: "relative",
-        overflow: "hidden",
+        overflow: "visible", // Changed from "hidden" to allow transition element to flow out
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "35px"
+        marginTop: "35px",
       }}
     >
+      {/* Transition Element */}
+      {/* {showTransition && <TransitionElement />} */}
+
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>
         <Box
           sx={{
@@ -98,16 +134,23 @@ export default function HeroSection({ loadingDone }) {
           />
 
           {/* Center Logo */}
-          <Box
-            component="img"
+          <motion.img
             src={logo}
             alt="Company Logo"
-            sx={{
+            animate={{
+              y: [5, -10, 5], // Moves up by 15px, then back to center
+            }}
+            transition={{
+              duration: 2, // Slower for smooth float
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            style={{
               position: "absolute",
               top: "-25%",
-              left: "50%",
+              left: "37.5%",
               transform: "translateX(-50%)",
-              width: { xs: "100px", md: "300px" },
+              width: "300px",
               height: "auto",
               zIndex: 2,
               pointerEvents: "none",

@@ -25,6 +25,7 @@ import {
   Phone,
   AccessTime 
 } from '@mui/icons-material';
+import CTA from "../subpage-components/CTA"
 
 // Company color
 const primaryColor = "#c9b49a";

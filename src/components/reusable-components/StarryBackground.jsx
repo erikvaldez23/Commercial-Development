@@ -39,9 +39,9 @@ const StarryBackground = () => {
 
     // Layer configs
     const starLayers = [
-      { count: 100, speed: 0.05, size: { min: 0.2, max: 0.8 }, brightness: { min: 0.3, max: 0.5 } },
-      { count: 70, speed: 0.1, size: { min: 0.5, max: 1.2 }, brightness: { min: 0.4, max: 0.7 } },
-      { count: 30, speed: 0.2, size: { min: 0.8, max: 1.5 }, brightness: { min: 0.5, max: 0.9 } },
+      { count: 200, speed: 0.05, size: { min: 0.2, max: 0.8 }, brightness: { min: 0.3, max: 0.5 } },
+      { count: 140, speed: 0.1, size: { min: 0.5, max: 1.2 }, brightness: { min: 0.4, max: 0.7 } },
+      { count: 60, speed: 0.2, size: { min: 0.8, max: 1.5 }, brightness: { min: 0.5, max: 0.9 } },
     ];
     
     const stars = [];

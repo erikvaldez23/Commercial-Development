@@ -20,6 +20,7 @@
     "@mui/material": "^6.4.2",
     "@react-three/drei": "^9.121.4",
     "@react-three/fiber": "^8.17.14",
+    "@tailwindcss/vite": "^4.1.4",
     "axios": "^1.7.9",
     "chart.js": "^4.4.9",
     "cors": "^2.8.5",
@@ -43,6 +44,7 @@
     "sitemap-generator": "^8.5.1",
     "slick-carousel": "^1.8.1",
     "swiper": "^11.2.4",
+    "tailwindcss": "^4.1.4",
     "three": "^0.173.0"
   },
   "devDependencies": {
