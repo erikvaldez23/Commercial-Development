@@ -94,7 +94,7 @@ export default function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <CssBaseline /> */}
+      <CssBaseline />
       <Router>
         <ScrollToTop />
         <ScrollHandler />
@@ -117,9 +117,11 @@ export default function App() {
 
         <>
           {loading &&
-            (window.location.hash === "#/" ||
-              window.location.hash === "" ||
-              window.location.pathname === "/") && <Loader />}
+            // (window.location.hash === "#/" ||
+              // window.location.hash === "" ||
+              // window.location.pathname === "/")
+              //  && 
+               <Loader />}
           <Routes>
             <Route
               path="/"
