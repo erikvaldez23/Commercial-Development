@@ -147,10 +147,10 @@ export default function HeroSection({ loadingDone }) {
             }}
             style={{
               position: "absolute",
-              top: "-25%",
-              left: "37.5%",
+              top: "-10%",
+              left: "45%",
               transform: "translateX(-50%)",
-              width: "300px",
+              width: "125px",
               height: "auto",
               zIndex: 2,
               pointerEvents: "none",

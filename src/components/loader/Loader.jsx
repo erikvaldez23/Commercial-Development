@@ -11,12 +11,12 @@ export default function FuturisticLoader() {
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    const particleCount = 500;
+    const particleCount = 1000;
     const particles = [];
 
     for (let i = 0; i < particleCount; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'particle';
+      const particle = document.createElement("div");
+      particle.className = "particle";
 
       // Random position, size, and initial scale
       const size = Math.random() * 2 + 1;
@@ -35,35 +35,35 @@ export default function FuturisticLoader() {
     }
 
     return () => {
-      particles.forEach(p => p.remove());
+      particles.forEach((p) => p.remove());
     };
   }, []);
 
   // Variants
-  const hexagonVariants = {
-    rotate: {
-      rotate: 360,
-      transition: { duration: 20, ease: "linear", repeat: Infinity }
-    }
-  };
+  // const hexagonVariants = {
+  //   rotate: {
+  //     rotate: 360,
+  //     transition: { duration: 20, ease: "linear", repeat: Infinity },
+  //   },
+  // };
 
-  const pulseVariants = {
-    pulse: {
-      scale: [1, 1.05, 1],
-      opacity: [0.7, 1, 0.7],
-      transition: { duration: 2, ease: "easeInOut", repeat: Infinity }
-    }
-  };
+  // const pulseVariants = {
+  //   pulse: {
+  //     scale: [1, 1.05, 1],
+  //     opacity: [0.7, 1, 0.7],
+  //     transition: { duration: 2, ease: "easeInOut", repeat: Infinity },
+  //   },
+  // };
 
   const textVariants = {
     glow: {
       textShadow: [
         "0 0 8px rgba(201, 180, 154, 0.7)",
         "0 0 18px rgba(201, 180, 154, 0.9)",
-        "0 0 8px rgba(201, 180, 154, 0.7)"
+        "0 0 8px rgba(201, 180, 154, 0.7)",
       ],
-      transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" }
-    }
+      transition: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
+    },
   };
 
   return (
@@ -83,23 +83,23 @@ export default function FuturisticLoader() {
           background: "white",
           borderRadius: "50%",
           pointerEvents: "none",
-          animation: "hyperspace 2s linear infinite",
-          opacity: 0.8
+          animation: "hyperspace 1s linear infinite",
+          opacity: 0.8,
         },
         "@keyframes hyperspace": {
           "0%": {
-            transform: "translateZ(0px) scale(1)",
-            opacity: 0.3
+            transform: "translateZ(0px) scale(0.1)", // Start smaller
+            opacity: 0.3,
           },
-          "70%": {
-            transform: "translateZ(500px) scale(2)",
-            opacity: 1
+          "80%": {
+            transform: "translateZ(500px) scale(2.5)", // More dramatic scaling
+            opacity: 1,
           },
           "100%": {
-            transform: "translateZ(1000px) scale(4)",
-            opacity: 0
-          }
-        }
+            transform: "translateZ(1000px) scale(5)", // Bigger scale
+            opacity: 0,
+          },
+        },
       }}
       ref={containerRef}
     >
@@ -113,7 +113,7 @@ export default function FuturisticLoader() {
             linear-gradient(90deg, rgba(107, 255, 193, 0.05) 1px, transparent 1px)
           `,
           backgroundSize: "40px 40px",
-          opacity: 0.1
+          opacity: 0.1,
         }}
       />
 
@@ -164,21 +164,21 @@ export default function FuturisticLoader() {
           boxShadow: [
             "0 0 8px rgba(201, 180, 154, 0.7)",
             "0 0 18px rgba(201, 180, 154, 0.9)",
-            "0 0 8px rgba(201, 180, 154, 0.7)"
+            "0 0 8px rgba(201, 180, 154, 0.7)",
           ],
         }}
         transition={{
           duration: 2,
           repeat: Infinity,
-          ease: "easeInOut"
+          ease: "easeInOut",
         }}
         sx={{
           position: "absolute",
           width: "120px",
           height: "120px",
           borderRadius: "50%",
-          background: 'linear-gradient(145deg, #c9b49a 0%, #e5ded1 50%, #fffaf2 100%)'
-
+          background:
+            "linear-gradient(145deg, #c9b49a 0%, #e5ded1 50%, #fffaf2 100%)",
         }}
       />
 
@@ -187,7 +187,7 @@ export default function FuturisticLoader() {
         sx={{
           position: "relative",
           zIndex: 10,
-          textAlign: "center"
+          textAlign: "center",
         }}
       >
         <Typography
@@ -201,7 +201,7 @@ export default function FuturisticLoader() {
             fontWeight: 700,
             letterSpacing: "0.25em",
             textShadow: "0 0 10px rgba(107, 255, 193, 0.8)",
-            marginBottom: "16px"
+            marginBottom: "16px",
           }}
         >
           GREEN ARK
@@ -210,12 +210,12 @@ export default function FuturisticLoader() {
         <Typography
           component={motion.div}
           animate={{
-            opacity: [0.5, 1, 0.5]
+            opacity: [0.5, 1, 0.5],
           }}
           transition={{
             duration: 1.5,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
           variant="subtitle1"
           sx={{
@@ -223,10 +223,10 @@ export default function FuturisticLoader() {
             fontFamily: "'Roboto Mono', monospace",
             letterSpacing: "0.2em",
             fontSize: "0.8rem",
-            opacity: 0.8
+            opacity: 0.8,
           }}
         >
-          INITIALIZING SYSTEMS
+          LOADING PAGE
         </Typography>
 
         {/* Progress bar */}
@@ -238,26 +238,25 @@ export default function FuturisticLoader() {
             background: "rgba(107, 255, 193, 0.2)",
             margin: "12px auto 0",
             borderRadius: "2px",
-            overflow: "hidden"
+            overflow: "hidden",
           }}
         >
           <Box
             component={motion.div}
             animate={{
-              x: ["-100%", "100%"]
+              x: ["-100%", "100%"],
             }}
             transition={{
               duration: 2,
               repeat: Infinity,
-              ease: "easeInOut"
+              ease: "easeInOut",
             }}
             sx={{
               position: "absolute",
               width: "50%",
               height: "100%",
-              background: 'linear-gradient(145deg, #c9b49a 0%, #e5ded1 50%, #fffaf2 100%)'
-
-
+              background:
+                "linear-gradient(145deg, #c9b49a 0%, #e5ded1 50%, #fffaf2 100%)",
             }}
           />
         </Box>

@@ -87,7 +87,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const minTime = 2000;
+    const minTime = 4000;
     const timer = setTimeout(() => setAnimationDone(true), minTime);
     return () => clearTimeout(timer);
   }, []);
