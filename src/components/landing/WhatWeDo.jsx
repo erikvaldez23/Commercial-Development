@@ -6,6 +6,7 @@ import {
   Container,
   useMediaQuery,
   useTheme,
+  Divider,
 } from "@mui/material";
 import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import StarryBackground from "../reusable-components/StarryBackground";
@@ -96,19 +97,19 @@ const ParticleEffect = ({ scrollYProgress }) => {
     const delay = i * 0.1;
     const size = Math.random() * (20 - 5) + 5;
     const xPos = Math.random() * 100;
-    
+
     const y = useTransform(
-      scrollYProgress, 
-      [0, 0.5, 1], 
+      scrollYProgress,
+      [0, 0.5, 1],
       [`${i * -20}%`, `${i * -10}%`, `${i * -5}%`]
     );
-    
+
     const opacity = useTransform(
-      scrollYProgress, 
-      [0, 0.2, 0.8, 1], 
+      scrollYProgress,
+      [0, 0.2, 0.8, 1],
       [0, 0.6, 0.3, 0]
     );
-    
+
     return (
       <motion.div
         key={i}
@@ -145,7 +146,7 @@ const WhatWeDo = () => {
   const ref = useRef(null);
   const headerRef = useRef(null);
   const isInView = useInView(headerRef, { once: false, amount: 0.3 });
-  
+
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
@@ -167,23 +168,23 @@ const WhatWeDo = () => {
   // Entrance animation for the section
   const entranceVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
   };
 
   // Reveal animation for cards
   const revealVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: (i) => ({ 
-      opacity: 1, 
+    visible: (i) => ({
+      opacity: 1,
       y: 0,
-      transition: { 
+      transition: {
         delay: 0.2 + i * 0.15,
-        duration: 0.7, 
-        ease: [0.215, 0.61, 0.355, 1] // Cubic bezier for a nice bounce effect
-      }
+        duration: 0.7,
+        ease: [0.215, 0.61, 0.355, 1], // Cubic bezier for a nice bounce effect
+      },
     }),
   };
 
@@ -227,29 +228,14 @@ const WhatWeDo = () => {
           left: 0,
           right: 0,
           height: "150px",
-          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
           zIndex: 0,
           pointerEvents: "none",
         }}
       />
 
       {/* Section Background */}
-      <Box
-        component={motion.div}
-        style={{
-          scale: backgroundScale,
-          opacity: useTransform(scrollYProgress, [0, 0.3], [0, 0.2]),
-        }}
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: "radial-gradient(circle at center, rgba(201,180,154,0.08) 0%, rgba(0,0,0,0) 70%)",
-          zIndex: 0,
-        }}
-      />
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <motion.div
@@ -267,7 +253,6 @@ const WhatWeDo = () => {
             fontWeight={600}
             textAlign="center"
             sx={{
-              mb: 2,
               fontSize: { xs: "2.5rem", md: "3.5rem" },
               background: "linear-gradient(to right, #c9b49a, #e2c799)",
               WebkitBackgroundClip: "text",
@@ -277,6 +262,22 @@ const WhatWeDo = () => {
           >
             What We Do
           </Typography>
+
+          <Divider
+            component={motion.div}
+            initial={{ width: 0 }}
+            whileInView={{ width: "80px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            sx={{
+              mx: "auto",
+              borderColor: "#c9b49a",
+              borderWidth: 2,
+              opacity: 0.8,
+              marginY: isMobile ? 4 : 2,
+            }}
+          />
+
           <Typography
             variant="h6"
             textAlign="center"
@@ -322,7 +323,8 @@ const WhatWeDo = () => {
                     boxShadow: `0 8px 32px 0 rgba(0, 0, 0, 0.37)`, // ← A little stronger shadow
                     border: `1px solid rgba(255, 255, 255, 0.18)`, // ← Faint border
                     height: "330px",
-                    transition: "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
+                    transition:
+                      "all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)",
                     overflow: "hidden",
                     position: "relative",
                     "&:hover": {
@@ -411,14 +413,14 @@ const WhatWeDo = () => {
           <Box
             component={motion.div}
             initial={{ opacity: 0 }}
-            whileInView={{ 
+            whileInView={{
               opacity: [0, 0.5, 0.3],
-              transition: { 
+              transition: {
                 duration: 3,
                 times: [0, 0.5, 1],
                 repeat: Infinity,
-                repeatType: "reverse"
-              }
+                repeatType: "reverse",
+              },
             }}
             viewport={{ once: false }}
             sx={{
@@ -508,6 +510,6 @@ const WhatWeDo = () => {
       </Container>
     </Box>
   );
-}
+};
 
 export default WhatWeDo;

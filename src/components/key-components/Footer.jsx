@@ -116,7 +116,7 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        background: "linear-gradient(180deg, rgba(0,20,30,0.95) 0%, rgba(0,40,60,0.98) 100%)",
+        background: "transparent",
         color: "#f5f5f5",
         pt: isMobile ? 6 : 8,
         pb: isMobile ? 4 : 5,
@@ -149,23 +149,6 @@ const Footer = () => {
         },
       }}
     >
-      {/* Geometric pattern overlay for visual interest */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: `
-            radial-gradient(circle at 20% 30%, rgba(39, 148, 210, 0.05) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(52, 199, 89, 0.05) 0%, transparent 50%)
-          `,
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      />
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <Grid container spacing={4}>
           {/* Logo and Tagline Column */}

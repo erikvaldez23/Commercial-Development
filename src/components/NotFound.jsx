@@ -13,7 +13,7 @@ const NotFound = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        backgroundColor: "#f9f9f9",
+        backgroundColor: "transparent",
       }}
     >
       {/* <Topbar notFound={true} /> */}
@@ -27,7 +27,6 @@ const NotFound = () => {
           flexGrow: 1,
           backgroundColor: "#b6c0c2",
           padding: { xs: 4, md: 8 },
-          mt: { xs: "56px", md: "64px" },
         }}
       >
         <Box
@@ -65,8 +64,8 @@ const NotFound = () => {
             <Button
               variant="contained"
               sx={{
-                backgroundColor: "#000",
-                color: "#fff",
+                backgroundColor: "#fff",
+                color: "#000",
                 fontWeight: "bold",
                 borderRadius: "25px",
                 px: 4,
@@ -84,7 +83,7 @@ const NotFound = () => {
           {/* Image Section */}
           <Box sx={{ flex: 1, display: "flex", justifyContent: "center" }}>
             <img
-              src="/dog.jpeg"
+              src="/Commercial-Development/dog.jpeg"
               alt="Funny Dog"
               style={{
                 maxWidth: "100%",
@@ -101,13 +100,11 @@ const NotFound = () => {
         <CallToAction />
       </Box>
       {/* Contact Section */}
-      <Box sx={{ backgroundColor: "#f9f9f9", width: "100vw" }}>
+      <Box sx={{width: "100vw" }}>
         <Contact />
       </Box>
 
       <QuickLinks />
-
-      <Footer />
     </Box>
   );
 };

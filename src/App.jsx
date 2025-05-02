@@ -22,6 +22,7 @@ import Topbar from "./components/key-components/Topbar";
 import Footer from "./components/key-components/Footer";
 import Loader from "./components/loader/Loader";
 import Chatbot from "./ChatBot";
+import RevealSection from "./components/animations/RevealSection";
 
 // landing & sub-pages
 import Hero from "./components/hero/Hero";
@@ -87,7 +88,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const minTime = 4000;
+    const minTime = 6500;
     const timer = setTimeout(() => setAnimationDone(true), minTime);
     return () => clearTimeout(timer);
   }, []);
@@ -116,22 +117,35 @@ export default function App() {
         <Topbar handleOpenChatbot={handleOpenChatbot} />
 
         <>
-          {loading &&
+          {loading && (
             // (window.location.hash === "#/" ||
-              // window.location.hash === "" ||
-              // window.location.pathname === "/")
-              //  && 
-               <Loader />}
+            // window.location.hash === "" ||
+            // window.location.pathname === "/")
+            //  &&
+            <Loader />
+          )}
           <Routes>
             <Route
               path="/"
               element={
                 <>
                   <Hero loadingDone={!loading} />
-                  <WhatWeDo />
-                  <WhyInvestWithUs />
-                  <CallToAction />
-                  <QuickLinks />
+                  <RevealSection>
+                    <WhatWeDo />
+                  </RevealSection>
+
+                  <RevealSection>
+                    <WhyInvestWithUs />
+                  </RevealSection>
+
+                  <RevealSection>
+                    <CallToAction />
+                  </RevealSection>
+
+                  <RevealSection>
+                    <QuickLinks />
+                  </RevealSection>
+
                   <Contact />
                 </>
               }
