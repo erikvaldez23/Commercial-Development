@@ -97,54 +97,55 @@ const QuickLinks = () => {
       }}
     >
       <Container maxWidth="lg">
-        <Box sx={{ mb: 5, textAlign: "center" }}>
+        <Box sx={{ mb: { xs: 4, md: 6 }, textAlign: "center" }}>
           <Typography
-            variant="h5"
+            variant= {isMobile ? "h3" : "h2"}
             component={motion.h2}
+            fontWeight={700}
+            mb={2}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
             sx={{
-              color: "#fff",
-              fontWeight: 600,
-              position: "relative",
-              display: "inline-block",
-              mb: 1,
+              background: "linear-gradient(to right, #c9b49a, #e2c799)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              textFillColor: "transparent",
+              letterSpacing: "-0.5px"
             }}
           >
             Investment Resources & Opportunities
           </Typography>
+
+              <Divider
+                 sx={{
+                   mx: "auto",
+                   borderColor: "#c9b49a",
+                   borderWidth: 2,
+                   opacity: 0.8,
+                   width: "80px",
+                   my: 3,
+                 }}
+               />
+
           <Typography
-            variant="body1"
+            variant="h6"
             component={motion.p}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
             sx={{
-              color: "rgba(255, 255, 255, 0.7)",
-              maxWidth: "700px",
-              mx: "auto",
-              mb: 2,
+              color: "rgba(255,255,255,0.8)",
+              maxWidth: 800, mx: "auto", fontWeight: 400, lineHeight: 1.6,
             }}
           >
             Access our comprehensive collection of investment tools,
             opportunities, and educational resources
           </Typography>
-          <Divider
-            component={motion.div}
-            initial={{ width: 0 }}
-            whileInView={{ width: "80px" }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            viewport={{ once: true }}
-            sx={{
-              mx: "auto",
-              borderColor: "#c9b49a",
-              borderWidth: 2,
-              opacity: 0.8,
-            }}
-          />
+     
         </Box>
 
         <Grid container spacing={3} justifyContent="center">
