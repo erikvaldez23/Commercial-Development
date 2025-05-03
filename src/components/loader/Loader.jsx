@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 
-export default function FuturisticLoader() {
+export default function Loader() {
   const theme = useTheme();
 
   const textVariants = {
