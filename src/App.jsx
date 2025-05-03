@@ -88,7 +88,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const minTime = 6500;
+    const minTime = 6400;
     const timer = setTimeout(() => setAnimationDone(true), minTime);
     return () => clearTimeout(timer);
   }, []);
@@ -111,7 +111,7 @@ export default function App() {
             zIndex: -999,
           }}
         >
-          <StarryBackground />
+          {!loading && <StarryBackground />}
         </Box>
 
         <Topbar handleOpenChatbot={handleOpenChatbot} />
