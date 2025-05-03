@@ -193,7 +193,8 @@ const WhatWeDo = () => {
       ref={ref}
       id="what-we-do"
       sx={{
-        background: "transparent",
+        // background: "#2F4F4F",
+        background: '#222',
         py: { xs: 10, md: 12 },
         position: "relative",
         color: colors.text,

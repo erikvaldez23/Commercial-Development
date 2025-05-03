@@ -12,7 +12,6 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "/greenark-logo1.png";
-import TransitionElement from "../animations/TransitionElement";
 
 export default function HeroSection({ loadingDone }) {
   const [open, setOpen] = useState(false);

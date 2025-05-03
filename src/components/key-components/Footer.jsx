@@ -369,7 +369,7 @@ const Footer = () => {
             </Box>
 
             {/* Certification badges */}
-            {!isMobile && (
+            {/* {!isMobile && (
               <Box sx={{ mt: 4, pt: 2, borderTop: "1px solid rgba(255,255,255,0.1)" }}>
                 <Typography variant="caption" sx={{ color: "rgba(255,255,255,0.5)", mb: 1, display: "block" }}>
                   Our Certifications:
@@ -397,7 +397,7 @@ const Footer = () => {
                   ))}
                 </Box>
               </Box>
-            )}
+            )} */}
           </Grid>
 
           {/* Contact Information Column */}
@@ -508,7 +508,7 @@ const Footer = () => {
             </Box>
 
             {/* Map preview */}
-            {!isMobile && !isMedium && (
+            {/* {!isMobile && !isMedium && (
               <Box 
                 sx={{ 
                   mt: 3,
@@ -534,7 +534,6 @@ const Footer = () => {
                   }
                 }}
               >
-                {/* This would be replaced with an actual map embed */}
                 <Box 
                   component="img"
                   src="/api/placeholder/400/100"
@@ -542,7 +541,7 @@ const Footer = () => {
                   sx={{ width: "100%", height: "100%", objectFit: "cover" }}
                 />
               </Box>
-            )}
+            )} */}
           </Grid>
         </Grid>
 

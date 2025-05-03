@@ -23,6 +23,8 @@ import Footer from "./components/key-components/Footer";
 import Loader from "./components/loader/Loader";
 import Chatbot from "./ChatBot";
 import RevealSection from "./components/animations/RevealSection";
+import VideoBackground from "./components/animations/VideoBackground";
+import SlideUpReveal from "./components/animations/SlideUpReveal";
 
 // landing & sub-pages
 import Hero from "./components/hero/Hero";
@@ -88,7 +90,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const minTime = 6400;
+    const minTime = 6550;
     const timer = setTimeout(() => setAnimationDone(true), minTime);
     return () => clearTimeout(timer);
   }, []);
@@ -111,84 +113,74 @@ export default function App() {
             zIndex: -999,
           }}
         >
-          {!loading && <StarryBackground />}
+          {/* <StarryBackground /> */}
+          <VideoBackground />
         </Box>
 
         <Topbar handleOpenChatbot={handleOpenChatbot} />
 
         <>
-          {loading && (
-            // (window.location.hash === "#/" ||
-            // window.location.hash === "" ||
-            // window.location.pathname === "/")
-            //  &&
-            <Loader />
-          )}
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero loadingDone={!loading} />
-                  <RevealSection>
-                    <WhatWeDo />
-                  </RevealSection>
+  {loading ? (
+    <Loader />
+  ) : (
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Hero loadingDone={!loading} />
+              <SlideUpReveal>
+                <WhatWeDo />
+              </SlideUpReveal>
+              <RevealSection>
+                <WhyInvestWithUs />
+              </RevealSection>
+              <RevealSection>
+                <CallToAction />
+              </RevealSection>
+              <RevealSection>
+                <QuickLinks />
+              </RevealSection>
+              <Contact />
+            </>
+          }
+        />
+        {/* Other routes... */}
+      </Routes>
 
-                  <RevealSection>
-                    <WhyInvestWithUs />
-                  </RevealSection>
+      <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
 
-                  <RevealSection>
-                    <CallToAction />
-                  </RevealSection>
+      {!chatbotOpen && (
+        <Box
+          sx={{
+            position: "fixed",
+            bottom: 20,
+            right: 20,
+            zIndex: (theme) => theme.zIndex.modal + 5,
+          }}
+        >
+          <IconButton
+            onClick={handleOpenChatbot}
+            sx={{
+              backgroundColor: "#c9b49a",
+              color: "white",
+              "&:hover": { backgroundColor: "#000" },
+              width: 70,
+              height: 70,
+              boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
+            }}
+          >
+            <ChatIcon sx={{ fontSize: 40 }} />
+          </IconButton>
+        </Box>
+      )}
 
-                  <RevealSection>
-                    <QuickLinks />
-                  </RevealSection>
+      <Footer />
+    </>
+  )}
+</>
 
-                  <Contact />
-                </>
-              }
-            />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/what-we-offer" element={<Offer />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/how-it-works" element={<How />} />
-            <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-
-          <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
-
-          {!chatbotOpen && (
-            <Box
-              sx={{
-                position: "fixed",
-                bottom: 20,
-                right: 20,
-                zIndex: (theme) => theme.zIndex.modal + 5,
-              }}
-            >
-              <IconButton
-                onClick={handleOpenChatbot}
-                sx={{
-                  backgroundColor: "#c9b49a",
-                  color: "white",
-                  "&:hover": { backgroundColor: "#000" },
-                  width: 70,
-                  height: 70,
-                  boxShadow: "0px 4px 12px rgba(0,0,0,0.3)",
-                }}
-              >
-                <ChatIcon sx={{ fontSize: 40 }} />
-              </IconButton>
-            </Box>
-          )}
-
-          <Footer />
-        </>
       </Router>
     </ThemeProvider>
   );
