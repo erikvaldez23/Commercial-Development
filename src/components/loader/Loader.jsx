@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
+import video from "/src/assets/HyperspaceJump.mp4"
 
 export default function Loader() {
   const theme = useTheme();
@@ -42,7 +43,7 @@ export default function Loader() {
           zIndex: 0,
         }}
       >
-        <source src="/Commercial-Development/HyperspaceJump.mp4" type="video/mp4" />
+        <source src={video} type="video/mp4" />
       </video>
 
       <Box
