@@ -86,7 +86,7 @@ export default function HeroSection({ loadingDone }) {
       sx={{
         background: "transparent",
         color: "white",
-        position: "sticky",
+        position: "relative",
         top: 0, // Stick to top
         left: 0,
         right: 0,
@@ -198,7 +198,7 @@ export default function HeroSection({ loadingDone }) {
                 letterSpacing: "0.5px",
               }}
             >
-              INVEST IN SUSTAINABLE <br /> REAL ESTATE
+              TOMORROWS SUSTAINABILITY TODAY
             </Typography>
           </motion.div>
 

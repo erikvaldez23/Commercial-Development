@@ -96,7 +96,7 @@ const Footer = () => {
   const contactInfo = [
     { 
       icon: <FaMapMarkerAlt />,
-      text: "123 Sustainable Way,\nEcoCityville, EC 12345",
+      text: "Address,\nCity, State, Zip",
       color: "#34c759"
     },
     { 
@@ -206,7 +206,7 @@ const Footer = () => {
                   color: "rgba(255,255,255,0.85)",
                   fontWeight: 300,
                   lineHeight: 1.5,
-                  borderLeft: "2px solid #34c759",
+                  borderLeft: "2px solid #2794d2",
                   pl: 2,
                   position: "relative",
                   "&::before": {
@@ -225,7 +225,7 @@ const Footer = () => {
                 }}
               >
                 <Box component="span" sx={{ 
-                  color: "#34c759", 
+                  color: "#2794d2",
                   fontWeight: 500,
                   mr: 0.5,
                 }}>
@@ -252,11 +252,10 @@ const Footer = () => {
                     variant="outlined"
                     size="small"
                     sx={{
-                      borderColor: "#34c759",
+                      background: "#2794d2",
                       color: "#fff",
                       "&:hover": {
-                        borderColor: "#34c759",
-                        background: "rgba(52, 199, 89, 0.1)",
+                        background: "#2794d2",
                       },
                       textTransform: "none",
                       mt: 1,
@@ -317,7 +316,7 @@ const Footer = () => {
                   left: 0,
                   width: isMobile ? "100%" : "40px",
                   height: "2px",
-                  background: "#34c759",
+                  background: "#2794d2",
                 }
               }}
             >
@@ -437,8 +436,8 @@ const Footer = () => {
                 >
                   <Box 
                     sx={{ 
-                      color: info.color,
-                      backgroundColor: `${info.color}1A`, // 10% opacity
+                      color: "#fff",
+                      background: "#2794d2",
                       p: 1,
                       borderRadius: "50%",
                       display: "flex",
@@ -597,7 +596,7 @@ const Footer = () => {
             }}
           >
             <FaLeaf size={12} style={{ color: "#34c759" }} />
-            Committed to sustainable investing since 2020
+            Action Quote
           </Typography>
         </Box>
       </Container>

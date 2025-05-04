@@ -19,7 +19,8 @@ import "./App.css";
 // core components
 import Topbar from "./components/key-components/Topbar";
 import Footer from "./components/key-components/Footer";
-import Loader from "./components/loader/Loader";
+// import Loader from "./components/loader/Loader";
+import UpdatedLoader from "./components/loader/UpdatedLoader";
 import Chatbot from "./ChatBot";
 import RevealSection from "./components/animations/RevealSection";
 import VideoBackground from "./components/animations/VideoBackground";
@@ -118,49 +119,47 @@ export default function App() {
         <Topbar handleOpenChatbot={handleOpenChatbot} />
 
         <>
-          {loading && <Loader />}
           <Routes>
             <Route
               path="/"
               element={
                 <>
-                  {/* Fixed background Hero */}
-                  <Box
-                    sx={{
-                      position: "fixed",
-                      top: 0,
-                      left: 0,
-                      width: "100vw",
-                      height: "100vh",
-                      zIndex: 1,
-                    }}
-                  >
-                    <Hero loadingDone={!loading} />
-                  </Box>
+                  {loading ? (
+                    <UpdatedLoader />
+                  ) : (
+                    <>
+                      <Box
+                        sx={{
+                          position: "fixed",
+                          top: 0,
+                          left: 0,
+                          width: "100vw",
+                          height: "100vh",
+                          zIndex: 1,
+                        }}
+                      >
+                        <Hero loadingDone />
+                      </Box>
 
-                  {/* Scroll spacer to allow scrolling */}
-                  <Box sx={{ height: "100vh" }} />
+                      <Box sx={{ height: "100vh" }} />
 
-                  {/* Overlapping slide-up sections */}
-                  <SlideUpReveal zIndex={2}>
-                    <WhatWeDo />
-                  </SlideUpReveal>
+                      <SlideUpReveal zIndex={2}>
+                        <WhatWeDo />
+                      </SlideUpReveal>
 
-                  <SlideUpReveal zIndex={3}>
-                    <WhyInvestWithUs />
-                  </SlideUpReveal>
+                      <SlideUpReveal zIndex={3}>
+                        <WhyInvestWithUs />
+                      </SlideUpReveal>
 
-                  <SlideUpReveal zIndex={4}>
-                    <CallToAction />
-                  </SlideUpReveal>
+                      <SlideUpReveal zIndex={4}>
+                        <CallToAction />
+                      </SlideUpReveal>
 
-                  <SlideUpReveal zIndex={5}>
-                    <QuickLinks />
-                  </SlideUpReveal>
-
-                  <SlideUpReveal zIndex={6}>
-                    <Contact />
-                  </SlideUpReveal>
+                      <SlideUpReveal zIndex={6}>
+                        <Contact />
+                      </SlideUpReveal>
+                    </>
+                  )}
                 </>
               }
             />

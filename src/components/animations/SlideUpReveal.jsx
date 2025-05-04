@@ -73,7 +73,7 @@ export default function SlideUpReveal({ children, delay = 0.2, overlap = "100vh"
           // borderTopRightRadius: "30px",
           // boxShadow: "0 -10px 30px rgba(0,0,0,0.4)",
           backgroundColor: "#111", // Match your WhatWeDo section background
-          minHeight: "100vh",
+          minHeight: "50vh",
           overflow: "hidden"
         }}
       >
