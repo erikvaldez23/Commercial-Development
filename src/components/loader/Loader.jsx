@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Typography, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
+import video from "../../../public/HyperspaceJump.mp4";
+
 
 export default function Loader() {
   const theme = useTheme();
@@ -45,7 +47,7 @@ export default function Loader() {
         }}
       >
         <source
-          src={`${import.meta.env.BASE_URL}HyperspaceJump.mp4`}
+          src={video}
           type="video/mp4"
         />
       </video>
