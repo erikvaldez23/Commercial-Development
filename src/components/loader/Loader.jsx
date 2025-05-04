@@ -34,6 +34,8 @@ export default function Loader() {
         loop
         muted
         playsInline
+        poster="/fallback.jpg"
+        onError={() => console.error("🚫 VIDEO FAILED TO LOAD")}
         style={{
           position: "absolute",
           width: "100%",
@@ -42,7 +44,10 @@ export default function Loader() {
           zIndex: 0,
         }}
       >
-        <source src={`${import.meta.env.BASE_URL}HyperspaceJump.mp4`} type="video/mp4" />
+        <source
+          src={`${import.meta.env.BASE_URL}HyperspaceJump.mp4`}
+          type="video/mp4"
+        />
       </video>
 
       <Box
