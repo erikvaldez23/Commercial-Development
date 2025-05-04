@@ -194,49 +194,14 @@ const WhatWeDo = () => {
       id="what-we-do"
       sx={{
         // background: "#2F4F4F",
-        background: '#222',
+        background: '#111',
         py: { xs: 10, md: 12 },
         position: "relative",
         color: colors.text,
         overflow: "hidden",
+        zIndex: 2,
       }}
     >
-      {/* Connect particles effect */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: "-50px", // Overlap with the hero section
-          left: 0,
-          right: 0,
-          height: "200px",
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      >
-        <ParticleEffect scrollYProgress={scrollYProgress} />
-      </Box>
-
-      {/* Transition gradient at the top */}
-      <Box
-        component={motion.div}
-        style={{
-          opacity: useTransform(scrollYProgress, [0, 0.2], [1, 0]),
-          y: useTransform(scrollYProgress, [0, 0.5], [0, -50]),
-        }}
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          height: "150px",
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 100%)",
-          zIndex: 0,
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Section Background */}
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1 }}>
         <motion.div

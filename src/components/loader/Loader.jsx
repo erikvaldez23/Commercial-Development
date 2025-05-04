@@ -42,7 +42,7 @@ export default function Loader() {
           zIndex: 0,
         }}
       >
-        <source src="/Commercial-Development/HyperspaceJump.mp4" type="video/mp4" />
+        <source src={`${import.meta.env.BASE_URL}HyperspaceJump.mp4`} type="video/mp4" />
       </video>
 
       <Box

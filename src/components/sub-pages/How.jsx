@@ -31,6 +31,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowForward";
 import Matter from "../subpage-components/Matter"
 import Services from "../subpage-components/Services"
 import Offerings from "../subpage-components/Offerings"
+import HowVideo from "../animations/HowVideo"
 
 // Custom styled components using MUI's styled API
 const GoldText = styled(Typography)(({ theme }) => ({
@@ -131,7 +132,7 @@ export default function How() {
     }, []);
 
   return (
-    <Box sx={{ bgcolor: '#0f0f0f', color: 'white' }}>
+    <Box sx={{ color: 'white' }}>
       {/* Hero Section with 3D-like elements */}
       <Fade in={loaded} timeout={1000}>
         <Box 
@@ -140,12 +141,12 @@ export default function How() {
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            // background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/api/placeholder/1920/1080)`,
             background: "url(/dark-background.jpg)",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         >
+          <HowVideo />
           <Container maxWidth="lg">
             <Box sx={{ maxWidth: isMobile ? '100%' : '60%' }}>
               <Typography 
@@ -201,7 +202,7 @@ export default function How() {
           sx={{
             position: 'absolute',
             inset: 0,
-            background: 'linear-gradient(135deg, #0f0f0f 0%, #000000 100%)',
+            background: 'transparent',
             zIndex: 0,
           }}
         >
@@ -211,7 +212,6 @@ export default function How() {
               width: '600px', 
               height: '600px', 
               borderRadius: '50%', 
-              background: 'radial-gradient(circle, rgba(201,180,154,0.1) 0%, rgba(0,0,0,0) 70%)',
               filter: 'blur(100px)',
               top: '-200px',
               right: '-100px',

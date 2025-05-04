@@ -1,4 +1,3 @@
-// src/components/hero/HeroSection.jsx
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -12,6 +11,9 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "/greenark-logo1.png";
+import WhatWeDo from "../landing/WhatWeDo";
+import SlideUpReveal from "../animations/SlideUpReveal";
+
 
 export default function HeroSection({ loadingDone }) {
   const [open, setOpen] = useState(false);
@@ -84,8 +86,12 @@ export default function HeroSection({ loadingDone }) {
       sx={{
         background: "transparent",
         color: "white",
-        position: "relative",
-        overflow: "visible", // Changed from "hidden" to allow transition element to flow out
+        position: "sticky",
+        top: 0, // Stick to top
+        left: 0,
+        right: 0,
+        zIndex: 0,
+        overflow: "visible", 
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -93,9 +99,6 @@ export default function HeroSection({ loadingDone }) {
         marginTop: "35px",
       }}
     >
-      {/* Transition Element */}
-      {/* {showTransition && <TransitionElement />} */}
-
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>
         <Box
           sx={{
@@ -279,6 +282,52 @@ export default function HeroSection({ loadingDone }) {
               >
                 Learn More
               </Button>
+            </Box>
+          </motion.div>
+          
+          {/* Scroll indicator */}
+          <motion.div
+            variants={scrollIndicatorVariants}
+            initial="initial"
+            animate="animate"
+            style={{
+              position: "absolute",
+              bottom: "5%",
+              left: "50%",
+              transform: "translateX(-50%)",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              opacity: 0.7,
+            }}
+          >
+            <Typography variant="caption" sx={{ mb: 1, fontSize: "0.9rem" }}>
+              Scroll Down
+            </Typography>
+            <Box
+              sx={{
+                width: "40px",
+                height: "40px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M12 5V19M12 19L5 12M12 19L19 12"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
             </Box>
           </motion.div>
         </Box>

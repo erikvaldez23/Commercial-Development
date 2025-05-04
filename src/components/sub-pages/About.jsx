@@ -26,6 +26,7 @@ import {
   AccessTime 
 } from '@mui/icons-material';
 import CTA from "../subpage-components/CTA"
+import AboutVideo from "../animations/AboutVideo"
 
 // Company color
 const primaryColor = "#c9b49a";
@@ -139,10 +140,9 @@ export default function AboutUs() {
             mb: 8,
             display: 'flex',
             alignItems: 'center',
-            // background: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)), url(/api/placeholder/1920/1080)`,
-            background: "transparent",
           }}
         >
+          <AboutVideo />
           <Container maxWidth="lg">
             <Box sx={{ maxWidth: isMobile ? '100%' : '60%' }}>
               <Typography 
