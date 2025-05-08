@@ -31,7 +31,6 @@ import ArrowRightIcon from "@mui/icons-material/ArrowForward";
 import Matter from "../subpage-components/Matter"
 import Services from "../subpage-components/Services"
 import Offerings from "../subpage-components/Offerings"
-import HowVideo from "../animations/HowVideo"
 
 // Custom styled components using MUI's styled API
 const GoldText = styled(Typography)(({ theme }) => ({
@@ -141,12 +140,11 @@ export default function How() {
             position: 'relative',
             display: 'flex',
             alignItems: 'center',
-            background: "url(/dark-background.jpg)",
+            background: "#000",
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
         >
-          <HowVideo />
           <Container maxWidth="lg">
             <Box sx={{ maxWidth: isMobile ? '100%' : '60%' }}>
               <Typography 
@@ -202,7 +200,7 @@ export default function How() {
           sx={{
             position: 'absolute',
             inset: 0,
-            background: 'transparent',
+            background: '#000',
             zIndex: 0,
           }}
         >

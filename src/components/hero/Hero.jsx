@@ -85,6 +85,7 @@ export default function HeroSection({ loadingDone }) {
     <Box
       sx={{
         background: "url(/Commercial-Development/bg.png)",
+        // background: "#000",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",

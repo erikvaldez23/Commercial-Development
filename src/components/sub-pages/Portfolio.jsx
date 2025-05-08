@@ -120,7 +120,7 @@ export default function Portfolio() {
     }, []);
 
   return (
-    <Box sx={{ background: "transparent", color: 'white' }}>
+    <Box sx={{ background: "linear-gradient(135deg, #0f0f0f 0%, #000000 100%)", color: 'white' }}>
       {/* Hero Section with 3D-like elements */}
       <Fade in={loaded} timeout={1000}>
         <Box 

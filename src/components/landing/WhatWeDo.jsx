@@ -28,7 +28,7 @@ const items = [
 
 const WhatWeDo = () => {
   return (
-    <Box sx={{ backgroundColor: "#0a0a0a", py: 10, color: "#e2c799" }}>
+    <Box sx={{ backgroundColor: "#000", py: 10, color: "#e2c799" }}>
       <Container maxWidth="lg">
         <Typography
           variant="h3"

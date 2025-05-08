@@ -42,7 +42,6 @@ import Portfolio from "./components/sub-pages/Portfolio";
 import Team from "./components/sub-pages/Team";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
-import StarryBackground from "./components/reusable-components/StarryBackground";
 
 // theme
 const theme = createTheme({
@@ -176,7 +175,7 @@ export default function App() {
             <Route path="*" element={<NotFound />} />
           </Routes>
 
-          <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
+          {/* <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
 
           {!chatbotOpen && (
             <Box
@@ -201,7 +200,7 @@ export default function App() {
                 <ChatIcon sx={{ fontSize: 40 }} />
               </IconButton>
             </Box>
-          )}
+          )} */}
 
           <Footer />
         </>
