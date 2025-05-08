@@ -93,6 +93,7 @@ export default function WhyInvestWithUs() {
         px: { xs: 2, md: 4 },
         color: "white",
         overflow: "hidden",
+        bgcolor: "#111"
       }}
     >
       <Container maxWidth="lg">

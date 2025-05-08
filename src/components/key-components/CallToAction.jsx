@@ -85,7 +85,7 @@ const CallToAction = () => {
           left: 0,
           right: 0,
           bottom: 0,
-          background: "transparent",
+          background: "#111",
           zIndex: -1,
         }}
       >

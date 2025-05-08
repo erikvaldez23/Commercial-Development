@@ -84,7 +84,10 @@ export default function HeroSection({ loadingDone }) {
   return (
     <Box
       sx={{
-        background: "transparent",
+        background: "url(/Commercial-Development/bg.png)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
         color: "white",
         position: "relative",
         top: 0, // Stick to top
@@ -96,7 +99,6 @@ export default function HeroSection({ loadingDone }) {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
-        marginTop: "35px",
       }}
     >
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>

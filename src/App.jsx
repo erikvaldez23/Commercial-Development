@@ -25,6 +25,7 @@ import Chatbot from "./ChatBot";
 import RevealSection from "./components/animations/RevealSection";
 import VideoBackground from "./components/animations/VideoBackground";
 import SlideUpReveal from "./components/animations/SlideUpReveal";
+import OceanLoader from "./components/loader/Loader3";
 
 // landing & sub-pages
 import Hero from "./components/hero/Hero";
@@ -90,7 +91,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const minTime = 6000;
+    const minTime = 3000;
     const timer = setTimeout(() => setAnimationDone(true), minTime);
     return () => clearTimeout(timer);
   }, []);
@@ -113,7 +114,7 @@ export default function App() {
             zIndex: -999,
           }}
         >
-          <VideoBackground />
+          {/* <VideoBackground /> */}
         </Box>
 
         <Topbar handleOpenChatbot={handleOpenChatbot} />
@@ -125,10 +126,11 @@ export default function App() {
               element={
                 <>
                   {loading ? (
-                    <UpdatedLoader />
+                    // <UpdatedLoader />
+                    <OceanLoader />
                   ) : (
                     <>
-                      <Box
+                      {/* <Box
                         sx={{
                           position: "fixed",
                           top: 0,
@@ -137,27 +139,27 @@ export default function App() {
                           height: "100vh",
                           zIndex: 1,
                         }}
-                      >
+                      > */}
                         <Hero loadingDone />
-                      </Box>
+                      {/* </Box> */}
 
-                      <Box sx={{ height: "100vh" }} />
+                      {/* <Box sx={{ height: "100vh" }} /> */}
 
-                      <SlideUpReveal zIndex={2}>
+                      {/* <SlideUpReveal zIndex={2}> */}
                         <WhatWeDo />
-                      </SlideUpReveal>
+                      {/* </SlideUpReveal> */}
 
-                      <SlideUpReveal zIndex={3}>
+                      {/* <SlideUpReveal zIndex={3}> */}
                         <WhyInvestWithUs />
-                      </SlideUpReveal>
+                      {/* </SlideUpReveal> */}
 
-                      <SlideUpReveal zIndex={4}>
+                      {/* <SlideUpReveal zIndex={4}> */}
                         <CallToAction />
-                      </SlideUpReveal>
+                      {/* </SlideUpReveal> */}
 
-                      <SlideUpReveal zIndex={6}>
+                      {/* <SlideUpReveal zIndex={6}> */}
                         <Contact />
-                      </SlideUpReveal>
+                      {/* </SlideUpReveal> */}
                     </>
                   )}
                 </>

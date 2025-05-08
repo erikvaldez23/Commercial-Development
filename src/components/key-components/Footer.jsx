@@ -116,13 +116,12 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        background: "transparent",
+        background: "#111",
         color: "#f5f5f5",
         pt: isMobile ? 6 : 8,
         pb: isMobile ? 4 : 5,
         position: "relative",
         overflow: "hidden",
-        boxShadow: "0 -10px 25px rgba(0,0,0,0.2)",
         // "&::before": {
         //   content: '""',
         //   position: "absolute",
