@@ -42,6 +42,7 @@ import Portfolio from "./components/sub-pages/Portfolio";
 import Team from "./components/sub-pages/Team";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
+import Dashboard from "./components/portfolio-dashboard/Dashboard"
 
 // theme
 const theme = createTheme({
@@ -169,7 +170,7 @@ export default function App() {
             <Route path="/what-we-offer" element={<Offer />} />
             <Route path="/about" element={<About />} />
             <Route path="/how-it-works" element={<How />} />
-            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio" element={<Dashboard />} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

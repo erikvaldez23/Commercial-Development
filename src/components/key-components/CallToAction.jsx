@@ -45,11 +45,15 @@ const CallToAction = () => {
     <Box
       sx={{
         position: "relative",
-        minHeight: "90vh",
+        height: "100vh",
         display: "flex",
         alignItems: "center",
         py: { xs: 8, md: 12 },
         overflow: "hidden",
+        background: "url(/Commercial-Development/tem-cta-bg3.jpg)",
+       backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
       {/* Background with gradient overlay */}
@@ -136,7 +140,7 @@ const CallToAction = () => {
                 color: "rgba(255, 255, 255, 0.9)",
                 mb: 4,
                 maxWidth: { xs: "100%", md: "80%" },
-                marginTop: 130,
+                marginTop: 80,
               }}
             >
               {content.paragraph}
