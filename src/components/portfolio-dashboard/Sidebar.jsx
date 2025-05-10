@@ -7,7 +7,6 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
-import ApartmentIcon from "@mui/icons-material/Apartment";
 
 const menuItems = ["Overview", "Analytics", "Buildings", "Settings"];
 
@@ -33,20 +32,22 @@ export default function Sidebar() {
           src="/Commercial-Development/greenark-logo1.png"
           alt="Dashboard Visual"
           sx={{
-            height: 40, // set consistent height
+            height: 100, // set consistent height
             width: "auto",
             marginRight: 2,
+            mx: "auto",
+            textAlign: "center",
           }}
         />
-        <Typography variant="h4" sx={{ letterSpacing: 1, fontWeight: "bold" }}>
-          Ark
-        </Typography>
+        {/* <Typography variant="h4" sx={{ letterSpacing: 1, fontWeight: "bold" }}>
+        Green Ark
+        </Typography> */}
       </Box>
 
       <Divider
         sx={{
           background: "#fff",
-          marginY: 5,
+          marginY: 4,
         }}
       />
 

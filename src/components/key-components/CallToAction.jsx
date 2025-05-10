@@ -1,246 +1,142 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React from "react";
 import {
   Box,
   Typography,
   Button,
-  useMediaQuery,
-  useTheme,
-  Dialog,
-  IconButton,
-  Container,
-  Paper,
+  TextField,
   Grid,
+  IconButton,
+  InputAdornment,
 } from "@mui/material";
-import { motion } from "framer-motion";
-import CloseIcon from "@mui/icons-material/Close";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import AddIcon from "@mui/icons-material/Add";
 
-const CallToAction = () => {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const { serviceId } = useParams();
-  const [openModal, setOpenModal] = useState(false);
-
-  const handleOpenModal = () => setOpenModal(true);
-  const handleCloseModal = () => setOpenModal(false);
-
-  // Content mapping based on serviceId or purpose
-  const contentMap = {
-    // You can add specific content variations here
-    default: {
-      headline: "Ready to Work on the Biggest Problem of all Time?",
-      paragraph:
-        "We are freaked out about climate change — but we are optimists. With the right people, building the right solutions, we can get to net zero in time. Reshape entire industries. And cool the planet.",
-      secondaryText:
-        "This decade is the inflection point. What are you waiting for?",
-      ctaText: "APPLY NOW",
-    },
-  };
-
-  // Get content based on serviceId or use default
-  const content = contentMap[serviceId] || contentMap.default;
-
+export default function CallToAction() {
   return (
     <Box
       sx={{
-        position: "relative",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        py: { xs: 8, md: 12 },
-        overflow: "hidden",
-        background: "url(/Commercial-Development/tem-cta-bg3.jpg)",
-       backgroundSize: "cover",
-        backgroundPosition: "center",
+        minHeight: "90vh",
+        bgcolor: "#000",
+        color: "#fff",
+        px: { xs: 4, md: 10 },
+        py: 10,
+        backgroundImage: "url('/Commercial-Development/cta-bg.jpg')",
         backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
       }}
     >
-      {/* Background with gradient overlay */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          background: "#000",
-          zIndex: -1,
-        }}
-      />
-
-      {/* Wavy overlay effect */}
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          opacity: 0.4,
-          background: "url('/path-to-wavy-texture.png')",
-          backgroundSize: "cover",
-          zIndex: -1,
-        }}
-      />
-
-      <Container maxWidth="lg">
-        <Grid
-          container
-          spacing={6}
-          alignItems="center"
-          component={motion.div}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.3 }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.2 },
+      {/* Headline */}
+      <Box sx={{ maxWidth: 800 }}>
+        <Typography variant="h1" sx={{ fontWeight: "bold", mb: 2 }}>
+          GET STARTED WITH CODEX IN 5 MINUTES, FOR FREE
+        </Typography>
+        <Typography variant="h4" sx={{ color: "#ccc", mb: 4 }}>
+          Sign-up and immediately get free access to real-time and historical
+          pricing, charts, and aggregates for tokens and NFTs.
+        </Typography>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#D5FF3F",
+            color: "#000",
+            fontWeight: 600,
+            borderRadius: 2,
+            px: 3,
+            py: 1,
+            "&:hover": {
+              backgroundColor: "#dfff5f",
             },
           }}
+          startIcon={<AddIcon />}
         >
-          {/* Left content section - Now takes up more space */}
-          <Grid item xs={12} md={7} lg={8}>
-            <Box>
-              <Typography
-                component={motion.h1}
-                variant={isMobile ? "h2" : "h1"}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+          GET STARTED FREE
+        </Button>
+      </Box>
+
+      {/* Footer CTA */}
+      <Box
+        sx={{
+          backgroundColor: "rgba(255, 255, 255, 0.05)", // translucent white/gray
+          backdropFilter: "blur(10px)", // enables the blur effect
+          WebkitBackdropFilter: "blur(10px)", // Safari support
+          borderRadius: 4,
+          mt: 10,
+          p: 4,
+          minHeight: "30vh",
+          display: "flex",
+          alignItems: "center",
+          border: "1px solid rgba(255, 255, 255, 0.1)", // optional subtle border
+        }}
+      >
+        <Grid container spacing={4} alignItems="center">
+          <Grid item xs={12} md={4}>
+            <Typography variant="subtitle2" sx={{ mb: 2 }}>
+              STAY UP TO DATE
+            </Typography>
+            <Box display="flex" gap={1}>
+              <TextField
+                placeholder="Email address"
+                variant="filled"
+                fullWidth
                 sx={{
-                  fontFamily: "'Inter', 'Roboto', sans-serif",
-                  fontWeight: 600,
-                  fontSize: { xs: "2.5rem", sm: "3.5rem", md: "8.5rem" },
-                  color: "white",
-                  letterSpacing: "-0.02em",
-                  lineHeight: 1.1,
-                  mb: 6,
-                  maxWidth: "100%",
+                  bgcolor: "#000",
+                  input: { color: "#fff" },
+                  borderRadius: 1,
                 }}
-              >
-                {content.headline}
-              </Typography>
-            </Box>
-          </Grid>
-
-          {/* Right section - empty for this style */}
-          <Grid item xs={12} md={5} lg={4}>
-            {/* Intentionally left empty to match the screenshot layout */}
-            <Typography
-              component={motion.p}
-              variant="body1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.8 }}
-              sx={{
-                fontSize: { xs: "1.1rem", sm: "1.2rem", md: "1.8rem" },
-                lineHeight: 1.6,
-                color: "rgba(255, 255, 255, 0.9)",
-                mb: 4,
-                maxWidth: { xs: "100%", md: "80%" },
-                marginTop: 80,
-              }}
-            >
-              {content.paragraph}
-            </Typography>
-            <Typography
-              component={motion.p}
-              variant="body1"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.8 }}
-              sx={{
-                fontSize: { xs: "1.1rem", sm: "1.2rem", md: "1.6rem" },
-                lineHeight: 1.6,
-                color: "rgba(255, 255, 255, 0.9)",
-                mb: 4,
-                fontWeight: 500,
-                maxWidth: { xs: "100%", md: "80%" },
-              }}
-            >
-              {content.secondaryText}
-            </Typography>
-
-            <Box
-              component={motion.div}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-            >
+              />
               <Button
                 variant="contained"
-                onClick={handleOpenModal}
-                endIcon={<ArrowForwardIcon />}
                 sx={{
-                  backgroundColor: "white",
-                  color: "#3a1c71",
+                  backgroundColor: "#D5FF3F",
+                  color: "#000",
                   fontWeight: 600,
-                  py: 1.5,
-                  px: 4,
-                  borderRadius: "2rem",
-                  textTransform: "uppercase",
-                  fontSize: "0.875rem",
-                  letterSpacing: "0.05em",
-                  boxShadow: "0 4px 20px rgba(255, 255, 255, 0.3)",
-                  transition: "all 0.3s ease",
+                  px: 3,
                   "&:hover": {
-                    backgroundColor: "rgba(255, 255, 255, 0.9)",
-                    boxShadow: "0 6px 25px rgba(255, 255, 255, 0.5)",
-                    transform: "translateY(-2px)",
+                    backgroundColor: "#dfff5f",
                   },
                 }}
               >
-                {content.ctaText}
+                SIGN UP
               </Button>
             </Box>
           </Grid>
-        </Grid>
-      </Container>
 
-      {/* Modal */}
-      <Dialog
-        open={openModal}
-        onClose={handleCloseModal}
-        fullWidth
-        maxWidth="lg"
-        PaperProps={{
-          sx: {
-            borderRadius: "8px",
-            overflow: "hidden",
-            boxShadow: "0 24px 80px rgba(0,0,0,0.5)",
-          },
-        }}
-      >
-        <Box sx={{ position: "relative" }}>
-          <IconButton
-            onClick={handleCloseModal}
-            sx={{
-              position: "absolute",
-              top: 16,
-              right: 16,
-              color: "#fff",
-              backgroundColor: "rgba(0,0,0,0.6)",
-              zIndex: 1,
-              "&:hover": {
-                backgroundColor: "rgba(0,0,0,0.8)",
-              },
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-          <iframe
-            src=""
-            width="100%"
-            height="800px"
-            style={{ border: "none" }}
-            title="Application Form"
-          />
-        </Box>
-      </Dialog>
+          <Grid item xs={6} md={2}>
+            <Typography variant="body2" sx={{ mb: 1 }}>
+              Product
+            </Typography>
+            <Typography variant="body2" sx={{ color: "#aaa" }}>
+              Pricing
+              <br />
+              Customers
+              <br />
+              Documentation
+            </Typography>
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Typography variant="body2" sx={{ mb: 1 }}>
+              About
+            </Typography>
+            <Typography variant="body2" sx={{ color: "#aaa" }}>
+              Blog
+              <br />
+              Press Kit
+              <br />
+              FAQ
+            </Typography>
+          </Grid>
+          <Grid item xs={6} md={2}>
+            <Typography variant="body2" sx={{ mb: 1 }}>
+              Twitter (X)
+            </Typography>
+            <Typography variant="body2" sx={{ color: "#aaa" }}>
+              Discord
+            </Typography>
+          </Grid>
+        </Grid>
+      </Box>
     </Box>
   );
-};
-
-export default CallToAction;
+}

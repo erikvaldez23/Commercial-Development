@@ -158,7 +158,7 @@ export default function ModernDashboard() {
     <Box
       sx={{
         background: bgGradient,
-        mb: 5
+        mb: 5,
       }}
     >
       <Box
@@ -197,14 +197,14 @@ export default function ModernDashboard() {
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Avatar
+              {/* <Avatar
                 sx={{
                   background: "linear-gradient(45deg, #8BC34A, #4CAF50)",
                   p: 1,
                 }}
               >
                 <ForestIcon />
-              </Avatar>
+              </Avatar> */}
               <Typography
                 variant="h5"
                 sx={{
@@ -213,7 +213,7 @@ export default function ModernDashboard() {
                   letterSpacing: "0.5px",
                 }}
               >
-                GREEN ARK
+                GREEN ARK DASHBOARD
               </Typography>
             </Box>
 
@@ -264,17 +264,17 @@ export default function ModernDashboard() {
                       variant="h4"
                       sx={{ fontWeight: 700, color: textColor, mb: 1 }}
                     >
-                      Welcome back, Admin
+                      Project 1
                     </Typography>
                     <Typography
                       variant="body1"
                       sx={{ color: subTextColor, fontWeight: 500 }}
                     >
-                      Your building is performing 15% better than last week.
-                      Keep up the great work!
+                      The building is performing 15% better than last week. Keep
+                      up the great work!
                     </Typography>
                   </Box>
-                  <Box sx={{ display: { xs: "none", md: "block" } }}>
+                  {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
                     <img
                       src="/api/placeholder/200/100"
                       alt="Building performance"
@@ -284,7 +284,7 @@ export default function ModernDashboard() {
                         opacity: 0.9,
                       }}
                     />
-                  </Box>
+                  </Box> */}
                 </Box>
               </AnimatedCard>
             </Grid>
@@ -354,21 +354,21 @@ export default function ModernDashboard() {
             <Grid item xs={12} md={8}>
               <AnimatedCard
                 sx={{
-        bgcolor: "rgba(34, 34, 38, 0.7)",
-        backdropFilter: "blur(10px)",
-        p: 2.5,
-        borderRadius: 4,
-        color: "#fff",
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
-        border: "1px solid rgba(255, 255, 255, 0.08)",
-        transition: "all 0.3s ease-in-out",
-        height: "42vh",
-        "&:hover": {
-          boxShadow: "0 15px 40px rgba(0, 0, 0, 0.3)",
-          transform: "translateY(-3px)",
-          borderColor: "rgba(255, 255, 255, 0.15)",
-        },
-      }}
+                  bgcolor: "rgba(34, 34, 38, 0.7)",
+                  backdropFilter: "blur(10px)",
+                  p: 2.5,
+                  borderRadius: 4,
+                  color: "#fff",
+                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
+                  border: "1px solid rgba(255, 255, 255, 0.08)",
+                  transition: "all 0.3s ease-in-out",
+                  height: "42vh",
+                  "&:hover": {
+                    boxShadow: "0 15px 40px rgba(0, 0, 0, 0.3)",
+                    transform: "translateY(-3px)",
+                    borderColor: "rgba(255, 255, 255, 0.15)",
+                  },
+                }}
               >
                 {/* Image Section */}
                 <Box
