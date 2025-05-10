@@ -205,16 +205,6 @@ export default function ModernDashboard() {
               >
                 <ForestIcon />
               </Avatar> */}
-              <Typography
-                variant="h5"
-                sx={{
-                  fontWeight: 700,
-                  color: textColor,
-                  letterSpacing: "0.5px",
-                }}
-              >
-                GREEN ARK DASHBOARD
-              </Typography>
             </Box>
 
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -270,8 +260,7 @@ export default function ModernDashboard() {
                       variant="body1"
                       sx={{ color: subTextColor, fontWeight: 500 }}
                     >
-                      The building is performing 15% better than last week. Keep
-                      up the great work!
+                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi rem illum ab assumenda.
                     </Typography>
                   </Box>
                   {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
@@ -362,7 +351,7 @@ export default function ModernDashboard() {
                   boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
                   border: "1px solid rgba(255, 255, 255, 0.08)",
                   transition: "all 0.3s ease-in-out",
-                  height: "42vh",
+                  height: "43vh",
                   "&:hover": {
                     boxShadow: "0 15px 40px rgba(0, 0, 0, 0.3)",
                     transform: "translateY(-3px)",
@@ -537,8 +526,39 @@ export default function ModernDashboard() {
               </AnimatedCard>
             </Grid>
 
-            {/* Temperature */}
             <Grid item xs={12} md={5}>
+              <AnimatedCard delay={0.5}>
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 600, color: textColor, mb: 2, height: "3.7vh" }}
+                >
+                  Building Location
+                </Typography>
+
+                <Box
+                  sx={{
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    height: "300px",
+                    boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+                  }}
+                >
+                  <iframe
+                    title="Building Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8018044740475!2d-101.87771402430353!3d33.58449487333676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c413f31ec847%3A0x52db374b7b07849!2sTexas%20Tech%20University!5e0!3m2!1sen!2sus!4v1746898136720!5m2!1sen!2sus"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </Box>
+              </AnimatedCard>
+            </Grid>
+
+            {/* Temperature */}
+            <Grid item xs={12} md={6}>
               <AnimatedCard delay={0.2}>
                 <Box
                   sx={{
@@ -610,21 +630,21 @@ export default function ModernDashboard() {
                   variant="body2"
                   sx={{ mt: 1, color: subTextColor, textAlign: "center" }}
                 >
-                  Building temperature over 24 hours
+                  Temperature over last 24 hours
                 </Typography>
               </AnimatedCard>
             </Grid>
 
             {/* Air Quality */}
-            <Grid item xs={12} md={4}>
+            <Grid item xs={12} md={6}>
               <AnimatedCard delay={0.3}>
                 <Box
                   sx={{
                     mb: 2,
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "center",
-                    height: "7.2vh",
+                    alignItems: "top",
+                    height: "17.3vh",
                   }}
                 >
                   <Typography
@@ -633,7 +653,7 @@ export default function ModernDashboard() {
                   >
                     Air Quality
                   </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <Box sx={{ display: "flex", alignItems: "top", gap: 1 }}>
                     <AirIcon sx={{ color: "#4CAF50" }} />
                     <Box sx={{ textAlign: "right" }}>
                       <Typography

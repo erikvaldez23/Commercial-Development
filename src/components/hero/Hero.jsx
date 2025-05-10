@@ -14,7 +14,6 @@ import logo from "/greenark-logo1.png";
 import WhatWeDo from "../landing/WhatWeDo";
 import SlideUpReveal from "../animations/SlideUpReveal";
 
-
 export default function HeroSection({ loadingDone }) {
   const [open, setOpen] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
@@ -95,13 +94,27 @@ export default function HeroSection({ loadingDone }) {
         left: 0,
         right: 0,
         zIndex: 0,
-        overflow: "visible", 
+        overflow: "visible",
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
       }}
     >
+      {/* Bottom Gradient Overlay */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "150px", // Adjust for smoother or faster fade
+          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
+          zIndex: 1, // Put above image but below content
+          pointerEvents: "none", // Prevent interference with clicks
+        }}
+      />
+
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>
         <Box
           sx={{
@@ -287,7 +300,7 @@ export default function HeroSection({ loadingDone }) {
               </Button>
             </Box>
           </motion.div>
-          
+
           {/* Scroll indicator */}
           <motion.div
             variants={scrollIndicatorVariants}
