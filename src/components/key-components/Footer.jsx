@@ -607,9 +607,9 @@ const Footer = () => {
           position: "absolute",
           right: 20,
           bottom: showScrollTop ? 20 : -60,
-          backgroundColor: "rgba(52, 199, 89, 0.1)",
+          backgroundColor: "rgba(0, 0, 0, 0.4)",
           borderRadius: "50%",
-          color: "#34c759",
+          color: "#c9b49a",
           transition: "all 0.3s ease",
           opacity: showScrollTop ? 1 : 0,
           "&:hover": {

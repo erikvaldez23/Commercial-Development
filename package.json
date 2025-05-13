@@ -29,6 +29,7 @@
     "fast-levenshtein": "^3.0.0",
     "framer-motion": "^12.9.2",
     "fs": "^0.0.1-security",
+    "lottie-react": "^2.4.1",
     "lucide-react": "^0.486.0",
     "mongoose": "^8.13.2",
     "node-fetch": "^3.3.2",

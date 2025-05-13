@@ -108,7 +108,7 @@ export default function HeroSection({ loadingDone }) {
           bottom: 0,
           left: 0,
           right: 0,
-          height: "150px", // Adjust for smoother or faster fade
+          height: "300px", // Adjust for smoother or faster fade
           background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
           zIndex: 1, // Put above image but below content
           pointerEvents: "none", // Prevent interference with clicks

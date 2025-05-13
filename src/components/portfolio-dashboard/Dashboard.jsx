@@ -4,14 +4,13 @@ import {
   Box,
   Grid,
   Card,
-  CardContent,
   Typography,
   Switch,
-  Divider,
   IconButton,
   Avatar,
   Badge,
   Tooltip,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import ForestIcon from "@mui/icons-material/Forest";
@@ -70,13 +69,17 @@ const AnimatedCard = ({ children, delay = 0, ...props }) => (
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 1, y: 0 }}
     transition={{ duration: 0.5, delay }}
+    style={{ height: '100%', display: 'flex' }}
   >
     <Card
       elevation={0}
       sx={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
         bgcolor: "rgba(34, 34, 38, 0.7)",
         backdropFilter: "blur(10px)",
-        p: 2.5,
+        p: { xs: 1.5, sm: 2, md: 2.5 },
         borderRadius: 4,
         color: "#fff",
         boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
@@ -129,6 +132,9 @@ const StatusIndicator = ({ status }) => {
 
 export default function ModernDashboard() {
   const [darkMode, setDarkMode] = useState(true);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
 
   // Toggle function for dark/light mode
   const toggleDarkMode = () => {
@@ -158,31 +164,33 @@ export default function ModernDashboard() {
     <Box
       sx={{
         background: bgGradient,
-        mb: 5,
+        minHeight: "100vh",
+        width: "100%",
       }}
     >
       <Box
         sx={{
           display: "flex",
-          height: "100vh",
-          overflow: "hidden",
+          minHeight: "100vh",
           width: "90%",
-          mx: "auto",
-          marginLeft: 28,
+          marginLeft: "10%"
         }}
       >
-        <Sidebar />
+        {/* Sidebar with responsive behavior */}
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+          <Sidebar />
+        </Box>
+        
         <Box
           sx={{
             width: "100%",
             background: bgGradient,
-            height: "100vh",
+            minHeight: "100vh",
             overflow: "auto",
             flexGrow: 1,
-            pl: { xs: 2, md: 10 },
-            pr: { xs: 2, md: 4 },
-            pt: 6,
-            pb: 4,
+            px: { xs: 2, sm: 3, md: 4 },
+            py: { xs: 3, sm: 4, md: 6 },
+            ml: { xs: 0, md: 8 },
             transition: "all 0.3s ease",
           }}
         >
@@ -192,22 +200,15 @@ export default function ModernDashboard() {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              mb: 4,
-              px: 2,
+              mb: { xs: 2, sm: 3, md: 4 },
+              px: { xs: 1, sm: 2 },
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              {/* <Avatar
-                sx={{
-                  background: "linear-gradient(45deg, #8BC34A, #4CAF50)",
-                  p: 1,
-                }}
-              >
-                <ForestIcon />
-              </Avatar> */}
+              {/* Logo can be placed here if needed */}
             </Box>
 
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 2 } }}>
               <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
                 <IconButton onClick={toggleDarkMode} sx={{ color: textColor }}>
                   {darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
@@ -222,8 +223,8 @@ export default function ModernDashboard() {
               </Tooltip>
               <Avatar
                 sx={{
-                  width: 40,
-                  height: 40,
+                  width: { xs: 32, sm: 40 },
+                  height: { xs: 32, sm: 40 },
                   cursor: "pointer",
                   border: `2px solid ${borderColor}`,
                   transition: "all 0.3s ease",
@@ -238,21 +239,28 @@ export default function ModernDashboard() {
           </Box>
 
           {/* Dashboard Content */}
-          <Grid container spacing={3}>
+          <Grid container spacing={{ xs: 2, sm: 3 }} alignItems="stretch">
             {/* Welcome Card */}
             <Grid item xs={12}>
               <AnimatedCard>
                 <Box
                   sx={{
                     display: "flex",
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: "space-between",
-                    alignItems: "center",
+                    alignItems: { xs: 'flex-start', sm: 'center' },
+                    gap: { xs: 2, sm: 0 },
                   }}
                 >
                   <Box>
                     <Typography
                       variant="h4"
-                      sx={{ fontWeight: 700, color: textColor, mb: 1 }}
+                      sx={{ 
+                        fontWeight: 700, 
+                        color: textColor, 
+                        mb: 1,
+                        fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' } 
+                      }}
                     >
                       Project 1
                     </Typography>
@@ -260,35 +268,22 @@ export default function ModernDashboard() {
                       variant="body1"
                       sx={{ color: subTextColor, fontWeight: 500 }}
                     >
-                     Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi rem illum ab assumenda.
+                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi rem illum ab assumenda.
                     </Typography>
                   </Box>
-                  {/* <Box sx={{ display: { xs: "none", md: "block" } }}>
-                    <img
-                      src="/api/placeholder/200/100"
-                      alt="Building performance"
-                      style={{
-                        maxHeight: "100px",
-                        objectFit: "contain",
-                        opacity: 0.9,
-                      }}
-                    />
-                  </Box> */}
                 </Box>
               </AnimatedCard>
             </Grid>
 
-            {/* Overview Cards Row */}
-            <Grid item xs={12} md={4}>
+            {/* Carbon Output Card */}
+            <Grid item xs={12} sm={6} md={4}>
               <AnimatedCard delay={0.1}>
                 <Box
                   sx={{
                     mb: 2,
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "stretch",
-                    overflowY: "auto",
-                    height: "9vh",
+                    alignItems: "center",
                   }}
                 >
                   <Typography
@@ -311,13 +306,15 @@ export default function ModernDashboard() {
 
                 <Box
                   sx={{
-                    width: "50%",
+                    width: { xs: '60%', sm: '70%', md: '50%' },
                     mx: "auto",
                     mt: 2,
-                    mb: 1.5,
+                    mb: 2,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
+                    flexGrow: 1,
+                    justifyContent: "center",
                   }}
                 >
                   <CircularProgressbar
@@ -340,51 +337,48 @@ export default function ModernDashboard() {
               </AnimatedCard>
             </Grid>
 
-            <Grid item xs={12} md={8}>
-              <AnimatedCard
-                sx={{
-                  bgcolor: "rgba(34, 34, 38, 0.7)",
-                  backdropFilter: "blur(10px)",
-                  p: 2.5,
-                  borderRadius: 4,
-                  color: "#fff",
-                  boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
-                  border: "1px solid rgba(255, 255, 255, 0.08)",
-                  transition: "all 0.3s ease-in-out",
-                  height: "43vh",
-                  "&:hover": {
-                    boxShadow: "0 15px 40px rgba(0, 0, 0, 0.3)",
-                    transform: "translateY(-3px)",
-                    borderColor: "rgba(255, 255, 255, 0.15)",
-                  },
-                }}
-              >
-                {/* Image Section */}
+            {/* Image Card */}
+            <Grid item xs={12} sm={6} md={8}>
+              <AnimatedCard delay={0.2}>
                 <Box
-                  component="img"
-                  src="/Commercial-Development/city2.jpg"
-                  alt="Dashboard Visual"
                   sx={{
-                    height: "100%",
+                    height: { xs: '200px', sm: '250px', md: '300px' },
                     width: "100%",
-                    objectFit: "cover",
-                    borderRadius: 10,
+                    position: "relative",
+                    borderRadius: 3,
+                    overflow: "hidden",
                   }}
-                />
+                >
+                  <Box
+                    component="img"
+                    src="/Commercial-Development/city2.jpg"
+                    alt="Dashboard Visual"
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                      objectFit: "cover",
+                      borderRadius: 3,
+                    }}
+                    onError={(e) => {
+                      e.target.src = "/api/placeholder/800/400";
+                      e.target.alt = "City Placeholder";
+                    }}
+                  />
+                </Box>
               </AnimatedCard>
             </Grid>
 
-            {/* Energy Usage Card */}
+            {/* Energy Distribution Card */}
             <Grid item xs={12} md={7}>
-              <AnimatedCard delay={0.4}>
+              <AnimatedCard delay={0.3}>
                 <Box
                   sx={{
                     mb: 2,
                     display: "flex",
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: "space-between",
-                    alignItems: "stretch",
-                    overflowY: "auto",
-                    height: "9.2vh",
+                    alignItems: { xs: 'flex-start', sm: 'center' },
+                    gap: { xs: 1, sm: 0 },
                   }}
                 >
                   <Typography
@@ -401,98 +395,104 @@ export default function ModernDashboard() {
                   </Box>
                 </Box>
 
-                <ResponsiveContainer width="100%" height={200}>
-                  <AreaChart
-                    data={energyData}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-                  >
-                    <defs>
-                      <linearGradient
-                        id="solarGradient"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop
-                          offset="5%"
-                          stopColor="#4CAF50"
-                          stopOpacity={0.3}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#4CAF50"
-                          stopOpacity={0}
-                        />
-                      </linearGradient>
-                      <linearGradient
-                        id="usageGradient"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop
-                          offset="5%"
-                          stopColor="#2196F3"
-                          stopOpacity={0.3}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#2196F3"
-                          stopOpacity={0}
-                        />
-                      </linearGradient>
-                    </defs>
-                    <XAxis
-                      dataKey="time"
-                      tick={{ fill: subTextColor, fontSize: 12 }}
-                      axisLine={{ stroke: borderColor }}
-                      tickLine={false}
-                    />
-                    <YAxis
-                      tick={{ fill: subTextColor, fontSize: 12 }}
-                      axisLine={{ stroke: borderColor }}
-                      tickLine={false}
-                      tickFormatter={(value) => `${value} MW`}
-                    />
-                    <RechartsTooltip
-                      contentStyle={{
-                        backgroundColor: darkMode
-                          ? "rgba(30,30,30,0.8)"
-                          : "rgba(255,255,255,0.8)",
-                        border: "none",
-                        borderRadius: "8px",
-                        color: textColor,
-                      }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="solar"
-                      stackId="1"
-                      stroke="#4CAF50"
-                      fillOpacity={1}
-                      fill="url(#solarGradient)"
-                      strokeWidth={2}
-                      name="Solar Production"
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="usage"
-                      stackId="2"
-                      stroke="#2196F3"
-                      fillOpacity={1}
-                      fill="url(#usageGradient)"
-                      strokeWidth={2}
-                      name="Energy Usage"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+                <Box sx={{ flexGrow: 1, minHeight: '180px' }}>
+                  <ResponsiveContainer width="100%" height={200}>
+                    <AreaChart
+                      data={energyData}
+                      margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                    >
+                      <defs>
+                        <linearGradient
+                          id="solarGradient"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#4CAF50"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#4CAF50"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                        <linearGradient
+                          id="usageGradient"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#2196F3"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#2196F3"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      <XAxis
+                        dataKey="time"
+                        tick={{ fill: subTextColor, fontSize: 10 }}
+                        axisLine={{ stroke: borderColor }}
+                        tickLine={false}
+                        interval={isMobile ? 2 : 1}
+                      />
+                      <YAxis
+                        tick={{ fill: subTextColor, fontSize: 10 }}
+                        axisLine={{ stroke: borderColor }}
+                        tickLine={false}
+                        tickFormatter={(value) => `${value}`}
+                        width={30}
+                      />
+                      <RechartsTooltip
+                        contentStyle={{
+                          backgroundColor: darkMode
+                            ? "rgba(30,30,30,0.8)"
+                            : "rgba(255,255,255,0.8)",
+                          border: "none",
+                          borderRadius: "8px",
+                          color: textColor,
+                        }}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="solar"
+                        stackId="1"
+                        stroke="#4CAF50"
+                        fillOpacity={1}
+                        fill="url(#solarGradient)"
+                        strokeWidth={2}
+                        name="Solar Production"
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="usage"
+                        stackId="2"
+                        stroke="#2196F3"
+                        fillOpacity={1}
+                        fill="url(#usageGradient)"
+                        strokeWidth={2}
+                        name="Energy Usage"
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </Box>
 
                 <Box
                   sx={{
                     display: "flex",
+                    flexDirection: { xs: 'column', sm: 'row' },
                     justifyContent: "space-around",
+                    gap: { xs: 1, sm: 2 },
                     mt: 2,
                   }}
                 >
@@ -526,11 +526,12 @@ export default function ModernDashboard() {
               </AnimatedCard>
             </Grid>
 
+            {/* Building Location Card */}
             <Grid item xs={12} md={5}>
-              <AnimatedCard delay={0.5}>
+              <AnimatedCard delay={0.4}>
                 <Typography
                   variant="h6"
-                  sx={{ fontWeight: 600, color: textColor, mb: 2, height: "3.7vh" }}
+                  sx={{ fontWeight: 600, color: textColor, mb: 2 }}
                 >
                   Building Location
                 </Typography>
@@ -539,8 +540,9 @@ export default function ModernDashboard() {
                   sx={{
                     borderRadius: 3,
                     overflow: "hidden",
-                    height: "300px",
+                    height: { xs: '200px', sm: '250px', md: '280px' },
                     boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+                    flexGrow: 1,
                   }}
                 >
                   <iframe
@@ -557,16 +559,15 @@ export default function ModernDashboard() {
               </AnimatedCard>
             </Grid>
 
-            {/* Temperature */}
-            <Grid item xs={12} md={6}>
-              <AnimatedCard delay={0.2}>
+            {/* Temperature Card */}
+            <Grid item xs={12} sm={6}>
+              <AnimatedCard delay={0.5}>
                 <Box
                   sx={{
                     mb: 2,
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "top",
-                    height: "15vh",
+                    alignItems: "center",
                   }}
                 >
                   <Typography
@@ -586,65 +587,67 @@ export default function ModernDashboard() {
                   </Box>
                 </Box>
 
-                <ResponsiveContainer width="100%" height={130}>
-                  <AreaChart
-                    data={temperatureData}
-                    margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
+                <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <ResponsiveContainer width="100%" height={130}>
+                    <AreaChart
+                      data={temperatureData}
+                      margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
+                    >
+                      <defs>
+                        <linearGradient
+                          id="tempGradient"
+                          x1="0"
+                          y1="0"
+                          x2="0"
+                          y2="1"
+                        >
+                          <stop
+                            offset="5%"
+                            stopColor="#FF9800"
+                            stopOpacity={0.3}
+                          />
+                          <stop
+                            offset="95%"
+                            stopColor="#FF9800"
+                            stopOpacity={0}
+                          />
+                        </linearGradient>
+                      </defs>
+                      <XAxis
+                        dataKey="time"
+                        tick={{ fill: subTextColor, fontSize: 10 }}
+                        axisLine={{ stroke: borderColor }}
+                        tickLine={false}
+                        interval={isMobile ? 2 : 1}
+                      />
+                      <Area
+                        type="monotone"
+                        dataKey="temp"
+                        stroke="#FF9800"
+                        fill="url(#tempGradient)"
+                        strokeWidth={2}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                  <Typography
+                    variant="body2"
+                    sx={{ mt: 1, color: subTextColor, textAlign: "center" }}
                   >
-                    <defs>
-                      <linearGradient
-                        id="tempGradient"
-                        x1="0"
-                        y1="0"
-                        x2="0"
-                        y2="1"
-                      >
-                        <stop
-                          offset="5%"
-                          stopColor="#FF9800"
-                          stopOpacity={0.3}
-                        />
-                        <stop
-                          offset="95%"
-                          stopColor="#FF9800"
-                          stopOpacity={0}
-                        />
-                      </linearGradient>
-                    </defs>
-                    <XAxis
-                      dataKey="time"
-                      tick={{ fill: subTextColor, fontSize: 10 }}
-                      axisLine={{ stroke: borderColor }}
-                      tickLine={false}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="temp"
-                      stroke="#FF9800"
-                      fill="url(#tempGradient)"
-                      strokeWidth={2}
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
-                <Typography
-                  variant="body2"
-                  sx={{ mt: 1, color: subTextColor, textAlign: "center" }}
-                >
-                  Temperature over last 24 hours
-                </Typography>
+                    Temperature over last 24 hours
+                  </Typography>
+                </Box>
               </AnimatedCard>
             </Grid>
 
-            {/* Air Quality */}
-            <Grid item xs={12} md={6}>
-              <AnimatedCard delay={0.3}>
+            {/* Air Quality Card */}
+            <Grid item xs={12} sm={6}>
+              <AnimatedCard delay={0.6}>
                 <Box
                   sx={{
                     mb: 2,
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "top",
-                    height: "17.3vh",
+                    alignItems: "center",
                   }}
                 >
                   <Typography
@@ -653,7 +656,7 @@ export default function ModernDashboard() {
                   >
                     Air Quality
                   </Typography>
-                  <Box sx={{ display: "flex", alignItems: "top", gap: 1 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                     <AirIcon sx={{ color: "#4CAF50" }} />
                     <Box sx={{ textAlign: "right" }}>
                       <Typography
@@ -673,157 +676,84 @@ export default function ModernDashboard() {
                   </Box>
                 </Box>
 
-                <Box
-                  sx={{
-                    p: 1,
-                    display: "flex",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  {["PM2.5", "CO2", "VOC", "Humidity"].map((param, index) => (
-                    <Box key={param} sx={{ textAlign: "center" }}>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: subTextColor, mb: 0.5 }}
-                      >
-                        {param}
-                      </Typography>
-                      <Typography
-                        variant="body1"
-                        sx={{ fontWeight: 600, color: textColor }}
-                      >
-                        {index === 0
-                          ? "12µg"
-                          : index === 1
-                          ? "487ppm"
-                          : index === 2
-                          ? "Low"
-                          : "54%"}
-                      </Typography>
-                    </Box>
-                  ))}
-                </Box>
-
-                <Box
-                  sx={{
-                    mt: 2,
-                    p: 1.5,
-                    borderRadius: 2,
-                    bgcolor: darkMode
-                      ? "rgba(76, 175, 80, 0.1)"
-                      : "rgba(76, 175, 80, 0.05)",
-                    border: "1px solid rgba(76, 175, 80, 0.2)",
-                  }}
-                >
-                  <Typography
-                    variant="body2"
+                <Box sx={{ 
+                  flexGrow: 1, 
+                  display: 'flex', 
+                  flexDirection: 'column', 
+                  justifyContent: 'space-between' 
+                }}>
+                  <Box
                     sx={{
-                      color: "#4CAF50",
+                      p: 1,
                       display: "flex",
-                      alignItems: "center",
-                      gap: 1,
+                      justifyContent: "space-between",
+                      flexWrap: { xs: 'wrap', sm: 'nowrap' },
+                      gap: 2,
                     }}
                   >
-                    <CheckCircleIcon fontSize="small" />
-                    Air quality is excellent. All parameters within optimal
-                    range.
-                  </Typography>
+                    {["PM2.5", "CO2", "VOC", "Humidity"].map((param, index) => (
+                      <Box 
+                        key={param} 
+                        sx={{ 
+                          textAlign: "center", 
+                          flex: { xs: '1 0 40%', sm: '1' },
+                          mb: { xs: 1, sm: 0 } 
+                        }}
+                      >
+                        <Typography
+                          variant="body2"
+                          sx={{ color: subTextColor, mb: 0.5 }}
+                        >
+                          {param}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          sx={{ fontWeight: 600, color: textColor }}
+                        >
+                          {index === 0
+                            ? "12µg"
+                            : index === 1
+                            ? "487ppm"
+                            : index === 2
+                            ? "Low"
+                            : "54%"}
+                        </Typography>
+                      </Box>
+                    ))}
+                  </Box>
+
+                  <Box
+                    sx={{
+                      mt: 2,
+                      p: 1.5,
+                      borderRadius: 2,
+                      bgcolor: darkMode
+                        ? "rgba(76, 175, 80, 0.1)"
+                        : "rgba(76, 175, 80, 0.05)",
+                      border: "1px solid rgba(76, 175, 80, 0.2)",
+                    }}
+                  >
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#4CAF50",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 1,
+                      }}
+                    >
+                      <CheckCircleIcon fontSize="small" />
+                      Air quality is excellent. All parameters within optimal
+                      range.
+                    </Typography>
+                  </Box>
                 </Box>
               </AnimatedCard>
             </Grid>
 
-            {/* Smart Control Card */}
-            {/* <Grid item xs={12} md={4}>
-              <AnimatedCard delay={0.5}>
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: 600, color: textColor, mb: 2 }}
-                >
-                  Smart Controls
-                </Typography>
-
-                {[
-                  {
-                    name: "Lighting",
-                    icon: <LightModeIcon sx={{ color: "#FFD54F" }} />,
-                  },
-                  {
-                    name: "Temperature",
-                    icon: <ThermostatIcon sx={{ color: "#FF9800" }} />,
-                  },
-                  {
-                    name: "Security",
-                    icon: <SecurityIcon sx={{ color: "#F44336" }} />,
-                  },
-                  {
-                    name: "Water",
-                    icon: <WaterDropIcon sx={{ color: "#2196F3" }} />,
-                  },
-                ].map((control, index) => (
-                  <Box
-                    key={control.name}
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      p: 1.5,
-                      borderRadius: 2,
-                      mb: 1.5,
-                      bgcolor: darkMode
-                        ? "rgba(255,255,255,0.03)"
-                        : "rgba(0,0,0,0.02)",
-                      transition: "all 0.2s ease",
-                      "&:hover": {
-                        bgcolor: darkMode
-                          ? "rgba(255,255,255,0.06)"
-                          : "rgba(0,0,0,0.04)",
-                      },
-                    }}
-                  >
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                      {control.icon}
-                      <Typography sx={{ color: textColor }}>
-                        {control.name}
-                      </Typography>
-                    </Box>
-                    <Switch
-                      defaultChecked={index !== 3}
-                      color="success"
-                      sx={{
-                        "& .MuiSwitch-switchBase.Mui-checked": {
-                          color: "#4CAF50",
-                        },
-                        "& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track":
-                          {
-                            backgroundColor: "rgba(76, 175, 80, 0.5)",
-                          },
-                      }}
-                    />
-                  </Box>
-                ))}
-
-                <Box
-                  sx={{
-                    mt: 2,
-                    p: 1.5,
-                    borderRadius: 2,
-                    bgcolor: darkMode
-                      ? "rgba(33, 150, 243, 0.1)"
-                      : "rgba(33, 150, 243, 0.05)",
-                    border: "1px solid rgba(33, 150, 243, 0.2)",
-                  }}
-                >
-                  <Typography variant="body2" sx={{ color: "#2196F3" }}>
-                    Energy-saving mode is active, saving approximately 24% on
-                    daily consumption.
-                  </Typography>
-                </Box>
-              </AnimatedCard>
-            </Grid> */}
-
-            {/* Maintenance Alerts */}
+            {/* Building Maintenance Cards */}
             <Grid item xs={12}>
-              <AnimatedCard delay={0.6}>
+              <AnimatedCard delay={0.7}>
                 <Typography
                   variant="h6"
                   sx={{ fontWeight: 600, color: textColor, mb: 2 }}
@@ -831,7 +761,7 @@ export default function ModernDashboard() {
                   Building Maintenance
                 </Typography>
 
-                <Grid container spacing={2}>
+                <Grid container spacing={{ xs: 2, sm: 2, md: 2 }}>
                   {[
                     {
                       title: "Water Leak Detected",
@@ -855,11 +785,12 @@ export default function ModernDashboard() {
                       time: "Today at 9:00 AM",
                     },
                   ].map((alert, index) => (
-                    <Grid item xs={12} md={4} key={index}>
+                    <Grid item xs={12} sm={6} md={4} key={index}>
                       <Box
                         sx={{
-                          p: 2,
+                          p: { xs: 1.5, sm: 2 },
                           borderRadius: 2,
+                          height: '100%',
                           bgcolor: darkMode
                             ? alert.status === "warning"
                               ? "rgba(255, 193, 7, 0.1)"
@@ -880,7 +811,6 @@ export default function ModernDashboard() {
                           }`,
                           display: "flex",
                           gap: 2,
-                          height: "100%",
                         }}
                       >
                         <Avatar
@@ -916,6 +846,7 @@ export default function ModernDashboard() {
                           <Typography
                             variant="caption"
                             sx={{ color: subTextColor }}
+                            // ...continued from previous block
                           >
                             {alert.time}
                           </Typography>
@@ -926,7 +857,8 @@ export default function ModernDashboard() {
                 </Grid>
               </AnimatedCard>
             </Grid>
-          </Grid>
+
+          </Grid> {/* End of Dashboard Content */}
         </Box>
       </Box>
     </Box>
