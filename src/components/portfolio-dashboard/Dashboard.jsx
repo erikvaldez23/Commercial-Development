@@ -39,6 +39,7 @@ import {
 } from "recharts";
 import "react-circular-progressbar/dist/styles.css";
 import Sidebar from "./Sidebar";
+import "./Dashboard.css";
 
 // Sample data for charts
 const energyData = [
@@ -63,43 +64,6 @@ const temperatureData = [
   { time: "21:00", temp: 70 },
 ];
 
-// Custom card component with motion effects
-const AnimatedCard = ({ children, delay = 0, ...props }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay }}
-    style={{ height: '100%', display: 'flex' }}
-  >
-    <Card
-      elevation={0}
-      sx={{
-        width: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        bgcolor: "rgba(34, 34, 38, 0.7)",
-        backdropFilter: "blur(10px)",
-        p: { xs: 1.5, sm: 2, md: 2.5 },
-        borderRadius: 4,
-        color: "#fff",
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
-        border: "1px solid rgba(255, 255, 255, 0.08)",
-        transition: "all 0.3s ease-in-out",
-        "&:hover": {
-          boxShadow: "0 15px 40px rgba(0, 0, 0, 0.3)",
-          transform: "translateY(-3px)",
-          borderColor: "rgba(255, 255, 255, 0.15)",
-        },
-        ...props.sx,
-      }}
-      {...props}
-    >
-      {children}
-    </Card>
-  </motion.div>
-);
-
-// Status indicator component
 const StatusIndicator = ({ status }) => {
   const getColor = () => {
     switch (status) {
@@ -130,57 +94,63 @@ const StatusIndicator = ({ status }) => {
   );
 };
 
-export default function ModernDashboard() {
+const AnimatedCard = ({ children, delay = 0, className }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.5, delay }}
+    style={{ height: "100%", display: "flex" }}
+    className={className}
+  >
+    <Box
+      sx={{
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        bgcolor: "rgba(34, 34, 38, 0.7)",
+        backdropFilter: "blur(10px)",
+        p: 2.5,
+        borderRadius: 4,
+        color: "#fff",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+      }}
+    >
+      {children}
+    </Box>
+  </motion.div>
+);
+
+const ModernDashboard = () => {
   const [darkMode, setDarkMode] = useState(true);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
-  // Toggle function for dark/light mode
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-  };
-
-  // Dynamic background based on mode
   const bgGradient = darkMode
     ? "linear-gradient(135deg, #121212 0%, #1E1E2D 100%)"
     : "linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%)";
 
-  // Dynamic text color based on mode
   const textColor = darkMode ? "#fff" : "#333";
   const subTextColor = darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
-
-  // Dynamic card background based on mode
-  const cardBg = darkMode
-    ? "rgba(34, 34, 38, 0.7)"
-    : "rgba(255, 255, 255, 0.7)";
-
-  // Dynamic border color based on mode
   const borderColor = darkMode
     ? "rgba(255, 255, 255, 0.08)"
     : "rgba(0, 0, 0, 0.08)";
 
   return (
-    <Box
-      sx={{
-        background: bgGradient,
-        minHeight: "100vh",
-        width: "100%",
-      }}
-    >
+    <Box sx={{ background: bgGradient, height: "100%" }}>
       <Box
         sx={{
           display: "flex",
           minHeight: "100vh",
           width: "90%",
-          marginLeft: "10%"
+          mx: "auto",
+          marginRight: "10px",
         }}
       >
-        {/* Sidebar with responsive behavior */}
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Box sx={{ display: { xs: "none", md: "block" } }}>
           <Sidebar />
         </Box>
-        
         <Box
           sx={{
             width: "100%",
@@ -191,26 +161,23 @@ export default function ModernDashboard() {
             px: { xs: 2, sm: 3, md: 4 },
             py: { xs: 3, sm: 4, md: 6 },
             ml: { xs: 0, md: 8 },
-            transition: "all 0.3s ease",
           }}
         >
-          {/* Header */}
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              mb: { xs: 2, sm: 3, md: 4 },
-              px: { xs: 1, sm: 2 },
+              mb: 4,
             }}
           >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              {/* Logo can be placed here if needed */}
-            </Box>
-
-            <Box sx={{ display: "flex", alignItems: "center", gap: { xs: 1, sm: 2 } }}>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}></Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
               <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
-                <IconButton onClick={toggleDarkMode} sx={{ color: textColor }}>
+                <IconButton
+                  onClick={() => setDarkMode(!darkMode)}
+                  sx={{ color: textColor }}
+                >
                   {darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
                 </IconButton>
               </Tooltip>
@@ -223,14 +190,10 @@ export default function ModernDashboard() {
               </Tooltip>
               <Avatar
                 sx={{
-                  width: { xs: 32, sm: 40 },
-                  height: { xs: 32, sm: 40 },
+                  width: 40,
+                  height: 40,
                   cursor: "pointer",
                   border: `2px solid ${borderColor}`,
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    boxShadow: "0 0 10px rgba(255,255,255,0.2)",
-                  },
                 }}
                 alt="User"
                 src="/path-to-user-image.jpg"
@@ -238,629 +201,581 @@ export default function ModernDashboard() {
             </Box>
           </Box>
 
-          {/* Dashboard Content */}
-          <Grid container spacing={{ xs: 2, sm: 3 }} alignItems="stretch">
-            {/* Welcome Card */}
-            <Grid item xs={12}>
-              <AnimatedCard>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    justifyContent: "space-between",
-                    alignItems: { xs: 'flex-start', sm: 'center' },
-                    gap: { xs: 2, sm: 0 },
-                  }}
-                >
-                  <Box>
-                    <Typography
-                      variant="h4"
-                      sx={{ 
-                        fontWeight: 700, 
-                        color: textColor, 
-                        mb: 1,
-                        fontSize: { xs: '1.5rem', sm: '2rem', md: '2.125rem' } 
-                      }}
-                    >
-                      Project 1
-                    </Typography>
-                    <Typography
-                      variant="body1"
-                      sx={{ color: subTextColor, fontWeight: 500 }}
-                    >
-                      Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi rem illum ab assumenda.
-                    </Typography>
-                  </Box>
-                </Box>
-              </AnimatedCard>
-            </Grid>
+          {/* Grid layout */}
+          <Box className="parent">
+            <AnimatedCard delay={0.1} className="div1">
+              <Typography
+                variant="h4"
+                sx={{
+                  fontWeight: 700,
+                  color: textColor,
+                  mb: 1,
+                  fontSize: { xs: "1.5rem", sm: "2rem", md: "2.125rem" },
+                }}
+              >
+                Project 1
+              </Typography>
+              <Typography
+                variant="body1"
+                sx={{ color: subTextColor, fontWeight: 500 }}
+              >
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi
+                rem illum ab assumenda.
+              </Typography>
+            </AnimatedCard>
 
-            {/* Carbon Output Card */}
-            <Grid item xs={12} sm={6} md={4}>
-              <AnimatedCard delay={0.1}>
-                <Box
-                  sx={{
-                    mb: 2,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 600, color: textColor }}
-                  >
-                    Carbon Output
-                  </Typography>
-                  <Tooltip title="Better than industry average">
-                    <Box
-                      sx={{ display: "flex", alignItems: "center", gap: 0.5 }}
-                    >
-                      <StatusIndicator status="good" />
-                      <Typography variant="body2" sx={{ color: "#4CAF50" }}>
-                        -15%
-                      </Typography>
-                    </Box>
-                  </Tooltip>
-                </Box>
-
-                <Box
-                  sx={{
-                    width: { xs: '60%', sm: '70%', md: '50%' },
-                    mx: "auto",
-                    mt: 2,
-                    mb: 2,
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    flexGrow: 1,
-                    justifyContent: "center",
-                  }}
-                >
-                  <CircularProgressbar
-                    value={85}
-                    text={`85%`}
-                    styles={buildStyles({
-                      textColor: textColor,
-                      pathColor: "#8BC34A",
-                      trailColor: darkMode ? "#333" : "#e6e6e6",
-                      textSize: "16px",
-                    })}
-                  />
-                  <Typography
-                    variant="body2"
-                    sx={{ mt: 2, color: subTextColor, textAlign: "center" }}
-                  >
-                    Reduced carbon emissions
+            <AnimatedCard delay={0.2} className="div2">
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 600, color: textColor }}
+              >
+                Carbon Output
+              </Typography>
+              <Tooltip title="Better than industry average">
+                <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
+                  <StatusIndicator status="good" />
+                  <Typography variant="body2" sx={{ color: "#4CAF50" }}>
+                    -15%
                   </Typography>
                 </Box>
-              </AnimatedCard>
-            </Grid>
+              </Tooltip>
 
-            {/* Image Card */}
-            <Grid item xs={12} sm={6} md={8}>
-              <AnimatedCard delay={0.2}>
+              <Box
+                sx={{
+                  width: { xs: "60%", sm: "70%", md: "50%" },
+                  mx: "auto",
+                  mt: 2,
+                  mb: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  flexGrow: 1,
+                  justifyContent: "center",
+                }}
+              >
+                <CircularProgressbar
+                  value={85}
+                  text={"85%"}
+                  styles={buildStyles({
+                    textColor: textColor,
+                    pathColor: "#8BC34A",
+                    trailColor: darkMode ? "#333" : "#e6e6e6",
+                    textSize: "16px",
+                  })}
+                />
+                <Typography
+                  variant="body2"
+                  sx={{ mt: 2, color: subTextColor, textAlign: "center" }}
+                >
+                  Reduced carbon emissions
+                </Typography>
+              </Box>
+            </AnimatedCard>
+
+            <AnimatedCard delay={0.3} className="div3">
+              <Box
+                sx={{
+                  height: "100%",
+                  width: "100%",
+                  position: "relative",
+                  borderRadius: 3,
+                  overflow: "hidden",
+                }}
+              >
                 <Box
+                  component="img"
+                  src="/Commercial-Development/city2.jpg"
+                  alt="Dashboard Visual"
                   sx={{
-                    height: { xs: '200px', sm: '250px', md: '300px' },
+                    height: "100%",
                     width: "100%",
-                    position: "relative",
-                    borderRadius: 3,
-                    overflow: "hidden",
+                    objectFit: "cover",
+                    borderRadius: 5,
                   }}
+                  onError={(e) => {
+                    e.target.src = "/api/placeholder/800/400";
+                    e.target.alt = "City Placeholder";
+                  }}
+                />
+              </Box>
+            </AnimatedCard>
+            <AnimatedCard delay={0.4} className="div4">
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 600, color: textColor }}
+              >
+                Temperature
+              </Typography>
+              <Box sx={{ display: "flex" }}>
+                <ThermostatIcon sx={{ color: "#FF9800", mr: 1 }} />
+                <Typography
+                  variant="h5"
+                  sx={{ fontWeight: 600, color: textColor }}
                 >
-                  <Box
-                    component="img"
-                    src="/Commercial-Development/city2.jpg"
-                    alt="Dashboard Visual"
-                    sx={{
-                      height: "100%",
-                      width: "100%",
-                      objectFit: "cover",
-                      borderRadius: 3,
-                    }}
-                    onError={(e) => {
-                      e.target.src = "/api/placeholder/800/400";
-                      e.target.alt = "City Placeholder";
-                    }}
-                  />
-                </Box>
-              </AnimatedCard>
-            </Grid>
+                  72°F
+                </Typography>
+              </Box>
 
-            {/* Energy Distribution Card */}
-            <Grid item xs={12} md={7}>
-              <AnimatedCard delay={0.3}>
-                <Box
-                  sx={{
-                    mb: 2,
-                    display: "flex",
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    justifyContent: "space-between",
-                    alignItems: { xs: 'flex-start', sm: 'center' },
-                    gap: { xs: 1, sm: 0 },
-                  }}
-                >
-                  <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 600, color: textColor }}
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                }}
+              >
+                <ResponsiveContainer width="100%" height={130}>
+                  <AreaChart
+                    data={temperatureData}
+                    margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
                   >
-                    Energy Distribution
-                  </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <EnergySavingsLeafIcon sx={{ color: "#4CAF50" }} />
-                    <Typography variant="body2" sx={{ color: "#4CAF50" }}>
-                      60% from renewable sources
-                    </Typography>
-                  </Box>
-                </Box>
-
-                <Box sx={{ flexGrow: 1, minHeight: '180px' }}>
-                  <ResponsiveContainer width="100%" height={200}>
-                    <AreaChart
-                      data={energyData}
-                      margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
-                    >
-                      <defs>
-                        <linearGradient
-                          id="solarGradient"
-                          x1="0"
-                          y1="0"
-                          x2="0"
-                          y2="1"
-                        >
-                          <stop
-                            offset="5%"
-                            stopColor="#4CAF50"
-                            stopOpacity={0.3}
-                          />
-                          <stop
-                            offset="95%"
-                            stopColor="#4CAF50"
-                            stopOpacity={0}
-                          />
-                        </linearGradient>
-                        <linearGradient
-                          id="usageGradient"
-                          x1="0"
-                          y1="0"
-                          x2="0"
-                          y2="1"
-                        >
-                          <stop
-                            offset="5%"
-                            stopColor="#2196F3"
-                            stopOpacity={0.3}
-                          />
-                          <stop
-                            offset="95%"
-                            stopColor="#2196F3"
-                            stopOpacity={0}
-                          />
-                        </linearGradient>
-                      </defs>
-                      <XAxis
-                        dataKey="time"
-                        tick={{ fill: subTextColor, fontSize: 10 }}
-                        axisLine={{ stroke: borderColor }}
-                        tickLine={false}
-                        interval={isMobile ? 2 : 1}
-                      />
-                      <YAxis
-                        tick={{ fill: subTextColor, fontSize: 10 }}
-                        axisLine={{ stroke: borderColor }}
-                        tickLine={false}
-                        tickFormatter={(value) => `${value}`}
-                        width={30}
-                      />
-                      <RechartsTooltip
-                        contentStyle={{
-                          backgroundColor: darkMode
-                            ? "rgba(30,30,30,0.8)"
-                            : "rgba(255,255,255,0.8)",
-                          border: "none",
-                          borderRadius: "8px",
-                          color: textColor,
-                        }}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="solar"
-                        stackId="1"
-                        stroke="#4CAF50"
-                        fillOpacity={1}
-                        fill="url(#solarGradient)"
-                        strokeWidth={2}
-                        name="Solar Production"
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="usage"
-                        stackId="2"
-                        stroke="#2196F3"
-                        fillOpacity={1}
-                        fill="url(#usageGradient)"
-                        strokeWidth={2}
-                        name="Energy Usage"
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                </Box>
-
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: { xs: 'column', sm: 'row' },
-                    justifyContent: "space-around",
-                    gap: { xs: 1, sm: 2 },
-                    mt: 2,
-                  }}
+                    <defs>
+                      <linearGradient
+                        id="tempGradient"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="5%"
+                          stopColor="#FF9800"
+                          stopOpacity={0.3}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor="#FF9800"
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                    </defs>
+                    <XAxis
+                      dataKey="time"
+                      tick={{ fill: subTextColor, fontSize: 10 }}
+                      axisLine={{ stroke: borderColor }}
+                      tickLine={false}
+                      interval={isMobile ? 2 : 1}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="temp"
+                      stroke="#FF9800"
+                      fill="url(#tempGradient)"
+                      strokeWidth={2}
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+                <Typography
+                  variant="body2"
+                  sx={{ mt: 1, color: subTextColor, textAlign: "center" }}
                 >
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Box
-                      sx={{
-                        width: 12,
-                        height: 12,
-                        borderRadius: 6,
-                        bgcolor: "#4CAF50",
-                      }}
-                    />
-                    <Typography variant="body2" sx={{ color: subTextColor }}>
-                      Solar Production: 0.78 MW
-                    </Typography>
-                  </Box>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <Box
-                      sx={{
-                        width: 12,
-                        height: 12,
-                        borderRadius: 6,
-                        bgcolor: "#2196F3",
-                      }}
-                    />
-                    <Typography variant="body2" sx={{ color: subTextColor }}>
-                      Energy Usage: 1.32 MW
-                    </Typography>
-                  </Box>
-                </Box>
-              </AnimatedCard>
-            </Grid>
+                  Temperature over last 24 hours
+                </Typography>
+              </Box>
+            </AnimatedCard>
 
-            {/* Building Location Card */}
-            <Grid item xs={12} md={5}>
-              <AnimatedCard delay={0.4}>
+            <AnimatedCard delay={0.5} className="div5">
+              <Box
+                sx={{
+                  mb: 2,
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  justifyContent: "space-between",
+                  alignItems: { xs: "flex-start", sm: "center" },
+                  gap: { xs: 1, sm: 0 },
+                }}
+              >
                 <Typography
                   variant="h6"
-                  sx={{ fontWeight: 600, color: textColor, mb: 2 }}
+                  sx={{ fontWeight: 600, color: textColor }}
                 >
-                  Building Location
+                  Energy Distribution
                 </Typography>
-
-                <Box
-                  sx={{
-                    borderRadius: 3,
-                    overflow: "hidden",
-                    height: { xs: '200px', sm: '250px', md: '280px' },
-                    boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
-                    flexGrow: 1,
-                  }}
-                >
-                  <iframe
-                    title="Building Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8018044740475!2d-101.87771402430353!3d33.58449487333676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c413f31ec847%3A0x52db374b7b07849!2sTexas%20Tech%20University!5e0!3m2!1sen!2sus!4v1746898136720!5m2!1sen!2sus"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0 }}
-                    allowFullScreen=""
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                </Box>
-              </AnimatedCard>
-            </Grid>
-
-            {/* Temperature Card */}
-            <Grid item xs={12} sm={6}>
-              <AnimatedCard delay={0.5}>
-                <Box
-                  sx={{
-                    mb: 2,
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 600, color: textColor }}
-                  >
-                    Temperature
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <EnergySavingsLeafIcon sx={{ color: "#4CAF50" }} />
+                  <Typography variant="body2" sx={{ color: "#4CAF50" }}>
+                    60% from renewable sources
                   </Typography>
-                  <Box sx={{ display: "flex" }}>
-                    <ThermostatIcon sx={{ color: "#FF9800", mr: 1 }} />
+                </Box>
+              </Box>
+
+              <Box sx={{ flexGrow: 1, minHeight: "180px" }}>
+                <ResponsiveContainer width="100%" height={200}>
+                  <AreaChart
+                    data={energyData}
+                    margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+                  >
+                    <defs>
+                      <linearGradient
+                        id="solarGradient"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="5%"
+                          stopColor="#4CAF50"
+                          stopOpacity={0.3}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor="#4CAF50"
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                      <linearGradient
+                        id="usageGradient"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="5%"
+                          stopColor="#2196F3"
+                          stopOpacity={0.3}
+                        />
+                        <stop
+                          offset="95%"
+                          stopColor="#2196F3"
+                          stopOpacity={0}
+                        />
+                      </linearGradient>
+                    </defs>
+                    <XAxis
+                      dataKey="time"
+                      tick={{ fill: subTextColor, fontSize: 10 }}
+                      axisLine={{ stroke: borderColor }}
+                      tickLine={false}
+                      interval={isMobile ? 2 : 1}
+                    />
+                    <YAxis
+                      tick={{ fill: subTextColor, fontSize: 10 }}
+                      axisLine={{ stroke: borderColor }}
+                      tickLine={false}
+                      tickFormatter={(value) => `${value}`}
+                      width={30}
+                    />
+                    <RechartsTooltip
+                      contentStyle={{
+                        backgroundColor: darkMode
+                          ? "rgba(30,30,30,0.8)"
+                          : "rgba(255,255,255,0.8)",
+                        border: "none",
+                        borderRadius: "8px",
+                        color: textColor,
+                      }}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="solar"
+                      stackId="1"
+                      stroke="#4CAF50"
+                      fillOpacity={1}
+                      fill="url(#solarGradient)"
+                      strokeWidth={2}
+                      name="Solar Production"
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="usage"
+                      stackId="2"
+                      stroke="#2196F3"
+                      fillOpacity={1}
+                      fill="url(#usageGradient)"
+                      strokeWidth={2}
+                      name="Energy Usage"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: { xs: "column", sm: "row" },
+                  justifyContent: "space-around",
+                  gap: { xs: 1, sm: 2 },
+                  mt: 2,
+                }}
+              >
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <Box
+                    sx={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: 6,
+                      bgcolor: "#4CAF50",
+                    }}
+                  />
+                  <Typography variant="body2" sx={{ color: subTextColor }}>
+                    Solar Production: 0.78 MW
+                  </Typography>
+                </Box>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <Box
+                    sx={{
+                      width: 12,
+                      height: 12,
+                      borderRadius: 6,
+                      bgcolor: "#2196F3",
+                    }}
+                  />
+                  <Typography variant="body2" sx={{ color: subTextColor }}>
+                    Energy Usage: 1.32 MW
+                  </Typography>
+                </Box>
+              </Box>
+            </AnimatedCard>
+
+            <AnimatedCard delay={0.6} className="div6">
+              <Box
+                sx={{
+                  mb: 2,
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Typography
+                  variant="h6"
+                  sx={{ fontWeight: 600, color: textColor }}
+                >
+                  Air Quality
+                </Typography>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                  <AirIcon sx={{ color: "#4CAF50" }} />
+                  <Box sx={{ textAlign: "right" }}>
                     <Typography
                       variant="h5"
-                      sx={{ fontWeight: 600, color: textColor }}
+                      sx={{
+                        fontWeight: 600,
+                        color: textColor,
+                        lineHeight: 1,
+                      }}
                     >
-                      72°F
+                      28
+                    </Typography>
+                    <Typography variant="caption" sx={{ color: "#4CAF50" }}>
+                      Good
                     </Typography>
                   </Box>
                 </Box>
+              </Box>
 
-                <Box sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <ResponsiveContainer width="100%" height={130}>
-                    <AreaChart
-                      data={temperatureData}
-                      margin={{ top: 5, right: 5, left: -20, bottom: 0 }}
-                    >
-                      <defs>
-                        <linearGradient
-                          id="tempGradient"
-                          x1="0"
-                          y1="0"
-                          x2="0"
-                          y2="1"
-                        >
-                          <stop
-                            offset="5%"
-                            stopColor="#FF9800"
-                            stopOpacity={0.3}
-                          />
-                          <stop
-                            offset="95%"
-                            stopColor="#FF9800"
-                            stopOpacity={0}
-                          />
-                        </linearGradient>
-                      </defs>
-                      <XAxis
-                        dataKey="time"
-                        tick={{ fill: subTextColor, fontSize: 10 }}
-                        axisLine={{ stroke: borderColor }}
-                        tickLine={false}
-                        interval={isMobile ? 2 : 1}
-                      />
-                      <Area
-                        type="monotone"
-                        dataKey="temp"
-                        stroke="#FF9800"
-                        fill="url(#tempGradient)"
-                        strokeWidth={2}
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
-                  <Typography
-                    variant="body2"
-                    sx={{ mt: 1, color: subTextColor, textAlign: "center" }}
-                  >
-                    Temperature over last 24 hours
-                  </Typography>
-                </Box>
-              </AnimatedCard>
-            </Grid>
-
-            {/* Air Quality Card */}
-            <Grid item xs={12} sm={6}>
-              <AnimatedCard delay={0.6}>
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
                 <Box
                   sx={{
-                    mb: 2,
+                    p: 1,
                     display: "flex",
                     justifyContent: "space-between",
-                    alignItems: "center",
+                    flexWrap: { xs: "wrap", sm: "nowrap" },
+                    gap: 2,
+                  }}
+                >
+                  {["PM2.5", "CO2", "VOC", "Humidity"].map((param, index) => (
+                    <Box
+                      key={param}
+                      sx={{
+                        textAlign: "center",
+                        flex: { xs: "1 0 40%", sm: "1" },
+                        mb: { xs: 1, sm: 0 },
+                      }}
+                    >
+                      <Typography
+                        variant="body2"
+                        sx={{ color: subTextColor, mb: 0.5 }}
+                      >
+                        {param}
+                      </Typography>
+                      <Typography
+                        variant="body1"
+                        sx={{ fontWeight: 600, color: textColor }}
+                      >
+                        {index === 0
+                          ? "12µg"
+                          : index === 1
+                          ? "487ppm"
+                          : index === 2
+                          ? "Low"
+                          : "54%"}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+
+                <Box
+                  sx={{
+                    mt: 2,
+                    p: 1.5,
+                    borderRadius: 2,
+                    bgcolor: darkMode
+                      ? "rgba(76, 175, 80, 0.1)"
+                      : "rgba(76, 175, 80, 0.05)",
+                    border: "1px solid rgba(76, 175, 80, 0.2)",
                   }}
                 >
                   <Typography
-                    variant="h6"
-                    sx={{ fontWeight: 600, color: textColor }}
-                  >
-                    Air Quality
-                  </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <AirIcon sx={{ color: "#4CAF50" }} />
-                    <Box sx={{ textAlign: "right" }}>
-                      <Typography
-                        variant="h5"
-                        sx={{
-                          fontWeight: 600,
-                          color: textColor,
-                          lineHeight: 1,
-                        }}
-                      >
-                        28
-                      </Typography>
-                      <Typography variant="caption" sx={{ color: "#4CAF50" }}>
-                        Good
-                      </Typography>
-                    </Box>
-                  </Box>
-                </Box>
-
-                <Box sx={{ 
-                  flexGrow: 1, 
-                  display: 'flex', 
-                  flexDirection: 'column', 
-                  justifyContent: 'space-between' 
-                }}>
-                  <Box
+                    variant="body2"
                     sx={{
-                      p: 1,
+                      color: "#4CAF50",
                       display: "flex",
-                      justifyContent: "space-between",
-                      flexWrap: { xs: 'wrap', sm: 'nowrap' },
-                      gap: 2,
+                      alignItems: "center",
+                      gap: 1,
                     }}
                   >
-                    {["PM2.5", "CO2", "VOC", "Humidity"].map((param, index) => (
-                      <Box 
-                        key={param} 
-                        sx={{ 
-                          textAlign: "center", 
-                          flex: { xs: '1 0 40%', sm: '1' },
-                          mb: { xs: 1, sm: 0 } 
-                        }}
-                      >
-                        <Typography
-                          variant="body2"
-                          sx={{ color: subTextColor, mb: 0.5 }}
-                        >
-                          {param}
-                        </Typography>
-                        <Typography
-                          variant="body1"
-                          sx={{ fontWeight: 600, color: textColor }}
-                        >
-                          {index === 0
-                            ? "12µg"
-                            : index === 1
-                            ? "487ppm"
-                            : index === 2
-                            ? "Low"
-                            : "54%"}
-                        </Typography>
-                      </Box>
-                    ))}
-                  </Box>
+                    <CheckCircleIcon fontSize="small" />
+                    Air quality is excellent. All parameters within optimal
+                    range.
+                  </Typography>
+                </Box>
+              </Box>
+            </AnimatedCard>
 
-                  <Box
-                    sx={{
-                      mt: 2,
-                      p: 1.5,
-                      borderRadius: 2,
-                      bgcolor: darkMode
-                        ? "rgba(76, 175, 80, 0.1)"
-                        : "rgba(76, 175, 80, 0.05)",
-                      border: "1px solid rgba(76, 175, 80, 0.2)",
-                    }}
-                  >
-                    <Typography
-                      variant="body2"
+            <AnimatedCard delay={0.7} className="div7">
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 600, color: textColor, mb: 2 }}
+              >
+                Building Location
+              </Typography>
+
+              <Box
+                sx={{
+                  borderRadius: 3,
+                  overflow: "hidden",
+                  height: { xs: "200px", sm: "250px", md: "280px" },
+                  boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+                  flexGrow: 1,
+                }}
+              >
+                <iframe
+                  title="Building Location"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8018044740475!2d-101.87771402430353!3d33.58449487333676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c413f31ec847%3A0x52db374b7b07849!2sTexas%20Tech%20University!5e0!3m2!1sen!2sus!4v1746898136720!5m2!1sen!2sus"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+              </Box>
+            </AnimatedCard>
+
+            <AnimatedCard delay={0.8} className="div8">
+              <Typography
+                variant="h6"
+                sx={{ fontWeight: 600, color: textColor, mb: 2 }}
+              >
+                Building Maintenance
+              </Typography>
+
+              <Grid container spacing={2}>
+                {[
+                  {
+                    title: "Water Leak Detected",
+                    location: "Level 2, West Wing",
+                    status: "warning",
+                    icon: <WaterDropIcon />,
+                    time: "30 minutes ago",
+                  },
+                  {
+                    title: "Smoke Alarm Fault",
+                    location: "Level 5, Room 507",
+                    status: "error",
+                    icon: <WarningIcon />,
+                    time: "1 hour ago",
+                  },
+                  {
+                    title: "Cooling System Check",
+                    location: "Central HVAC",
+                    status: "good",
+                    icon: <CheckCircleIcon />,
+                    time: "Today at 9:00 AM",
+                  },
+                ].map((alert, index) => (
+                  <Grid item xs={12} key={index}>
+                    {" "}
+                    {/* Stack on all screen sizes */}
+                    <Box
                       sx={{
-                        color: "#4CAF50",
+                        p: 1,
+                        borderRadius: 2,
+                        bgcolor: darkMode
+                          ? alert.status === "warning"
+                            ? "rgba(255, 193, 7, 0.1)"
+                            : alert.status === "error"
+                            ? "rgba(244, 67, 54, 0.1)"
+                            : "rgba(76, 175, 80, 0.1)"
+                          : alert.status === "warning"
+                          ? "rgba(255, 193, 7, 0.05)"
+                          : alert.status === "error"
+                          ? "rgba(244, 67, 54, 0.05)"
+                          : "rgba(76, 175, 80, 0.05)",
+                        border: `1px solid ${
+                          alert.status === "warning"
+                            ? "rgba(255, 193, 7, 0.3)"
+                            : alert.status === "error"
+                            ? "rgba(244, 67, 54, 0.3)"
+                            : "rgba(76, 175, 80, 0.3)"
+                        }`,
                         display: "flex",
-                        alignItems: "center",
-                        gap: 1,
+                        gap: 2,
                       }}
                     >
-                      <CheckCircleIcon fontSize="small" />
-                      Air quality is excellent. All parameters within optimal
-                      range.
-                    </Typography>
-                  </Box>
-                </Box>
-              </AnimatedCard>
-            </Grid>
-
-            {/* Building Maintenance Cards */}
-            <Grid item xs={12}>
-              <AnimatedCard delay={0.7}>
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: 600, color: textColor, mb: 2 }}
-                >
-                  Building Maintenance
-                </Typography>
-
-                <Grid container spacing={{ xs: 2, sm: 2, md: 2 }}>
-                  {[
-                    {
-                      title: "Water Leak Detected",
-                      location: "Level 2, West Wing",
-                      status: "warning",
-                      icon: <WaterDropIcon />,
-                      time: "30 minutes ago",
-                    },
-                    {
-                      title: "Smoke Alarm Fault",
-                      location: "Level 5, Room 507",
-                      status: "error",
-                      icon: <WarningIcon />,
-                      time: "1 hour ago",
-                    },
-                    {
-                      title: "Cooling System Check",
-                      location: "Central HVAC",
-                      status: "good",
-                      icon: <CheckCircleIcon />,
-                      time: "Today at 9:00 AM",
-                    },
-                  ].map((alert, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                      <Box
+                      <Avatar
                         sx={{
-                          p: { xs: 1.5, sm: 2 },
-                          borderRadius: 2,
-                          height: '100%',
-                          bgcolor: darkMode
-                            ? alert.status === "warning"
-                              ? "rgba(255, 193, 7, 0.1)"
-                              : alert.status === "error"
-                              ? "rgba(244, 67, 54, 0.1)"
-                              : "rgba(76, 175, 80, 0.1)"
-                            : alert.status === "warning"
-                            ? "rgba(255, 193, 7, 0.05)"
-                            : alert.status === "error"
-                            ? "rgba(244, 67, 54, 0.05)"
-                            : "rgba(76, 175, 80, 0.05)",
-                          border: `1px solid ${
+                          bgcolor:
                             alert.status === "warning"
-                              ? "rgba(255, 193, 7, 0.3)"
+                              ? "rgba(255, 193, 7, 0.2)"
                               : alert.status === "error"
-                              ? "rgba(244, 67, 54, 0.3)"
-                              : "rgba(76, 175, 80, 0.3)"
-                          }`,
-                          display: "flex",
-                          gap: 2,
+                              ? "rgba(244, 67, 54, 0.2)"
+                              : "rgba(76, 175, 80, 0.2)",
+                          color:
+                            alert.status === "warning"
+                              ? "#FFC107"
+                              : alert.status === "error"
+                              ? "#F44336"
+                              : "#4CAF50",
                         }}
                       >
-                        <Avatar
-                          sx={{
-                            bgcolor:
-                              alert.status === "warning"
-                                ? "rgba(255, 193, 7, 0.2)"
-                                : alert.status === "error"
-                                ? "rgba(244, 67, 54, 0.2)"
-                                : "rgba(76, 175, 80, 0.2)",
-                            color:
-                              alert.status === "warning"
-                                ? "#FFC107"
-                                : alert.status === "error"
-                                ? "#F44336"
-                                : "#4CAF50",
-                          }}
+                        {alert.icon}
+                      </Avatar>
+                      <Box>
+                        <Typography sx={{ fontWeight: 600, color: textColor }}>
+                          {alert.title}
+                        </Typography>
+                        <Typography
+                          variant="body2"
+                          sx={{ color: subTextColor, mb: 1 }}
                         >
-                          {alert.icon}
-                        </Avatar>
-                        <Box>
-                          <Typography
-                            sx={{ fontWeight: 600, color: textColor }}
-                          >
-                            {alert.title}
-                          </Typography>
-                          <Typography
-                            variant="body2"
-                            sx={{ color: subTextColor, mb: 1 }}
-                          >
-                            {alert.location}
-                          </Typography>
-                          <Typography
-                            variant="caption"
-                            sx={{ color: subTextColor }}
-                            // ...continued from previous block
-                          >
-                            {alert.time}
-                          </Typography>
-                        </Box>
+                          {alert.location}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          sx={{ color: subTextColor }}
+                        >
+                          {alert.time}
+                        </Typography>
                       </Box>
-                    </Grid>
-                  ))}
-                </Grid>
-              </AnimatedCard>
-            </Grid>
-
-          </Grid> {/* End of Dashboard Content */}
+                    </Box>
+                  </Grid>
+                ))}
+              </Grid>
+            </AnimatedCard>
+          </Box>
         </Box>
       </Box>
     </Box>
   );
-}
+};
+
+export default ModernDashboard;

@@ -8,7 +8,8 @@ import {
   Divider,
 } from "@mui/material";
 
-const menuItems = ["Overview", "Analytics", "Buildings", "Settings"];
+// const menuItems = ["Overview", "Analytics", "Buildings", "Settings"];
+const menuItems = ["Overview", "Analytics", "Buildings"];
 
 export default function Sidebar() {
   return (
