@@ -7,9 +7,13 @@ import {
   ListItemText,
   Divider,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 
-// const menuItems = ["Overview", "Analytics", "Buildings", "Settings"];
-const menuItems = ["Overview", "Analytics", "Buildings"];
+const menuItems = [
+  { label: "Overview", path: "/portfolio/overview" },
+  { label: "Analytics", path: "/portfolio/analytics" },
+  { label: "Buildings", path: "/portfolio/buildings" },
+];
 
 export default function Sidebar() {
   return (
@@ -33,34 +37,28 @@ export default function Sidebar() {
           src="/Commercial-Development/greenark-logo1.png"
           alt="Dashboard Visual"
           sx={{
-            height: 100, // set consistent height
+            height: 100,
             width: "auto",
             marginRight: 2,
             mx: "auto",
             textAlign: "center",
           }}
         />
-        {/* <Typography variant="h4" sx={{ letterSpacing: 1, fontWeight: "bold" }}>
-        Green Ark
-        </Typography> */}
       </Box>
 
-      <Divider
-        sx={{
-          background: "#fff",
-          marginY: 4,
-        }}
-      />
+      <Divider sx={{ background: "#fff", marginY: 4 }} />
 
       {/* Menu Items */}
       <List>
-        {menuItems.map((text) => (
-          <ListItem key={text} disablePadding>
+        {menuItems.map(({ label, path }) => (
+          <ListItem key={label} disablePadding>
             <ListItemButton
+              component={Link}
+              to={path}
               sx={{ borderRadius: 2, ":hover": { bgcolor: "#1e1e1e" } }}
             >
               <ListItemText
-                primary={text}
+                primary={label}
                 primaryTypographyProps={{ fontSize: 30 }}
               />
             </ListItemButton>
