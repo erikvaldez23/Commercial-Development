@@ -54,7 +54,7 @@ const quoteY = useTransform(scrollYProgress, [0.4, 0.6], [30, 0]);
       ref={sectionRef}
       sx={{ 
         backgroundColor: "#050505",
-        backgroundImage: "radial-gradient(circle at 10% 20%, #101010 0%, #050505 80%)",
+        background: 'linear-gradient(135deg, #000000 0%, #1c1c1c 25%, #3d3d3d 50%, #1c1c1c 75%, #000000 100%)',
         height: "100vh", 
         py: { xs: 12, md: 16 }, 
         position: "relative",

@@ -5,18 +5,21 @@ import {
   Button,
   TextField,
   Grid,
+  Dialog,
+  DialogContent,
   IconButton,
-  InputAdornment,
 } from "@mui/material";
+import { FaTimes } from "react-icons/fa";
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
 
 export default function CallToAction() {
+  const navigate = useNavigate();
+  const handleOpen = () => setOpen(false);
+  const handleClose = () => setOpen(false);
+
   return (
-    <Box
-      sx={{
-        background: "#000",
-      }}
-    >
+    <Box sx={{ background: "#000" }}>
       <Box
         sx={{
           minHeight: "90vh",
@@ -24,7 +27,8 @@ export default function CallToAction() {
           color: "#fff",
           px: { xs: 4, md: 10 },
           py: 10,
-          backgroundImage: "url('/Commercial-Development/cta-bg.jpg')",
+          background:
+            "linear-gradient(135deg, #000000 0%, #1c1c1c 25%, #3d3d3d 50%, #1c1c1c 75%, #000000 100%)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           display: "flex",
@@ -52,7 +56,8 @@ export default function CallToAction() {
               px: 3,
               py: 1,
               "&:hover": {
-                backgroundColor: "#dfff5f",
+                backgroundColor: "#000",
+                color: "#fff",
               },
             }}
             startIcon={<AddIcon />}
@@ -64,16 +69,16 @@ export default function CallToAction() {
         {/* Footer CTA */}
         <Box
           sx={{
-            backgroundColor: "rgba(255, 255, 255, 0.05)", // translucent white/gray
-            backdropFilter: "blur(10px)", // enables the blur effect
-            WebkitBackdropFilter: "blur(10px)", // Safari support
+            backgroundColor: "rgba(255, 255, 255, 0.05)",
+            backdropFilter: "blur(10px)",
+            WebkitBackdropFilter: "blur(10px)",
             borderRadius: 4,
             mt: 10,
             p: 4,
             minHeight: "30vh",
             display: "flex",
             alignItems: "center",
-            border: "1px solid rgba(255, 255, 255, 0.1)", // optional subtle border
+            border: "1px solid rgba(255, 255, 255, 0.1)",
           }}
         >
           <Grid container spacing={4} alignItems="center">
@@ -109,22 +114,36 @@ export default function CallToAction() {
                 </Button>
               </Box>
             </Grid>
+
             <Grid
               item
               xs={12}
               md={6}
               container
-              spacing={40}
+              spacing={4}
               justifyContent="flex-end"
-              marginLeft="-120px"
+              marginLeft="150px"
             >
+              {/* Column 1 */}
               <Grid item xs={12} sm={4}>
                 <Box sx={{ textAlign: "left" }}>
                   <Typography variant="h2" fontWeight={600}>
                     Company
                   </Typography>
-                  <Typography variant="h4">About Us</Typography>
-                  <Typography variant="h4">Careers</Typography>
+                  <Typography
+                    variant="h4"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => navigate("/about")}
+                  >
+                    About Us
+                  </Typography>
+                  <Typography
+                    variant="h4"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => navigate("/careers")}
+                  >
+                    Careers
+                  </Typography>
                 </Box>
               </Grid>
 
@@ -134,8 +153,20 @@ export default function CallToAction() {
                   <Typography variant="h2" fontWeight={600}>
                     Support
                   </Typography>
-                  <Typography variant="h4">Help Center</Typography>
-                  <Typography variant="h4">Contact</Typography>
+                  <Typography
+                    variant="h4"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => navigate("/support")}
+                  >
+                    Help Center
+                  </Typography>
+                  <Typography
+                    variant="h4"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => navigate("/contact")}
+                  >
+                    Contact
+                  </Typography>
                 </Box>
               </Grid>
 
@@ -145,8 +176,20 @@ export default function CallToAction() {
                   <Typography variant="h2" fontWeight={600}>
                     Legal
                   </Typography>
-                  <Typography variant="h4">Privacy Policy</Typography>
-                  <Typography variant="h4">Terms of Use</Typography>
+                  <Typography
+                    variant="h4"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => navigate("/privacy")}
+                  >
+                    Privacy Policy
+                  </Typography>
+                  <Typography
+                    variant="h4"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => navigate("/terms")}
+                  >
+                    Terms of Use
+                  </Typography>
                 </Box>
               </Grid>
             </Grid>
