@@ -252,9 +252,10 @@ export default function How() {
             </Container>
           </Box>
         </Box>
+        
       </Fade>
 
-      <Box sx={{ backgroundColor: "#0f0f0f", py: 10 }}>
+      <Box sx={{ backgroundColor: "#0f0f0f", py: 10}}>
         <Container maxWidth="lg">
           <Typography
             variant="h4"
@@ -320,6 +321,8 @@ export default function How() {
         </Container>
       </Box>
 
+
+      
       {/* CTA Section */}
       <Box
         sx={{

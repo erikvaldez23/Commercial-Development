@@ -173,14 +173,14 @@ const ModernDashboard = () => {
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}></Box>
             <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
+              {/* <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
                 <IconButton
                   onClick={() => setDarkMode(!darkMode)}
                   sx={{ color: textColor }}
                 >
                   {darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
                 </IconButton>
-              </Tooltip>
+              </Tooltip> */}
               <Tooltip title="Notifications">
                 <IconButton sx={{ color: textColor }}>
                   <Badge badgeContent={3} color="error">

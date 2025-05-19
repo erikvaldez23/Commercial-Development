@@ -23,12 +23,12 @@ export default function CallToAction() {
       <Box
         sx={{
           minHeight: "90vh",
-          bgcolor: "#000",
           color: "#fff",
           px: { xs: 4, md: 10 },
           py: 10,
-          background:
-            "linear-gradient(135deg, #000000 0%, #1c1c1c 25%, #3d3d3d 50%, #1c1c1c 75%, #000000 100%)",
+          background: "#000",
+          background: "-webkit-linear-gradient(to right, #000000, #434343)",
+          background: " linear-gradient(to right, #000000, #434343)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "cover",
           display: "flex",
