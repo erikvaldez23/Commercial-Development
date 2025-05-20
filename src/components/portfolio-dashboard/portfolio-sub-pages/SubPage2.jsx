@@ -35,6 +35,7 @@ import ApartmentIcon from '@mui/icons-material/Apartment';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
 import Sidebar from "../Sidebar"
 
+
 // Create a futuristic dark theme with MUI
 const futuristicTheme = createTheme({
   palette: {
@@ -214,7 +215,7 @@ const futuristicTheme = createTheme({
 });
 
 // Get icon by project type
-const getTypeIcon = (type) => {
+const SubPage2 = (type) => {
   switch(type) {
     case 'Office':
       return <BusinessIcon sx={{ fontSize: 16 }} />;
@@ -764,4 +765,4 @@ const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage;
+export default SubPage2;

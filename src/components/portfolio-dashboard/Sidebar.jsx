@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Box,
   Typography,
@@ -11,35 +11,35 @@ import {
   Paper,
   Tooltip,
   IconButton,
-  Collapse
+  Collapse,
 } from "@mui/material";
-import { Link, useLocation } from "react-router-dom";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AnalyticsIcon from '@mui/icons-material/BarChart';
-import BuildingsIcon from '@mui/icons-material/Business';
-import MenuIcon from '@mui/icons-material/Menu';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import DashboardIcon from "@mui/icons-material/Dashboard";
+import AnalyticsIcon from "@mui/icons-material/BarChart";
+import BuildingsIcon from "@mui/icons-material/Business";
+import MenuIcon from "@mui/icons-material/Menu";
+import ExpandLessIcon from "@mui/icons-material/ExpandLess";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const menuItems = [
-  { 
-    label: "Overview", 
-    path: "/portfolio/overview",
-    icon: <DashboardIcon />
+  {
+    label: "Overview",
+    path: "/portfolio",
+    icon: <DashboardIcon />,
   },
-  { 
-    label: "Analytics", 
+  {
+    label: "Analytics",
     path: "/portfolio/analytics",
     icon: <AnalyticsIcon />,
     subItems: [
-      { label: "Performance", path: "/portfolio/analytics/performance" },
-      { label: "Sustainability", path: "/portfolio/analytics/sustainability" }
-    ]
+      { label: "Path 1", path: "/portfolio/sub-link1" },
+      { label: "Path 2", path: "/portfolio/sub-link2" },
+    ],
   },
-  { 
-    label: "Buildings", 
+  {
+    label: "Buildings",
     path: "/portfolio/buildings",
-    icon: <BuildingsIcon />
+    icon: <BuildingsIcon />,
   },
 ];
 
@@ -47,6 +47,7 @@ export default function Sidebar() {
   const [expanded, setExpanded] = useState(null);
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleExpand = (index) => {
     setExpanded(expanded === index ? null : index);
@@ -56,14 +57,19 @@ export default function Sidebar() {
     setCollapsed(!collapsed);
   };
 
-    const bgGradient = "linear-gradient(135deg, #121212 0%, #1E1E2D 100%)"
+  const handleLogoClick = () => {
+    navigate("/portfolio")
+    }
+  
+
+  const bgGradient = "linear-gradient(135deg, #121212 0%, #1E1E2D 100%)";
 
   return (
     <Paper
       elevation={3}
       sx={{
         width: collapsed ? 70 : 260,
-        bgcolor: bgGradient,
+        background: bgGradient,
         height: "100vh",
         transition: "width 0.3s ease",
         position: "fixed",
@@ -73,13 +79,13 @@ export default function Sidebar() {
         display: "flex",
         flexDirection: "column",
         zIndex: 1200,
-        overflow: "hidden"
+        overflow: "hidden",
       }}
     >
       {/* Header with Logo and Collapse Button */}
-      <Box 
-        display="flex" 
-        alignItems="center" 
+      <Box
+        display="flex"
+        alignItems="center"
         justifyContent={collapsed ? "center" : "space-between"}
         py={2}
         px={collapsed ? 1 : 2}
@@ -91,81 +97,103 @@ export default function Sidebar() {
             alt="GreenArk Logo"
             sx={{
               height: 40,
-              width: "auto"
+              width: "auto",
+              "&:hover": {
+                transform: "translate(1.5)",
+                cursor: "pointer"
+              }
             }}
+            onClick={handleLogoClick}
           />
         )}
         <Tooltip title={collapsed ? "Expand sidebar" : "Collapse sidebar"}>
-          <IconButton onClick={toggleSidebar} size="small">
+          <IconButton onClick={toggleSidebar} size="small" sx={{color: "#fff"}}>
             <MenuIcon />
           </IconButton>
         </Tooltip>
       </Box>
-      
+
       <Divider />
-      
+
       {/* Menu Items */}
       <List sx={{ flexGrow: 1, overflowY: "auto", py: 2 }}>
         {menuItems.map((item, index) => {
-          const isActive = location.pathname === item.path || 
-                          (item.subItems && item.subItems.some(subItem => location.pathname === subItem.path));
-          
+          const isActive =
+            location.pathname === item.path ||
+            (item.subItems &&
+              item.subItems.some(
+                (subItem) => location.pathname === subItem.path
+              ));
+
           return (
             <Box key={item.label}>
               <ListItem disablePadding>
                 <ListItemButton
-                  component={item.subItems ? 'div' : Link}
+                  component={item.subItems ? "div" : Link}
                   to={item.subItems ? undefined : item.path}
-                  onClick={item.subItems ? () => handleExpand(index) : undefined}
+                  onClick={
+                    item.subItems ? () => handleExpand(index) : undefined
+                  }
                   sx={{
                     borderRadius: 1,
                     mx: 1,
                     mb: 0.5,
                     py: 1,
-                    bgcolor: isActive ? 'action.selected' : 'transparent',
-                    '&:hover': {
-                      bgcolor: 'action.hover',
+                    bgcolor: isActive ? "action.selected" : "transparent",
+                    "&:hover": {
+                      bgcolor: "action.hover",
                     },
-                    position: 'relative',
-                    '&::before': isActive ? {
-                      content: '""',
-                      position: 'absolute',
-                      left: 0,
-                      top: '20%',
-                      height: '60%',
-                      width: 4,
-                      borderRadius: 1,
-                      bgcolor: 'primary.main',
-                    } : {},
+                    position: "relative",
+                    "&::before": isActive
+                      ? {
+                          content: '""',
+                          position: "absolute",
+                          left: 0,
+                          top: "20%",
+                          height: "60%",
+                          width: 4,
+                          borderRadius: 1,
+                          bgcolor: "primary.main",
+                        }
+                      : {},
                     pl: isActive ? 3 : 2,
                   }}
                 >
-                  <ListItemIcon sx={{ minWidth: 40, color: isActive ? 'primary.main' : 'inherit' }}>
+                  <ListItemIcon
+                    sx={{
+                      minWidth: 60,
+                      color: isActive ? "#fff" : "#fff",
+                    }}
+                  >
                     {item.icon}
                   </ListItemIcon>
                   {!collapsed && (
                     <>
-                      <ListItemText 
+                      <ListItemText
                         primary={item.label}
-                        primaryTypographyProps={{ 
-                          fontSize: 16,
+                        primaryTypographyProps={{
+                          fontSize: 22,
                           fontWeight: isActive ? 600 : 400,
+                          color:"#fff"
                         }}
                       />
-                      {item.subItems && (
-                        expanded === index ? <ExpandLessIcon /> : <ExpandMoreIcon />
-                      )}
+                      {item.subItems &&
+                        (expanded === index ? (
+                          <ExpandLessIcon />
+                        ) : (
+                          <ExpandMoreIcon />
+                        ))}
                     </>
                   )}
                 </ListItemButton>
               </ListItem>
-              
+
               {!collapsed && item.subItems && (
                 <Collapse in={expanded === index} timeout="auto" unmountOnExit>
                   <List component="div" disablePadding>
                     {item.subItems.map((subItem) => {
                       const isSubActive = location.pathname === subItem.path;
-                      
+
                       return (
                         <ListItemButton
                           key={subItem.label}
@@ -176,18 +204,22 @@ export default function Sidebar() {
                             py: 0.75,
                             mx: 1,
                             borderRadius: 1,
-                            bgcolor: isSubActive ? 'action.selected' : 'transparent',
-                            '&:hover': {
-                              bgcolor: 'action.hover',
+                            bgcolor: isSubActive
+                              ? "primary.main"
+                              : "transparent",
+                            "&:hover": {
+                              bgcolor: "action.hover",
                             },
                           }}
                         >
-                          <ListItemText 
-                            primary={subItem.label} 
-                            primaryTypographyProps={{ 
+                          <ListItemText
+                            primary={subItem.label}
+                            primaryTypographyProps={{
                               fontSize: 14,
                               fontWeight: isSubActive ? 500 : 400,
-                              color: isSubActive ? 'primary.main' : 'text.secondary',
+                              color: isSubActive
+                                ? "#fff"
+                                : "#fff",
                             }}
                           />
                         </ListItemButton>

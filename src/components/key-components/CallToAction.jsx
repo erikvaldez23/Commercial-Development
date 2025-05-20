@@ -62,7 +62,7 @@ export default function CallToAction() {
             }}
             startIcon={<AddIcon />}
           >
-            GET STARTED FREE
+            GET STARTED
           </Button>
         </Box>
 

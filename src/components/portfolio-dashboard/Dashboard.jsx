@@ -142,7 +142,6 @@ const ModernDashboard = () => {
       <Box
         sx={{
           display: "flex",
-          minHeight: "100vh",
           width: "90%",
           mx: "auto",
           marginRight: "10px",
@@ -159,7 +158,7 @@ const ModernDashboard = () => {
             overflow: "auto",
             flexGrow: 1,
             px: { xs: 2, sm: 3, md: 4 },
-            py: { xs: 3, sm: 4, md: 6 },
+            py: { xs: 3, sm: 4, md: 10 },
             ml: { xs: 0, md: 8 },
           }}
         >
@@ -181,7 +180,7 @@ const ModernDashboard = () => {
                   {darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
                 </IconButton>
               </Tooltip> */}
-              <Tooltip title="Notifications">
+              {/* <Tooltip title="Notifications">
                 <IconButton sx={{ color: textColor }}>
                   <Badge badgeContent={3} color="error">
                     <NotificationsIcon />
@@ -197,7 +196,7 @@ const ModernDashboard = () => {
                 }}
                 alt="User"
                 src="/path-to-user-image.jpg"
-              />
+              /> */}
             </Box>
           </Box>
 

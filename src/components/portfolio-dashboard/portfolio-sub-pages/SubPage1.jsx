@@ -230,7 +230,7 @@ const getTypeIcon = (type) => {
 };
 
 // Main component
-const ProjectsPage = () => {
+const SubPage1 = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Statuses');
@@ -764,4 +764,4 @@ const ProjectsPage = () => {
   );
 };
 
-export default ProjectsPage;
+export default SubPage1;

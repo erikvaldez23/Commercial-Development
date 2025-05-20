@@ -44,6 +44,8 @@ import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import Dashboard from "./components/portfolio-dashboard/Dashboard"
 import Projects from "./components/portfolio-dashboard/portfolio-sub-pages/Proejcts";
+import SubPage1 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage1";
+import SubPage2 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage2";
 
 // theme
 const theme = createTheme({
@@ -181,6 +183,8 @@ export default function App() {
             <Route path="/portfolio/overview" element={<NotFound />} />
             <Route path="/portfolio/analytics" element={<NotFound />} />
             <Route path="/portfolio/buildings" element={<Projects />} />
+            <Route path="/portfolio/sub-link1" element={<SubPage1 />} />
+            <Route path="/portfolio/sub-link1" element={<SubPage1 />} />
           </Routes>
 
           {/* <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
