@@ -64,8 +64,8 @@ const WhatWeDo = () => {
       ref={sectionRef}
       sx={{
         background: "#000",
-        background: "-webkit-linear-gradient(to right, #000000, #434343)",
-        background: "linear-gradient(to right, #000000, #434343)",
+        // background: "-webkit-linear-gradient(to right, #000000, #434343)",
+        // background: "linear-gradient(to right, #000000, #434343)",
         height: "100vh",
         py: { xs: 12, md: 16 },
         position: "relative",
@@ -226,8 +226,8 @@ const WhatWeDo = () => {
                         src={item.icon}
                         alt={item.title}
                         style={{
-                          width: 60,
-                          height: 60,
+                          width: 80,
+                          height: 80,
                           filter: "drop-shadow(0 0 10px rgba(226,199,153,0.3))",
                         }}
                       />
@@ -240,7 +240,7 @@ const WhatWeDo = () => {
                   sx={{
                     fontWeight: 600,
                     mb: 1,
-                    fontSize: { xs: "1.25rem", md: "1.4rem" },
+                    fontSize: { xs: "1.25rem", md: "1.7rem" },
                     transition: "color 0.3s ease",
                     color: hoveredIndex === index ? "#e2c799" : "#fff",
                   }}
@@ -253,7 +253,7 @@ const WhatWeDo = () => {
                     color: "#aaa",
                     maxWidth: "220px",
                     mx: "auto",
-                    fontSize: { xs: "0.9rem", md: "1rem" },
+                    fontSize: { xs: "0.9rem", md: "1.5rem" },
                     opacity: 0.8,
                   }}
                 >
@@ -264,7 +264,6 @@ const WhatWeDo = () => {
           ))}
         </Box>
 
-        {/* <motion.div style={{ width: dividerWidth }}> */}
         <Divider
           sx={{
             my: { xs: 5, md: 8 },
@@ -276,14 +275,7 @@ const WhatWeDo = () => {
             boxShadow: "0 0 10px rgba(201,180,154,0.3)",
           }}
         />
-        {/* </motion.div> */}
 
-        <motion.div
-          style={{
-            opacity: quoteOpacity,
-            y: quoteY, // This works because Framer Motion recognizes `y` as a motion value
-          }}
-        >
           <Typography
             variant="h4"
             align="center"
@@ -291,15 +283,14 @@ const WhatWeDo = () => {
               color: "#bfae90",
               fontWeight: 300,
               fontStyle: "italic",
-              fontSize: { xs: "1.5rem", md: "2rem" },
+              fontSize: { xs: "1.5rem", md: "3rem" },
               textShadow: "0 0 20px rgba(191,174,144,0.2)",
               letterSpacing: 1,
               lineHeight: 1.5,
             }}
           >
-            The future is vertical, smart, and rooted in purpose.
+            "The best way to predict the future is to create it"
           </Typography>
-        </motion.div>
       </Container>
     </Box>
   );

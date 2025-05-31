@@ -1,4 +1,3 @@
-// ModernDashboard.jsx
 import React, { useState } from "react";
 import {
   Box,
@@ -13,17 +12,11 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import ForestIcon from "@mui/icons-material/Forest";
-import WbSunnyIcon from "@mui/icons-material/WbSunny";
-import NightsStayIcon from "@mui/icons-material/NightsStay";
-import NotificationsIcon from "@mui/icons-material/Notifications";
 import AirIcon from "@mui/icons-material/Air";
 import EnergySavingsLeafIcon from "@mui/icons-material/EnergySavingsLeaf";
 import WarningIcon from "@mui/icons-material/Warning";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import WaterDropIcon from "@mui/icons-material/WaterDrop";
-import SecurityIcon from "@mui/icons-material/Security";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import ThermostatIcon from "@mui/icons-material/Thermostat";
 import { motion } from "framer-motion";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";

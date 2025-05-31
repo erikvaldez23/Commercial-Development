@@ -83,8 +83,7 @@ export default function HeroSection({ loadingDone }) {
   return (
     <Box
       sx={{
-        background: "url(/Commercial-Development/bg.png)",
-        // background: "#000",
+        background: "url(/Commercial-Development/sunset.mp4)",
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -101,6 +100,18 @@ export default function HeroSection({ loadingDone }) {
         justifyContent: "center",
       }}
     >
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1))",
+          zIndex: 1,
+        }}
+      />
       {/* Bottom Gradient Overlay */}
       <Box
         sx={{
@@ -172,7 +183,7 @@ export default function HeroSection({ loadingDone }) {
               height: "auto",
               zIndex: 2,
               pointerEvents: "none",
-              opacity: 0.9,
+              filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))"
             }}
           />
 
@@ -212,6 +223,7 @@ export default function HeroSection({ loadingDone }) {
                 WebkitTextFillColor: "transparent",
                 textShadow: "0 0 30px rgba(201,180,154,0.3)",
                 letterSpacing: "0.5px",
+                filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))"
               }}
             >
               TOMORROWS SUSTAINABILITY TODAY
@@ -234,6 +246,7 @@ export default function HeroSection({ loadingDone }) {
                 margin: "0 auto",
                 mb: 5,
                 lineHeight: 1.7,
+                filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))"
               }}
             >
               Green Ark is redefining real estate investments — blending modern

@@ -174,7 +174,7 @@ export default function Sidebar() {
                         primaryTypographyProps={{
                           fontSize: 22,
                           fontWeight: isActive ? 600 : 400,
-                          color:"#fff"
+                          color: "#fff"
                         }}
                       />
                       {item.subItems &&
