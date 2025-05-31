@@ -400,7 +400,7 @@ export default function ContactForm() {
 
   return (
     <Box sx={{ width: "100%", background: '#000' }}>
-      <Box sx={{ maxWidth: "90rem", mx: "auto", px: { xs: 2, sm: 4 }, py: 8, color: 'white' }} id="contact">
+      <Box sx={{ maxWidth: "90vw", mx: "auto", px: { xs: 2, sm: 4 }, py: 8, color: 'white' }} id="contact">
         {/* Header Section */}
         <Box sx={{ textAlign: "center", mb: { xs: 4, md: 6 } }}>
           <Typography
