@@ -183,13 +183,9 @@ const ModernDashboard = () => {
                 variant="h4"
                 sx={{
                   fontWeight: 700,
-                  color: textColor,
                   mb: 1,
                   fontSize: { xs: "1.5rem", sm: "2rem", md: "2.125rem" },
-                  background: `linear-gradient(135deg, ${accentColor}, ${secondaryAccent})`,
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
+                  color: "#c9b49a",
                 }}
               >
                 Project 1
