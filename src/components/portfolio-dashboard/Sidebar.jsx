@@ -58,11 +58,16 @@ export default function Sidebar() {
   };
 
   const handleLogoClick = () => {
-    navigate("/portfolio")
-    }
-  
+    navigate("/portfolio");
+  };
 
-  const bgGradient = "linear-gradient(135deg, #121212 0%, #1E1E2D 100%)";
+  // Black-centered color scheme
+  const bgGradient = "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0d0d0d 100%)";
+  const accentColor = "#ffffff"; // Pure white for contrast
+  const hoverColor = "rgba(255, 255, 255, 0.08)"; // Subtle white overlay
+  const activeColor = "rgba(255, 255, 255, 0.12)"; // Slightly more prominent
+  const dividerColor = "rgba(255, 255, 255, 0.1)"; // Subtle divider
+  const textSecondary = "rgba(255, 255, 255, 0.7)"; // Muted white text
 
   return (
     <Paper
@@ -80,6 +85,7 @@ export default function Sidebar() {
         flexDirection: "column",
         zIndex: 1200,
         overflow: "hidden",
+        borderRight: `1px solid ${dividerColor}`,
       }}
     >
       {/* Header with Logo and Collapse Button */}
@@ -89,6 +95,9 @@ export default function Sidebar() {
         justifyContent={collapsed ? "center" : "space-between"}
         py={2}
         px={collapsed ? 1 : 2}
+        sx={{
+          borderBottom: `1px solid ${dividerColor}`,
+        }}
       >
         {!collapsed && (
           <Box
@@ -98,22 +107,36 @@ export default function Sidebar() {
             sx={{
               height: 40,
               width: "auto",
+              filter: "brightness(0) invert(1)", // Makes logo white
               "&:hover": {
-                transform: "translate(1.5)",
-                cursor: "pointer"
+                transform: "scale(1.05)",
+                cursor: "pointer",
+                filter: "brightness(0) invert(1) drop-shadow(0 0 8px rgba(255,255,255,0.3))",
+                transition: "all 0.2s ease",
               }
             }}
             onClick={handleLogoClick}
           />
         )}
         <Tooltip title={collapsed ? "Expand sidebar" : "Collapse sidebar"}>
-          <IconButton onClick={toggleSidebar} size="small" sx={{color: "#fff"}}>
+          <IconButton 
+            onClick={toggleSidebar} 
+            size="small" 
+            sx={{
+              color: accentColor,
+              "&:hover": {
+                backgroundColor: hoverColor,
+                transform: "scale(1.1)",
+              },
+              transition: "all 0.2s ease",
+            }}
+          >
             <MenuIcon />
           </IconButton>
         </Tooltip>
       </Box>
 
-      <Divider />
+      <Divider sx={{ backgroundColor: dividerColor }} />
 
       {/* Menu Items */}
       <List sx={{ flexGrow: 1, overflowY: "auto", py: 2 }}>
@@ -135,13 +158,15 @@ export default function Sidebar() {
                     item.subItems ? () => handleExpand(index) : undefined
                   }
                   sx={{
-                    borderRadius: 1,
+                    borderRadius: 2,
                     mx: 1,
                     mb: 0.5,
-                    py: 1,
-                    bgcolor: isActive ? "action.selected" : "transparent",
+                    py: 1.5,
+                    bgcolor: isActive ? activeColor : "transparent",
                     "&:hover": {
-                      bgcolor: "action.hover",
+                      bgcolor: hoverColor,
+                      transform: "translateX(4px)",
+                      transition: "all 0.2s ease",
                     },
                     position: "relative",
                     "&::before": isActive
@@ -151,18 +176,21 @@ export default function Sidebar() {
                           left: 0,
                           top: "20%",
                           height: "60%",
-                          width: 4,
+                          width: 3,
                           borderRadius: 1,
-                          bgcolor: "primary.main",
+                          bgcolor: accentColor,
+                          boxShadow: `0 0 8px ${accentColor}`,
                         }
                       : {},
                     pl: isActive ? 3 : 2,
+                    transition: "all 0.2s ease",
                   }}
                 >
                   <ListItemIcon
                     sx={{
                       minWidth: 60,
-                      color: isActive ? "#fff" : "#fff",
+                      color: isActive ? accentColor : textSecondary,
+                      transition: "color 0.2s ease",
                     }}
                   >
                     {item.icon}
@@ -172,16 +200,17 @@ export default function Sidebar() {
                       <ListItemText
                         primary={item.label}
                         primaryTypographyProps={{
-                          fontSize: 22,
+                          fontSize: 16,
                           fontWeight: isActive ? 600 : 400,
-                          color: "#fff"
+                          color: isActive ? accentColor : textSecondary,
+                          transition: "all 0.2s ease",
                         }}
                       />
                       {item.subItems &&
                         (expanded === index ? (
-                          <ExpandLessIcon />
+                          <ExpandLessIcon sx={{ color: textSecondary }} />
                         ) : (
-                          <ExpandMoreIcon />
+                          <ExpandMoreIcon sx={{ color: textSecondary }} />
                         ))}
                     </>
                   )}
@@ -201,15 +230,31 @@ export default function Sidebar() {
                           to={subItem.path}
                           sx={{
                             pl: 6,
-                            py: 0.75,
+                            py: 1,
                             mx: 1,
-                            borderRadius: 1,
-                            bgcolor: isSubActive
-                              ? "primary.main"
-                              : "transparent",
+                            borderRadius: 2,
+                            bgcolor: isSubActive ? activeColor : "transparent",
                             "&:hover": {
-                              bgcolor: "action.hover",
+                              bgcolor: hoverColor,
+                              transform: "translateX(2px)",
+                              transition: "all 0.2s ease",
                             },
+                            position: "relative",
+                            "&::before": isSubActive
+                              ? {
+                                  content: '""',
+                                  position: "absolute",
+                                  left: 16,
+                                  top: "50%",
+                                  transform: "translateY(-50%)",
+                                  height: 6,
+                                  width: 6,
+                                  borderRadius: "50%",
+                                  bgcolor: accentColor,
+                                  boxShadow: `0 0 6px ${accentColor}`,
+                                }
+                              : {},
+                            transition: "all 0.2s ease",
                           }}
                         >
                           <ListItemText
@@ -217,9 +262,8 @@ export default function Sidebar() {
                             primaryTypographyProps={{
                               fontSize: 14,
                               fontWeight: isSubActive ? 500 : 400,
-                              color: isSubActive
-                                ? "#fff"
-                                : "#fff",
+                              color: isSubActive ? accentColor : textSecondary,
+                              transition: "color 0.2s ease",
                             }}
                           />
                         </ListItemButton>

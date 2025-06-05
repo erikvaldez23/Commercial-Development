@@ -82,7 +82,7 @@ const GoldText = styled(Typography)(({ theme }) => ({
 }));
 
 const DarkSection = styled(Box)(({ theme }) => ({
-  backgroundColor: "#0f0f0f",
+  backgroundColor: "#000",
   color: "white",
 }));
 

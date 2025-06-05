@@ -21,11 +21,11 @@ import { useNavigate } from "react-router-dom"; // 👈 at the top
 
 // Your nav items
 const navItems = [
-  { label: "How It Works", path: "/#/how-it-works" },
+  { label: "Ark Vision", path: "/#/how-it-works" },
   { label: "What We Offer", path: "/#/what-we-offer" },
-  { label: "Our story", path: "/#/about" },
-  { label: "Portfolio", path: "/#/portfolio" },
-  { label: "Get in touch", path: "/contact", isAnchor: true },
+  { label: "Our Story", path: "/#/about" },
+  { label: "Ark OS", path: "/#/portfolio" },
+  { label: "Get In Touch", path: "/contact", isAnchor: true },
 ];
 
 // The "pill" wrapper with enhanced styling

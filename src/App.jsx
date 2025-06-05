@@ -26,6 +26,7 @@ import RevealSection from "./components/animations/RevealSection";
 import VideoBackground from "./components/animations/VideoBackground";
 import SlideUpReveal from "./components/animations/SlideUpReveal";
 import OceanLoader from "./components/loader/Loader3";
+import LottieLoader from "./components/animations/LottieLoader";
 
 // landing & sub-pages
 import Hero from "./components/hero/Hero";
@@ -121,7 +122,7 @@ export default function App() {
           {/* <VideoBackground /> */}
         </Box>
 
-        <Topbar handleOpenChatbot={handleOpenChatbot} />
+        {!loading && <Topbar handleOpenChatbot={handleOpenChatbot} />}
 
         <>
           <Routes>
@@ -130,7 +131,7 @@ export default function App() {
               element={
                 <>
                   {loading ? (
-                    <OceanLoader />
+                    <LottieLoader />
                   ) : (
                     <>
                       {/* <Box
@@ -214,7 +215,7 @@ export default function App() {
             </Box>
           )} */}
 
-          <Footer />
+          {!loading && <Footer />}
         </>
       </Router>
     </ThemeProvider>

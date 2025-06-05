@@ -61,13 +61,13 @@ const StatusIndicator = ({ status }) => {
   const getColor = () => {
     switch (status) {
       case "good":
-        return "#4CAF50";
+        return "#00FF88"; // Bright green accent
       case "warning":
-        return "#FFC107";
+        return "#FFD700"; // Gold warning
       case "error":
-        return "#FF5252";
+        return "#FF4757"; // Bright red
       default:
-        return "#4CAF50";
+        return "#00FF88";
     }
   };
 
@@ -81,7 +81,7 @@ const StatusIndicator = ({ status }) => {
         height: 10,
         borderRadius: "50%",
         backgroundColor: getColor(),
-        boxShadow: `0 0 10px ${getColor()}`,
+        boxShadow: `0 0 15px ${getColor()}`,
       }}
     />
   );
@@ -100,13 +100,24 @@ const AnimatedCard = ({ children, delay = 0, className }) => (
         width: "100%",
         display: "flex",
         flexDirection: "column",
-        bgcolor: "rgba(34, 34, 38, 0.7)",
-        backdropFilter: "blur(10px)",
+        bgcolor: "rgba(15, 15, 15, 0.95)", // Deep black with slight transparency
+        backdropFilter: "blur(15px)",
         p: 2.5,
         borderRadius: 4,
-        color: "#fff",
-        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.15)",
-        border: "1px solid rgba(255, 255, 255, 0.08)",
+        color: "#FFFFFF",
+        boxShadow: "0 15px 35px rgba(0, 0, 0, 0.5), 0 5px 15px rgba(0, 0, 0, 0.3)",
+        border: "1px solid rgba(255, 255, 255, 0.1)",
+        position: "relative",
+        overflow: "hidden",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "1px",
+          background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+        }
       }}
     >
       {children}
@@ -120,15 +131,13 @@ const ModernDashboard = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
-  const bgGradient = darkMode
-    ? "linear-gradient(135deg, #121212 0%, #1E1E2D 100%)"
-    : "linear-gradient(135deg, #f5f7fa 0%, #e4e8ed 100%)";
-
-  const textColor = darkMode ? "#fff" : "#333";
-  const subTextColor = darkMode ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.7)";
-  const borderColor = darkMode
-    ? "rgba(255, 255, 255, 0.08)"
-    : "rgba(0, 0, 0, 0.08)";
+  // Black-centered color scheme
+  const bgGradient = "radial-gradient(ellipse at top, #0a0a0a 0%, #000000 100%)";
+  const textColor = "#FFFFFF";
+  const subTextColor = "rgba(255,255,255,0.7)";
+  const borderColor = "rgba(255, 255, 255, 0.15)";
+  const accentColor = "#00FF88"; // Bright green accent
+  const secondaryAccent = "#7C3AED"; // Purple accent
 
   return (
     <Box sx={{ background: bgGradient, height: "100%" }}>
@@ -164,33 +173,7 @@ const ModernDashboard = () => {
             }}
           >
             <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}></Box>
-            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-              {/* <Tooltip title={darkMode ? "Light Mode" : "Dark Mode"}>
-                <IconButton
-                  onClick={() => setDarkMode(!darkMode)}
-                  sx={{ color: textColor }}
-                >
-                  {darkMode ? <WbSunnyIcon /> : <NightsStayIcon />}
-                </IconButton>
-              </Tooltip> */}
-              {/* <Tooltip title="Notifications">
-                <IconButton sx={{ color: textColor }}>
-                  <Badge badgeContent={3} color="error">
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-              </Tooltip>
-              <Avatar
-                sx={{
-                  width: 40,
-                  height: 40,
-                  cursor: "pointer",
-                  border: `2px solid ${borderColor}`,
-                }}
-                alt="User"
-                src="/path-to-user-image.jpg"
-              /> */}
-            </Box>
+            <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}></Box>
           </Box>
 
           {/* Grid layout */}
@@ -203,6 +186,10 @@ const ModernDashboard = () => {
                   color: textColor,
                   mb: 1,
                   fontSize: { xs: "1.5rem", sm: "2rem", md: "2.125rem" },
+                  background: `linear-gradient(135deg, ${accentColor}, ${secondaryAccent})`,
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
                 }}
               >
                 Project 1
@@ -226,7 +213,7 @@ const ModernDashboard = () => {
               <Tooltip title="Better than industry average">
                 <Box sx={{ display: "flex", alignItems: "center", gap: 0.5 }}>
                   <StatusIndicator status="good" />
-                  <Typography variant="body2" sx={{ color: "#4CAF50" }}>
+                  <Typography variant="body2" sx={{ color: accentColor }}>
                     -15%
                   </Typography>
                 </Box>
@@ -250,8 +237,8 @@ const ModernDashboard = () => {
                   text={"85%"}
                   styles={buildStyles({
                     textColor: textColor,
-                    pathColor: "#8BC34A",
-                    trailColor: darkMode ? "#333" : "#e6e6e6",
+                    pathColor: accentColor,
+                    trailColor: "rgba(255, 255, 255, 0.1)",
                     textSize: "16px",
                   })}
                 />
@@ -283,6 +270,7 @@ const ModernDashboard = () => {
                     width: "100%",
                     objectFit: "cover",
                     borderRadius: 5,
+                    filter: "brightness(0.8) contrast(1.2)", // Darker, more contrast for black theme
                   }}
                   onError={(e) => {
                     e.target.src = "/api/placeholder/800/400";
@@ -291,6 +279,7 @@ const ModernDashboard = () => {
                 />
               </Box>
             </AnimatedCard>
+
             <AnimatedCard delay={0.4} className="div4">
               <Typography
                 variant="h6"
@@ -299,7 +288,7 @@ const ModernDashboard = () => {
                 Temperature
               </Typography>
               <Box sx={{ display: "flex" }}>
-                <ThermostatIcon sx={{ color: "#FF9800", mr: 1 }} />
+                <ThermostatIcon sx={{ color: "#FF6B35", mr: 1 }} />
                 <Typography
                   variant="h5"
                   sx={{ fontWeight: 600, color: textColor }}
@@ -331,12 +320,12 @@ const ModernDashboard = () => {
                       >
                         <stop
                           offset="5%"
-                          stopColor="#FF9800"
-                          stopOpacity={0.3}
+                          stopColor="#FF6B35"
+                          stopOpacity={0.6}
                         />
                         <stop
                           offset="95%"
-                          stopColor="#FF9800"
+                          stopColor="#FF6B35"
                           stopOpacity={0}
                         />
                       </linearGradient>
@@ -351,7 +340,7 @@ const ModernDashboard = () => {
                     <Area
                       type="monotone"
                       dataKey="temp"
-                      stroke="#FF9800"
+                      stroke="#FF6B35"
                       fill="url(#tempGradient)"
                       strokeWidth={2}
                     />
@@ -384,8 +373,8 @@ const ModernDashboard = () => {
                   Energy Distribution
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <EnergySavingsLeafIcon sx={{ color: "#4CAF50" }} />
-                  <Typography variant="body2" sx={{ color: "#4CAF50" }}>
+                  <EnergySavingsLeafIcon sx={{ color: accentColor }} />
+                  <Typography variant="body2" sx={{ color: accentColor }}>
                     60% from renewable sources
                   </Typography>
                 </Box>
@@ -407,12 +396,12 @@ const ModernDashboard = () => {
                       >
                         <stop
                           offset="5%"
-                          stopColor="#4CAF50"
-                          stopOpacity={0.3}
+                          stopColor={accentColor}
+                          stopOpacity={0.6}
                         />
                         <stop
                           offset="95%"
-                          stopColor="#4CAF50"
+                          stopColor={accentColor}
                           stopOpacity={0}
                         />
                       </linearGradient>
@@ -425,12 +414,12 @@ const ModernDashboard = () => {
                       >
                         <stop
                           offset="5%"
-                          stopColor="#2196F3"
-                          stopOpacity={0.3}
+                          stopColor={secondaryAccent}
+                          stopOpacity={0.6}
                         />
                         <stop
                           offset="95%"
-                          stopColor="#2196F3"
+                          stopColor={secondaryAccent}
                           stopOpacity={0}
                         />
                       </linearGradient>
@@ -451,19 +440,18 @@ const ModernDashboard = () => {
                     />
                     <RechartsTooltip
                       contentStyle={{
-                        backgroundColor: darkMode
-                          ? "rgba(30,30,30,0.8)"
-                          : "rgba(255,255,255,0.8)",
-                        border: "none",
+                        backgroundColor: "rgba(15,15,15,0.95)",
+                        border: `1px solid ${borderColor}`,
                         borderRadius: "8px",
                         color: textColor,
+                        boxShadow: "0 10px 25px rgba(0,0,0,0.5)",
                       }}
                     />
                     <Area
                       type="monotone"
                       dataKey="solar"
                       stackId="1"
-                      stroke="#4CAF50"
+                      stroke={accentColor}
                       fillOpacity={1}
                       fill="url(#solarGradient)"
                       strokeWidth={2}
@@ -473,7 +461,7 @@ const ModernDashboard = () => {
                       type="monotone"
                       dataKey="usage"
                       stackId="2"
-                      stroke="#2196F3"
+                      stroke={secondaryAccent}
                       fillOpacity={1}
                       fill="url(#usageGradient)"
                       strokeWidth={2}
@@ -498,7 +486,8 @@ const ModernDashboard = () => {
                       width: 12,
                       height: 12,
                       borderRadius: 6,
-                      bgcolor: "#4CAF50",
+                      bgcolor: accentColor,
+                      boxShadow: `0 0 8px ${accentColor}`,
                     }}
                   />
                   <Typography variant="body2" sx={{ color: subTextColor }}>
@@ -511,7 +500,8 @@ const ModernDashboard = () => {
                       width: 12,
                       height: 12,
                       borderRadius: 6,
-                      bgcolor: "#2196F3",
+                      bgcolor: secondaryAccent,
+                      boxShadow: `0 0 8px ${secondaryAccent}`,
                     }}
                   />
                   <Typography variant="body2" sx={{ color: subTextColor }}>
@@ -537,7 +527,7 @@ const ModernDashboard = () => {
                   Air Quality
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                  <AirIcon sx={{ color: "#4CAF50" }} />
+                  <AirIcon sx={{ color: accentColor }} />
                   <Box sx={{ textAlign: "right" }}>
                     <Typography
                       variant="h5"
@@ -549,7 +539,7 @@ const ModernDashboard = () => {
                     >
                       28
                     </Typography>
-                    <Typography variant="caption" sx={{ color: "#4CAF50" }}>
+                    <Typography variant="caption" sx={{ color: accentColor }}>
                       Good
                     </Typography>
                   </Box>
@@ -609,16 +599,14 @@ const ModernDashboard = () => {
                     mt: 2,
                     p: 1.5,
                     borderRadius: 2,
-                    bgcolor: darkMode
-                      ? "rgba(76, 175, 80, 0.1)"
-                      : "rgba(76, 175, 80, 0.05)",
-                    border: "1px solid rgba(76, 175, 80, 0.2)",
+                    bgcolor: `rgba(0, 255, 136, 0.1)`,
+                    border: `1px solid rgba(0, 255, 136, 0.3)`,
                   }}
                 >
                   <Typography
                     variant="body2"
                     sx={{
-                      color: "#4CAF50",
+                      color: accentColor,
                       display: "flex",
                       alignItems: "center",
                       gap: 1,
@@ -645,8 +633,9 @@ const ModernDashboard = () => {
                   borderRadius: 3,
                   overflow: "hidden",
                   height: { xs: "200px", sm: "250px", md: "280px" },
-                  boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
+                  boxShadow: "0 8px 25px rgba(0,0,0,0.6)",
                   flexGrow: 1,
+                  border: `1px solid ${borderColor}`,
                 }}
               >
                 <iframe
@@ -654,7 +643,7 @@ const ModernDashboard = () => {
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3323.8018044740475!2d-101.87771402430353!3d33.58449487333676!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8640c413f31ec847%3A0x52db374b7b07849!2sTexas%20Tech%20University!5e0!3m2!1sen!2sus!4v1746898136720!5m2!1sen!2sus"
                   width="100%"
                   height="100%"
-                  style={{ border: 0 }}
+                  style={{ border: 0, filter: "invert(90%) hue-rotate(180deg)" }}
                   allowFullScreen=""
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
@@ -695,29 +684,21 @@ const ModernDashboard = () => {
                   },
                 ].map((alert, index) => (
                   <Grid item xs={12} key={index}>
-                    {" "}
-                    {/* Stack on all screen sizes */}
                     <Box
                       sx={{
                         p: 1,
                         borderRadius: 2,
-                        bgcolor: darkMode
-                          ? alert.status === "warning"
-                            ? "rgba(255, 193, 7, 0.1)"
-                            : alert.status === "error"
-                            ? "rgba(244, 67, 54, 0.1)"
-                            : "rgba(76, 175, 80, 0.1)"
-                          : alert.status === "warning"
-                          ? "rgba(255, 193, 7, 0.05)"
+                        bgcolor: alert.status === "warning"
+                          ? "rgba(255, 215, 0, 0.1)"
                           : alert.status === "error"
-                          ? "rgba(244, 67, 54, 0.05)"
-                          : "rgba(76, 175, 80, 0.05)",
+                          ? "rgba(255, 71, 87, 0.1)"
+                          : "rgba(0, 255, 136, 0.1)",
                         border: `1px solid ${
                           alert.status === "warning"
-                            ? "rgba(255, 193, 7, 0.3)"
+                            ? "rgba(255, 215, 0, 0.3)"
                             : alert.status === "error"
-                            ? "rgba(244, 67, 54, 0.3)"
-                            : "rgba(76, 175, 80, 0.3)"
+                            ? "rgba(255, 71, 87, 0.3)"
+                            : "rgba(0, 255, 136, 0.3)"
                         }`,
                         display: "flex",
                         gap: 2,
@@ -725,18 +706,16 @@ const ModernDashboard = () => {
                     >
                       <Avatar
                         sx={{
-                          bgcolor:
-                            alert.status === "warning"
-                              ? "rgba(255, 193, 7, 0.2)"
-                              : alert.status === "error"
-                              ? "rgba(244, 67, 54, 0.2)"
-                              : "rgba(76, 175, 80, 0.2)",
-                          color:
-                            alert.status === "warning"
-                              ? "#FFC107"
-                              : alert.status === "error"
-                              ? "#F44336"
-                              : "#4CAF50",
+                          bgcolor: alert.status === "warning"
+                            ? "rgba(255, 215, 0, 0.2)"
+                            : alert.status === "error"
+                            ? "rgba(255, 71, 87, 0.2)"
+                            : "rgba(0, 255, 136, 0.2)",
+                          color: alert.status === "warning"
+                            ? "#FFD700"
+                            : alert.status === "error"
+                            ? "#FF4757"
+                            : accentColor,
                         }}
                       >
                         {alert.icon}
