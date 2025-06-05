@@ -33,80 +33,80 @@ import StorefrontIcon from '@mui/icons-material/Storefront';
 import WarehouseIcon from '@mui/icons-material/Warehouse';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import ViewModuleIcon from '@mui/icons-material/ViewModule';
-import Sidebar from "../Sidebar"
+import Sidebar from '../Sidebar';
 
-// Create a futuristic dark theme with MUI
-const futuristicTheme = createTheme({
+// Create a sophisticated black theme with beige accents
+const blackTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#c9b49a', // bright cyan blue
+      main: '#c9b49a', // warm beige
     },
     secondary: {
-      main: '#FF5EFF', // neon pink
+      main: '#E5E5E5', // light silver
     },
     background: {
-      default: '#050510', // very dark blue-black
-      paper: '#0A0A1E', // dark blue-black
+      default: '#000000', // pure black
+      paper: '#0A0A0A', // near black
     },
     text: {
       primary: '#FFFFFF',
       secondary: 'rgba(255, 255, 255, 0.7)',
     },
-    divider: 'rgba(0, 194, 255, 0.12)',
+    divider: 'rgba(201, 180, 154, 0.15)',
     error: {
-      main: '#FF5252',
+      main: '#FF4444',
     },
     warning: {
-      main: '#FFD740',
+      main: '#FFB000',
     },
     success: {
-      main: '#69F0AE',
+      main: '#00C851',
     }
   },
   typography: {
-    fontFamily: '"Exo 2", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Playfair Display", "Roboto", "Helvetica", "Arial", serif',
     h4: {
-      fontWeight: 600,
-      letterSpacing: '0.05em',
+      fontWeight: 700,
+      letterSpacing: '0.02em',
     },
     h6: {
-      fontWeight: 500,
-      letterSpacing: '0.03em',
+      fontWeight: 600,
+      letterSpacing: '0.01em',
     },
     button: {
       fontWeight: 500,
-      letterSpacing: '0.05em',
+      letterSpacing: '0.03em',
     },
     body1: {
-      letterSpacing: '0.03em',
+      letterSpacing: '0.01em',
     }
   },
   shape: {
-    borderRadius: 4,
+    borderRadius: 8,
   },
   components: {
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          background: 'linear-gradient(135deg, #050510 0%, #0A1A2C 100%)',
+          background: 'radial-gradient(ellipse at center, #1A1A1A 0%, #000000 70%)',
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          background: 'linear-gradient(135deg, #0A0A1E 0%, #101035 100%)',
+          background: 'linear-gradient(145deg, #0F0F0F 0%, #1A1A1A 100%)',
           backdropFilter: 'blur(10px)',
-          transition: 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-          borderLeft: '1px solid rgba(0, 194, 255, 0.2)',
-          borderTop: '1px solid rgba(0, 194, 255, 0.1)',
-          boxShadow: '0 4px 20px 0 rgba(0, 0, 30, 0.8), 0 0 15px rgba(0, 194, 255, 0.1)',
+          transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+          border: '1px solid rgba(201, 180, 154, 0.1)',
+          boxShadow: '0 4px 20px 0 rgba(0, 0, 0, 0.8), 0 1px 8px rgba(201, 180, 154, 0.1)',
           '&:hover': {
-            transform: 'translateY(-8px)',
-            boxShadow: '0 12px 30px 0 rgba(0, 0, 30, 0.9), 0 0 20px rgba(0, 194, 255, 0.2)',
+            transform: 'translateY(-8px) scale(1.02)',
+            boxShadow: '0 12px 40px 0 rgba(0, 0, 0, 0.9), 0 0 25px rgba(201, 180, 154, 0.2)',
+            border: '1px solid rgba(201, 180, 154, 0.3)',
             '& .MuiCardMedia-root': {
-              filter: 'brightness(1.1) contrast(1.1)',
+              filter: 'brightness(1.2) contrast(1.1) saturate(1.1)',
             },
           },
         },
@@ -116,45 +116,51 @@ const futuristicTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: 'none',
+          background: 'linear-gradient(145deg, #0A0A0A 0%, #151515 100%)',
         },
         outlined: {
-          borderColor: 'rgba(0, 194, 255, 0.2)',
+          borderColor: 'rgba(201, 180, 154, 0.2)',
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
-          fontWeight: 500,
+          borderRadius: 6,
+          fontWeight: 600,
         },
         filledPrimary: {
-          background: 'linear-gradient(90deg, #0092CF 0%, #00C2FF 100%)',
-          boxShadow: '0 0 8px rgba(0, 194, 255, 0.5)',
+          background: 'linear-gradient(135deg, #c9b49a 0%, #d4c2aa 100%)',
+          color: '#000000',
+          boxShadow: '0 2px 12px rgba(201, 180, 154, 0.4)',
         },
         filledSuccess: {
-          background: 'linear-gradient(90deg, #00A676 0%, #69F0AE 100%)',
-          boxShadow: '0 0 8px rgba(105, 240, 174, 0.5)',
+          background: 'linear-gradient(135deg, #00C851 0%, #00FF88 100%)',
+          color: '#000000',
+          boxShadow: '0 2px 12px rgba(0, 200, 81, 0.4)',
         },
         filledWarning: {
-          background: 'linear-gradient(90deg, #CC9320 0%, #FFD740 100%)',
-          boxShadow: '0 0 8px rgba(255, 215, 64, 0.5)',
+          background: 'linear-gradient(135deg, #FFB000 0%, #FFC107 100%)',
+          color: '#000000',
+          boxShadow: '0 2px 12px rgba(255, 176, 0, 0.4)',
         },
       },
     },
     MuiButton: {
       styleOverrides: {
         root: {
-          borderRadius: 4,
+          borderRadius: 8,
           textTransform: 'none',
-          fontWeight: 500,
+          fontWeight: 600,
         },
         containedPrimary: {
-          background: 'linear-gradient(90deg, #0092CF 0%, #00C2FF 100%)',
-          boxShadow: '0 4px 10px rgba(0, 0, 0, 0.25), 0 0 15px rgba(0, 194, 255, 0.3)',
+          background: 'linear-gradient(135deg, #c9b49a 0%, #d4c2aa 100%)',
+          color: '#000000',
+          boxShadow: '0 4px 15px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(201, 180, 154, 0.3)',
           '&:hover': {
-            background: 'linear-gradient(90deg, #00A7EC 0%, #33CFFF 100%)',
-            boxShadow: '0 6px 15px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 194, 255, 0.4)',
+            background: 'linear-gradient(135deg, #d4c2aa 0%, #dfd0bb 100%)',
+            boxShadow: '0 6px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(201, 180, 154, 0.4)',
+            transform: 'translateY(-2px)',
           },
         },
       },
@@ -163,16 +169,17 @@ const futuristicTheme = createTheme({
       styleOverrides: {
         root: {
           '& .MuiOutlinedInput-root': {
+            backgroundColor: 'rgba(255, 255, 255, 0.02)',
             '& fieldset': {
-              borderColor: 'rgba(0, 194, 255, 0.3)',
-              transition: 'border-color 0.3s',
+              borderColor: 'rgba(201, 180, 154, 0.3)',
+              transition: 'all 0.3s',
             },
             '&:hover fieldset': {
-              borderColor: 'rgba(0, 194, 255, 0.5)',
+              borderColor: 'rgba(201, 180, 154, 0.5)',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#00C2FF',
-              boxShadow: '0 0 0 2px rgba(0, 194, 255, 0.2)',
+              borderColor: '#c9b49a',
+              boxShadow: '0 0 0 2px rgba(201, 180, 154, 0.2)',
             },
           },
         },
@@ -182,15 +189,16 @@ const futuristicTheme = createTheme({
       styleOverrides: {
         outlined: {
           '&.MuiOutlinedInput-root': {
+            backgroundColor: 'rgba(255, 255, 255, 0.02)',
             '& fieldset': {
-              borderColor: 'rgba(0, 194, 255, 0.3)',
+              borderColor: 'rgba(201, 180, 154, 0.3)',
             },
             '&:hover fieldset': {
-              borderColor: 'rgba(0, 194, 255, 0.5)',
+              borderColor: 'rgba(201, 180, 154, 0.5)',
             },
             '&.Mui-focused fieldset': {
-              borderColor: '#00C2FF',
-              boxShadow: '0 0 0 2px rgba(0, 194, 255, 0.2)',
+              borderColor: '#c9b49a',
+              boxShadow: '0 0 0 2px rgba(201, 180, 154, 0.2)',
             },
           },
         },
@@ -199,13 +207,20 @@ const futuristicTheme = createTheme({
     MuiToggleButton: {
       styleOverrides: {
         root: {
+          backgroundColor: 'rgba(255, 255, 255, 0.03)',
+          border: '1px solid rgba(201, 180, 154, 0.2)',
+          color: 'rgba(255, 255, 255, 0.8)',
           '&.Mui-selected': {
-            backgroundColor: alpha('#00C2FF', 0.15),
-            color: '#00C2FF',
-            boxShadow: `0 0 10px ${alpha('#00C2FF', 0.3)}`,
+            backgroundColor: alpha('#c9b49a', 0.15),
+            color: '#c9b49a',
+            border: '1px solid rgba(201, 180, 154, 0.5)',
+            boxShadow: `0 0 15px ${alpha('#c9b49a', 0.3)}`,
             '&:hover': {
-              backgroundColor: alpha('#00C2FF', 0.25),
+              backgroundColor: alpha('#c9b49a', 0.25),
             }
+          },
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
           }
         }
       }
@@ -234,7 +249,7 @@ const ProjectsPage = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Statuses');
-  const isSmallScreen = useMediaQuery(futuristicTheme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(blackTheme.breakpoints.down('sm'));
 
   // Sample project data
   const projectsData = [
@@ -247,7 +262,7 @@ const ProjectsPage = () => {
       squareFootage: "245,000 sq ft",
       investment: "$120M",
       description: "A premium office tower with waterfront views and LEED certification.",
-      thumbnail: "/api/placeholder/600/400"
+      thumbnail: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&h=400&fit=crop"
     },
     {
       id: 2,
@@ -258,7 +273,7 @@ const ProjectsPage = () => {
       squareFootage: "125,000 sq ft",
       investment: "$65M",
       description: "Urban retail center with mixed-use facilities and underground parking.",
-      thumbnail: "/api/placeholder/600/400"
+      thumbnail: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&h=400&fit=crop"
     },
     {
       id: 3,
@@ -269,7 +284,7 @@ const ProjectsPage = () => {
       squareFootage: "450,000 sq ft",
       investment: "$95M",
       description: "Modern industrial complex with advanced logistics infrastructure.",
-      thumbnail: "/api/placeholder/600/400"
+      thumbnail: "https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600&h=400&fit=crop"
     },
     {
       id: 4,
@@ -280,7 +295,7 @@ const ProjectsPage = () => {
       squareFootage: "320,000 sq ft",
       investment: "$180M",
       description: "Luxury residential with ground-floor retail and amenities.",
-      thumbnail: "/api/placeholder/600/400"
+      thumbnail: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=600&h=400&fit=crop"
     },
     {
       id: 5,
@@ -291,7 +306,7 @@ const ProjectsPage = () => {
       squareFootage: "175,000 sq ft",
       investment: "$145M",
       description: "Modern tech-focused office space with collaborative areas.",
-      thumbnail: "/api/placeholder/600/400"
+      thumbnail: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop"
     },
     {
       id: 6,
@@ -302,7 +317,7 @@ const ProjectsPage = () => {
       squareFootage: "550,000 sq ft",
       investment: "$110M",
       description: "State-of-the-art logistics facility with port access.",
-      thumbnail: "/api/placeholder/600/400"
+      thumbnail: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&h=400&fit=crop"
     }
   ];
 
@@ -334,98 +349,30 @@ const ProjectsPage = () => {
   };
 
   return (
-    <ThemeProvider theme={futuristicTheme}>
+    <ThemeProvider theme={blackTheme}>
       <Box sx={{ 
         bgcolor: 'background.default', 
         minHeight: '100vh',
-        backgroundImage: 'radial-gradient(circle at 50% 0%, rgba(0, 194, 255, 0.08) 0%, rgba(0, 0, 0, 0) 50%)',
+        backgroundImage: 'radial-gradient(circle at 30% 20%, rgba(201, 180, 154, 0.05) 0%, rgba(0, 0, 0, 0) 50%), radial-gradient(circle at 70% 80%, rgba(201, 180, 154, 0.03) 0%, rgba(0, 0, 0, 0) 40%)',
         backgroundSize: '100% 100%',
         backgroundRepeat: 'no-repeat',
+        pt: 15,
       }}>
-        <Sidebar />
-        {/* Header Section with Futuristic Line effect */}
-        <Paper 
-          elevation={0} 
-          square 
-          sx={{ 
-            bgcolor: 'background.paper', 
-            py: 6,
-            borderBottom: '1px solid',
-            borderColor: 'rgba(0, 194, 255, 0.15)',
-            paddingTop: "15vh",
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          {/* Futuristic line overlay */}
-          <Box sx={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            opacity: 0.04,
-            backgroundImage: `repeating-linear-gradient(90deg, #00C2FF, #00C2FF 2px, transparent 2px, transparent 40px),
-                             repeating-linear-gradient(0deg, #00C2FF, #00C2FF 2px, transparent 2px, transparent 40px)`,
-            pointerEvents: 'none',
-          }} />
-          
-          {/* Glow effect */}
-          <Box sx={{
-            position: 'absolute',
-            top: '-100px',
-            left: '0',
-            width: '100%',
-            height: '200px',
-            background: 'radial-gradient(ellipse at center, rgba(0, 194, 255, 0.15) 0%, rgba(0, 0, 0, 0) 70%)',
-            pointerEvents: 'none',
-          }} />
-          
-          <Container maxWidth="lg">
-            <Typography 
-              variant="h4" 
-              component="h1" 
-              gutterBottom
-              sx={{
-                background: 'linear-gradient(90deg, #FFFFFF 0%, #00C2FF 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                textShadow: '0 0 20px rgba(0, 194, 255, 0.4)',
-                fontWeight: 700,
-                position: 'relative',
-                display: 'inline-block',
-                pb: 1,
-                '&:after': {
-                  content: '""',
-                  position: 'absolute',
-                  bottom: 0,
-                  left: 0,
-                  width: '60px',
-                  height: '3px',
-                  background: 'linear-gradient(90deg, #00C2FF 0%, rgba(0, 194, 255, 0) 100%)',
-                  borderRadius: '3px',
-                }
-              }}
-            >
-              Our Projects
-            </Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ maxWidth: 'md' }}>
-              Explore our portfolio of premium commercial real estate investments across various sectors and locations.
-            </Typography>
-          </Container>
-        </Paper>
-
+           <Box sx={{ display: { xs: "none", md: "block" } }}>
+                  <Sidebar />
+                </Box>
         {/* Filters and Search */}
         <Container maxWidth="lg" sx={{ py: 4 }}>
           <Paper 
-            elevation={3} 
+            elevation={8} 
             sx={{ 
               p: 3, 
               mb: 4, 
-              background: 'linear-gradient(135deg, rgba(10, 10, 30, 0.9) 0%, rgba(16, 16, 40, 0.9) 100%)',
-              backdropFilter: 'blur(10px)',
-              borderLeft: '1px solid rgba(0, 194, 255, 0.2)',
-              borderTop: '1px solid rgba(0, 194, 255, 0.1)',
+              background: 'linear-gradient(145deg, rgba(10, 10, 10, 0.95) 0%, rgba(25, 25, 25, 0.95) 100%)',
+              backdropFilter: 'blur(20px)',
+              border: '1px solid rgba(201, 180, 154, 0.15)',
+              boxShadow: '0 8px 32px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(201, 180, 154, 0.1)',
+              borderRadius: 3,
             }}
           >
             <Stack 
@@ -445,9 +392,9 @@ const ProjectsPage = () => {
                   '& .MuiToggleButtonGroup-grouped': {
                     mx: 0.5,
                     my: { xs: 0.5, sm: 0 },
-                    border: '1px solid rgba(0, 194, 255, 0.2)',
-                    borderRadius: '20px !important',
-                    px: 2,
+                    borderRadius: '25px !important',
+                    px: 2.5,
+                    py: 1,
                   }
                 }}
               >
@@ -460,6 +407,7 @@ const ProjectsPage = () => {
                       display: 'flex',
                       alignItems: 'center',
                       gap: 0.5,
+                      fontWeight: 500,
                     }}
                   >
                     {filter !== 'All' && getTypeIcon(filter)}
@@ -483,7 +431,7 @@ const ProjectsPage = () => {
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <SearchIcon fontSize="small" sx={{ color: 'rgba(0, 194, 255, 0.7)' }} />
+                        <SearchIcon fontSize="small" sx={{ color: 'rgba(201, 180, 154, 0.7)' }} />
                       </InputAdornment>
                     ),
                   }}
@@ -501,7 +449,7 @@ const ProjectsPage = () => {
                     displayEmpty
                     startAdornment={
                       <InputAdornment position="start">
-                        <FilterListIcon fontSize="small" sx={{ color: 'rgba(0, 194, 255, 0.7)' }} />
+                        <FilterListIcon fontSize="small" sx={{ color: 'rgba(201, 180, 154, 0.7)' }} />
                       </InputAdornment>
                     }
                     sx={{ minWidth: '150px' }}
@@ -521,7 +469,7 @@ const ProjectsPage = () => {
           <Grid container spacing={3}>
             {filteredProjects.map((project) => (
               <Grid item xs={12} sm={6} md={4} key={project.id}>
-                <Card elevation={5}>
+                <Card elevation={12}>
                   <Box sx={{ position: 'relative' }}>
                     <CardMedia
                       component="img"
@@ -530,7 +478,7 @@ const ProjectsPage = () => {
                       alt={project.title}
                       sx={{
                         transition: 'all 0.4s ease',
-                        filter: 'brightness(0.85) contrast(1.1)',
+                        filter: 'brightness(0.8) contrast(1.2) saturate(0.9)',
                       }}
                     />
                     <Chip
@@ -553,8 +501,8 @@ const ProjectsPage = () => {
                         bottom: 0,
                         left: 0,
                         width: '100%',
-                        height: '100px',
-                        background: 'linear-gradient(to top, rgba(10, 10, 30, 1) 0%, rgba(10, 10, 30, 0) 100%)'
+                        height: '120px',
+                        background: 'linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.8) 50%, rgba(0, 0, 0, 0) 100%)'
                       }} 
                     />
                     
@@ -568,29 +516,31 @@ const ProjectsPage = () => {
                         position: 'absolute',
                         bottom: 16,
                         left: 16,
-                        border: '1px solid rgba(0, 194, 255, 0.3)',
-                        backgroundColor: 'rgba(10, 10, 30, 0.8)',
-                        backdropFilter: 'blur(4px)',
+                        border: '1px solid rgba(201, 180, 154, 0.4)',
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        backdropFilter: 'blur(8px)',
+                        color: '#c9b49a',
                       }}
                     />
                   </Box>
-                  <CardContent>
-                    <Box sx={{ mb: 1.5 }}>
+                  <CardContent sx={{ p: 3 }}>
+                    <Box sx={{ mb: 2 }}>
                       <Typography 
                         variant="h6" 
                         component="h2" 
                         gutterBottom={false}
                         sx={{ 
                           mb: 0.5,
-                          background: 'linear-gradient(90deg, #FFFFFF 30%, #00C2FF 100%)',
+                          background: 'linear-gradient(135deg, #FFFFFF 0%, #c9b49a 100%)',
                           WebkitBackgroundClip: 'text',
                           WebkitTextFillColor: 'transparent',
+                          fontWeight: 600,
                         }}
                       >
                         {project.title}
                       </Typography>
                       <Stack direction="row" alignItems="center" spacing={0.5}>
-                        <LocationOnIcon fontSize="small" sx={{ color: futuristicTheme.palette.text.secondary, fontSize: 16 }} />
+                        <LocationOnIcon fontSize="small" sx={{ color: 'rgba(201, 180, 154, 0.7)', fontSize: 16 }} />
                         <Typography variant="body2" color="text.secondary">
                           {project.location}
                         </Typography> 
@@ -598,48 +548,49 @@ const ProjectsPage = () => {
                     </Box>
                     
                     <Divider sx={{ 
-                      my: 1.5, 
-                      borderColor: 'rgba(0, 194, 255, 0.1)',
+                      my: 2, 
+                      borderColor: 'rgba(201, 180, 154, 0.15)',
                       '&::before, &::after': {
-                        borderColor: 'rgba(0, 194, 255, 0.1)',
+                        borderColor: 'rgba(201, 180, 154, 0.15)',
                       } 
                     }} />
                     
-                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2, minHeight: isSmallScreen ? 'auto' : '50px' }}>
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2.5, minHeight: isSmallScreen ? 'auto' : '50px' }}>
                       {project.description}
                     </Typography>
 
-                    <Grid container spacing={2} sx={{ mb: 2 }}>
+                    <Grid container spacing={2} sx={{ mb: 3 }}>
                       <Grid item xs={6}>
                         <Paper 
                           variant="outlined" 
                           sx={{ 
-                            p: 1.5, 
-                            backgroundColor: alpha('#00C2FF', 0.03),
-                            backgroundImage: 'linear-gradient(135deg, rgba(0, 194, 255, 0.03) 0%, rgba(0, 194, 255, 0.06) 100%)',
-                            borderColor: alpha('#00C2FF', 0.2),
+                            p: 2, 
+                            backgroundColor: 'rgba(201, 180, 154, 0.05)',
+                            backgroundImage: 'linear-gradient(145deg, rgba(201, 180, 154, 0.03) 0%, rgba(201, 180, 154, 0.08) 100%)',
+                            borderColor: 'rgba(201, 180, 154, 0.2)',
                             position: 'relative',
                             overflow: 'hidden',
+                            borderRadius: 2,
                           }}
                         >
-                          {/* Animated corner accent */}
+                          {/* Beige corner accent */}
                           <Box sx={{
                             position: 'absolute',
                             top: 0,
                             right: 0,
-                            width: '15px',
-                            height: '15px',
-                            borderRight: '2px solid rgba(0, 194, 255, 0.5)',
-                            borderTop: '2px solid rgba(0, 194, 255, 0.5)',
+                            width: '20px',
+                            height: '20px',
+                            borderRight: '2px solid rgba(201, 180, 154, 0.6)',
+                            borderTop: '2px solid rgba(201, 180, 154, 0.6)',
                           }} />
                           
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
                             Size
                           </Typography>
                           <Typography 
                             variant="body2" 
-                            fontWeight="medium"
-                            sx={{ color: alpha('#FFFFFF', 0.95) }}
+                            fontWeight="600"
+                            sx={{ color: '#FFFFFF', mt: 0.5 }}
                           >
                             {project.squareFootage}
                           </Typography>
@@ -649,32 +600,33 @@ const ProjectsPage = () => {
                         <Paper 
                           variant="outlined" 
                           sx={{ 
-                            p: 1.5, 
-                            backgroundColor: alpha('#00C2FF', 0.03),
-                            backgroundImage: 'linear-gradient(135deg, rgba(0, 194, 255, 0.03) 0%, rgba(0, 194, 255, 0.06) 100%)',
-                            borderColor: alpha('#00C2FF', 0.2),
+                            p: 2, 
+                            backgroundColor: 'rgba(201, 180, 154, 0.05)',
+                            backgroundImage: 'linear-gradient(145deg, rgba(201, 180, 154, 0.03) 0%, rgba(201, 180, 154, 0.08) 100%)',
+                            borderColor: 'rgba(201, 180, 154, 0.2)',
                             position: 'relative',
                             overflow: 'hidden',
+                            borderRadius: 2,
                           }}
                         >
-                          {/* Animated corner accent */}
+                          {/* Beige corner accent */}
                           <Box sx={{
                             position: 'absolute',
                             top: 0,
                             right: 0,
-                            width: '15px',
-                            height: '15px',
-                            borderRight: '2px solid rgba(0, 194, 255, 0.5)',
-                            borderTop: '2px solid rgba(0, 194, 255, 0.5)',
+                            width: '20px',
+                            height: '20px',
+                            borderRight: '2px solid rgba(201, 180, 154, 0.6)',
+                            borderTop: '2px solid rgba(201, 180, 154, 0.6)',
                           }} />
                           
-                          <Typography variant="caption" color="text.secondary">
+                          <Typography variant="caption" color="text.secondary" sx={{ fontSize: '0.7rem' }}>
                             Investment
                           </Typography>
                           <Typography 
                             variant="body2" 
-                            fontWeight="medium"
-                            sx={{ color: alpha('#FFFFFF', 0.95) }}
+                            fontWeight="600"
+                            sx={{ color: '#FFFFFF', mt: 0.5 }}
                           >
                             {project.investment}
                           </Typography>
@@ -688,13 +640,15 @@ const ProjectsPage = () => {
                       disableElevation
                       endIcon={<ArrowOutwardIcon fontSize="small" />}
                       sx={{ 
-                        background: 'linear-gradient(90deg, #0092CF 0%, #00C2FF 100%)',
+                        background: 'linear-gradient(135deg, #c9b49a 0%, #d4c2aa 100%)',
                         position: 'relative',
                         overflow: 'hidden',
+                        py: 1.5,
+                        fontWeight: 600,
                       }}
                     >
                       <span>View Project Details</span>
-                      {/* Button glow effect */}
+                      {/* Button shimmer effect */}
                       <Box 
                         sx={{
                           position: 'absolute',
@@ -702,9 +656,9 @@ const ProjectsPage = () => {
                           left: '-100%',
                           width: '100%',
                           height: '100%',
-                          background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%)',
-                          animation: 'ripple 3s infinite',
-                          '@keyframes ripple': {
+                          background: 'linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.3) 50%, transparent 100%)',
+                          animation: 'shimmer 4s infinite',
+                          '@keyframes shimmer': {
                             '0%': {
                               left: '-100%',
                             },
@@ -727,9 +681,9 @@ const ProjectsPage = () => {
               textAlign="center" 
               sx={{ 
                 py: 8,
-                background: 'rgba(10, 10, 30, 0.5)',
-                borderRadius: 2,
-                border: '1px solid rgba(0, 194, 255, 0.1)',
+                background: 'linear-gradient(145deg, rgba(10, 10, 10, 0.8) 0%, rgba(25, 25, 25, 0.8) 100%)',
+                borderRadius: 3,
+                border: '1px solid rgba(201, 180, 154, 0.15)',
                 backdropFilter: 'blur(10px)',
                 mt: 4
               }}
@@ -747,14 +701,16 @@ const ProjectsPage = () => {
                 variant="outlined"
                 sx={{ 
                   mt: 2,
-                  borderColor: 'rgba(0, 194, 255, 0.5)',
+                  borderColor: 'rgba(201, 180, 154, 0.5)',
+                  color: '#c9b49a',
                   '&:hover': {
-                    borderColor: '#00C2FF',
-                    boxShadow: '0 0 10px rgba(0, 194, 255, 0.3)',
-                  }
+                    borderColor: '#c9b49a',
+                    boxShadow: '0 0 12px rgba(201, 180, 154, 0.4)',
+                    backgroundColor: 'rgba(201, 180, 154, 0.05)',
+                  },
                 }}
               >
-                Clear all filters
+                Reset Filters
               </Button>
             </Box>
           )}
