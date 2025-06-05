@@ -28,6 +28,51 @@ import {
 } from "@mui/icons-material";
 import CTA from "../subpage-components/CTA";
 
+const FloatingParticles = () => {
+  return (
+    <Box
+      sx={{
+        position: "fixed",
+        inset: 0,
+        overflow: "hidden",
+        pointerEvents: "none",
+        height: "100vh"
+      }}
+    >
+      {[...Array(15)].map((_, i) => (
+        <Box
+          key={i}
+          component={motion.div}
+          sx={{
+            position: "absolute",
+            width: "4px",
+            height: "4px",
+            background:
+              "linear-gradient(45deg, rgba(201, 180, 154, 0.6), rgba(244, 228, 188, 0.4))",
+            borderRadius: "50%",
+            left: `${Math.random() * 100}%`,
+          }}
+          initial={{
+            y: "100vh",
+            opacity: 0,
+          }}
+          animate={{
+            y: "-100px",
+            opacity: [0, 1, 0],
+          }}
+          transition={{
+            duration: Math.random() * 8 + 6,
+            repeat: Infinity,
+            ease: "linear",
+            delay: Math.random() * 5,
+          }}
+        />
+      ))}
+    </Box>
+  );
+};
+
+
 // Company color
 const primaryColor = "#c9b49a";
 const darkBg = "#121212";
@@ -140,6 +185,7 @@ export default function AboutUs() {
         pb: 10,
       }}
     >
+      <FloatingParticles />
       {/* Hero Section */}
       <Fade in={loaded} timeout={1000}>
         <Box
