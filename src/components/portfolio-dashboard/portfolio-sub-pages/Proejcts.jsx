@@ -255,8 +255,8 @@ const ProjectsPage = () => {
   const projectsData = [
     {
       id: 1,
-      title: "Riverfront Office Tower",
-      location: "Chicago, IL",
+      title: "Project 1",
+      location: "Dallas, TX",
       type: "Office",
       status: "In Development",
       squareFootage: "245,000 sq ft",
@@ -266,8 +266,8 @@ const ProjectsPage = () => {
     },
     {
       id: 2,
-      title: "Midtown Retail Plaza",
-      location: "Atlanta, GA",
+      title: "Project 2",
+      location: "Dallas, TX",
       type: "Retail",
       status: "Completed",
       squareFootage: "125,000 sq ft",
@@ -277,7 +277,7 @@ const ProjectsPage = () => {
     },
     {
       id: 3,
-      title: "Eastside Industrial Park",
+      title: "Project 3",
       location: "Dallas, TX",
       type: "Industrial",
       status: "In Development",
@@ -288,8 +288,8 @@ const ProjectsPage = () => {
     },
     {
       id: 4,
-      title: "Downtown Residential Tower",
-      location: "Miami, FL",
+      title: "Project 4",
+      location: "Dallas, TX",
       type: "Mixed-Use",
       status: "Planned",
       squareFootage: "320,000 sq ft",
@@ -299,8 +299,8 @@ const ProjectsPage = () => {
     },
     {
       id: 5,
-      title: "Westside Tech Hub",
-      location: "San Francisco, CA",
+      title: "Project 5",
+      location: "Dallas, TX",
       type: "Office",
       status: "Completed",
       squareFootage: "175,000 sq ft",
@@ -310,8 +310,8 @@ const ProjectsPage = () => {
     },
     {
       id: 6,
-      title: "Harbor Logistics Center",
-      location: "Seattle, WA",
+      title: "Project 6",
+      location: "Dallas, TX",
       type: "Industrial",
       status: "In Development",
       squareFootage: "550,000 sq ft",

@@ -28,7 +28,7 @@ const menuItems = [
     icon: <DashboardIcon />,
   },
   {
-    label: "Analytics",
+    label: "Analytics (Coming Soon!)",
     path: "/portfolio/analytics",
     icon: <AnalyticsIcon />,
     subItems: [

@@ -63,7 +63,7 @@ const ModernStewardsOfSpace = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
-  const [selectedCity, setSelectedCity] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(cities[0]);
   const [visible, setVisible] = useState(false);
 
   // Animation variants for heading text

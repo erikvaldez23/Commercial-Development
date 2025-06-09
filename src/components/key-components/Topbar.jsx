@@ -22,9 +22,9 @@ import { useNavigate } from "react-router-dom"; // 👈 at the top
 // Your nav items
 const navItems = [
   { label: "Ark Vision", path: "/Commercial-Development/#/how-it-works" },
-  { label: "What We Offer", path: "/Commercial-Development/#/what-we-offer" },
-  { label: "Our Story", path: "/Commercial-Development/#/about" },
   { label: "Ark OS", path: "/Commercial-Development/#/portfolio" },
+  { label: "Ark Crypto", path: "/Commercial-Development/#/what-we-offer" },
+  { label: "Our Story", path: "/Commercial-Development/#/about" },
   { label: "Get In Touch", path: "/contact", isAnchor: true },
 ];
 

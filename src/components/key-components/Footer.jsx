@@ -94,10 +94,8 @@ const footerLinks = [
   {
     title: 'Platform',
     links: [
-      { text: 'Member Login', href: '#' },
-      { text: 'Manifesto', href: '#' },
-      { text: 'Join the Team', href: '#' },
-      { text: 'Superpower Labs', href: '#' },
+      { text: 'Link', href: '#' },
+      { text: 'Link', href: '#' },
     ],
   },
   {
@@ -122,7 +120,6 @@ const footerLinks = [
     title: 'Legal',
     links: [
       { text: 'Terms & Conditions', href: '#' },
-      { text: 'Informed Medical Consent', href: '#' },
       { text: 'Privacy Policy', href: '#' },
     ],
   },
