@@ -48,4 +48,26 @@
     grid-column-start: 4;
     grid-row-start: 5;
 }
-        
+@media (max-width: 768px) {
+  .parent {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 16px;
+    height: auto;
+  }
+
+  .div1,
+  .div2,
+  .div3,
+  .div4,
+  .div5,
+  .div6,
+  .div7,
+  .div8 {
+    grid-column: span 1 / span 1;
+    grid-row: auto;
+    grid-column-start: auto;
+    grid-row-start: auto;
+  }
+}
