@@ -11,22 +11,21 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "/greenark-logo1.png";
-import WhatWeDo from "../landing/WhatWeDo";
-import SlideUpReveal from "../animations/SlideUpReveal";
 
 export default function HeroSection({ loadingDone }) {
   const [open, setOpen] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
+  const [showContent, setShowContent] = useState(false); // <-- animation trigger delay
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   useEffect(() => {
-    // Show transition element after the hero animations
     if (loadingDone) {
       const timer = setTimeout(() => {
         setShowTransition(true);
-      }, 800);
+        setShowContent(true); // <-- 1s delay before showing animated content
+      }, 1000);
       return () => clearTimeout(timer);
     }
   }, [loadingDone]);
@@ -38,15 +37,9 @@ export default function HeroSection({ loadingDone }) {
     });
   };
 
-  // Motion Variants
   const containerVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-  };
-
-  const lineVariants = {
-    hidden: { width: 0 },
-    visible: { width: "120px", transition: { delay: 0.3, duration: 1 } },
   };
 
   const textVariants = {
@@ -59,27 +52,6 @@ export default function HeroSection({ loadingDone }) {
     visible: { opacity: 1, y: 0, transition: { delay: 0.6, duration: 0.8 } },
   };
 
-  // Add the scroll indicator animation
-  const scrollIndicatorVariants = {
-    initial: { y: 0, opacity: 0 },
-    animate: {
-      y: [0, 10, 0],
-      opacity: [0, 1, 0],
-      transition: {
-        y: {
-          repeat: Infinity,
-          duration: 2,
-          ease: "easeInOut",
-        },
-        opacity: {
-          repeat: Infinity,
-          duration: 2,
-          ease: "easeInOut",
-        },
-      },
-    },
-  };
-
   return (
     <Box
       sx={{
@@ -89,7 +61,7 @@ export default function HeroSection({ loadingDone }) {
         backgroundRepeat: "no-repeat",
         color: "white",
         position: "relative",
-        top: 0, // Stick to top
+        top: 0,
         left: 0,
         right: 0,
         zIndex: 0,
@@ -112,21 +84,21 @@ export default function HeroSection({ loadingDone }) {
           zIndex: 1,
         }}
       />
-      {/* Bottom Gradient Overlay */}
+
       <Box
         sx={{
           position: "absolute",
           bottom: 0,
           left: 0,
           right: 0,
-          height: "300px", // Adjust for smoother or faster fade
+          height: "300px",
           background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
-          zIndex: 1, // Put above image but below content
-          pointerEvents: "none", // Prevent interference with clicks
+          zIndex: 1,
+          pointerEvents: "none",
         }}
       />
 
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2, pb: 5 }}>
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Box
           sx={{
             py: { xs: 6, md: 8 },
@@ -162,35 +134,28 @@ export default function HeroSection({ loadingDone }) {
             }}
           />
 
-          {/* Center Logo */}
-          <motion.img
+          {/* Static Centered Logo */}
+          <Box
+            component="img"
             src={logo}
             alt="Company Logo"
-            animate={{
-              y: [5, -10, 5], // Moves up by 15px, then back to center
-            }}
-            transition={{
-              duration: 2, // Slower for smooth float
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            style={{
+            sx={{
               position: "absolute",
               top: "-10%",
-              left: "45%",
+              left: "50%",
               transform: "translateX(-50%)",
               width: "125px",
               height: "auto",
               zIndex: 2,
               pointerEvents: "none",
-              filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))"
+              filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))",
             }}
           />
 
           {/* Animated Line */}
           <motion.div
             initial={{ scaleX: 0 }}
-            animate={loadingDone ? { scaleX: 1 } : { scaleX: 0 }}
+            animate={showContent ? { scaleX: 1 } : { scaleX: 0 }}
             transition={{ delay: 0.3, duration: 1 }}
             style={{
               height: "3px",
@@ -198,18 +163,15 @@ export default function HeroSection({ loadingDone }) {
               background:
                 "linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,1) 50%, rgba(201,180,154,0) 100%)",
               transformOrigin: "center",
-              marginTop: "1rem", // 🔥 more space above
-              marginBottom: "1rem", // 🔥 more space below
-              marginLeft: "auto",
-              marginRight: "auto",
+              margin: "1rem auto",
             }}
           />
 
-          {/* Animated Heading */}
+          {/* Heading */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
-            animate={loadingDone ? "visible" : "hidden"}
+            animate={showContent ? "visible" : "hidden"}
           >
             <Typography
               component="h1"
@@ -223,7 +185,7 @@ export default function HeroSection({ loadingDone }) {
                 WebkitTextFillColor: "transparent",
                 textShadow: "0 0 30px rgba(201,180,154,0.3)",
                 letterSpacing: "0.5px",
-                filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))"
+                filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))",
               }}
             >
               TOMORROWS SUSTAINABILITY TODAY
@@ -234,7 +196,7 @@ export default function HeroSection({ loadingDone }) {
           <motion.div
             variants={textVariants}
             initial="hidden"
-            animate={loadingDone ? "visible" : "hidden"}
+            animate={showContent ? "visible" : "hidden"}
           >
             <Typography
               variant="body1"
@@ -246,7 +208,7 @@ export default function HeroSection({ loadingDone }) {
                 margin: "0 auto",
                 mb: 5,
                 lineHeight: 1.7,
-                filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))"
+                filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))",
               }}
             >
               Green Ark is redefining real estate investments — blending modern
@@ -258,7 +220,7 @@ export default function HeroSection({ loadingDone }) {
           <motion.div
             variants={buttonVariants}
             initial="hidden"
-            animate={loadingDone ? "visible" : "hidden"}
+            animate={showContent ? "visible" : "hidden"}
           >
             <Box
               sx={{
@@ -313,52 +275,6 @@ export default function HeroSection({ loadingDone }) {
               </Button>
             </Box>
           </motion.div>
-
-          {/* Scroll indicator */}
-          <motion.div
-            variants={scrollIndicatorVariants}
-            initial="initial"
-            animate="animate"
-            style={{
-              position: "absolute",
-              bottom: "5%",
-              left: "50%",
-              transform: "translateX(-50%)",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              opacity: 0.7,
-            }}
-          >
-            <Typography variant="caption" sx={{ mb: 1, fontSize: "0.9rem" }}>
-              Scroll Down
-            </Typography>
-            <Box
-              sx={{
-                width: "40px",
-                height: "40px",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 5V19M12 19L5 12M12 19L19 12"
-                  stroke="white"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Box>
-          </motion.div>
         </Box>
       </Container>
 
@@ -377,7 +293,6 @@ export default function HeroSection({ loadingDone }) {
           >
             <FaTimes />
           </IconButton>
-
           <iframe
             src=""
             width="100%"
