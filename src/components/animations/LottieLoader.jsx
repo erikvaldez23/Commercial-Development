@@ -1,8 +1,8 @@
 import React from "react";
 import { Player } from "@lottiefiles/react-lottie-player";
-import { Box } from "@mui/material"; // Optional, if using MUI for styling
+import { Box } from "@mui/material";
 
-import animationData from "../../assets/coin-animation.json";
+import animationData from "../../assets/Rizz.json";
 
 const LottieLoader = () => {
   return (
@@ -20,7 +20,7 @@ const LottieLoader = () => {
         autoplay
         loop
         src={animationData}
-        style={{ height: "200px", width: "200px" }}
+        style={{ height: "800px", width: "800px" }}
       />
     </Box>
   );

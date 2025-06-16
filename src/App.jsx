@@ -47,7 +47,7 @@ import Dashboard from "./components/portfolio-dashboard/Dashboard"
 import Projects from "./components/portfolio-dashboard/portfolio-sub-pages/Proejcts";
 import SubPage1 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage1";
 import SubPage2 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage2";
-
+import Lottie from "lottie-react";
 
 // theme
 const theme = createTheme({
@@ -96,7 +96,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    const minTime = 3000;
+    const minTime = 4000;
     const timer = setTimeout(() => setAnimationDone(true), minTime);
     return () => clearTimeout(timer);
   }, []);
