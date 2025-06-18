@@ -436,7 +436,6 @@ const AppleArkOSDashboard = () => {
                 label="Project Phase"
                 value="Design"
                 color="primary.main"
-                highlight
                 delay={600}
               />
               <HeaderMetric

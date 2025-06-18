@@ -54,49 +54,69 @@ export default function HeroSection({ loadingDone }) {
 
   return (
     <Box
-      sx={{
-        background: "url(/Commercial-Development/sunset.mp4)",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        color: "white",
-        position: "relative",
+    sx={{
+      position: "relative",
+      minHeight: "100vh",
+      overflow: "hidden",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      color: "white",
+      backgroundImage: `url(/Commercial-Development/city.jpg)`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundRepeat: "no-repeat",
+    }}
+  >
+    {/* ✅ Video Background */}
+    <video
+      autoPlay
+      muted
+      loop
+      playsInline
+      style={{
+        position: "absolute",
         top: 0,
         left: 0,
-        right: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
         zIndex: 0,
-        overflow: "visible",
-        minHeight: "100vh",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
       }}
     >
-      <Box
-        sx={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1))",
-          zIndex: 1,
-        }}
+      <source
+        src={`/Commercial-Development/sunset.mp4`}
+        type="video/mp4"
       />
+      Your browser does not support the video tag.
+    </video>
 
-      <Box
-        sx={{
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          height: "300px",
-          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
-          zIndex: 1,
-          pointerEvents: "none",
-        }}
-      />
+    {/* ✅ Gradient Overlay Top */}
+    <Box
+      sx={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        background: "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1))",
+        zIndex: 1,
+      }}
+    />
+
+    {/* ✅ Gradient Overlay Bottom */}
+    <Box
+      sx={{
+        position: "absolute",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        height: "300px",
+        background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
+        zIndex: 1,
+        pointerEvents: "none",
+      }}
+    />
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Box
