@@ -49,6 +49,8 @@ import SubPage1 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPa
 import SubPage2 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage2";
 import Lottie from "lottie-react";
 
+import ArkOSDashboard from "./components/portfolio-dashboard/ArkOSDashboard";
+
 // theme
 const theme = createTheme({
   palette: {
@@ -174,7 +176,7 @@ export default function App() {
             <Route path="/what-we-offer" element={<Offer />} />
             <Route path="/about" element={<About />} />
             <Route path="/how-it-works" element={<How />} />
-            <Route path="/portfolio" element={<Dashboard />} />
+            <Route path="/portfolio" element={<ArkOSDashboard />} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

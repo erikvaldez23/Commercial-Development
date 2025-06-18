@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Box,
   Grid,
@@ -7,16 +7,18 @@ import {
   Container,
   Divider,
   Stack,
-  IconButton,
-  Fade,
   useTheme,
   alpha
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-// Styled components for enhanced aesthetics
+// Apple-inspired styled components
 const StyledFooterBox = styled(Box)(({ theme }) => ({
-  background: "#000",
+  background: `linear-gradient(180deg, 
+    rgba(0, 0, 0, 0.95) 0%, 
+    rgba(10, 10, 10, 0.98) 100%)`,
+  backdropFilter: 'blur(20px)',
+  WebkitBackdropFilter: 'blur(20px)',
   position: 'relative',
   overflow: 'hidden',
   '&::before': {
@@ -28,163 +30,196 @@ const StyledFooterBox = styled(Box)(({ theme }) => ({
     height: '1px',
     background: `linear-gradient(90deg, 
       transparent 0%, 
-      ${alpha('#c9b49a', 0.3)} 50%, 
+      ${alpha('#ffffff', 0.1)} 50%, 
       transparent 100%)`,
   }
 }));
 
 const StyledBrandText = styled(Typography)(({ theme }) => ({
-  background: `linear-gradient(135deg, 
-    #c9b49a 0%, 
-    #b8a082 50%, 
-    #a68f6b 100%)`,
+  background: `linear-gradient(180deg, 
+    #ffffff 0%, 
+    rgba(255, 255, 255, 0.8) 100%)`,
   backgroundClip: 'text',
   WebkitBackgroundClip: 'text',
   WebkitTextFillColor: 'transparent',
-  textShadow: '0 4px 20px rgba(201, 180, 154, 0.3)',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif',
+  fontWeight: 700,
+  letterSpacing: '-0.05em',
   position: 'relative',
-  '&::after': {
-    content: '""',
-    position: 'absolute',
-    bottom: '-10px',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '60px',
-    height: '2px',
-    background: 'linear-gradient(90deg, transparent, #c9b49a, transparent)',
-    borderRadius: '1px',
+  transition: 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  '&:hover': {
+    transform: 'scale(1.02)',
+    filter: 'brightness(1.1)',
   }
 }));
 
-const StyledLink = styled(Link)(({ theme }) => ({
+const StyledSectionTitle = styled(Typography)(({ theme }) => ({
+  color: 'rgba(255, 255, 255, 0.9)',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+  fontWeight: 600,
+  fontSize: '13px',
+  letterSpacing: '0.3px',
+  textTransform: 'none',
+  marginBottom: theme.spacing(2),
   position: 'relative',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+}));
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  color: 'rgba(255, 255, 255, 0.7)',
+  textDecoration: 'none',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+  fontWeight: 400,
+  fontSize: '12px',
+  lineHeight: 1.6,
+  transition: 'all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+  position: 'relative',
   cursor: 'pointer',
-  '&::before': {
-    content: '"›"',
-    marginRight: theme.spacing(1),
-    color: '#c9b49a',
-    transition: 'transform 0.3s ease',
-  },
   '&:hover': {
-    color: '#c9b49a',
-    transform: 'translateX(4px)',
-    '&::before': {
-      transform: 'translateX(4px) scale(1.2)',
-    },
-    '&::after': {
-      width: 'calc(100% - 20px)',
-    }
+    color: 'rgba(255, 255, 255, 1)',
+    textDecoration: 'none',
+    transform: 'translateY(-1px)',
+  },
+  '&:active': {
+    transform: 'translateY(0px)',
+    transition: 'all 0.1s ease',
   }
 }));
 
 const StyledDivider = styled(Divider)(({ theme }) => ({
-  background: `linear-gradient(90deg, 
-    transparent 0%, 
-    ${alpha('#c9b49a', 0.4)} 20%, 
-    ${alpha('#c9b49a', 0.6)} 50%, 
-    ${alpha('#c9b49a', 0.4)} 80%, 
-    transparent 100%)`,
+  background: 'rgba(255, 255, 255, 0.08)',
   height: '1px',
   border: 'none',
-  margin: theme.spacing(6, 0, 4, 0),
+  margin: theme.spacing(4, 0, 3, 0),
+}));
+
+const CopyrightText = styled(Typography)(({ theme }) => ({
+  color: 'rgba(255, 255, 255, 0.5)',
+  fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+  fontSize: '11px',
+  fontWeight: 400,
+  letterSpacing: '0.2px',
+  lineHeight: 1.5,
 }));
 
 const footerLinks = [
   {
-    title: 'Platform',
+    title: 'Products',
     links: [
-      { text: 'Link', href: '#' },
-      { text: 'Link', href: '#' },
+      { text: 'Green Solutions', href: '#' },
+      { text: 'Sustainability Tools', href: '#' },
+      { text: 'Carbon Tracking', href: '#' },
+      { text: 'Eco Analytics', href: '#' },
     ],
   },
   {
-    title: 'Community',
+    title: 'Services',
     links: [
-      { text: 'Creators', href: '#' },
-      { text: 'Partners', href: '#' },
-      { text: 'For Companies', href: '#' },
-      { text: 'Contact Us', href: '#' },
+      { text: 'Consulting', href: '#' },
+      { text: 'Implementation', href: '#' },
+      { text: 'Support', href: '#' },
+      { text: 'Training', href: '#' },
     ],
   },
   {
-    title: 'Social',
+    title: 'Company',
     links: [
-      { text: 'X/Twitter', href: '#' },
-      { text: 'Instagram', href: '#' },
+      { text: 'About', href: '#' },
+      { text: 'Careers', href: '#' },
+      { text: 'Press', href: '#' },
+      { text: 'Contact', href: '#' },
+    ],
+  },
+  {
+    title: 'Connect',
+    links: [
+      { text: 'Twitter', href: '#' },
       { text: 'LinkedIn', href: '#' },
-      { text: 'Tik Tok', href: '#' },
-    ],
-  },
-  {
-    title: 'Legal',
-    links: [
-      { text: 'Terms & Conditions', href: '#' },
-      { text: 'Privacy Policy', href: '#' },
+      { text: 'Instagram', href: '#' },
+      { text: 'Newsletter', href: '#' },
     ],
   },
 ];
 
 const Footer = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsVisible(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <StyledFooterBox
       sx={{
-        height: '80vh',
-        pt: 8,
-        pb: 4,
+        py: { xs: 6, md: 8 },
+        minHeight: { xs: 'auto', md: '70vh' },
         display: 'flex',
         flexDirection: 'column',
-        justifyContent: 'space-between',
+        justifyContent: 'center',
       }}
     >
-      <Container maxWidth="lg">
-        <Fade in timeout={1000}>
+      <Container 
+        maxWidth="lg" 
+        sx={{ 
+          opacity: isVisible ? 1 : 0,
+          transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+          transition: 'all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        }}
+      >
+        {/* Brand Section */}
+        <Box sx={{ textAlign: 'center', mb: { xs: 6, md: 8 } }}>
           <StyledBrandText
             variant="h1"
             sx={{
-              fontSize: { xs: 48, sm: 72, md: 300 },
-              fontWeight: 900,
-              textAlign: 'center',
-              mb: 8,
-              fontFamily: 'Montserrat, sans-serif',
-              letterSpacing: { xs: '-2px', md: '-8px' },
+              fontSize: { xs: '3rem', sm: '4rem', md: '6rem', lg: '8rem' },
+              mb: 2,
             }}
           >
             GREEN ARK
           </StyledBrandText>
-        </Fade>
+          <Typography
+            sx={{
+              color: 'rgba(255, 255, 255, 0.6)',
+              fontSize: { xs: '14px', md: '16px' },
+              fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
+              fontWeight: 300,
+              letterSpacing: '0.3px',
+              maxWidth: '600px',
+              mx: 'auto',
+              lineHeight: 1.6,
+            }}
+          >
+            Pioneering sustainable solutions for a better tomorrow
+          </Typography>
+        </Box>
 
-        <Grid container spacing={6} justifyContent="center">
+        {/* Links Grid */}
+        <Grid 
+          container 
+          spacing={{ xs: 4, md: 6 }} 
+          justifyContent="center"
+          sx={{ mb: { xs: 4, md: 6 } }}
+        >
           {footerLinks.map((section, idx) => (
-            <Grid item xs={12} sm={6} md={3} key={idx}>
-              <Box sx={{ mb: 3 }}>
-                <Typography
-                  variant="h6"
-                  sx={{
-                    fontSize: { xs: 14, sm: 16 },
-                    fontWeight: 700,
-                    color: '#c9b49a',
-                    mb: 3,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px',
-                    opacity: 0.8,
-                  }}
-                >
-                  {section.title}
-                </Typography>
-              </Box>
-              <Stack spacing={3}>
+            <Grid 
+              item 
+              xs={6} 
+              sm={3} 
+              key={idx}
+              sx={{
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                transition: `all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${idx * 0.1}s`,
+              }}
+            >
+              <StyledSectionTitle>
+                {section.title}
+              </StyledSectionTitle>
+              <Stack spacing={1.5}>
                 {section.links.map(({ text, href }, index) => (
                   <StyledLink
                     key={index}
                     href={href}
-                    underline="none"
-                    color="#fff"
-                    sx={{
-                      fontSize: { xs: 16, sm: 18, md: 20 },
-                      fontWeight: 400,
-                      lineHeight: 1.4,
-                    }}
                   >
                     {text}
                   </StyledLink>
@@ -196,18 +231,22 @@ const Footer = () => {
 
         <StyledDivider />
 
+        {/* Copyright */}
         <Box sx={{ textAlign: 'center' }}>
-          <Typography
-            variant="body1"
-            sx={{
-              fontSize: { xs: 14, sm: 16 },
-              color: "#fff",
-              fontWeight: 300,
-              letterSpacing: '0.5px',
-            }}
-          >
-            © 2025 GREEN ARK, INC. — ALL RIGHTS RESERVED
-          </Typography>
+          <CopyrightText>
+            Copyright © 2025 Green Ark Inc. All rights reserved.
+          </CopyrightText>
+          <Box sx={{ mt: 1 }}>
+            <StyledLink href="#" sx={{ mr: 3 }}>
+              Privacy Policy
+            </StyledLink>
+            <StyledLink href="#" sx={{ mr: 3 }}>
+              Terms of Service
+            </StyledLink>
+            <StyledLink href="#">
+              Legal
+            </StyledLink>
+          </Box>
         </Box>
       </Container>
     </StyledFooterBox>
