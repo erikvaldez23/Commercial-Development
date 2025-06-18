@@ -141,10 +141,10 @@ export default function HeroSection({ loadingDone }) {
             alt="Company Logo"
             sx={{
               position: "absolute",
-              top: "-10%",
+              top: "-7%",
               left: "50%",
               transform: "translateX(-50%)",
-              width: "125px",
+              width: "100px",
               height: "auto",
               zIndex: 2,
               pointerEvents: "none",
@@ -178,7 +178,7 @@ export default function HeroSection({ loadingDone }) {
               variant="h1"
               sx={{
                 fontWeight: 900,
-                fontSize: { xs: "3.5rem", sm: "3.5rem", md: "7.5rem" },
+                fontSize: { xs: "3.5rem", sm: "3.5rem", md: "6rem" },
                 mb: 2,
                 background: "linear-gradient(90deg, #ffffff 0%, #c9b49a 100%)",
                 WebkitBackgroundClip: "text",
@@ -188,7 +188,7 @@ export default function HeroSection({ loadingDone }) {
                 filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))",
               }}
             >
-              TOMORROWS SUSTAINABILITY TODAY
+              TOMORROWS <br /> SUSTAINABILITY TODAY
             </Typography>
           </motion.div>
 
@@ -201,7 +201,7 @@ export default function HeroSection({ loadingDone }) {
             <Typography
               variant="body1"
               sx={{
-                fontSize: { xs: "1.1rem", md: "2rem" },
+                fontSize: { xs: "1.1rem", md: "1.8rem" },
                 fontWeight: 300,
                 color: "rgba(255,255,255,0.85)",
                 maxWidth: "700px",

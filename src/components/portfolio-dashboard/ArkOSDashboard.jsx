@@ -231,6 +231,7 @@ const AppleArkOSDashboard = () => {
             mb: 0.5,
             opacity: highlight ? 1 : 0.7,
             transition: "opacity 0.3s ease",
+            fontSize: "1.5rem"
           }}
         >
           {label}
@@ -246,6 +247,7 @@ const AppleArkOSDashboard = () => {
             backgroundClip: highlight ? "text" : "inherit",
             WebkitBackgroundClip: highlight ? "text" : "inherit",
             WebkitTextFillColor: highlight ? "transparent" : "inherit",
+            fontSize: "1.5rem"
           }}
         >
           {value}
@@ -395,18 +397,19 @@ const AppleArkOSDashboard = () => {
               <Box display="flex" alignItems="center" gap={3}>
                 <Avatar
                   sx={{
-                    background: "linear-gradient(135deg, #FF9500, #FF6B00)",
-                    width: 48,
-                    height: 48,
+                    width: 100,
+                    height: 100,
                     boxShadow: "0 8px 32px rgba(255, 149, 0, 0.3)",
+                    background: "rgba(0, 0, 0, 0.2)",
                   }}
                 >
-                  <Box
-                    sx={{
-                      width: 20,
-                      height: 20,
-                      bgcolor: "white",
-                      borderRadius: "50%",
+                  <img
+                    src="/Commercial-Development/greenark-logo1.png"
+                    alt="logo"
+                    style={{
+                      width: "80%",
+                      height: "80%",
+                      objectFit: "contain",
                     }}
                   />
                 </Avatar>
@@ -455,9 +458,13 @@ const AppleArkOSDashboard = () => {
             >
               <Paper
                 sx={{
-                  minHeight: 350,
-                  background:
-                    "linear-gradient(135deg, rgba(0, 122, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)",
+                  minHeight: 600,
+                  // background:
+                  //   "linear-gradient(135deg, rgba(0, 122, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%)",
+                    background: "url(/Commercial-Development/map.jpg)",
+                    backgroundSize: "cover",               // ✅ makes image fill the container
+    backgroundPosition: "center",          // ✅ centers the image
+    backgroundRepeat: "no-repeat",         // ✅ prevents tiling
                   position: "relative",
                   display: "flex",
                   alignItems: "center",
@@ -471,8 +478,7 @@ const AppleArkOSDashboard = () => {
                     left: 0,
                     right: 0,
                     bottom: 0,
-                    background:
-                      "radial-gradient(circle at 30% 30%, rgba(0, 122, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255, 149, 0, 0.05) 0%, transparent 50%)",
+                    background: "radial-gradient(circle at 30% 30%, rgba(0, 122, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255, 149, 0, 0.05) 0%, transparent 50%)",
                   },
                 }}
               >
@@ -598,12 +604,22 @@ const AppleArkOSDashboard = () => {
                         sx={{
                           background:
                             "linear-gradient(135deg, #007AFF, #5AC8FA)",
-                          color: "white",
+                          color: "#000",
                           boxShadow: "0 4px 16px rgba(0, 122, 255, 0.3)",
                         }}
                       />
-                      <Chip label="Approvals" size="small" variant="outlined" />
-                      <Chip label="Funding" size="small" variant="outlined" />
+                      <Chip
+                        label="Approvals"
+                        size="small"
+                        variant="outlined"
+                        sx={{ color: "#000" }}
+                      />
+                      <Chip
+                        label="Funding"
+                        size="small"
+                        variant="outlined"
+                        sx={{ color: "#000" }}
+                      />
                     </Box>
                   </Box>
 

@@ -25,7 +25,9 @@ import {
   InputAdornment,
   CircularProgress,
   alpha,
-  styled
+  styled,
+  Fade,
+  Grow
 } from "@mui/material";
 import { 
   Building, 
@@ -35,209 +37,241 @@ import {
   MessageSquare, 
   Settings, 
   DollarSign, 
-  CheckCircle 
+  CheckCircle,
+  ArrowRight
 } from "lucide-react";
 
-// Styled components
-const StyledCard = styled(Card)(({ theme }) => ({
-  background: "rgba(255, 255, 255, 0.05)",
-  borderRadius: "24px",
-  backdropFilter: "blur(20px) saturate(180%)",
-  WebkitBackdropFilter: "blur(20px) saturate(180%)",
-  boxShadow: `0 10px 40px 0 rgba(0, 0, 0, 0.37)`,
-  border: `1px solid rgba(255, 255, 255, 0.18)`,
+// Apple-inspired styled components
+const AppleCard = styled(Card)(({ theme }) => ({
+  background: "rgba(255, 255, 255, 0.98)",
+  borderRadius: "20px",
+  backdropFilter: "blur(40px) saturate(200%)",
+  WebkitBackdropFilter: "blur(40px) saturate(200%)",
+  boxShadow: "0 8px 32px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06)",
+  border: "1px solid rgba(255, 255, 255, 0.2)",
   overflow: 'hidden',
   position: 'relative',
-  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+  transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
   '&:hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: `0 15px 50px 0 rgba(0, 0, 0, 0.45)`,
-  },
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: '4px',
-    background: `linear-gradient(90deg, ${theme.palette.primary.main}, ${alpha(theme.palette.primary.light, 0.6)})`,
+    transform: 'translateY(-2px)',
+    boxShadow: "0 12px 48px rgba(0, 0, 0, 0.12), 0 2px 4px rgba(0, 0, 0, 0.08)",
   }
 }));
 
-const StyledTextField = styled(TextField)(({ theme }) => ({
+const AppleTextField = styled(TextField)(({ theme }) => ({
   '& .MuiOutlinedInput-root': {
-    borderRadius: theme.spacing(1),
-    backgroundColor: alpha('#000', 0.2),
-    color: '#fff',
-    transition: 'all 0.3s ease',
+    borderRadius: "12px",
+    backgroundColor: "rgba(118, 118, 128, 0.04)",
+    border: "1px solid rgba(118, 118, 128, 0.12)",
+    transition: 'all 0.2s ease-in-out',
+    fontSize: "17px",
+    fontWeight: 400,
     '& input': {
-      color: '#fff',
+      padding: "16px 14px",
+      fontSize: "17px",
+      fontWeight: 400,
+      color: "rgba(0, 0, 0, 0.87)",
       '&::placeholder': {
-        color: alpha('#fff', 0.6),
+        color: "rgba(60, 60, 67, 0.6)",
         opacity: 1,
+        fontSize: "17px"
       }
     },
     '& textarea': {
-      color: '#fff',
+      fontSize: "17px",
+      fontWeight: 400,
+      color: "rgba(0, 0, 0, 0.87)",
       '&::placeholder': {
-        color: alpha('#fff', 0.6),
+        color: "rgba(60, 60, 67, 0.6)",
         opacity: 1,
+        fontSize: "17px"
       }
     },
     '& fieldset': {
-      borderColor: alpha('#fff', 0.2),
-      transition: 'border-color 0.3s ease',
+      border: 'none',
     },
-    '&:hover fieldset': {
-      borderColor: alpha('#fff', 0.5),
+    '&:hover': {
+      backgroundColor: "rgba(118, 118, 128, 0.08)",
+      borderColor: "rgba(0, 122, 255, 0.3)",
     },
-    '&.Mui-focused fieldset': {
-      borderColor: theme.palette.primary.main,
-      borderWidth: '2px',
+    '&.Mui-focused': {
+      backgroundColor: "rgba(118, 118, 128, 0.08)",
+      borderColor: "#007AFF",
+      borderWidth: "2px",
+      boxShadow: "0 0 0 4px rgba(0, 122, 255, 0.1)",
     }
   },
   '& .MuiInputLabel-root': {
-    color: alpha('#fff', 0.7),
-    transition: 'color 0.3s ease',
-  },
-  '& .MuiInputLabel-root.Mui-focused': {
-    color: theme.palette.primary.main,
+    color: "rgba(60, 60, 67, 0.6)",
+    fontSize: "17px",
+    fontWeight: 400,
+    transform: 'translate(14px, 16px) scale(1)',
+    '&.MuiInputLabel-shrink': {
+      transform: 'translate(14px, -9px) scale(0.75)',
+      fontSize: "13px",
+      fontWeight: 500,
+      color: "#007AFF",
+    }
   },
   '& .MuiFormHelperText-root': {
-    color: theme.palette.error.main,
-    marginTop: '6px',
-    fontSize: '0.75rem',
+    color: "#FF3B30",
+    marginTop: "8px",
+    fontSize: "13px",
+    fontWeight: 400,
+    marginLeft: "4px"
   },
-  '& .MuiInputAdornment-root .MuiSvgIcon-root, & .MuiInputAdornment-root svg': {
-    color: alpha('#fff', 0.7),
+  '& .MuiInputAdornment-root svg': {
+    color: "rgba(60, 60, 67, 0.6)",
+    width: "20px",
+    height: "20px"
   }
 }));
 
-const StyledSelect = styled(Select)(({ theme }) => ({
-  borderRadius: theme.spacing(1),
-  backgroundColor: alpha('#000', 0.2),
-  color: '#fff',
+const AppleSelect = styled(Select)(({ theme }) => ({
+  borderRadius: "12px",
+  backgroundColor: "rgba(118, 118, 128, 0.04)",
+  border: "1px solid rgba(118, 118, 128, 0.12)",
+  fontSize: "17px",
+  fontWeight: 400,
   '& .MuiSelect-select': {
-    color: '#fff',
+    padding: "16px 14px",
+    fontSize: "17px",
+    fontWeight: 400,
+    color: "rgba(0, 0, 0, 0.87)",
   },
   '& .MuiSvgIcon-root': {
-    color: '#fff',
+    color: "rgba(60, 60, 67, 0.6)",
+    right: "12px"
   },
   '& fieldset': {
-    borderColor: alpha('#fff', 0.2),
-    transition: 'border-color 0.3s ease',
+    border: 'none',
   },
-  '&:hover fieldset': {
-    borderColor: alpha('#fff', 0.5),
+  '&:hover': {
+    backgroundColor: "rgba(118, 118, 128, 0.08)",
+    borderColor: "rgba(0, 122, 255, 0.3)",
   },
-  '&.Mui-focused fieldset': {
-    borderColor: theme.palette.primary.main,
-    borderWidth: '2px',
+  '&.Mui-focused': {
+    backgroundColor: "rgba(118, 118, 128, 0.08)",
+    borderColor: "#007AFF",
+    borderWidth: "2px",
+    boxShadow: "0 0 0 4px rgba(0, 122, 255, 0.1)",
   }
 }));
 
-const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
-  color: theme.palette.text.primary,
+const AppleMenuItem = styled(MenuItem)(({ theme }) => ({
+  fontSize: "17px",
+  fontWeight: 400,
+  padding: "12px 16px",
+  '&:hover': {
+    backgroundColor: "rgba(0, 122, 255, 0.08)"
+  }
 }));
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
+  fontSize: "20px",
+  fontWeight: 600,
+  color: "rgba(0, 0, 0, 0.87)",
+  marginBottom: "24px",
+  letterSpacing: "-0.3px",
   display: 'flex',
   alignItems: 'center',
-  gap: theme.spacing(1.5),
-  fontWeight: 600,
-  color: theme.palette.primary.main,
-  marginBottom: theme.spacing(1),
-  '& svg': {
-    color: theme.palette.primary.main,
-  }
+  gap: "12px"
 }));
 
 const IconWrapper = styled(Box)(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: alpha(theme.palette.primary.main, 0.15),
-  borderRadius: '50%',
-  padding: theme.spacing(1),
-  width: 40,
-  height: 40,
-  boxShadow: `0 4px 8px ${alpha(theme.palette.primary.main, 0.25)}`,
+  backgroundColor: "#007AFF",
+  borderRadius: "8px",
+  padding: "8px",
+  width: "36px",
+  height: "36px",
 }));
 
-const GlowDivider = styled(Divider)(({ theme }) => ({
-  background: `linear-gradient(to right, ${alpha(theme.palette.primary.main, 0.7)}, transparent)`,
-  height: '2px',
-  marginBottom: theme.spacing(3),
+const AppleDivider = styled(Divider)(({ theme }) => ({
+  backgroundColor: "rgba(118, 118, 128, 0.12)",
+  height: "1px",
+  marginBottom: "32px"
 }));
 
-const SubmitButton = styled(Button)(({ theme }) => ({
-  backgroundImage: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.dark} 100%)`,
-  boxShadow: `0 4px 15px ${alpha(theme.palette.primary.main, 0.4)}`,
-  borderRadius: theme.spacing(2),
-  padding: theme.spacing(1.75, 3),
+const AppleButton = styled(Button)(({ theme }) => ({
+  backgroundColor: "#007AFF",
+  borderRadius: "12px",
+  padding: "16px 24px",
+  fontSize: "17px",
   fontWeight: 600,
-  letterSpacing: '0.5px',
-  transition: theme.transitions.create(['transform', 'box-shadow'], {
-    duration: theme.transitions.duration.standard,
-  }),
+  letterSpacing: "-0.2px",
+  textTransform: 'none',
+  boxShadow: "0 4px 16px rgba(0, 122, 255, 0.24)",
+  transition: 'all 0.2s ease-in-out',
   '&:hover': {
-    transform: 'translateY(-3px)',
-    boxShadow: `0 8px 25px ${alpha(theme.palette.primary.main, 0.6)}`,
+    backgroundColor: "#0056CC",
+    transform: 'translateY(-1px)',
+    boxShadow: "0 6px 20px rgba(0, 122, 255, 0.32)",
   },
   '&:active': {
-    transform: 'translateY(-1px)',
+    transform: 'translateY(0px)',
+    boxShadow: "0 2px 8px rgba(0, 122, 255, 0.24)",
   },
   '&.Mui-disabled': {
-    background: alpha(theme.palette.primary.main, 0.4),
+    backgroundColor: "rgba(118, 118, 128, 0.24)",
+    color: "rgba(60, 60, 67, 0.3)",
+    boxShadow: "none"
   }
 }));
 
-const BudgetSlider = styled(Slider)(({ theme }) => ({
-  color: theme.palette.primary.main,
-  height: 8,
+const AppleSlider = styled(Slider)(({ theme }) => ({
+  color: "#007AFF",
+  height: "4px",
+  padding: "16px 0",
   '& .MuiSlider-track': {
     border: 'none',
-    backgroundImage: `linear-gradient(to right, ${theme.palette.primary.main}, ${theme.palette.primary.light})`,
+    backgroundColor: "#007AFF",
+    height: "4px",
+  },
+  '& .MuiSlider-rail': {
+    backgroundColor: "rgba(118, 118, 128, 0.16)",
+    height: "4px",
   },
   '& .MuiSlider-thumb': {
-    height: 24,
-    width: 24,
+    height: "20px",
+    width: "20px",
     backgroundColor: '#fff',
-    boxShadow: `0 0 0 4px ${alpha(theme.palette.primary.main, 0.16)}`,
-    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
-      boxShadow: `0 0 0 8px ${alpha(theme.palette.primary.main, 0.32)}`,
+    border: "2px solid #007AFF",
+    boxShadow: "0 2px 8px rgba(0, 122, 255, 0.24)",
+    '&:focus, &:hover, &.Mui-active': {
+      boxShadow: "0 2px 8px rgba(0, 122, 255, 0.32), 0 0 0 8px rgba(0, 122, 255, 0.12)",
     },
     '&:before': {
       display: 'none',
     },
   },
   '& .MuiSlider-valueLabel': {
-    lineHeight: 1.2,
-    fontSize: 12,
-    background: 'unset',
-    padding: 0,
-    width: 32,
-    height: 32,
-    borderRadius: '50% 50% 50% 0',
-    backgroundColor: theme.palette.primary.main,
-    transformOrigin: 'bottom left',
-    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
-    '&:before': { display: 'none' },
-    '&.MuiSlider-valueLabelOpen': {
-      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
-    },
-    '& > *': {
-      transform: 'rotate(45deg)',
-    },
+    backgroundColor: "#007AFF",
+    borderRadius: "8px",
+    fontSize: "13px",
+    fontWeight: 500,
+    padding: "4px 8px",
+    '&:before': {
+      display: 'none'
+    }
   },
   '& .MuiSlider-mark': {
-    backgroundColor: alpha('#fff', 0.5),
-    height: 8,
-    width: 1,
+    backgroundColor: "rgba(118, 118, 128, 0.32)",
+    height: "4px",
+    width: "2px",
+    borderRadius: "1px",
     '&.MuiSlider-markActive': {
-      backgroundColor: 'currentColor',
+      backgroundColor: "#007AFF",
     },
   },
+  '& .MuiSlider-markLabel': {
+    fontSize: "13px",
+    fontWeight: 400,
+    color: "rgba(60, 60, 67, 0.6)",
+    marginTop: "8px"
+  }
 }));
 
 const propertyTypesOptions = [
@@ -261,7 +295,6 @@ const budgetMarks = [
 export default function ContactForm() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  const isSm = useMediaQuery(theme.breakpoints.down('sm'));
   
   const [formData, setFormData] = useState({
     name: "", 
@@ -281,7 +314,6 @@ export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
 
-  // Format budget value for display
   const formatBudget = (value) => {
     if (value >= 1000000) {
       return `$${(value / 1000000).toFixed(1)}M`;
@@ -293,7 +325,6 @@ export default function ContactForm() {
     const { name, value, checked, type } = e.target;
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
     
-    // Mark field as touched
     if (!touched[name]) {
       setTouched({ ...touched, [name]: true });
     }
@@ -316,13 +347,13 @@ export default function ContactForm() {
         return !value.trim() 
           ? "Email is required" 
           : !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value) 
-            ? "Email is invalid" 
+            ? "Please enter a valid email address" 
             : "";
       case 'phone':
         return !value.trim() 
           ? "Phone number is required" 
           : !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im.test(value)
-            ? "Phone number is invalid"
+            ? "Please enter a valid phone number"
             : "";
       case 'message':
         return !value.trim() ? "Message is required" : "";
@@ -333,7 +364,6 @@ export default function ContactForm() {
     }
   };
 
-  // Validate fields when they're touched
   useEffect(() => {
     const newErrors = {};
     Object.keys(touched).forEach(field => {
@@ -351,7 +381,6 @@ export default function ContactForm() {
     const allTouched = {};
     const validationErrors = {};
     
-    // Mark all fields as touched
     ['name', 'email', 'phone', 'message', 'propertyType'].forEach(field => {
       allTouched[field] = true;
       const error = validateField(field, formData[field]);
@@ -376,7 +405,6 @@ export default function ContactForm() {
     setSubmitError(null);
     
     try {
-      // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1500));
       console.log("Form submitted:", formData);
       setIsSubmitted(true);
@@ -387,7 +415,7 @@ export default function ContactForm() {
       setTouched({});
     } catch (error) {
       console.error("Submission error:", error);
-      setSubmitError("There was an error submitting your form. Please try again.");
+      setSubmitError("Something went wrong. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -399,325 +427,331 @@ export default function ContactForm() {
   };
 
   return (
-    <Box sx={{ width: "100%", background: '#000' }}>
-      <Box sx={{ maxWidth: "90vw", mx: "auto", px: { xs: 2, sm: 4 }, py: 8, color: 'white' }} id="contact">
-        {/* Header Section */}
-        <Box sx={{ textAlign: "center", mb: { xs: 4, md: 6 } }}>
-          <Typography
-            variant={isMobile ? "h3" : "h2"}
-            fontWeight={700}
-            mb={2}
-            sx={{
-              background: "linear-gradient(to right, #c9b49a, #e2c799)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              textFillColor: "transparent",
-              letterSpacing: "-0.5px"
-            }}
-          >
-            Contact Us
-          </Typography>
-          <Box
-            sx={{
-              mx: "auto", width: 80, height: 4, mb: 3,
-              background: "linear-gradient(to right, rgba(201,180,154,0.9), rgba(201,180,154,0.2))",
-              borderRadius: 2,
-            }}
-          />
-          <Typography
-            variant="h6"
-            sx={{
-              color: "rgba(255,255,255,0.8)",
-              maxWidth: 800, mx: "auto", fontWeight: 400, lineHeight: 1.6,
-            }}
-          >
-            Interested in exploring investment opportunities? Reach out to our team of experts and let us guide you through your next venture.
-          </Typography>
-        </Box>
+    <Box sx={{ 
+      minHeight: "100vh",
+      background: "#000",
+      padding: { xs: 2, sm: 4 },
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center'
+    }}>
+      <Box sx={{ maxWidth: "1600px", width: "100%" }}>
+        {/* Header */}
+        <Fade in timeout={800}>
+          <Box sx={{ textAlign: "center", mb: 6 }}>
+            <Typography
+              variant={isMobile ? "h3" : "h2"}
+              sx={{
+                fontSize: { xs: "32px", md: "48px" },
+                fontWeight: 700,
+                color: "rgba(0, 0, 0, 0.87)",
+                marginBottom: "16px",
+                letterSpacing: "-1px",
+                lineHeight: 1.1
+              }}
+            >
+              Get in Touch
+            </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                fontSize: "20px",
+                fontWeight: 400,
+                color: "rgba(60, 60, 67, 0.6)",
+                maxWidth: "600px",
+                mx: "auto",
+                lineHeight: 1.4,
+                letterSpacing: "-0.2px"
+              }}
+            >
+              Ready to explore investment opportunities? Let's connect and discuss your next venture.
+            </Typography>
+          </Box>
+        </Fade>
 
-        {/* Form Card with subtle animation */}
-        <StyledCard>
-          <CardContent sx={{ p: { xs: 3, sm: 4, md: 5 } }}>
-            <form onSubmit={handleSubmit} noValidate aria-label="Contact form">
+        {/* Form Card */}
+        <Grow in timeout={1000}>
+          <AppleCard>
+            <CardContent sx={{ p: { xs: 4, sm: 6 } }}>
+              <form onSubmit={handleSubmit} noValidate>
+                <Grid container spacing={4}>
+                  {/* Personal Information */}
+                  <Grid item xs={12}>
+                    <SectionTitle>
+                      <IconWrapper>
+                        <User size={20} color="white" />
+                      </IconWrapper>
+                      Personal Information
+                    </SectionTitle>
+                    <AppleDivider />
+                  </Grid>
 
-              {/* Personal Info */}
-              <Grid container spacing={3}>
-                <Grid item xs={12}>
-                  <SectionTitle variant="h6">
-                    <IconWrapper><User size={20} /></IconWrapper>
-                    Personal Information
-                  </SectionTitle>
-                  <GlowDivider />
-                </Grid>
-
-                <Grid item xs={12} md={6} lg={4}>
-                  <StyledTextField 
-                    fullWidth 
-                    label="Full Name" 
-                    name="name" 
-                    value={formData.name} 
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.name && !!errors.name} 
-                    helperText={touched.name && errors.name} 
-                    required 
-                    variant="outlined"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <User size={18} />
-                        </InputAdornment>
-                      ),
-                    }}
-                    aria-describedby={errors.name ? "name-error" : undefined}
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6} lg={4}>
-                  <StyledTextField 
-                    fullWidth 
-                    label="Company Name (Optional)" 
-                    name="company" 
-                    value={formData.company} 
-                    onChange={handleChange} 
-                    variant="outlined"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Building size={18} />
-                        </InputAdornment>
-                      ),
-                    }} 
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6} lg={4}>
-                  <StyledTextField 
-                    fullWidth 
-                    label="Email Address" 
-                    name="email" 
-                    type="email" 
-                    value={formData.email} 
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.email && !!errors.email} 
-                    helperText={touched.email && errors.email} 
-                    required 
-                    variant="outlined"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Mail size={18} />
-                        </InputAdornment>
-                      ),
-                    }}
-                    aria-describedby={errors.email ? "email-error" : undefined}
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={6} lg={4}>
-                  <StyledTextField 
-                    fullWidth 
-                    label="Phone Number" 
-                    name="phone" 
-                    value={formData.phone} 
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.phone && !!errors.phone} 
-                    helperText={touched.phone && errors.phone} 
-                    required 
-                    variant="outlined"
-                    placeholder="(123) 456-7890"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Phone size={18} />
-                        </InputAdornment>
-                      ),
-                    }}
-                    aria-describedby={errors.phone ? "phone-error" : undefined}
-                  />
-                </Grid>
-
-                {/* Property Requirements */}
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <SectionTitle variant="h6">
-                    <IconWrapper><Building size={20} /></IconWrapper>
-                    Property Requirements
-                  </SectionTitle>
-                  <GlowDivider />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <FormControl fullWidth error={touched.propertyType && !!errors.propertyType} required>
-                    <FormLabel sx={{ mb: 1, color: alpha('#fff', 0.7) }}>Property Type</FormLabel>
-                    <StyledSelect 
-                      name="propertyType" 
-                      value={formData.propertyType} 
+                  <Grid item xs={12} md={6}>
+                    <AppleTextField 
+                      fullWidth 
+                      label="Full Name" 
+                      name="name" 
+                      value={formData.name} 
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      displayEmpty
-                      inputProps={{ 'aria-label': 'Property type' }}
-                    >
-                      <StyledMenuItem value="" disabled>Select property type</StyledMenuItem>
-                      {propertyTypesOptions.map(option => (
-                        <StyledMenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </StyledMenuItem>
-                      ))}
-                    </StyledSelect>
-                    {touched.propertyType && errors.propertyType && (
-                      <FormHelperText>{errors.propertyType}</FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
+                      error={touched.name && !!errors.name} 
+                      helperText={touched.name && errors.name} 
+                      required 
+                    />
+                  </Grid>
 
-                <Grid item xs={12} md={6}>
-                  <FormControl fullWidth>
-                    <FormLabel sx={{ mb: 1, color: alpha('#fff', 0.7), display: 'flex', alignItems: 'center', gap: 1 }}>
-                      <DollarSign size={16} /> Investment Budget
-                    </FormLabel>
-                    <Box sx={{ px: 2, pt: 3, pb: 1 }}>
-                      <BudgetSlider
-                        value={formData.budget}
-                        onChange={handleSliderChange}
-                        min={100000}
-                        max={10000000}
-                        step={100000}
-                        marks={budgetMarks}
-                        valueLabelDisplay="auto"
-                        valueLabelFormat={formatBudget}
-                        aria-label="Budget slider"
-                      />
-                    </Box>
-                    <Typography sx={{ textAlign: 'center', mt: 1, color: alpha('#fff', 0.9) }}>
-                      Budget: <strong>{formatBudget(formData.budget)}</strong>
-                    </Typography>
-                  </FormControl>
-                </Grid>
+                  <Grid item xs={12} md={6}>
+                    <AppleTextField 
+                      fullWidth 
+                      label="Company Name" 
+                      name="company" 
+                      value={formData.company} 
+                      onChange={handleChange} 
+                    />
+                  </Grid>
 
-                {/* Message */}
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <SectionTitle variant="h6">
-                    <IconWrapper><MessageSquare size={20} /></IconWrapper>
-                    Your Message
-                  </SectionTitle>
-                  <GlowDivider />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <StyledTextField 
-                    fullWidth 
-                    label="Message" 
-                    name="message" 
-                    value={formData.message} 
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    error={touched.message && !!errors.message} 
-                    helperText={touched.message && errors.message} 
-                    required 
-                    multiline 
-                    rows={4} 
-                    variant="outlined"
-                    placeholder="Tell us about your investment goals and requirements..."
-                    aria-describedby={errors.message ? "message-error" : undefined}
-                  />
-                </Grid>
-
-                {/* Contact Preferences */}
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <SectionTitle variant="h6">
-                    <IconWrapper><Settings size={20} /></IconWrapper>
-                    Contact Preferences
-                  </SectionTitle>
-                  <GlowDivider />
-                </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <FormControl component="fieldset">
-                    <FormLabel sx={{ color: alpha('#fff', 0.7) }}>Preferred Contact Method</FormLabel>
-                    <RadioGroup 
-                      row 
-                      name="contactPreference" 
-                      value={formData.contactPreference} 
+                  <Grid item xs={12} md={6}>
+                    <AppleTextField 
+                      fullWidth 
+                      label="Email Address" 
+                      name="email" 
+                      type="email" 
+                      value={formData.email} 
                       onChange={handleChange}
-                      aria-label="contact preference"
+                      onBlur={handleBlur}
+                      error={touched.email && !!errors.email} 
+                      helperText={touched.email && errors.email} 
+                      required 
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <AppleTextField 
+                      fullWidth 
+                      label="Phone Number" 
+                      name="phone" 
+                      value={formData.phone} 
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={touched.phone && !!errors.phone} 
+                      helperText={touched.phone && errors.phone} 
+                      required 
+                      placeholder="(123) 456-7890"
+                    />
+                  </Grid>
+
+                  {/* Property Requirements */}
+                  <Grid item xs={12} sx={{ mt: 2 }}>
+                    <SectionTitle>
+                      <IconWrapper>
+                        <Building size={20} color="white" />
+                      </IconWrapper>
+                      Property Requirements
+                    </SectionTitle>
+                    <AppleDivider />
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <FormControl fullWidth error={touched.propertyType && !!errors.propertyType} required>
+                      <FormLabel sx={{ 
+                        mb: 1, 
+                        fontSize: "17px", 
+                        fontWeight: 400,
+                        color: "rgba(60, 60, 67, 0.6)" 
+                      }}>
+                        Property Type
+                      </FormLabel>
+                      <AppleSelect 
+                        name="propertyType" 
+                        value={formData.propertyType} 
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        displayEmpty
+                      >
+                        <AppleMenuItem value="" disabled>
+                          Select property type
+                        </AppleMenuItem>
+                        {propertyTypesOptions.map(option => (
+                          <AppleMenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </AppleMenuItem>
+                        ))}
+                      </AppleSelect>
+                      {touched.propertyType && errors.propertyType && (
+                        <FormHelperText sx={{ color: "#FF3B30", fontSize: "13px", mt: 1 }}>
+                          {errors.propertyType}
+                        </FormHelperText>
+                      )}
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <FormControl fullWidth>
+                      <FormLabel sx={{ 
+                        mb: 2, 
+                        fontSize: "17px", 
+                        fontWeight: 400,
+                        color: "rgba(60, 60, 67, 0.6)",
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: 1
+                      }}>
+                        <DollarSign size={16} /> Investment Budget
+                      </FormLabel>
+                      <Box sx={{ px: 2, pt: 2, pb: 1 }}>
+                        <AppleSlider
+                          value={formData.budget}
+                          onChange={handleSliderChange}
+                          min={100000}
+                          max={10000000}
+                          step={100000}
+                          marks={budgetMarks}
+                          valueLabelDisplay="auto"
+                          valueLabelFormat={formatBudget}
+                        />
+                      </Box>
+                      <Typography sx={{ 
+                        textAlign: 'center', 
+                        mt: 2, 
+                        fontSize: "17px",
+                        fontWeight: 500,
+                        color: "rgba(0, 0, 0, 0.87)" 
+                      }}>
+                        {formatBudget(formData.budget)}
+                      </Typography>
+                    </FormControl>
+                  </Grid>
+
+                  {/* Message */}
+                  <Grid item xs={12} sx={{ mt: 2 }}>
+                    <SectionTitle>
+                      <IconWrapper>
+                        <MessageSquare size={20} color="white" />
+                      </IconWrapper>
+                      Tell us about your project
+                    </SectionTitle>
+                    <AppleDivider />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <AppleTextField 
+                      fullWidth 
+                      label="Message" 
+                      name="message" 
+                      value={formData.message} 
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      error={touched.message && !!errors.message} 
+                      helperText={touched.message && errors.message} 
+                      required 
+                      multiline 
+                      rows={4} 
+                      placeholder="Share your investment goals and requirements..."
+                    />
+                  </Grid>
+
+                  {/* Contact Preferences */}
+                  <Grid item xs={12} sx={{ mt: 2 }}>
+                    <SectionTitle>
+                      <IconWrapper>
+                        <Settings size={20} color="white" />
+                      </IconWrapper>
+                      Preferences
+                    </SectionTitle>
+                    <AppleDivider />
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <FormControl component="fieldset">
+                      <FormLabel sx={{ 
+                        fontSize: "17px", 
+                        fontWeight: 400,
+                        color: "rgba(60, 60, 67, 0.6)",
+                        mb: 2
+                      }}>
+                        How would you like us to contact you?
+                      </FormLabel>
+                      <RadioGroup 
+                        name="contactPreference" 
+                        value={formData.contactPreference} 
+                        onChange={handleChange}
+                        sx={{ gap: 1 }}
+                      >
+                        <FormControlLabel 
+                          value="email" 
+                          control={<Radio sx={{ color: "#007AFF" }} />} 
+                          label={<Typography sx={{ fontSize: "17px", fontWeight: 400 }}>Email</Typography>}
+                        />
+                        <FormControlLabel 
+                          value="phone" 
+                          control={<Radio sx={{ color: "#007AFF" }} />} 
+                          label={<Typography sx={{ fontSize: "17px", fontWeight: 400 }}>Phone</Typography>}
+                        />
+                        <FormControlLabel 
+                          value="either" 
+                          control={<Radio sx={{ color: "#007AFF" }} />} 
+                          label={<Typography sx={{ fontSize: "17px", fontWeight: 400 }}>Either</Typography>}
+                        />
+                      </RadioGroup>
+                    </FormControl>
+                  </Grid>
+
+                  <Grid item xs={12} md={6}>
+                    <FormControlLabel 
+                      control={
+                        <Checkbox 
+                          checked={formData.newsletter} 
+                          onChange={handleChange} 
+                          name="newsletter" 
+                          sx={{ color: "#007AFF" }}
+                        />
+                      } 
+                      label={
+                        <Typography sx={{ fontSize: "17px", fontWeight: 400, color: "rgba(0, 0, 0, 0.87)" }}>
+                          Keep me updated with market insights and new opportunities
+                        </Typography>
+                      }
+                    />
+                  </Grid>
+
+                  {/* Submit Button */}
+                  <Grid item xs={12} sx={{ mt: 3 }}>
+                    <AppleButton 
+                      type="submit" 
+                      fullWidth 
+                      disabled={isSubmitting}
+                      endIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : <ArrowRight size={20} />}
                     >
-                      <FormControlLabel 
-                        value="email" 
-                        control={<Radio sx={{ color: '#fff', '&.Mui-checked': { color: "theme.palette.primary.main" } }} />} 
-                        label="Email" 
-                      />
-                      <FormControlLabel 
-                        value="phone" 
-                        control={<Radio sx={{ color: '#fff', '&.Mui-checked': { color: theme.palette.primary.main } }} />} 
-                        label="Phone" 
-                      />
-                      <FormControlLabel 
-                        value="either" 
-                        control={<Radio sx={{ color: '#fff', '&.Mui-checked': { color: theme.palette.primary.main } }} />} 
-                        label="Either" 
-                      />
-                    </RadioGroup>
-                  </FormControl>
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </AppleButton>
+                  </Grid>
                 </Grid>
-
-                <Grid item xs={12} md={6}>
-                  <FormControlLabel 
-                    control={
-                      <Checkbox 
-                        checked={formData.newsletter} 
-                        onChange={handleChange} 
-                        name="newsletter" 
-                        sx={{ 
-                          color: '#fff',
-                          '&.Mui-checked': { 
-                            color: theme.palette.primary.main 
-                          } 
-                        }} 
-                      />
-                    } 
-                    label="Subscribe to our newsletter for market insights and property listings" 
-                  />
-                </Grid>
-
-                <Grid item xs={12} sx={{ mt: 2 }}>
-                  <SubmitButton 
-                    type="submit" 
-                    variant="contained" 
-                    fullWidth 
-                    disableElevation
-                    disabled={isSubmitting}
-                    startIcon={isSubmitting ? <CircularProgress size={20} color="inherit" /> : <CheckCircle size={20} />}
-                  >
-                    {isSubmitting ? "Submitting..." : "Submit Inquiry"}
-                  </SubmitButton>
-                </Grid>
-              </Grid>
-            </form>
-          </CardContent>
-        </StyledCard>
+              </form>
+            </CardContent>
+          </AppleCard>
+        </Grow>
 
         {/* Success Snackbar */}
         <Snackbar 
           open={isSubmitted} 
           autoHideDuration={6000} 
           onClose={handleCloseSnackbar} 
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
           <Alert 
             onClose={handleCloseSnackbar} 
             severity="success" 
             variant="filled"
             sx={{ 
-              borderRadius: 2, 
-              bgcolor: alpha(theme.palette.success.main, 0.9), 
+              borderRadius: "12px",
+              fontSize: "17px",
+              fontWeight: 400,
+              bgcolor: "#34C759",
               color: '#fff',
-              boxShadow: `0 4px 12px ${alpha(theme.palette.success.main, 0.5)}`
+              boxShadow: "0 8px 32px rgba(52, 199, 89, 0.24)"
             }}
           >
-            Thank you for contacting us! We'll get back to you shortly.
+            Message sent successfully! We'll be in touch soon.
           </Alert>
         </Snackbar>
 
@@ -726,17 +760,19 @@ export default function ContactForm() {
           open={!!submitError} 
           autoHideDuration={6000} 
           onClose={handleCloseSnackbar} 
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+          anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
         >
           <Alert 
             onClose={handleCloseSnackbar} 
             severity="error" 
             variant="filled"
             sx={{ 
-              borderRadius: 2, 
-              bgcolor: alpha(theme.palette.error.main, 0.9), 
+              borderRadius: "12px",
+              fontSize: "17px",
+              fontWeight: 400,
+              bgcolor: "#FF3B30",
               color: '#fff',
-              boxShadow: `0 4px 12px ${alpha(theme.palette.error.main, 0.5)}`
+              boxShadow: "0 8px 32px rgba(255, 59, 48, 0.24)"
             }}
           >
             {submitError}
