@@ -107,12 +107,12 @@ const CopyrightText = styled(Typography)(({ theme }) => ({
 
 const footerLinks = [
   {
-    title: "Products",
+    title: "Links",
     links: [
-      { text: "Green Solutions", href: "#" },
-      { text: "Sustainability Tools", href: "#" },
-      { text: "Carbon Tracking", href: "#" },
-      { text: "Eco Analytics", href: "#" },
+      { text: "ArkOS", href: "#" },
+      { text: "Ark Vision", href: "#" },
+      { text: "Ark Crypto", href: "#" },
+      { text: "Our Story", href: "#" },
     ],
   },
   {
