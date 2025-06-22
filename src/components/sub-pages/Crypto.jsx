@@ -375,91 +375,9 @@ export default function Offer() {
                     }}
                   />
                 </Box>
-                {/* </Box> */}
               </Box>
             </Grid>
           </Grid>
-        </Container>
-      </Box>
-      <Matter />
-
-      <Offerings />
-
-      <Services />
-
-      {/* CTA Section */}
-      <Box
-        sx={{
-          position: "relative",
-          py: 12,
-          overflow: "hidden",
-        }}
-      >
-        {/* Background gradient and blur elements */}
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            // background: "linear-gradient(135deg, #0f0f0f 0%, #000000 100%)",
-            background: "transparent",
-            zIndex: 0,
-          }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              width: "600px",
-              height: "600px",
-              borderRadius: "50%",
-              background:
-                // "radial-gradient(circle, rgba(201,180,154,0.1) 0%, rgba(0,0,0,0) 70%)",
-                "transparent",
-              filter: "blur(100px)",
-              top: "-200px",
-              right: "-100px",
-            }}
-          />
-        </Box>
-
-        <Container maxWidth="md" sx={{ position: "relative", zIndex: 1 }}>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <Box sx={{ textAlign: "center" }}>
-              <GoldText variant="h3" fontWeight={700} gutterBottom>
-                Ready to Transform Your Investment Strategy?
-              </GoldText>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: "rgba(255,255,255,0.8)",
-                  mb: 6,
-                  maxWidth: 800,
-                  mx: "auto",
-                }}
-              >
-                Partner with us to unlock value in real estate. Let's build
-                something lasting together.
-              </Typography>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  flexDirection: { xs: "column", sm: "row" },
-                  gap: 2,
-                  justifyContent: "center",
-                }}
-              >
-                <GoldButton>Schedule a Consultation</GoldButton>
-                <OutlinedGoldButton variant="outlined">
-                  View Case Studies
-                </OutlinedGoldButton>
-              </Box>
-            </Box>
-          </motion.div>
         </Container>
       </Box>
     </Box>

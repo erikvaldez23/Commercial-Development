@@ -36,18 +36,15 @@ import CallToAction from "./components/key-components/CallToAction";
 import QuickLinks from "./components/key-components/QuickLinks";
 import Contact from "./components/key-components/Contact";
 import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
-import Offer from "./components/sub-pages/Offer";
+import ArkCrypto from "./components/sub-pages/Crypto";
 import About from "./components/sub-pages/About";
-import How from "./components/sub-pages/How";
+import ArkVision from "./components/sub-pages/Vision";
 import Portfolio from "./components/sub-pages/Portfolio";
 import Team from "./components/sub-pages/Team";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 import Dashboard from "./components/portfolio-dashboard/Dashboard"
 import Projects from "./components/portfolio-dashboard/portfolio-sub-pages/Proejcts";
-import SubPage1 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage1";
-import SubPage2 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage2";
-import Lottie from "lottie-react";
 import Stakeholders from "./components/portfolio-dashboard/portfolio-sub-pages/Stakeholders";
 
 import ArkOSDashboard from "./components/portfolio-dashboard/ArkOSDashboard";
@@ -177,9 +174,9 @@ export default function App() {
             />
 
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/what-we-offer" element={<Offer />} />
+            <Route path="/ark-crypto" element={<ArkCrypto />} />
             <Route path="/about" element={<About />} />
-            <Route path="/how-it-works" element={<How />} />
+            <Route path="/ark-vision" element={<ArkVision />} />
             <Route path="/portfolio" element={<ArkOSDashboard />} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
@@ -191,8 +188,6 @@ export default function App() {
             <Route path="/portfolio/overview" element={<NotFound />} />
             <Route path="/portfolio/analytics" element={<NotFound />} />
             <Route path="/portfolio/buildings" element={<Projects />} />
-            <Route path="/portfolio/sub-link1" element={<SubPage1 />} />
-            <Route path="/portfolio/sub-link1" element={<SubPage1 />} />
           </Routes>
 
           {/* <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />
