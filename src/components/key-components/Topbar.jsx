@@ -5,7 +5,6 @@ import {
   Box,
   Typography,
   useMediaQuery,
-  Button,
   IconButton,
   Drawer,
   List,
@@ -17,7 +16,7 @@ import { styled, useTheme } from "@mui/system";
 import logo from "/greenark-logo1.png";
 import { motion } from "framer-motion";
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom"; // 👈 at the top
+import { useNavigate } from "react-router-dom";
 
 // Your nav items
 const navItems = [
@@ -38,9 +37,9 @@ const NavWrapper = styled(Box)(({ theme }) => ({
   alignItems: "center",
   gap: theme.spacing(4),
   padding: theme.spacing(2, 4),
- backdropFilter: "blur(12px)",
-  borderRadius: theme.shape.borderRadius * 6, // Even rounder pill
-  boxShadow: "0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(201,180,154,0.15)", // Gold accent border
+  backdropFilter: "blur(12px)",
+  borderRadius: theme.shape.borderRadius * 6,
+  boxShadow: "0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(201,180,154,0.15)",
   zIndex: theme.zIndex.appBar + 1,
   border: "1px solid rgba(201,180,154,0.2)",
   transition: "all 0.3s ease-in-out",
@@ -52,7 +51,6 @@ const NavWrapper = styled(Box)(({ theme }) => ({
     right: '-1px',
     bottom: '-1px',
     borderRadius: 'inherit',
-    // background: 'linear-gradient(135deg, rgba(201,180,154,0.5) 0%, rgba(201,180,154,0) 50%, rgba(201,180,154,0.2) 100%)',
     opacity: 0.3,
     pointerEvents: 'none',
     zIndex: -1,
@@ -88,30 +86,40 @@ const NavItem = styled(motion.div)(({ theme }) => ({
   },
 }));
 
-// Mobile menu button
+// Modern mobile menu button
 const MenuButton = styled(IconButton)(({ theme }) => ({
   color: '#c9b49a',
-  background: 'rgba(10, 10, 12, 0.6)',
-  backdropFilter: 'blur(12px)',
-  border: '1px solid rgba(201,180,154,0.2)',
-  boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+  background: 'rgba(0, 0, 0, 0.7)',
+  backdropFilter: 'blur(15px)',
+  border: '1px solid rgba(201,180,154,0.3)',
+  boxShadow: '0 8px 25px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+  borderRadius: '12px',
+  width: 48,
+  height: 48,
   '&:hover': {
-    background: 'rgba(20, 20, 22, 0.8)',
+    background: 'rgba(201,180,154,0.1)',
+    transform: 'scale(1.05)',
+    boxShadow: '0 12px 35px rgba(201,180,154,0.2)',
   },
+  '&:active': {
+    transform: 'scale(0.95)',
+  },
+  transition: 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
 }));
 
 const AnimatedLogo = ({ handleClick }) => {
   return (
     <Box 
-    onClick={handleClick}
-    sx={{ 
-      position: 'relative', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      height: { xs: "40px", md: "50px" }, // 🔥 control logo container height
-      width: "auto",
-    }}>
+      onClick={handleClick}
+      sx={{ 
+        position: 'relative', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        height: { xs: "40px", md: "50px" },
+        width: "auto",
+      }}
+    >
       {/* Glowing background */}
       <Box
         component={motion.div}
@@ -134,7 +142,7 @@ const AnimatedLogo = ({ handleClick }) => {
         src={logo}
         alt="Green Ark"
         sx={{ 
-          height: "100%",  // 🔥 make logo scale to parent height
+          height: "100%",
           width: "auto",
           maxHeight: "100%",
           objectFit: "contain",
@@ -148,13 +156,12 @@ const AnimatedLogo = ({ handleClick }) => {
   );
 };
 
-
 export default function FuturisticTopbar() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const navigate = useNavigate(); // 👈 hook from react-router-dom
+  const navigate = useNavigate();
   
   // Enhanced scroll effect
   useEffect(() => {
@@ -186,99 +193,200 @@ export default function FuturisticTopbar() {
 
   const handleLogoClick = () => {
     if (window.location.hash === "#/" || window.location.hash === "" || window.location.pathname === "/") {
-      // ✅ Already on home page, scroll to top
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       navigate("/");
     }
   };
-  
 
-  // Mobile drawer content
+  // Modern mobile drawer content
   const drawer = (
     <Box 
       sx={{ 
-        width: 350, 
+        width: 320,
         height: '100%',
-        background: 'linear-gradient(135deg, #0f0f0f 0%, #070707 100%)',
+        background: 'linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0a0a0a 100%)',
         color: '#fff',
         display: 'flex',
         flexDirection: 'column',
+        position: 'relative',
+        overflow: 'hidden',
+        // Add subtle texture
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'radial-gradient(circle at 20% 20%, rgba(201,180,154,0.03) 0%, transparent 50%)',
+          pointerEvents: 'none',
+        }
       }}
-      onClick={handleDrawerToggle}
     >
-      <Box sx={{ display: 'flex', justifyContent: 'flex-end', p: 1 }}>
+      {/* Enhanced header with close button */}
+      <Box 
+        sx={{ 
+          display: 'flex', 
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          p: 3,
+          borderBottom: '1px solid rgba(201,180,154,0.1)',
+          background: 'rgba(0,0,0,0.3)',
+          backdropFilter: 'blur(10px)',
+        }}
+      >
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            color: '#c9b49a', 
+            fontWeight: 600,
+            letterSpacing: '1px',
+            fontSize: '1.1rem'
+          }}
+        >
+          MENU
+        </Typography>
+        
         <IconButton 
-          sx={{ color: '#c9b49a' }}
           onClick={handleDrawerToggle}
+          sx={{ 
+            color: '#c9b49a',
+            background: 'rgba(201,180,154,0.1)',
+            border: '1px solid rgba(201,180,154,0.2)',
+            '&:hover': {
+              background: 'rgba(201,180,154,0.2)',
+              transform: 'rotate(90deg)',
+            },
+            transition: 'all 0.3s ease',
+          }}
         >
           <CloseIcon />
         </IconButton>
       </Box>
       
-      <Box sx={{ display: 'flex', justifyContent: 'center', my: 4 }}>
-        <AnimatedLogo />
+      {/* Logo section */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', py: 4 }}>
+        <AnimatedLogo handleClick={handleLogoClick} />
       </Box>
       
-      <List>
-        {navItems.map((item) => (
+      {/* Modern menu items with micro-interactions */}
+      <List sx={{ flex: 1, px: 2, py: 3 }}>
+        {navItems.map((item, index) => (
           <ListItem 
-            key={item.label} 
+            key={item.label}
             onClick={() => handleNavigation(item)}
             sx={{ 
-              '&:hover': { 
-                background: 'rgba(201,180,154,0.1)',
+              mb: 1,
+              borderRadius: 2,
+              position: 'relative',
+              overflow: 'hidden',
+              cursor: 'pointer',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: '3px',
+                background: 'linear-gradient(180deg, #c9b49a, rgba(201,180,154,0.3))',
+                transform: 'scaleY(0)',
+                transformOrigin: 'bottom',
+                transition: 'transform 0.3s ease',
               },
-              transition: 'all 0.2s ease',
-              my: 1,
+              '&:hover': { 
+                background: 'linear-gradient(135deg, rgba(201,180,154,0.08) 0%, rgba(201,180,154,0.03) 100%)',
+                transform: 'translateX(8px)',
+                '&::before': {
+                  transform: 'scaleY(1)',
+                },
+                '& .arrow-indicator': {
+                  opacity: 1,
+                }
+              },
+              transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+              // Staggered animation delay
+              animation: `slideInLeft 0.6s ease forwards ${index * 0.1}s`,
+              opacity: 0,
+              transform: 'translateX(-30px)',
+              '@keyframes slideInLeft': {
+                to: {
+                  opacity: 1,
+                  transform: 'translateX(0)',
+                }
+              }
             }}
           >
             <ListItemText 
               primary={item.label} 
               sx={{ 
-                textAlign: 'center',
                 '.MuiTypography-root': {
-                  color: '#c9b49a',
+                  color: '#ffffff',
                   fontWeight: 500,
-                  letterSpacing: '1px',
+                  letterSpacing: '0.5px',
+                  fontSize: '1.1rem',
+                  transition: 'color 0.3s ease',
                 }
               }} 
+            />
+            
+            {/* Arrow indicator */}
+            <Box
+              className="arrow-indicator"
+              sx={{
+                width: 6,
+                height: 6,
+                borderTop: '2px solid #c9b49a',
+                borderRight: '2px solid #c9b49a',
+                transform: 'rotate(45deg)',
+                opacity: 0,
+                transition: 'opacity 0.3s ease',
+              }}
             />
           </ListItem>
         ))}
       </List>
       
-      {/* Decorative elements for mobile menu */}
+      {/* Modern footer with animated divider */}
       <Box 
         sx={{ 
-          position: 'absolute', 
-          bottom: 40, 
-          left: 0, 
-          right: 0,
-          display: 'flex',
-          justifyContent: 'center',
+          p: 3,
+          borderTop: '1px solid rgba(201,180,154,0.1)',
+          background: 'rgba(0,0,0,0.5)',
+          backdropFilter: 'blur(10px)',
         }}
       >
+        {/* Animated divider */}
         <Box
           component={motion.div}
           animate={{
-            boxShadow: [
-              '0 0 10px rgba(201,180,154,0.2)',
-              '0 0 20px rgba(201,180,154,0.4)',
-              '0 0 10px rgba(201,180,154,0.2)',
-            ],
+            width: ['0%', '100%', '0%'],
           }}
           transition={{
-            duration: 3,
+            duration: 4,
             repeat: Infinity,
             ease: "easeInOut",
           }}
           sx={{
-            width: 120,
-            height: 1,
-            background: 'linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,0.7) 50%, rgba(201,180,154,0) 100%)',
+            height: 2,
+            background: 'linear-gradient(90deg, transparent, #c9b49a, transparent)',
+            mb: 2,
+            borderRadius: 1,
           }}
         />
+        
+        <Typography 
+          variant="caption" 
+          sx={{ 
+            color: 'rgba(201,180,154,0.7)',
+            textAlign: 'center',
+            display: 'block',
+            letterSpacing: '1px',
+            fontSize: '0.75rem'
+          }}
+        >
+          © 2024 GREEN ARK
+        </Typography>
       </Box>
     </Box>
   );
@@ -300,7 +408,7 @@ export default function FuturisticTopbar() {
           <Fade in={true} timeout={1000}>
             <NavWrapper>
               {/* Animated Logo */}
-              <AnimatedLogo handleClick={handleLogoClick}/>
+              <AnimatedLogo handleClick={handleLogoClick} />
               
               {/* Links with hover effects */}
               {navItems.map((item, index) => (
@@ -312,7 +420,7 @@ export default function FuturisticTopbar() {
                   onClick={() => handleNavigation(item)}
                 >
                   <Typography
-                  noWrap
+                    noWrap
                     sx={{
                       fontWeight: 500,
                       letterSpacing: '0.05em',
@@ -326,9 +434,9 @@ export default function FuturisticTopbar() {
             </NavWrapper>
           </Fade>
         ) : (
-          // Mobile view with menu button
+          // Mobile view with enhanced menu button
           <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', px: 2, pt: 1 }}>
-            <AnimatedLogo />
+            <AnimatedLogo handleClick={handleLogoClick} />
             
             <MenuButton
               color="inherit"
@@ -342,20 +450,28 @@ export default function FuturisticTopbar() {
           </Box>
         )}
         
-        {/* Mobile drawer */}
+        {/* Enhanced mobile drawer with glass morphism */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better mobile performance
+            keepMounted: true,
           }}
           sx={{
             '& .MuiDrawer-paper': { 
               boxSizing: 'border-box', 
-              width: 250,
+              width: 320,
               borderRight: 'none',
+              // Add glass morphism effect
+              background: 'rgba(0, 0, 0, 0.95)',
+              backdropFilter: 'blur(20px)',
+              borderLeft: '1px solid rgba(201,180,154,0.1)',
             },
+            '& .MuiBackdrop-root': {
+              background: 'rgba(0, 0, 0, 0.8)',
+              backdropFilter: 'blur(4px)',
+            }
           }}
         >
           {drawer}

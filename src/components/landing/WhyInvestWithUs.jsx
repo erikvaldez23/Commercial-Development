@@ -119,21 +119,21 @@ const ModernStewardsOfSpace = () => {
     <Box
       sx={{
         background: "#000",
-        py: 20,
       }}
     >
       <Box
         id="stewards-container"
         sx={{
           position: "relative",
-          background: `url('/Commercial-Development/map.jpg')`,
+          background: `url('/Commercial-Development/map2.jpeg')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: { xs: "100vh", md: "100vh" },
           color: "#e2c799",
           display: "flex",
-          alignItems: "center",
-          justifyContent: "flex-start",
+          flexDirection: "column",
+          alignItems: { xs: "flex-start", md: "flex-start" },
+          justifyContent: { xs: "flex-start", md: "center" },
           padding: { xs: 3, md: 10 },
           overflow: "hidden",
         }}
@@ -148,6 +148,36 @@ const ModernStewardsOfSpace = () => {
             bottom: 0,
             // background: "radial-gradient(circle at 50% 50%, rgba(226, 199, 153, 0.08) 0%, rgba(13, 19, 33, 0) 70%)",
             zIndex: 1,
+          }}
+        />
+
+        {/* Top gradient overlay */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            height: "80px", // adjust height as needed
+            background:
+              "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent)",
+            zIndex: 2, // should be above the background image, but below content
+            pointerEvents: "none", // ensure it doesn't block clicks
+          }}
+        />
+
+        {/* Bottom gradient overlay */}
+        <Box
+          sx={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: "80px", // adjust as needed
+            background:
+              "linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent)",
+            zIndex: 2,
+            pointerEvents: "none",
           }}
         />
 
@@ -235,79 +265,76 @@ const ModernStewardsOfSpace = () => {
             </Typography>
           </Box>
 
-          <Box
-            component={motion.div}
-            variants={textVariants}
-            sx={{
-              mt: 4,
-              p: 3,
-              backdropFilter: "blur(10px)",
-              backgroundColor: "rgba(0, 0, 0, 0.5)",
-              borderLeft: "4px solid #e2c799",
-              borderRadius: "0 8px 8px 0",
-            }}
-          >
-            <Typography
-              variant="body1"
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            <Box
+              component={motion.div}
+              variants={textVariants}
               sx={{
-                color: "#f5f5f5",
-                mt: 2,
-                fontSize: { xs: "1rem", md: "1.5rem" },
-                lineHeight: 1.6,
-                fontWeight: 300,
+                mt: 4,
+                p: 3,
+                backdropFilter: "blur(10px)",
+                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                borderLeft: "4px solid #e2c799",
+                borderRadius: "0 8px 8px 0",
               }}
             >
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima
-              officia nisi voluptatibus quo, ipsa, ex deleniti velit sunt at
-              totam officiis doloremque harum dolorem pariatur, necessitatibus
-              amet magni autem nam.
-            </Typography>
+              <Typography>
+                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus
+                fugit accusantium reprehenderit quas possimus delectus ullam ab
+                quae rem temporibus suscipit facere, mollitia consequuntur
+                eveniet rerum sed minus dolore laboriosam?
+              </Typography>
+            </Box>
           </Box>
 
-          {selectedCity && (
-            <Fade in={!!selectedCity} timeout={600}>
-              <Box
-                sx={{
-                  mt: 4,
-                  p: 3,
-                  backgroundColor: "rgba(226, 199, 153, 0.15)",
-                  backdropFilter: "blur(10px)",
-                  borderRadius: 2,
-                  border: "1px solid rgba(226, 199, 153, 0.3)",
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  fontWeight={600}
-                  color="#e2c799"
-                  sx={{ mb: 1 }}
+          <Box sx={{ display: { xs: "none", md: "block" } }}>
+            {selectedCity && (
+              <Fade in={!!selectedCity} timeout={600}>
+                <Box
+                  sx={{
+                    mt: 4,
+                    p: 3,
+                    backgroundColor: "rgba(226, 199, 153, 0.15)",
+                    backdropFilter: "blur(10px)",
+                    borderRadius: 2,
+                    border: "1px solid rgba(226, 199, 153, 0.3)",
+                  }}
                 >
-                  {selectedCity.name}
-                </Typography>
-                <Typography variant="body1" color="#f5f5f5" sx={{ mb: 2 }}>
-                  {selectedCity.description}
-                </Typography>
-                <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                  <Box>
-                    <Typography variant="caption" color="#e2c799">
-                      Development Size
-                    </Typography>
-                    <Typography variant="body1" fontWeight={500} color="#fff">
-                      {selectedCity.stat}
-                    </Typography>
-                  </Box>
-                  <Box>
-                    <Typography variant="caption" color="#e2c799">
-                      Completed
-                    </Typography>
-                    <Typography variant="body1" fontWeight={500} color="#fff">
-                      {selectedCity.yearCompleted}
-                    </Typography>
+                  <Typography
+                    variant="h5"
+                    fontWeight={600}
+                    color="#e2c799"
+                    sx={{ mb: 1 }}
+                  >
+                    {selectedCity.name}
+                  </Typography>
+                  <Typography variant="body1" color="#f5f5f5" sx={{ mb: 2 }}>
+                    {selectedCity.description}
+                  </Typography>
+                  <Box
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Box>
+                      <Typography variant="caption" color="#e2c799">
+                        Development Size
+                      </Typography>
+                      <Typography variant="body1" fontWeight={500} color="#fff">
+                        {selectedCity.stat}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Typography variant="caption" color="#e2c799">
+                        Completed
+                      </Typography>
+                      <Typography variant="body1" fontWeight={500} color="#fff">
+                        {selectedCity.yearCompleted}
+                      </Typography>
+                    </Box>
                   </Box>
                 </Box>
-              </Box>
-            </Fade>
-          )}
+              </Fade>
+            )}
+          </Box>
         </Box>
 
         {/* City markers with animations */}
