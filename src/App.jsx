@@ -48,8 +48,10 @@ import Projects from "./components/portfolio-dashboard/portfolio-sub-pages/Proej
 import SubPage1 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage1";
 import SubPage2 from "./components/portfolio-dashboard/portfolio-sub-pages/SubPage2";
 import Lottie from "lottie-react";
+import Stakeholders from "./components/portfolio-dashboard/portfolio-sub-pages/Stakeholders";
 
 import ArkOSDashboard from "./components/portfolio-dashboard/ArkOSDashboard";
+import ArkOS from "./components/landing/ArkOS";
 
 // theme
 const theme = createTheme({
@@ -159,6 +161,8 @@ export default function App() {
                         <WhyInvestWithUs />
                       {/* </SlideUpReveal> */}
 
+                      <ArkOS />
+
                       {/* <SlideUpReveal zIndex={4}> */}
                         <CallToAction />
                       {/* </SlideUpReveal> */}
@@ -179,6 +183,7 @@ export default function App() {
             <Route path="/portfolio" element={<ArkOSDashboard />} />
             <Route path="/team" element={<Team />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/stakeholders" element={<Stakeholders />} />
             <Route path="*" element={<NotFound />} />
 
 

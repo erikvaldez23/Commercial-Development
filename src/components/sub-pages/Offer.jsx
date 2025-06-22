@@ -66,7 +66,7 @@ const FloatingParticles = () => {
         inset: 0,
         overflow: "hidden",
         pointerEvents: "none",
-        height: "100vh"
+        height: "100vh",
       }}
     >
       {[...Array(15)].map((_, i) => (
@@ -212,6 +212,7 @@ export default function Offer() {
         transition={{ duration: 1 }}
         sx={{
           height: "75vh",
+          pt: 8,
           display: "flex",
           flexDirection: "column",
           position: "relative",
@@ -244,7 +245,7 @@ export default function Offer() {
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <Chip
-                  label="WHAT WE OFFER"
+                  label="ARK CRYPTO"
                   sx={{
                     background:
                       "linear-gradient(45deg, rgba(201, 180, 154, 0.2), rgba(244, 228, 188, 0.2))",
@@ -252,7 +253,7 @@ export default function Offer() {
                     color: primaryColor,
                     fontWeight: 600,
                     letterSpacing: 2,
-                    mb: 4,
+                    mb: 1,
                     mt: 5,
                   }}
                 />
@@ -271,11 +272,11 @@ export default function Offer() {
                   }}
                 >
                   <Box component="span" sx={{ color: "white" }}>
-                    SHAPING THE FUTURE OF
+                    FROM DIGITAL ASSET
                   </Box>
                   <br />
                   <Box component="span" sx={{ color: "white" }}>
-                    COMMERCIAL REAL ESTATE
+                    TO PHYSICAL IMPACT
                   </Box>
                 </Typography>
 
@@ -293,9 +294,10 @@ export default function Offer() {
                     maxWidth: "600px",
                   }}
                 >
-                  Our investment process is designed to be transparent,
-                  efficient, and investor‑friendly. From the first meeting to
-                  ongoing performance reporting.
+                  Ark is the utility token powering access, governance, and
+                  ownership within the Green Ark ecosystem. Use it to access
+                  developments early, vote on ESG impact, and earn rewards
+                  through sustainable action.
                 </Typography>
 
                 <Stack

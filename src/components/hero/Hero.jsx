@@ -54,69 +54,67 @@ export default function HeroSection({ loadingDone }) {
 
   return (
     <Box
-    sx={{
-      position: "relative",
-      minHeight: "100vh",
-      overflow: "hidden",
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: "center",
-      color: "white",
-      backgroundImage: `url(/Commercial-Development/city.jpg)`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
-    }}
-  >
-    {/* ✅ Video Background */}
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        objectFit: "cover",
-        zIndex: 0,
+      sx={{
+        position: "relative",
+        minHeight: "100vh",
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        color: "white",
+        backgroundImage: `url(/Commercial-Development/city.jpg)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
       }}
     >
-      <source
-        src={`/Commercial-Development/sunset.mp4`}
-        type="video/mp4"
+      {/* ✅ Video Background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          zIndex: 0,
+        }}
+      >
+        <source src={`/Commercial-Development/sunset.mp4`} type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      {/* ✅ Gradient Overlay Top */}
+      <Box
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1))",
+          zIndex: 1,
+        }}
       />
-      Your browser does not support the video tag.
-    </video>
 
-    {/* ✅ Gradient Overlay Top */}
-    <Box
-      sx={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        background: "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1))",
-        zIndex: 1,
-      }}
-    />
-
-    {/* ✅ Gradient Overlay Bottom */}
-    <Box
-      sx={{
-        position: "absolute",
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: "300px",
-        background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
-        zIndex: 1,
-        pointerEvents: "none",
-      }}
-    />
+      {/* ✅ Gradient Overlay Bottom */}
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "300px",
+          background: "linear-gradient(to bottom, rgba(0,0,0,0) 0%, #000 100%)",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      />
 
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         <Box
@@ -231,8 +229,8 @@ export default function HeroSection({ loadingDone }) {
                 filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))",
               }}
             >
-              Green Ark is redefining real estate investments — blending modern
-              innovation with lasting impact for a sustainable future.
+              Real estate engineered for intelligence, designed for resilience,
+              and built for the world.
             </Typography>
           </motion.div>
 

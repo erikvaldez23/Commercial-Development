@@ -261,7 +261,7 @@ const ModernStewardsOfSpace = () => {
             >
               WE'RE NOT DEVELOPERS.
               <br />
-              WE'RE STEWARDS OF SPACE.
+              WE'RE STEWARDS OF SPACE
             </Typography>
           </Box>
 
