@@ -1,349 +1,263 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 import {
   Box,
   Typography,
-  Button,
-  Card,
-  CardContent,
-  Grid,
   Container,
-  Fade,
-  Grow,
-  createTheme,
-  ThemeProvider,
-  keyframes,
-} from '@mui/material';
-import { styled } from '@mui/material/styles';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import { useNavigate } from 'react-router-dom';
+  Grid,
+  Paper,
+  useTheme,
+  alpha,
+} from "@mui/material";
+import { styled } from "@mui/material/styles";
 
-// Enhanced theme with Apple-inspired design
-const arkosTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#ffffff',
-      light: '#f5f5f7',
-    },
-    secondary: {
-      main: '#007AFF',
-      light: '#40e0d0',
-    },
-    background: {
-      default: '#000000',
-      paper: 'rgba(255, 255, 255, 0.02)',
-    },
-    text: {
-      primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.6)',
-    },
-  },
-  typography: {
-    fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif',
-    h1: {
-      fontSize: { xs: '4rem', md: '7rem' },
-      fontWeight: 100,
-      letterSpacing: '-0.05em',
-      lineHeight: 0.9,
-    },
-    h2: {
-      fontSize: { xs: '1.25rem', md: '1.5rem' },
-      fontWeight: 300,
-      lineHeight: 1.4,
-      letterSpacing: '-0.01em',
-    },
-    h3: {
-      fontSize: '1.25rem',
-      fontWeight: 600,
-      letterSpacing: '-0.01em',
-    },
-    body1: {
-      fontSize: '0.9rem',
-      fontWeight: 400,
-      lineHeight: 1.6,
-    },
-  },
-  shape: {
-    borderRadius: 24,
-  },
-});
-
-// Animated background with floating elements
-const pulseAnimation = keyframes`
-  0%, 100% { opacity: 0.1; transform: scale(1); }
-  50% { opacity: 0.2; transform: scale(1.1); }
-`;
-
-const BackgroundContainer = styled(Box)(({ theme }) => ({
-  minHeight: '100vh',
-  background: '#000000',
-  position: 'relative',
-  overflow: 'hidden',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  '&::before': {
+// Styled components
+const StyledContainer = styled(Container)(({ theme }) => ({
+  minHeight: "90vh",
+background: "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",  
+  position: "relative",
+  overflow: "hidden",
+  "&::before": {
     content: '""',
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    background: 'radial-gradient(circle at 25% 25%, rgba(0, 122, 255, 0.05) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(64, 224, 208, 0.05) 0%, transparent 50%)',
-    zIndex: 0,
+    pointerEvents: "none",
   },
 }));
 
-const FloatingElement = styled(Box)(({ theme }) => ({
-  position: 'absolute',
-  borderRadius: '50%',
-  filter: 'blur(40px)',
-  animation: `${pulseAnimation} 4s ease-in-out infinite`,
-  zIndex: 1,
-}));
-
-// Glass morphism card with enhanced hover effects
-const GlassCard = styled(Card)(({ theme }) => ({
-  background: 'rgba(255, 255, 255, 0.02)',
-  backdropFilter: 'blur(20px)',
-  border: '1px solid rgba(255, 255, 255, 0.08)',
-  borderRadius: theme.shape.borderRadius,
-  padding: theme.spacing(3),
-  position: 'relative',
-  overflow: 'hidden',
-  cursor: 'pointer',
-  transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
-  '&:hover': {
-    transform: 'translateY(-8px)',
-    background: 'rgba(255, 255, 255, 0.05)',
-    border: '1px solid rgba(255, 255, 255, 0.15)',
-    boxShadow: '0 20px 40px rgba(0, 122, 255, 0.1)',
-  },
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%)',
-    opacity: 0,
-    transition: 'opacity 0.3s ease',
-  },
-  '&:hover::before': {
-    opacity: 1,
-  },
-}));
-
-// Apple-style button with subtle animations
-const AppleButton = styled(Button)(({ theme }) => ({
-  background: 'rgba(255, 255, 255, 0.05)',
-  backdropFilter: 'blur(20px)',
-  border: '1px solid rgba(255, 255, 255, 0.15)',
-  borderRadius: 50,
-  padding: '16px 32px',
-  fontSize: '1rem',
-  fontWeight: 500,
-  letterSpacing: '0.01em',
-  color: '#ffffff',
-  textTransform: 'none',
-  position: 'relative',
-  overflow: 'hidden',
-  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-  '&:hover': {
-    background: 'rgba(255, 255, 255, 0.1)',
-    border: '1px solid rgba(255, 255, 255, 0.25)',
-    transform: 'translateY(-2px)',
-    boxShadow: '0 10px 30px rgba(0, 122, 255, 0.2)',
-  },
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    top: 0,
-    left: '-100%',
-    width: '100%',
-    height: '100%',
-    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent)',
-    transition: 'left 0.5s',
-  },
-  '&:hover::before': {
-    left: '100%',
-  },
-}));
-
-const GradientText = styled(Typography)(({ theme }) => ({
-  background: 'linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 50%, rgba(64, 224, 208, 0.8) 100%)',
-  WebkitBackgroundClip: 'text',
-  WebkitTextFillColor: 'transparent',
-  backgroundClip: 'text',
-  fontSize: "6rem"
-}));
-
-const IconContainer = styled(Box)(({ theme }) => ({
-  fontSize: '2.5rem',
+const LogoContainer = styled(Box)(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: 80,
+  height: 80,
+  borderRadius: "50%",
+  background: `linear-gradient(135deg, #00d4ff, #0066cc)`,
   marginBottom: theme.spacing(3),
-  transition: 'transform 0.3s ease',
-  '.MuiCard-root:hover &': {
-    transform: 'scale(1.1)',
+  position: "relative",
+  boxShadow: "0 8px 32px rgba(0, 212, 255, 0.3)",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: "70%",
+    height: "70%",
+    borderRadius: "50%",
+    background: "rgba(255, 255, 255, 0.1)",
+    backdropFilter: "blur(10px)",
   },
 }));
 
-const ArkosLandingPage = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [hoveredCard, setHoveredCard] = useState(null);
-  const navigate = useNavigate()
+const GlobeContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+  width: "100%",
+  height: 600,
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  "& .globe-wrapper": {
+    position: "relative",
+    width: 600,
+    height: 600,
+    borderRadius: "50%",
+    overflow: "hidden",
+    boxShadow: `
+      0 0 50px ${alpha("#00d4ff", 0.3)},
+      inset 0 0 30px ${alpha("#00d4ff", 0.1)}
+    `,
+  },
+  "& .globe-image": {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    borderRadius: "50%",
+  },
+}));
 
+const OrbitRing = styled(Box)(({ theme, size, duration, delay = 0 }) => ({
+  position: "absolute",
+  width: size,
+  height: size,
+  border: `1px solid ${alpha("#00d4ff", 0.3)}`,
+  borderRadius: "50%",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  animation: `rotate ${duration}s linear infinite`,
+  animationDelay: `${delay}s`,
+  "&::before": {
+    content: '""',
+    position: "absolute",
+    top: -3,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: 6,
+    height: 6,
+    borderRadius: "50%",
+    background: "#00d4ff",
+    boxShadow: `0 0 10px #00d4ff`,
+  },
+  "@keyframes rotate": {
+    "0%": { transform: "translate(-50%, -50%) rotate(0deg)" },
+    "100%": { transform: "translate(-50%, -50%) rotate(360deg)" },
+  },
+}));
 
-  const handleRoute = () => {
-    navigate("/portfolio")
-  }
+const AnimatedBackground = styled(Box)(() => ({
+  position: "absolute",
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background: `
+    radial-gradient(circle at 20% 80%, ${alpha(
+      "#00d4ff",
+      0.05
+    )} 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, ${alpha(
+      "#0066cc",
+      0.05
+    )} 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, ${alpha(
+      "#00d4ff",
+      0.03
+    )} 0%, transparent 50%)
+  `,
+  animation: "float 8s ease-in-out infinite",
+  "@keyframes float": {
+    "0%, 100%": { transform: "translateY(0px) scale(1)" },
+    "50%": { transform: "translateY(-10px) scale(1.02)" },
+  },
+}));
 
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 100);
-    return () => clearTimeout(timer);
-  }, []);
+const GlowingText = styled(Typography)(() => ({
+  background: "linear-gradient(135deg, #ffffff 0%, #00d4ff 100%)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  backgroundClip: "text",
+  filter: "drop-shadow(0 0 20px rgba(0, 212, 255, 0.3))",
+}));
 
-  const features = [
-    {
-      title: 'Real-Time Overview',
-      desc: 'Monitor permitting, design, and ROI for every development in your portfolio.',
-      icon: '📊',
-      delay: 200,
-    },
-    {
-      title: 'Simulation Tools',
-      desc: 'Activate generative AI scenarios, density projections, and ESG performance metrics.',
-      icon: '🎯',
-      delay: 400,
-    },
-    {
-      title: 'Collaborative Workflow',
-      desc: 'Approve layouts, provide feedback, and track milestones with stakeholders.',
-      icon: '🤝',
-      delay: 600,
-    },
-  ];
+const ArkOSComponent = () => {
+  const theme = useTheme();
 
   return (
-    <ThemeProvider theme={arkosTheme}>
-      <BackgroundContainer>
-        {/* Floating background elements */}
-        <FloatingElement
-          sx={{
-            top: '20%',
-            left: '15%',
-            width: 300,
-            height: 300,
-            background: 'rgba(0, 122, 255, 0.1)',
-            animationDelay: '0s',
-          }}
-        />
-        <FloatingElement
-          sx={{
-            bottom: '20%',
-            right: '15%',
-            width: 400,
-            height: 400,
-            background: 'rgba(64, 224, 208, 0.08)',
-            animationDelay: '2s',
-          }}
-        />
+    <StyledContainer maxWidth={false} disableGutters>
+      <AnimatedBackground />
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 8 }}>
+        <Grid container spacing={6} alignItems="center" minHeight="90vh">
+          {/* Left side - Content */}
+          <Grid item xs={12} md={6}>
+            <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+              {/* Logo */}
+               <Box
+                 component="img"
+                 src="/Commercial-Development/greenark-logo1.png"
+                 alt="Green Ark"
+                 sx={{ 
+                   height: "100%",
+                   width: "auto",
+                   maxHeight: "100%",
+                   objectFit: "contain",
+                   cursor: "pointer",
+                   position: 'relative',
+                   zIndex: 2,
+                   filter: 'drop-shadow(0 0 5px rgba(201,180,154,0.3))',
+                 }}
+               />
 
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2, py: 8 }}>
-          <Box sx={{ textAlign: 'center' }}>
-            
-            {/* Hero Title */}
-            <Fade in={isLoaded} timeout={800}>
-              <Box sx={{ mb: 6 }}>
-                <GradientText variant="h1" gutterBottom>
-                  ARKOS
-                </GradientText>
-                <Box
-                  sx={{
-                    width: 100,
-                    height: 1,
-                    background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent)',
-                    mx: 'auto',
-                    mt: 3,
-                  }}
-                />
-              </Box>
-            </Fade>
-
-            {/* Subtitle */}
-            <Fade in={isLoaded} timeout={1000} style={{ transitionDelay: '200ms' }}>
-              <Typography 
-                variant="h2" 
-                color="text.secondary" 
-                sx={{ 
-                  mb: 8,
-                  maxWidth: 800,
-                  mx: 'auto',
-                  px: 2,
+              {/* Main Title */}
+              <GlowingText
+                variant="h1"
+                sx={{
+                  fontSize: { xs: "3rem", md: "4rem", lg: "5rem" },
+                  fontWeight: 700,
+                  mb: 2,
+                  letterSpacing: "-0.02em",
+                  textShadow: "0 4px 8px rgba(0,0,0,0.5)",
                 }}
               >
-                The operational command center for intelligent real estate projects
-              </Typography>
-            </Fade>
+                ARK OS
+              </GlowingText>
 
-            {/* Feature Cards */}
-            <Grid container spacing={4} sx={{ mb: 8 }}>
-              {features.map((feature, index) => (
-                <Grid item xs={12} md={4} key={index}>
-                  <Grow
-                    in={isLoaded}
-                    timeout={800}
-                    style={{ transitionDelay: `${feature.delay}ms` }}
-                  >
-                    <GlassCard
-                      onMouseEnter={() => setHoveredCard(index)}
-                      onMouseLeave={() => setHoveredCard(null)}
-                    >
-                      <CardContent sx={{ p: 0 }}>
-                        <IconContainer>
-                          {feature.icon}
-                        </IconContainer>
-                        <Typography variant="h3" gutterBottom color="primary">
-                          {feature.title}
-                        </Typography>
-                        <Typography variant="body1" color="text.secondary">
-                          {feature.desc}
-                        </Typography>
-                      </CardContent>
-                    </GlassCard>
-                  </Grow>
-                </Grid>
-              ))}
-            </Grid>
-
-            {/* CTA Button */}
-            <Fade in={isLoaded} timeout={1000} style={{ transitionDelay: '800ms' }}>
-              <AppleButton
-                size="large"
-                endIcon={<ArrowForwardIcon />}
-                onClick={handleRoute}
+              {/* Subtitle */}
+              <Typography
+                variant="h4"
+                sx={{
+                  fontSize: { xs: "1.2rem", md: "1.5rem" },
+                  color: alpha("#ffffff", 0.9),
+                  fontWeight: 300,
+                  lineHeight: 1.4,
+                  maxWidth: { xs: "100%", md: "400px" },
+                  mx: { xs: "auto", md: 0 },
+                  textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                }}
               >
-                Launch ARKOS Demo
-              </AppleButton>
-            </Fade>
+                The generative brain behind every Green Ark development.
+              </Typography>
 
-          </Box>
-        </Container>
+              {/* Feature highlights */}
+              <Box
+                sx={{ mt: 4, display: "flex", flexDirection: "column", gap: 2 }}
+              >
+                <Paper
+                  elevation={0}
+                  sx={{
+                    background: alpha("#ffffff", 0.05),
+                    backdropFilter: "blur(20px)",
+                    border: `1px solid ${alpha("#00d4ff", 0.3)}`,
+                    borderRadius: 2,
+                    p: 2,
+                    display: "inline-block",
+                    boxShadow: `0 8px 32px ${alpha("#00d4ff", 0.1)}`,
+                  }}
+                >
+                  <Typography
+                    variant="body1"
+                    sx={{
+                      color: alpha("#ffffff", 0.9),
+                      fontWeight: 500,
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 1,
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        width: 8,
+                        height: 8,
+                        borderRadius: "50%",
+                        background: "#00d4ff",
+                        boxShadow: "0 0 10px #00d4ff",
+                      }}
+                    />
+                    Powered by Advanced AI Technology
+                  </Typography>
+                </Paper>
+              </Box>
+            </Box>
+          </Grid>
 
-        {/* Bottom accent line */}
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: 1,
-            background: 'linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)',
-          }}
-        />
-      </BackgroundContainer>
-    </ThemeProvider>
+          {/* Right side - Globe */}
+          <Grid item xs={12} md={6}>
+            <GlobeContainer>
+              <Box className="globe-wrapper">
+                <img
+                  src="/Commercial-Development/globe.avif"
+                  alt="Globe"
+                  className="globe-image"
+                />
+              </Box>
+            </GlobeContainer>
+          </Grid>
+        </Grid>
+      </Container>
+    </StyledContainer>
   );
 };
 
-export default ArkosLandingPage;
+export default ArkOSComponent;

@@ -28,6 +28,7 @@ import Matter from "../subpage-components/Matter";
 import Services from "../subpage-components/Services";
 import Offerings from "../subpage-components/Offerings";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import CryptoContent from "../subpage-components/CryptoContent";
 
 const ModernButton = styled(Button)(({ theme, variant: buttonVariant }) => ({
   borderRadius: "50px",
@@ -380,6 +381,9 @@ export default function Offer() {
           </Grid>
         </Container>
       </Box>
+
+      <CryptoContent />
+
     </Box>
   );
 }

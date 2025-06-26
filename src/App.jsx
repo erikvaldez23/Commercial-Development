@@ -165,7 +165,7 @@ export default function App() {
                       {/* </SlideUpReveal> */}
 
                       {/* <SlideUpReveal zIndex={6}> */}
-                        <Contact />
+                        {/* <Contact /> */}
                       {/* </SlideUpReveal> */}
                     </>
                   )}
