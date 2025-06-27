@@ -259,6 +259,7 @@ export default function HeroSection({ loadingDone }) {
                   fontWeight: 600,
                   py: 1.5,
                   px: 4,
+                  width: "250px",
                   "&:hover": {
                     background:
                       "linear-gradient(90deg, rgba(201,180,154,0.9) 0%, rgba(188,164,134,0.9) 100%)",
@@ -266,9 +267,8 @@ export default function HeroSection({ loadingDone }) {
                   },
                   transition: "all 0.3s ease",
                 }}
-                onClick={handleOpen}
               >
-                Start Investing
+                Explore Projects
               </Button>
 
               <Button
@@ -280,6 +280,7 @@ export default function HeroSection({ loadingDone }) {
                   fontWeight: 600,
                   py: 1.5,
                   px: 4,
+                  width: "250px",
                   "&:hover": {
                     borderColor: "#c9b49a",
                     background: "rgba(201,180,154,0.08)",
