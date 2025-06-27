@@ -1,263 +1,158 @@
-import React from "react";
-import {
-  Box,
-  Typography,
-  Container,
-  Grid,
+import React from 'react';
+import { 
+  Box, 
+  Typography, 
+  Container, 
+  Grid, 
   Paper,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   useTheme,
-  alpha,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+  useMediaQuery
+} from '@mui/material';
+import { 
+  Dashboard as DashboardIcon,
+  People as PeopleIcon,
+  Assessment as AssessmentIcon,
+  Psychology as PsychologyIcon
+} from '@mui/icons-material';
 
-// Styled components
-const StyledContainer = styled(Container)(({ theme }) => ({
-  minHeight: "90vh",
-background: "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",  
-  position: "relative",
-  overflow: "hidden",
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    pointerEvents: "none",
-  },
-}));
-
-const LogoContainer = styled(Box)(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: 80,
-  height: 80,
-  borderRadius: "50%",
-  background: `linear-gradient(135deg, #00d4ff, #0066cc)`,
-  marginBottom: theme.spacing(3),
-  position: "relative",
-  boxShadow: "0 8px 32px rgba(0, 212, 255, 0.3)",
-  "&::after": {
-    content: '""',
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: "70%",
-    height: "70%",
-    borderRadius: "50%",
-    background: "rgba(255, 255, 255, 0.1)",
-    backdropFilter: "blur(10px)",
-  },
-}));
-
-const GlobeContainer = styled(Box)(({ theme }) => ({
-  position: "relative",
-  width: "100%",
-  height: 600,
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "center",
-  "& .globe-wrapper": {
-    position: "relative",
-    width: 600,
-    height: 600,
-    borderRadius: "50%",
-    overflow: "hidden",
-    boxShadow: `
-      0 0 50px ${alpha("#00d4ff", 0.3)},
-      inset 0 0 30px ${alpha("#00d4ff", 0.1)}
-    `,
-  },
-  "& .globe-image": {
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    borderRadius: "50%",
-  },
-}));
-
-const OrbitRing = styled(Box)(({ theme, size, duration, delay = 0 }) => ({
-  position: "absolute",
-  width: size,
-  height: size,
-  border: `1px solid ${alpha("#00d4ff", 0.3)}`,
-  borderRadius: "50%",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  animation: `rotate ${duration}s linear infinite`,
-  animationDelay: `${delay}s`,
-  "&::before": {
-    content: '""',
-    position: "absolute",
-    top: -3,
-    left: "50%",
-    transform: "translateX(-50%)",
-    width: 6,
-    height: 6,
-    borderRadius: "50%",
-    background: "#00d4ff",
-    boxShadow: `0 0 10px #00d4ff`,
-  },
-  "@keyframes rotate": {
-    "0%": { transform: "translate(-50%, -50%) rotate(0deg)" },
-    "100%": { transform: "translate(-50%, -50%) rotate(360deg)" },
-  },
-}));
-
-const AnimatedBackground = styled(Box)(() => ({
-  position: "absolute",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  background: `
-    radial-gradient(circle at 20% 80%, ${alpha(
-      "#00d4ff",
-      0.05
-    )} 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, ${alpha(
-      "#0066cc",
-      0.05
-    )} 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, ${alpha(
-      "#00d4ff",
-      0.03
-    )} 0%, transparent 50%)
-  `,
-  animation: "float 8s ease-in-out infinite",
-  "@keyframes float": {
-    "0%, 100%": { transform: "translateY(0px) scale(1)" },
-    "50%": { transform: "translateY(-10px) scale(1.02)" },
-  },
-}));
-
-const GlowingText = styled(Typography)(() => ({
-  background: "linear-gradient(135deg, #ffffff 0%, #00d4ff 100%)",
-  WebkitBackgroundClip: "text",
-  WebkitTextFillColor: "transparent",
-  backgroundClip: "text",
-  filter: "drop-shadow(0 0 20px rgba(0, 212, 255, 0.3))",
-}));
-
-const ArkOSComponent = () => {
+const ArkOSHero = () => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const features = [
+    {
+      icon: <DashboardIcon />,
+      text: "Real-time dashboards of every project"
+    },
+    {
+      icon: <PeopleIcon />,
+      text: "Stakeholder collaboration portals"
+    },
+    {
+      icon: <AssessmentIcon />,
+      text: "ESG tracking and permit intelligence"
+    },
+    {
+      icon: <PsychologyIcon />,
+      text: "AI alerts for risks, delays, and optimization"
+    }
+  ];
 
   return (
-    <StyledContainer maxWidth={false} disableGutters>
-      <AnimatedBackground />
-      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 1, py: 8 }}>
-        <Grid container spacing={6} alignItems="center" minHeight="90vh">
-          {/* Left side - Content */}
+    <Box
+      sx={{
+        backgroundColor: '#000',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        py: 4
+      }}
+    >
+      <Container maxWidth="xl">
+        <Grid container spacing={4} alignItems="center">
+          {/* Left side - Image */}
           <Grid item xs={12} md={6}>
-            <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
-              {/* Logo */}
-               <Box
-                 component="img"
-                 src="/Commercial-Development/greenark-logo1.png"
-                 alt="Green Ark"
-                 sx={{ 
-                   height: "100%",
-                   width: "auto",
-                   maxHeight: "100%",
-                   objectFit: "contain",
-                   cursor: "pointer",
-                   position: 'relative',
-                   zIndex: 2,
-                   filter: 'drop-shadow(0 0 5px rgba(201,180,154,0.3))',
-                 }}
-               />
+          <Box
+  sx={{
+    width: '90%',
+    height: 800,
+    borderRadius: 4,
+    overflow: 'hidden',
+    backgroundImage: 'url(/Commercial-Development/coin2.png)',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    filter: "drop-shadow(0 0 40px rgba(201, 180, 154, 0.4))",
+  }}
+/>
 
-              {/* Main Title */}
-              <GlowingText
-                variant="h1"
-                sx={{
-                  fontSize: { xs: "3rem", md: "4rem", lg: "5rem" },
-                  fontWeight: 700,
-                  mb: 2,
-                  letterSpacing: "-0.02em",
-                  textShadow: "0 4px 8px rgba(0,0,0,0.5)",
-                }}
-              >
-                ARK OS
-              </GlowingText>
-
-              {/* Subtitle */}
+          </Grid>
+          {/* Right side - Content */}
+          <Grid item xs={12} md={6}>
+            <Box sx={{ pl: isMobile ? 0 : 4 }}>
               <Typography
-                variant="h4"
+                variant="h1"
+                component="h1"
                 sx={{
-                  fontSize: { xs: "1.2rem", md: "1.5rem" },
-                  color: alpha("#ffffff", 0.9),
-                  fontWeight: 300,
-                  lineHeight: 1.4,
-                  maxWidth: { xs: "100%", md: "400px" },
-                  mx: { xs: "auto", md: 0 },
-                  textShadow: "0 2px 4px rgba(0,0,0,0.3)",
+                  color: 'white',
+                  fontWeight: 900,
+                  mb: 4,
+                  fontSize: { xs: '2.5rem', md: '5rem' },
+                  lineHeight: 1.1,
+                  letterSpacing: '-0.02em'
                 }}
               >
-                The generative brain behind every Green Ark development.
+                ARK OS<br />
+                <Box component="span" sx={{ color: '#c9b49a', fontSize: "4rem" }}>
+                COMMAND THE FUTURE OF DEVELOPMENT
+                </Box>
               </Typography>
 
-              {/* Feature highlights */}
-              <Box
-                sx={{ mt: 4, display: "flex", flexDirection: "column", gap: 2 }}
+              <Typography
+                variant="h6"
+                sx={{
+                  color: '#b0b0b0',
+                  mb: 4,
+                  lineHeight: 1.6,
+                  fontWeight: 400
+                }}
               >
-                <Paper
-                  elevation={0}
-                  sx={{
-                    background: alpha("#ffffff", 0.05),
-                    backdropFilter: "blur(20px)",
-                    border: `1px solid ${alpha("#00d4ff", 0.3)}`,
-                    borderRadius: 2,
-                    p: 2,
-                    display: "inline-block",
-                    boxShadow: `0 8px 32px ${alpha("#00d4ff", 0.1)}`,
-                  }}
-                >
-                  <Typography
-                    variant="body1"
+                ArkOS is the operational brain of every Green Ark project. From dashboard overviews to ESG data, stakeholder approvals to timeline risks — it's all managed in one AI-powered hub.
+              </Typography>
+
+              <Typography
+                variant="h6"
+                sx={{
+                  color: 'white',
+                  fontWeight: 'bold',
+                  mb: 2
+                }}
+              >
+                Key Features:
+              </Typography>
+
+              <List sx={{ p: 0 }}>
+                {features.map((feature, index) => (
+                  <ListItem
+                    key={index}
                     sx={{
-                      color: alpha("#ffffff", 0.9),
-                      fontWeight: 500,
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 1,
+                      px: 0,
+                      py: 1,
+                      '&:hover': {
+                        backgroundColor: 'rgba(76, 175, 80, 0.1)',
+                        borderRadius: 2,
+                        transition: 'all 0.3s ease'
+                      }
                     }}
                   >
-                    <Box
+                    <ListItemIcon
                       sx={{
-                        width: 8,
-                        height: 8,
-                        borderRadius: "50%",
-                        background: "#00d4ff",
-                        boxShadow: "0 0 10px #00d4ff",
+                        color: '#ff5722',
+                        minWidth: 40
+                      }}
+                    >
+                      {feature.icon}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={feature.text}
+                      primaryTypographyProps={{
+                        color: '#e0e0e0',
+                        fontWeight: 600,
+                        fontSize: '1.1rem'
                       }}
                     />
-                    Powered by Advanced AI Technology
-                  </Typography>
-                </Paper>
-              </Box>
+                  </ListItem>
+                ))}
+              </List>
             </Box>
-          </Grid>
-
-          {/* Right side - Globe */}
-          <Grid item xs={12} md={6}>
-            <GlobeContainer>
-              <Box className="globe-wrapper">
-                <img
-                  src="/Commercial-Development/globe.avif"
-                  alt="Globe"
-                  className="globe-image"
-                />
-              </Box>
-            </GlobeContainer>
           </Grid>
         </Grid>
       </Container>
-    </StyledContainer>
+    </Box>
   );
 };
 
-export default ArkOSComponent;
+export default ArkOSHero;
