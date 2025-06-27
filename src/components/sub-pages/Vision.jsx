@@ -1,11 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import {
-  motion,
-  useAnimation,
-  useInView,
-  AnimatePresence,
-} from "framer-motion";
-import {
   Box,
   Typography,
   Container,
@@ -15,57 +9,47 @@ import {
   CardContent,
   useMediaQuery,
   Paper,
-  Fade,
   Chip,
   Stack,
-  Divider,
   Avatar,
   IconButton,
+  Fade,
+  Grow,
 } from "@mui/material";
 import { styled, useTheme } from "@mui/material/styles";
-import EuroIcon from "@mui/icons-material/Euro";
-import ApartmentIcon from "@mui/icons-material/Apartment";
-import InventoryIcon from "@mui/icons-material/Inventory";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import SecurityIcon from "@mui/icons-material/Security";
-import FlashOnIcon from "@mui/icons-material/FlashOn";
-import PublicIcon from "@mui/icons-material/Public";
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
-
-// Simulated Lottie component
-const Lottie = ({ animationData, loop, autoplay, style }) => (
-  <Box
-    sx={{
-      ...style,
-      backgroundColor: "rgba(201, 180, 154, 0.1)",
-      borderRadius: "50%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      fontSize: "4rem",
-      border: "2px solid rgba(201, 180, 154, 0.3)",
-    }}
-  >
-    🪙
-  </Box>
-);
-
-const coinAnimation = {};
-const primaryColor = "#c9b49a";
+import {
+  Visibility,
+  Timeline,
+  Architecture,
+  Speed,
+  LocationCity,
+  WbSunny,
+  Air,
+  Traffic,
+  Assessment,
+  CloudDownload,
+  PlayArrow,
+  AutoAwesome,
+  Engineering,
+  TrendingUp,
+} from "@mui/icons-material";
+import GradeOutlinedIcon from "@mui/icons-material/GradeOutlined";
+import CallToAction from "../key-components/CallToAction";
 
 // Styled Components
 const GradientText = styled(Typography)(({ theme }) => ({
-  background: "linear-gradient(45deg, #c9b49a 30%, #f4e4bc 90%)",
+  background: "linear-gradient(45deg, #c9b49a 30%, #c9b49a 90%)",
   WebkitBackgroundClip: "text",
   WebkitTextFillColor: "transparent",
   backgroundClip: "text",
+  fontWeight: 700,
 }));
 
 const GlassCard = styled(Card)(({ theme }) => ({
-  background: "rgba(255, 255, 255, 0.05)",
+  background: "rgba(255, 255, 255, 0.03)",
   backdropFilter: "blur(20px)",
   border: "1px solid rgba(201, 180, 154, 0.1)",
-  borderRadius: "20px",
+  borderRadius: "24px",
   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
   position: "relative",
   overflow: "hidden",
@@ -73,7 +57,7 @@ const GlassCard = styled(Card)(({ theme }) => ({
     background: "rgba(255, 255, 255, 0.08)",
     border: "1px solid rgba(201, 180, 154, 0.3)",
     transform: "translateY(-8px)",
-    boxShadow: "0 20px 40px rgba(201, 180, 154, 0.1)",
+    boxShadow: "0 20px 40px rgba(201, 180, 154, 0.15)",
   },
   "&::before": {
     content: '""',
@@ -92,6 +76,17 @@ const GlassCard = styled(Card)(({ theme }) => ({
   },
 }));
 
+const FeatureCard = styled(GlassCard)(({ theme }) => ({
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  cursor: "pointer",
+  "&:hover .feature-icon": {
+    transform: "scale(1.1) rotate(5deg)",
+    color: "#c9b49a",
+  },
+}));
+
 const ModernButton = styled(Button)(({ theme, variant: buttonVariant }) => ({
   borderRadius: "50px",
   padding: "16px 32px",
@@ -103,10 +98,10 @@ const ModernButton = styled(Button)(({ theme, variant: buttonVariant }) => ({
   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
   ...(buttonVariant === "gradient"
     ? {
-        background: "linear-gradient(45deg, #c9b49a 30%, #f4e4bc 90%)",
+        background: "linear-gradient(45deg, #c9b49a 30%, #c9b49a 90%)",
         color: "#000",
         "&:hover": {
-          background: "linear-gradient(45deg, #b8a389 30%, #e6d4a8 90%)",
+          background: "linear-gradient(45deg, #c9b49a 30%, #c9b49a 90%)",
           transform: "scale(1.05)",
           boxShadow: "0 10px 30px rgba(201, 180, 154, 0.3)",
         },
@@ -121,109 +116,83 @@ const ModernButton = styled(Button)(({ theme, variant: buttonVariant }) => ({
       }),
 }));
 
-const StatsCard = styled(Paper)(({ theme }) => ({
-  background: "rgba(0, 0, 0, 0.4)",
-  backdropFilter: "blur(10px)",
-  border: "1px solid rgba(255, 255, 255, 0.1)",
-  borderRadius: "16px",
-  padding: theme.spacing(3),
-  textAlign: "center",
-  transition: "all 0.3s ease",
-  "&:hover": {
-    transform: "translateY(-4px)",
-    border: "1px solid rgba(201, 180, 154, 0.3)",
-  },
-}));
+const FloatingParticles = () => (
+  <Box
+    sx={{
+      position: "absolute",
+      inset: 0,
+      overflow: "hidden",
+      pointerEvents: "none",
+    }}
+  >
+    {[...Array(20)].map((_, i) => (
+      <Box
+        key={i}
+        sx={{
+          position: "absolute",
+          width: `${Math.random() * 6 + 2}px`,
+          height: `${Math.random() * 6 + 2}px`,
+          background:
+            i % 3 === 0
+              ? "linear-gradient(45deg, rgba(201,180,154,0.6), rgba(201,180,154,0.4))"
+              : "rgba(201,180,154,0.3)",
+          borderRadius: "50%",
+          left: `${Math.random() * 100}%`,
+          animation: `float ${Math.random() * 10 + 8}s infinite linear`,
+          animationDelay: `${Math.random() * 5}s`,
+        }}
+      />
+    ))}
+    <style jsx>{`
+      @keyframes float {
+        from {
+          transform: translateY(100vh) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        to {
+          transform: translateY(-100px) rotate(360deg);
+          opacity: 0;
+        }
+      }
+    `}</style>
+  </Box>
+);
 
-const ProcessCard = styled(GlassCard)(({ theme }) => ({
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  position: "relative",
-  "&::after": {
-    content: '""',
-    position: "absolute",
-    top: "50%",
-    right: "-20px",
-    width: "40px",
-    height: "2px",
-    background: "linear-gradient(90deg, #c9b49a, transparent)",
-    transform: "translateY(-50%)",
-    [theme.breakpoints.down("lg")]: {
-      display: "none",
-    },
-  },
-  "&:last-child::after": {
-    display: "none",
-  },
-}));
-
-// Floating particles component
-const FloatingParticles = () => {
-  return (
-    <Box
-      sx={{
-        position: "absolute",
-        inset: 0,
-        overflow: "hidden",
-        pointerEvents: "none",
-      }}
-    >
-      {[...Array(15)].map((_, i) => (
-        <Box
-          key={i}
-          component={motion.div}
-          sx={{
-            position: "absolute",
-            width: "4px",
-            height: "4px",
-            background:
-              "linear-gradient(45deg, rgba(201, 180, 154, 0.6), rgba(244, 228, 188, 0.4))",
-            borderRadius: "50%",
-            left: `${Math.random() * 100}%`,
-          }}
-          initial={{
-            y: "100vh",
-            opacity: 0,
-          }}
-          animate={{
-            y: "-100px",
-            opacity: [0, 1, 0],
-          }}
-          transition={{
-            duration: Math.random() * 8 + 6,
-            repeat: Infinity,
-            ease: "linear",
-            delay: Math.random() * 5,
-          }}
-        />
-      ))}
-    </Box>
-  );
-};
-
-// Counter component
-const CounterNumber = ({ end, duration = 2, suffix = "" }) => {
+const AnimatedCounter = ({ end, duration = 2, suffix = "" }) => {
   const [count, setCount] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const ref = useRef();
-  const inView = useInView(ref);
 
   useEffect(() => {
-    if (inView) {
-      let start = 0;
-      const increment = end / (duration * 60);
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setCount(end);
-          clearInterval(timer);
-        } else {
-          setCount(Math.floor(start));
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          let start = 0;
+          const increment = end / (duration * 60);
+          const timer = setInterval(() => {
+            start += increment;
+            if (start >= end) {
+              setCount(end);
+              clearInterval(timer);
+            } else {
+              setCount(Math.floor(start));
+            }
+          }, 1000 / 60);
+          return () => clearInterval(timer);
         }
-      }, 1000 / 60);
-      return () => clearInterval(timer);
-    }
-  }, [inView, end, duration]);
+      },
+      { threshold: 0.1 }
+    );
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, [end, duration, hasAnimated]);
 
   return (
     <span ref={ref}>
@@ -233,58 +202,69 @@ const CounterNumber = ({ end, duration = 2, suffix = "" }) => {
   );
 };
 
-export default function ModernizedHow() {
+export default function ModernArkVision() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [loaded, setLoaded] = useState(false);
-  const [activeCard, setActiveCard] = useState(null);
+  const [activeFeature, setActiveFeature] = useState(null);
 
   useEffect(() => {
     setLoaded(true);
   }, []);
 
-  const processSteps = [
+  const keyFeatures = [
     {
-      icon: <EuroIcon sx={{ fontSize: 48, color: primaryColor }} />,
-      title: "Buy ARK",
+      icon: (
+        <Architecture
+          className="feature-icon"
+          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+        />
+      ),
+      title: "AI-Generated Site Planning",
       description:
-        "Purchase ARK tokens through our secure platform with multiple payment options and instant verification.",
-      color: "linear-gradient(135deg, #ffd700 0%, #ffed4e 100%)",
+        "Advanced algorithms analyze zoning data and terrain to create optimal site layouts automatically.",
+      color: "#c9b49a",
+      gradient: "linear-gradient(135deg, #c9b49a 0%, #c9b49a 100%)",
     },
     {
-      icon: <ApartmentIcon sx={{ fontSize: 48, color: primaryColor }} />,
-      title: "Access Projects",
+      icon: (
+        <WbSunny
+          className="feature-icon"
+          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+        />
+      ),
+      title: "Environmental Simulation",
       description:
-        "Unlock exclusive real estate investment opportunities and curated project portfolios worldwide.",
-      color: "linear-gradient(135deg, #4fc3f7 0%, #29b6f6 100%)",
+        "Real-time sunlight, wind patterns, and traffic flow analysis for optimal building placement.",
+      color: "#ff9800", // leave non-blue tones
+      gradient: "linear-gradient(135deg, #ff9800 0%, #f57c00 100%)",
     },
     {
-      icon: <InventoryIcon sx={{ fontSize: 48, color: primaryColor }} />,
-      title: "Earn Rewards",
+      icon: (
+        <Assessment
+          className="feature-icon"
+          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+        />
+      ),
+      title: "ESG Optimization",
       description:
-        "Stake your tokens and earn passive income through our automated reward distribution system.",
-      color: "linear-gradient(135deg, #81c784 0%, #66bb6a 100%)",
+        "Built-in ESG scoring system that refines designs for maximum sustainability impact.",
+      color: "#4caf50",
+      gradient: "linear-gradient(135deg, #4caf50 0%, #388e3c 100%)",
     },
     {
-      icon: <CheckCircleIcon sx={{ fontSize: 48, color: primaryColor }} />,
-      title: "Vote & Govern",
+      icon: (
+        <CloudDownload
+          className="feature-icon"
+          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+        />
+      ),
+      title: "ArkOS Integration",
       description:
-        "Participate in governance decisions and shape the future direction of the platform and investments.",
-      color: "linear-gradient(135deg, #ba68c8 0%, #ab47bc 100%)",
+        "Seamlessly export designs directly to ArkOS for live build tracking and project management.",
+      color: "#9c27b0",
+      gradient: "linear-gradient(135deg, #9c27b0 0%, #7b1fa2 100%)",
     },
-  ];
-
-  const stats = [
-    { number: 150, suffix: "M+", label: "Total Value Locked" },
-    { number: 25, suffix: "K+", label: "Active Investors" },
-    { number: 98, suffix: "%", label: "Satisfaction Rate" },
-    { number: 12, suffix: "+", label: "Countries Served" },
-  ];
-
-  const trustIndicators = [
-    { icon: <SecurityIcon />, label: "Bank-level Security", color: "#4caf50" },
-    { icon: <FlashOnIcon />, label: "Instant Access", color: "#2196f3" },
-    { icon: <PublicIcon />, label: "Global Platform", color: "#9c27b0" },
   ];
 
   return (
@@ -299,87 +279,142 @@ export default function ModernizedHow() {
     >
       <FloatingParticles />
 
-      {/* Hero Section */}
-      <Box
-        component={motion.section}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        sx={{
-          height: "75vh",
-          display: "flex",
-          flexDirection: "column",
-          position: "relative",
-          background:
-            "radial-gradient(circle at 50% 50%, rgba(201, 180, 154, 0.1) 0%, transparent 70%)",
-          mt: 10,
-        }}
-      >
-        {/* Background gradients */}
-        <Box
-          sx={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(135deg, #000 0%, #1a1a1a 50%, #000 100%)",
-            zIndex: -1,
-          }}
-        />
-
-        <Container
-          maxWidth="lg"
-          sx={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center",
-            py: 8,
-          }}
-        >
-          <Box>
-            {/* Logo Icon */}
-            <Box
-              component="img"
-              src="/Commercial-Development/arkvision-logo.png" // Replace with your icon path
-              alt="ARKVISION Logo"
+      <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
+        {/* Hero */}
+        <Fade in={loaded} timeout={1000}>
+          <Box sx={{ textAlign: "center", py: { xs: 8, md: 18 } }}>
+            <Avatar
               sx={{
-                width: "64px",
-                height: "64px",
-                mb: 2,
+                width: 120,
+                height: 120,
+                background: "linear-gradient(45deg, #c9b49a 30%, #c9b49a 90%)",
+                fontSize: "3rem",
                 mx: "auto",
-              }}
-            />
-
-            {/* Title */}
-            <Typography
-              variant="h2"
-              sx={{
-                fontWeight: 700,
-                fontSize: { xs: "2.5rem", sm: "3rem", md: "4rem" },
-                letterSpacing: "1px",
-                color: "white",
-                mb: 1,
+                mb: 2,
+                boxShadow: "0 0 40px rgba(201,180,154,0.3)",
+                animation: "pulse 2s infinite",
               }}
             >
+              <AutoAwesome sx={{ fontSize: "3rem" }} />
+            </Avatar>
+            <GradientText
+              variant="h1"
+              sx={{ fontSize: { xs: "3rem", sm: "4rem", md: "5rem" } }}
+            >
               ARKVISION™
-            </Typography>
-
-            {/* Subtitle */}
+            </GradientText>
             <Typography
-              variant="h6"
-              sx={{
-                color: "#29b6f6",
-                fontWeight: 400,
-                fontSize: { xs: "1rem", sm: "1.2rem" },
-                letterSpacing: "0.5px",
-              }}
+              variant="h4"
+              sx={{ color: "rgba(255,255,255,0.8)", mb: 3, fontWeight: 300 }}
             >
               AI Urban Planning Layer
             </Typography>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "rgba(255,255,255,0.7)",
+                mb: 6,
+                maxWidth: "800px",
+                mx: "auto",
+                lineHeight: 1.6,
+              }}
+            >
+              The generative brain behind every Green Ark development. Our
+              proprietary AI design platform simulates, optimizes, and generates
+              entire developments before a single shovel hits the ground.
+            </Typography>
+            <Stack
+              direction={{ xs: "column", sm: "row" }}
+              spacing={3}
+              justifyContent="center"
+            >
+              <ModernButton
+                variant="gradient"
+                size="large"
+                startIcon={<PlayArrow />}
+                sx={{ minWidth: 200 }}
+              >
+                See Demo
+              </ModernButton>
+              <ModernButton
+                variant="outlined"
+                size="large"
+                startIcon={<Engineering />}
+                sx={{ minWidth: 200 }}
+              >
+                Learn More
+              </ModernButton>
+            </Stack>
           </Box>
-        </Container>
-      </Box>
+        </Fade>
+
+        {/* Features */}
+        <Box sx={{ mb: 10 }}>
+          <Typography
+            variant="h3"
+            sx={{ textAlign: "center", mb: 2, fontWeight: 700 }}
+          >
+            Key Features
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              textAlign: "center",
+              mb: 6,
+              color: "rgba(255,255,255,0.7)",
+              maxWidth: "600px",
+              mx: "auto",
+            }}
+          >
+            Cutting-edge AI technology that revolutionizes urban development
+            planning
+          </Typography>
+          <Grid container spacing={4}>
+            {keyFeatures.map((f, idx) => (
+              <Grid item xs={12} md={6} key={idx}>
+                <Grow in={loaded} timeout={1000 + idx * 200}>
+                  <FeatureCard
+                    onMouseEnter={() => setActiveFeature(idx)}
+                    onMouseLeave={() => setActiveFeature(null)}
+                  >
+                    <CardContent sx={{ p: 4, height: "100%" }}>
+                      <Box
+                        sx={{
+                          width: 80,
+                          height: 80,
+                          borderRadius: "20px",
+                          background: f.gradient,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          mb: 3,
+                          color: "white",
+                        }}
+                      >
+                        {f.icon}
+                      </Box>
+                      <Typography
+                        variant="h5"
+                        sx={{
+                          fontWeight: 600,
+                          mb: 2,
+                          color: activeFeature === idx ? "#c9b49a" : "white",
+                        }}
+                      >
+                        {f.title}
+                      </Typography>
+                      <Typography sx={{ color: "rgba(255,255,255,0.7)" }}>
+                        {f.description}
+                      </Typography>
+                    </CardContent>
+                  </FeatureCard>
+                </Grow>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+      </Container>
+      <CallToAction />
     </Box>
   );
 }

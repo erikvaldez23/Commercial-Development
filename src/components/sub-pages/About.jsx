@@ -22,6 +22,7 @@ import {
   Mail,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
+import CallToAction from "../key-components/CallToAction";
 
 const FloatingParticles = () => {
   return (
@@ -444,6 +445,7 @@ export default function AboutUs() {
           </Grid>
         </Box>
       </Container>
+      <CallToAction />
     </Box>
   );
 }

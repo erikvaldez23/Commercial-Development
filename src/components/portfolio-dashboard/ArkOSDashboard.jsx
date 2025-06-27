@@ -50,6 +50,7 @@ import {
   TrendingUp,
   Assignment,
 } from "@mui/icons-material";
+import CallToAction from "../key-components/CallToAction";
 
 // Apple-inspired Material UI theme
 const appleTheme = createTheme({
@@ -1377,6 +1378,7 @@ const AppleArkOSDashboard = () => {
         }}
       >
         {renderPage()}
+        <CallToAction /> 
       </Box>
     </ThemeProvider>
   );
