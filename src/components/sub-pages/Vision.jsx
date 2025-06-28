@@ -282,7 +282,7 @@ export default function ModernArkVision() {
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         {/* Hero */}
         <Fade in={loaded} timeout={1000}>
-          <Box sx={{ textAlign: "center", py: { xs: 8, md: 18 } }}>
+          <Box sx={{ textAlign: "center", py: { xs: 8, md: 30 } }}>
             <Avatar
               sx={{
                 width: 120,
@@ -299,21 +299,18 @@ export default function ModernArkVision() {
             </Avatar>
             <GradientText
               variant="h1"
-              sx={{ fontSize: { xs: "3rem", sm: "4rem", md: "5rem" } }}
+              sx={{ 
+                fontSize: { xs: "3rem", sm: "4rem", md: "5rem" },
+                pb: 2,
+            }}
             >
               ARKVISION™
             </GradientText>
             <Typography
-              variant="h4"
-              sx={{ color: "rgba(255,255,255,0.8)", mb: 3, fontWeight: 300 }}
-            >
-              AI Urban Planning Layer
-            </Typography>
-            <Typography
               variant="h6"
               sx={{
                 color: "rgba(255,255,255,0.7)",
-                mb: 6,
+                pb: 2,
                 maxWidth: "800px",
                 mx: "auto",
                 lineHeight: 1.6,
