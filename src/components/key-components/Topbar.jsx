@@ -24,7 +24,7 @@ const navItems = [
   { label: "Ark OS", path: "/Commercial-Development/#/portfolio" },
   { label: "Ark Crypto", path: "/Commercial-Development/#/ark-crypto" },
   { label: "Our Story", path: "/Commercial-Development/#/about" },
-  { label: "Get In Touch", path: "/contact", isAnchor: true },
+  { label: "Get In Touch", path: "/Commercial-Development/#/contact" },
 ];
 
 // The "pill" wrapper with enhanced styling
