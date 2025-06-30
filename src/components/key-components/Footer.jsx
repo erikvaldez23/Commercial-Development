@@ -194,7 +194,7 @@ const Footer = () => {
               lineHeight: 1.6,
             }}
           >
-            Pioneering sustainable solutions for a better tomorrow
+            Tomorrows Sustainability Today
           </Typography>
         </Box>
 
