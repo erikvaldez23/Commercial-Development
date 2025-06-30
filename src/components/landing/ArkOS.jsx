@@ -114,8 +114,8 @@ const ArkOSHero = () => {
                 sx={{
                   color: "white",
                   fontWeight: 900,
-                  mb: 3,
-                  fontSize: { xs: "2.5rem", md: "4rem" },
+                  mb: 1,
+                  fontSize: { xs: "2.5rem", md: "5rem" },
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",
                   background:
@@ -133,7 +133,7 @@ const ArkOSHero = () => {
                 sx={{
                   color: "#c9b49a",
                   fontWeight: 700,
-                  mb: 4,
+                  mb: 1,
                   fontSize: { xs: "1.5rem", md: "2rem" },
                   lineHeight: 1.2,
                 }}
@@ -148,7 +148,7 @@ const ArkOSHero = () => {
                   mb: 4,
                   lineHeight: 1.7,
                   fontWeight: 400,
-                  fontSize: "1.1rem",
+                  fontSize: "1.5rem",
                 }}
               >
                 ArkOS is the operational brain of every Green Ark project. From
@@ -216,7 +216,7 @@ const ArkOSHero = () => {
                         backgroundColor: "rgba(255,255,255,0.03)",
                         backdropFilter: "blur(10px)",
                         border: "1px solid rgba(255,255,255,0.1)",
-                        borderRadius: 3,
+                        borderRadius: 20,
                         transition: "all 0.4s cubic-bezier(0.23, 1, 0.320, 1)",
                         "&:hover": {
                           backgroundColor: "rgba(255,255,255,0.08)",
@@ -230,7 +230,7 @@ const ArkOSHero = () => {
                         <Box
                           sx={{
                             display: "flex",
-                            alignItems: "flex-start",
+                            alignItems: "center",
                             gap: 2,
                           }}
                         >

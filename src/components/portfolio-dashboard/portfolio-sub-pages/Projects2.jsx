@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import {
   Box,
   Typography,
@@ -13,11 +13,11 @@ import {
   Fade,
   Grow,
   createTheme,
-  useTheme,
   ThemeProvider,
   CssBaseline,
 } from "@mui/material";
 import { LocationOn, ArrowForward } from "@mui/icons-material";
+import FilterBar from "../Filter";
 
 const appleTheme = createTheme({
   palette: {
@@ -152,7 +152,7 @@ const appleTheme = createTheme({
       styleOverrides: {
         root: {
           backdropFilter: "blur(10px)",
-          border: "1px solid rgba(255, 255, 255, 0.2)",
+          border: "rgba(255, 255, 255, 0.4)",
         },
       },
     },
@@ -172,7 +172,6 @@ const appleTheme = createTheme({
   },
 });
 
-// Mock data
 const projectsData = [
   {
     id: 1,
@@ -184,7 +183,10 @@ const projectsData = [
     timeline: "30.95 - 29.25",
     status: "Active",
     color: "#c9b49a",
+    size: "15,000 sq ft",
+    investment: "$1.2M",
     description: "Modern commercial tower with sustainable features",
+    category: "Office",
   },
   {
     id: 2,
@@ -196,7 +198,10 @@ const projectsData = [
     timeline: "31.05 - 32.12",
     status: "Active",
     color: "#c9b49a",
+    size: "32,000 sq ft",
+    investment: "$2.8M",
     description: "Mixed-use development with retail and office spaces",
+    category: "Mixed-Use",
   },
   {
     id: 3,
@@ -208,7 +213,10 @@ const projectsData = [
     timeline: "31.08 - 33.02",
     status: "Pending",
     color: "#c9b49a",
+    size: "32,000 sq ft",
+    investment: "$2.8M",
     description: "Eco-friendly commercial plaza with green technologies",
+    category: "Retail",
   },
   {
     id: 4,
@@ -220,25 +228,116 @@ const projectsData = [
     timeline: "31.03 - 32.08",
     status: "Review",
     color: "#c9b49a",
+    size: "32,000 sq ft",
+    investment: "$2.8M",
     description: "Technology center for startups and innovation",
+    category: "Office",
+  },
+  {
+    id: 5,
+    name: "Industrial Park",
+    location: "Ogun State, Nigeria",
+    phase: "Construction",
+    progress: 60,
+    budget: "$5.5M",
+    timeline: "30.12 - 32.06",
+    status: "Active",
+    color: "#c9b49a",
+    size: "45,000 sq ft",
+    investment: "$3.2M",
+    description: "Modern industrial facility with logistics center",
+    category: "Industrial",
+  },
+  {
+    id: 6,
+    name: "Shopping District",
+    location: "Port Harcourt, Nigeria",
+    phase: "Design",
+    progress: 25,
+    budget: "$3.8M",
+    timeline: "31.06 - 33.01",
+    status: "Pending",
+    color: "#c9b49a",
+    size: "28,000 sq ft",
+    investment: "$2.1M",
+    description: "Premium retail and entertainment complex",
+    category: "Retail",
   },
 ];
 
 const ProjectsPage = ({ onNavigate }) => {
   const [visible, setVisible] = useState(false);
+  const [filters, setFilters] = useState({
+    category: "All",
+    status: "All Statuses",
+    phase: "All Phases",
+    search: "",
+  });
+
+  const handleCategoryChange = (category) => {
+  setFilters((prev) => ({ ...prev, category }));
+};
+
+const handleStatusChange = (status) => {
+  setFilters((prev) => ({ ...prev, status }));
+};
+
+const handlePhaseChange = (phase) => {
+  setFilters((prev) => ({ ...prev, phase }));
+};
+
+const handleSearchChange = (search) => {
+  setFilters((prev) => ({ ...prev, search }));
+};
+
+const handleClearFilters = () => {
+  setFilters({
+    category: "All",
+    status: "All Statuses",
+    phase: "All Phases",
+    search: "",
+  });
+};
 
   useEffect(() => {
     setVisible(true);
   }, []);
 
-  return (
+  // Memoized filtered projects
+  const filteredProjects = useMemo(() => {
+  return projectsData.filter((project) => {
+    if (filters.category !== "All" && project.category !== filters.category)
+      return false;
+
+    if (filters.status !== "All Statuses" && project.status !== filters.status)
+      return false;
+
+    if (filters.phase !== "All Phases" && project.phase !== filters.phase)
+      return false;
+
+    if (filters.search) {
+      const searchLower = filters.search.toLowerCase();
+      return (
+        project.name.toLowerCase().includes(searchLower) ||
+        project.location.toLowerCase().includes(searchLower) ||
+        project.description.toLowerCase().includes(searchLower) ||
+        project.category.toLowerCase().includes(searchLower)
+      );
+    }
+
+    return true;
+  });
+}, [filters]);
+
+    return (
     <ThemeProvider theme={appleTheme}>
       <CssBaseline />
       <Box
         sx={{
           background:
             "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
-            height: "100vh",
+            pt: 10,
+          minHeight: "100vh",
           "&::before": {
             content: '""',
             position: "absolute",
@@ -252,169 +351,278 @@ const ProjectsPage = ({ onNavigate }) => {
           },
         }}
       >
-        <Container maxWidth="xl" sx={{ py: 12 }}>
+        <Container maxWidth="xl" sx={{ py: 6 }}>
           <Fade in={visible} timeout={1000}>
             <Box mb={4}>
               <Typography variant="h3" fontWeight={300} color="white" mb={1}>
                 All Projects
               </Typography>
-              <Typography variant="body1" color="text.secondary">
+              <Typography variant="body1" color="text.secondary" mb={2}>
                 Manage and monitor all your development projects
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {filteredProjects.length} of {projectsData.length} projects displayed
               </Typography>
             </Box>
           </Fade>
 
-          <Grid container spacing={3}>
-            {projectsData.map((project, index) => (
-              <Grid item xs={12} md={6} lg={4} key={project.id}>
-                <Grow
-                  in={visible}
-                  timeout={800}
-                  style={{ transitionDelay: `${index * 150}ms` }}
+          <FilterBar
+            onCategoryChange={handleCategoryChange}
+            onStatusChange={handleStatusChange}
+            onPhaseChange={handlePhaseChange}
+            onSearchChange={handleSearchChange}
+            onClearFilters={handleClearFilters}
+          />
+
+          {filteredProjects.length === 0 ? (
+            <Fade in timeout={500}>
+              <Box
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                justifyContent="center"
+                py={8}
+                sx={{
+                  background: "rgba(255, 255, 255, 0.02)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  borderRadius: "24px",
+                  textAlign: "center",
+                }}
+              >
+                <Typography variant="h5" color="text.secondary" mb={2}>
+                  No projects found
+                </Typography>
+                <Typography variant="body1" color="text.secondary" mb={3}>
+                  Try adjusting your filters or search terms
+                </Typography>
+                <Button
+                  onClick={handleClearFilters}
+                  variant="outlined"
+                  sx={{
+                    borderColor: "#c9b49a",
+                    color: "#c9b49a",
+                    "&:hover": {
+                      backgroundColor: "rgba(201, 180, 154, 0.1)",
+                      borderColor: "#c9b49a",
+                    },
+                  }}
                 >
-                  <Card
-                    sx={{
-                      height: "100%",
-                      cursor: "pointer",
-                      position: "relative",
-                      overflow: "hidden",
-                    }}
+                  Clear All Filters
+                </Button>
+              </Box>
+            </Fade>
+          ) : (
+            <Grid container spacing={3}>
+              {filteredProjects.map((project, index) => (
+                <Grid item xs={12} md={6} lg={4} key={project.id}>
+                  <Grow
+                    in={visible}
+                    timeout={800}
+                    style={{ transitionDelay: `${index * 150}ms` }}
                   >
-                    <Box
+                    <Card
                       sx={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        height: 4,
-                        background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
+                        height: "100%",
+                        cursor: "pointer",
+                        position: "relative",
+                        overflow: "hidden",
                       }}
-                    />
-
-                    <CardContent sx={{ p: 3 }}>
+                    >
                       <Box
-                        display="flex"
-                        justifyContent="space-between"
-                        alignItems="start"
-                        mb={2}
-                      >
-                        <Avatar
-                          sx={{
-                            background: `linear-gradient(135deg, ${project.color}, ${project.color}CC)`,
-                            width: 48,
-                            height: 48,
-                          }}
-                        >
-                          <LocationOn />
-                        </Avatar>
-                        <Chip
-                          label={project.status}
-                          size="small"
-                          sx={{
-                            background:
-                              project.status === "Active"
-                                ? "linear-gradient(135deg, #34C759, #34C759CC)"
-                                : "rgba(255, 255, 255, 0.1)",
-                            color: "white",
-                          }}
-                        />
-                      </Box>
+                        sx={{
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          right: 0,
+                          height: 4,
+                          background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
+                        }}
+                      />
 
-                      <Typography
-                        variant="h6"
-                        fontWeight={500}
-                        color="white"
-                        mb={1}
-                      >
-                        {project.name}
-                      </Typography>
-
-                      <Typography variant="body2" color="text.secondary" mb={2}>
-                        {project.location}
-                      </Typography>
-
-                      <Typography variant="body2" color="text.primary" mb={3}>
-                        {project.description}
-                      </Typography>
-
-                      <Box mb={3}>
+                      <CardContent sx={{ p: 3 }}>
                         <Box
                           display="flex"
                           justifyContent="space-between"
+                          alignItems="start"
+                          mb={2}
+                        >
+                          <Avatar
+                            sx={{
+                              background: `linear-gradient(135deg, ${project.color}, ${project.color}CC)`,
+                              width: 48,
+                              height: 48,
+                            }}
+                          >
+                            <LocationOn />
+                          </Avatar>
+                          <Box display="flex" flexDirection="column" gap={0.5} alignItems="end" sx={{width: "70px"}}>
+                            <Chip
+                              label={project.status}
+                              size="small"
+                              sx={{
+                                background:
+                                  project.status === "Active"
+                                    ? "linear-gradient(135deg, #34C759, #34C759CC)"
+                                    : project.status === "Pending"
+                                    ? "linear-gradient(135deg, #FF9500, #FF9500CC)"
+                                    : "linear-gradient(135deg, #FF3B30, #FF3B30CC)",
+                                color: "white",
+                                width: "100%",
+                                border: "rgba(255, 255, 255, 0.4)",
+                              }}
+                            />
+                            <Chip
+                              label={project.category}
+                              size="small"
+                              variant="outlined"
+                              sx={{
+                                background: "#000",
+                                color: "rgba(255, 255, s255, 0.7)",
+                                border: "rgba(255, 255, 255, 0.4)",
+                                fontSize: "0.7rem",
+                                width: "100%",
+                              }}
+                            />
+                          </Box>
+                        </Box>
+
+                        <Typography
+                          variant="h4"
+                          fontWeight={500}
+                          color="white"
                           mb={1}
                         >
-                          <Typography variant="caption" color="text.secondary">
-                            Progress
+                          {project.name}
+                        </Typography>
+
+                        <Typography variant="body1" color="text.secondary" mb={2}>
+                          {project.location}
+                        </Typography>
+
+                        <Typography variant="body1" color="text.primary" mb={3}>
+                          {project.description}
+                        </Typography>
+
+                        <Box display="flex" justifyContent="space-between" mb={2}>
+                          <Typography variant="body1" color="text.secondary">
+                            Size: {project.size}
                           </Typography>
-                          <Typography variant="caption" color="white">
-                            {project.progress}%
+                          <Typography variant="body1" color="text.secondary">
+                            Investment: {project.investment}
                           </Typography>
                         </Box>
-                        <LinearProgress
-                          variant="determinate"
-                          value={project.progress}
-                          sx={{
-                            "& .MuiLinearProgress-bar": {
-                              background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
-                            },
-                          }}
-                        />
-                      </Box>
 
-                      <Box display="flex" gap={1} mb={3} flexWrap="wrap">
-                        <Chip
-                          label={project.phase}
-                          size="small"
+                        <Box mb={3}>
+                          <Box
+                            display="flex"
+                            justifyContent="space-between"
+                            mb={1}
+                          >
+                            <Typography variant="caption" color="text.secondary">
+                              Progress
+                            </Typography>
+                            <Typography variant="caption" color="white">
+                              {project.progress}%
+                            </Typography>
+                          </Box>
+                          <LinearProgress
+                            variant="determinate"
+                            value={project.progress}
+                            sx={{
+                              "& .MuiLinearProgress-bar": {
+                                background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
+                              },
+                            }}
+                          />
+                        </Box>
+
+                        <Box display="flex" gap={1} mb={3} flexWrap="wrap">
+                          <Chip
+                            label={project.phase}
+                            size="small"
+                            sx={{
+                              background: `#000`,
+                              color: "white",
+                              border: "rgba(255, 255, 255, 0.8)",
+
+                            }}
+                          />
+                          <Chip
+                            label={project.budget}
+                            size="small"
+                            variant="outlined"
+                            sx={{
+                              color: "white",
+                              background: "#000",
+                              borderColor: "rgba(255, 255, 255, 0.8)",
+                            }}
+                          />
+                        </Box>
+
+                        <Typography
+                          variant="caption"
+                          color="text.secondary"
+                          display="block"
+                          mb={2}
+                        >
+                          Timeline: {project.timeline}
+                        </Typography>
+
+                        <Button
+                          fullWidth
+                          endIcon={<ArrowForward />}
                           sx={{
-                            background: `linear-gradient(135deg, ${project.color}40, ${project.color}20)`,
+                            background: `#c9b49a`,
                             color: "white",
                             border: `1px solid ${project.color}60`,
+                            "&:hover": {
+                              background: `linear-gradient(135deg, ${project.color}60, ${project.color}40)`,
+                              transform: "translateY(-2px)",
+                              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
+                            },
                           }}
-                        />
-                        <Chip
-                          label={project.budget}
-                          size="small"
-                          variant="outlined"
-                          sx={{
-                            color: "white",
-                            borderColor: "rgba(255, 255, 255, 0.3)",
-                          }}
-                        />
-                      </Box>
+                          onClick={() => onNavigate && onNavigate(project)}
+                        >
+                          View Details
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  </Grow>
+                </Grid>
+              ))}
+            </Grid>
+          )}
 
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        display="block"
-                        mb={2}
-                      >
-                        Timeline: {project.timeline}
-                      </Typography>
-
-                      <Button
-                        fullWidth
-                        endIcon={<ArrowForward />}
-                        sx={{
-                          background: `#c9b49a`,
-                          color: "white",
-                          border: `1px solid ${project.color}60`,
-                          "&:hover": {
-                            background: `linear-gradient(135deg, ${project.color}60, ${project.color}40)`,
-                          },
-                        }}
-                      >
-                        View Details
-                      </Button>
-                    </CardContent>
-                  </Card>
-                </Grow>
-              </Grid>
-            ))}
-          </Grid>
+          {/* Results Summary */}
+          {filteredProjects.length > 0 && (
+            <Fade in timeout={1000}>
+              <Box
+                mt={6}
+                p={3}
+                sx={{
+                  background: "rgba(255, 255, 255, 0.02)",
+                  backdropFilter: "blur(20px)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  borderRadius: "16px",
+                  textAlign: "center",
+                }}
+              >
+                <Typography variant="body2" color="text.secondary">
+                  Showing {filteredProjects.length} projects
+                  {filters.category !== "All" && ` in ${filters.category}`}
+                  {filters.status !== "All Statuses" && ` with ${filters.status} status`}
+                  {filters.phase !== "All Phases" && ` in ${filters.phase} phase`}
+                  {filters.search && ` matching "${filters.search}"`}
+                </Typography>
+              </Box>
+            </Fade>
+          )}
         </Container>
       </Box>
     </ThemeProvider>
   );
 };
+
 
 export default ProjectsPage;

@@ -177,7 +177,7 @@ export default function AboutUs() {
 
         {/* Vision Section */}
         <Container maxWidth="lg">
-          <Grid container spacing={6} alignItems="center" sx={{ pb: 20 }}>
+          <Grid container spacing={6} alignItems="center" sx={{ pb: 30 }}>
             <Grid item xs={12} md={6}>
               <Paper
                 elevation={10}
@@ -304,7 +304,7 @@ export default function AboutUs() {
             </Grid>
           </Grid>
 
-          <Grid container spacing={6} alignItems="center" sx={{ mb: 12 }}>
+          <Grid container spacing={6} alignItems="center" sx={{ pb: 30 }}>
             <Grid item xs={12} md={6}>
               <Box>
                 <Typography
