@@ -97,7 +97,6 @@ const FloatingParticles = () => {
             duration: Math.random() * 8 + 6,
             repeat: Infinity,
             ease: "linear",
-            delay: Math.random() * 5,
           }}
         />
       ))}
@@ -214,8 +213,7 @@ export default function Offer() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
         sx={{
-          height: "75vh",
-          pt: 8,
+          height: "90vh",
           display: "flex",
           flexDirection: "column",
           position: "relative",

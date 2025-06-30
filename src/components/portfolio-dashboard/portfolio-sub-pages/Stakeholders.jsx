@@ -61,6 +61,7 @@ import {
   Star,
   Timeline,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 // Apple-inspired Material UI theme (same as dashboard)
 const appleTheme = createTheme({
@@ -197,6 +198,11 @@ const Stakeholders = () => {
   const [filterType, setFilterType] = useState("all");
   const [selectedStakeholder, setSelectedStakeholder] = useState(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const navigate = useNavigate()
+
+  const handleArrowBack = () => {
+    navigate("/portfolio")
+  }
 
   // Sample stakeholder data
   const stakeholders = [

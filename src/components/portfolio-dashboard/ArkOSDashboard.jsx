@@ -51,6 +51,7 @@ import {
   Assignment,
 } from "@mui/icons-material";
 import CallToAction from "../key-components/CallToAction";
+import { useNavigate } from "react-router-dom";
 
 // Apple-inspired Material UI theme
 const appleTheme = createTheme({
@@ -315,321 +316,330 @@ const stakeholdersData = [
 
 
 // Projects Page Component
-const ProjectsPage = ({ onNavigate }) => {
-  const [visible, setVisible] = useState(false);
+// const ProjectsPage = ({ onNavigate }) => {
+//   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    setVisible(true);
-  }, []);
+//   useEffect(() => {
+//     setVisible(true);
+//   }, []);
 
-  return (
-    <Container maxWidth="xl" sx={{ py: 12 }}>
-      <Fade in={visible} timeout={1000}>
-        <Box mb={4}>
-          <Typography variant="h3" fontWeight={300} color="white" mb={1}>
-            All Projects
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Manage and monitor all your development projects
-          </Typography>
-        </Box>
-      </Fade>
+//   return (
+//     <Container maxWidth="xl" sx={{ py: 12 }}>
+//       <Fade in={visible} timeout={1000}>
+//         <Box mb={4}>
+//           <Typography variant="h3" fontWeight={300} color="white" mb={1}>
+//             All Projects
+//           </Typography>
+//           <Typography variant="body1" color="text.secondary">
+//             Manage and monitor all your development projects
+//           </Typography>
+//         </Box>
+//       </Fade>
 
-      <Grid container spacing={3}>
-        {projectsData.map((project, index) => (
-          <Grid item xs={12} md={6} lg={4} key={project.id}>
-            <Grow
-              in={visible}
-              timeout={800}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <Card
-                sx={{
-                  height: "100%",
-                  cursor: "pointer",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <Box
-                  sx={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: 4,
-                    background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
-                  }}
-                />
+//       <Grid container spacing={3}>
+//         {projectsData.map((project, index) => (
+//           <Grid item xs={12} md={6} lg={4} key={project.id}>
+//             <Grow
+//               in={visible}
+//               timeout={800}
+//               style={{ transitionDelay: `${index * 150}ms` }}
+//             >
+//               <Card
+//                 sx={{
+//                   height: "100%",
+//                   cursor: "pointer",
+//                   position: "relative",
+//                   overflow: "hidden",
+//                 }}
+//               >
+//                 <Box
+//                   sx={{
+//                     position: "absolute",
+//                     top: 0,
+//                     left: 0,
+//                     right: 0,
+//                     height: 4,
+//                     background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
+//                   }}
+//                 />
                 
-                <CardContent sx={{ p: 3 }}>
-                  <Box display="flex" justifyContent="space-between" alignItems="start" mb={2}>
-                    <Avatar
-                      sx={{
-                        background: `linear-gradient(135deg, ${project.color}, ${project.color}CC)`,
-                        width: 48,
-                        height: 48,
-                      }}
-                    >
-                      <LocationOn />
-                    </Avatar>
-                    <Chip
-                      label={project.status}
-                      size="small"
-                      sx={{
-                        background: project.status === "Active" 
-                          ? "linear-gradient(135deg, #34C759, #34C759CC)"
-                          : "rgba(255, 255, 255, 0.1)",
-                        color: "white",
-                      }}
-                    />
-                  </Box>
+//                 <CardContent sx={{ p: 3 }}>
+//                   <Box display="flex" justifyContent="space-between" alignItems="start" mb={2}>
+//                     <Avatar
+//                       sx={{
+//                         background: `linear-gradient(135deg, ${project.color}, ${project.color}CC)`,
+//                         width: 48,
+//                         height: 48,
+//                       }}
+//                     >
+//                       <LocationOn />
+//                     </Avatar>
+//                     <Chip
+//                       label={project.status}
+//                       size="small"
+//                       sx={{
+//                         background: project.status === "Active" 
+//                           ? "linear-gradient(135deg, #34C759, #34C759CC)"
+//                           : "rgba(255, 255, 255, 0.1)",
+//                         color: "white",
+//                       }}
+//                     />
+//                   </Box>
 
-                  <Typography variant="h6" fontWeight={500} color="white" mb={1}>
-                    {project.name}
-                  </Typography>
+//                   <Typography variant="h6" fontWeight={500} color="white" mb={1}>
+//                     {project.name}
+//                   </Typography>
                   
-                  <Typography variant="body2" color="text.secondary" mb={2}>
-                    {project.location}
-                  </Typography>
+//                   <Typography variant="body2" color="text.secondary" mb={2}>
+//                     {project.location}
+//                   </Typography>
 
-                  <Typography variant="body2" color="text.primary" mb={3}>
-                    {project.description}
-                  </Typography>
+//                   <Typography variant="body2" color="text.primary" mb={3}>
+//                     {project.description}
+//                   </Typography>
 
-                  <Box mb={3}>
-                    <Box display="flex" justifyContent="space-between" mb={1}>
-                      <Typography variant="caption" color="text.secondary">
-                        Progress
-                      </Typography>
-                      <Typography variant="caption" color="white">
-                        {project.progress}%
-                      </Typography>
-                    </Box>
-                    <LinearProgress
-                      variant="determinate"
-                      value={project.progress}
-                      sx={{
-                        "& .MuiLinearProgress-bar": {
-                          background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
-                        },
-                      }}
-                    />
-                  </Box>
+//                   <Box mb={3}>
+//                     <Box display="flex" justifyContent="space-between" mb={1}>
+//                       <Typography variant="caption" color="text.secondary">
+//                         Progress
+//                       </Typography>
+//                       <Typography variant="caption" color="white">
+//                         {project.progress}%
+//                       </Typography>
+//                     </Box>
+//                     <LinearProgress
+//                       variant="determinate"
+//                       value={project.progress}
+//                       sx={{
+//                         "& .MuiLinearProgress-bar": {
+//                           background: `linear-gradient(90deg, ${project.color}, ${project.color}CC)`,
+//                         },
+//                       }}
+//                     />
+//                   </Box>
 
-                  <Box display="flex" gap={1} mb={3} flexWrap="wrap">
-                    <Chip
-                      label={project.phase}
-                      size="small"
-                      sx={{
-                        background: `linear-gradient(135deg, ${project.color}40, ${project.color}20)`,
-                        color: "white",
-                        border: `1px solid ${project.color}60`,
-                      }}
-                    />
-                    <Chip
-                      label={project.budget}
-                      size="small"
-                      variant="outlined"
-                      sx={{ color: "white", borderColor: "rgba(255, 255, 255, 0.3)" }}
-                    />
-                  </Box>
+//                   <Box display="flex" gap={1} mb={3} flexWrap="wrap">
+//                     <Chip
+//                       label={project.phase}
+//                       size="small"
+//                       sx={{
+//                         background: `linear-gradient(135deg, ${project.color}40, ${project.color}20)`,
+//                         color: "white",
+//                         border: `1px solid ${project.color}60`,
+//                       }}
+//                     />
+//                     <Chip
+//                       label={project.budget}
+//                       size="small"
+//                       variant="outlined"
+//                       sx={{ color: "white", borderColor: "rgba(255, 255, 255, 0.3)" }}
+//                     />
+//                   </Box>
 
-                  <Typography variant="caption" color="text.secondary" display="block" mb={2}>
-                    Timeline: {project.timeline}
-                  </Typography>
+//                   <Typography variant="caption" color="text.secondary" display="block" mb={2}>
+//                     Timeline: {project.timeline}
+//                   </Typography>
 
-                  <Button
-                    fullWidth
-                    endIcon={<ArrowForward />}
-                    sx={{
-                      background: `linear-gradient(135deg, ${project.color}40, ${project.color}20)`,
-                      color: "white",
-                      border: `1px solid ${project.color}60`,
-                      "&:hover": {
-                        background: `linear-gradient(135deg, ${project.color}60, ${project.color}40)`,
-                      },
-                    }}
-                  >
-                    View Details
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grow>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-  );
-};
+//                   <Button
+//                     fullWidth
+//                     endIcon={<ArrowForward />}
+//                     sx={{
+//                       background: `linear-gradient(135deg, ${project.color}40, ${project.color}20)`,
+//                       color: "white",
+//                       border: `1px solid ${project.color}60`,
+//                       "&:hover": {
+//                         background: `linear-gradient(135deg, ${project.color}60, ${project.color}40)`,
+//                       },
+//                     }}
+//                   >
+//                     View Details
+//                   </Button>
+//                 </CardContent>
+//               </Card>
+//             </Grow>
+//           </Grid>
+//         ))}
+//       </Grid>
+//     </Container>
+//   );
+// };
 
 // Stakeholders Page Component
-const StakeholdersPage = ({ onNavigate }) => {
-  const [visible, setVisible] = useState(false);
+// const StakeholdersPage = ({ onNavigate }) => {
+//   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    setVisible(true);
-  }, []);
+//   useEffect(() => {
+//     setVisible(true);
+//   }, []);
 
-  return (
-    <Container maxWidth="xl" sx={{ py: 12 }}>
-      <Fade in={visible} timeout={1000}>
-        <Box mb={4}>
-          <Typography variant="h3" fontWeight={300} color="white" mb={1}>
-            Stakeholders
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Connect with team members and project stakeholders
-          </Typography>
-        </Box>
-      </Fade>
+//   return (
+//     <Container maxWidth="xl" sx={{ py: 12 }}>
+//       <Fade in={visible} timeout={1000}>
+//         <Box mb={4}>
+//           <Typography variant="h3" fontWeight={300} color="white" mb={1}>
+//             Stakeholders
+//           </Typography>
+//           <Typography variant="body1" color="text.secondary">
+//             Connect with team members and project stakeholders
+//           </Typography>
+//         </Box>
+//       </Fade>
 
-      <Grid container spacing={4}>
-        {stakeholdersData.map((stakeholder, index) => (
-          <Grid item xs={12} md={6} lg={4} key={stakeholder.id}>
-            <Grow
-              in={visible}
-              timeout={800}
-              style={{ transitionDelay: `${index * 150}ms` }}
-            >
-              <Card
-                sx={{
-                  height: "100%",
-                  cursor: "pointer",
-                  position: "relative",
-                }}
-              >
-                <CardContent sx={{ p: 4 }}>
-                  <Box display="flex" alignItems="center" mb={3}>
-                    <Avatar
-                      sx={{
-                        width: 64,
-                        height: 64,
-                        background: `linear-gradient(135deg, ${stakeholder.color}, ${stakeholder.color}CC)`,
-                        boxShadow: `0 8px 32px ${stakeholder.color}40`,
-                        fontSize: "1.5rem",
-                        fontWeight: 600,
-                        mr: 3,
-                      }}
-                    >
-                      {stakeholder.avatar}
-                    </Avatar>
-                    <Box>
-                      <Typography variant="h6" fontWeight={500} color="white">
-                        {stakeholder.name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {stakeholder.role}
-                      </Typography>
-                      <Chip
-                        label={stakeholder.department}
-                        size="small"
-                        sx={{
-                          mt: 1,
-                          background: `linear-gradient(135deg, ${stakeholder.color}40, ${stakeholder.color}20)`,
-                          color: "white",
-                          border: `1px solid ${stakeholder.color}60`,
-                        }}
-                      />
-                    </Box>
-                  </Box>
+//       <Grid container spacing={4}>
+//         {stakeholdersData.map((stakeholder, index) => (
+//           <Grid item xs={12} md={6} lg={4} key={stakeholder.id}>
+//             <Grow
+//               in={visible}
+//               timeout={800}
+//               style={{ transitionDelay: `${index * 150}ms` }}
+//             >
+//               <Card
+//                 sx={{
+//                   height: "100%",
+//                   cursor: "pointer",
+//                   position: "relative",
+//                 }}
+//               >
+//                 <CardContent sx={{ p: 4 }}>
+//                   <Box display="flex" alignItems="center" mb={3}>
+//                     <Avatar
+//                       sx={{
+//                         width: 64,
+//                         height: 64,
+//                         background: `linear-gradient(135deg, ${stakeholder.color}, ${stakeholder.color}CC)`,
+//                         boxShadow: `0 8px 32px ${stakeholder.color}40`,
+//                         fontSize: "1.5rem",
+//                         fontWeight: 600,
+//                         mr: 3,
+//                       }}
+//                     >
+//                       {stakeholder.avatar}
+//                     </Avatar>
+//                     <Box>
+//                       <Typography variant="h6" fontWeight={500} color="white">
+//                         {stakeholder.name}
+//                       </Typography>
+//                       <Typography variant="body2" color="text.secondary">
+//                         {stakeholder.role}
+//                       </Typography>
+//                       <Chip
+//                         label={stakeholder.department}
+//                         size="small"
+//                         sx={{
+//                           mt: 1,
+//                           background: `linear-gradient(135deg, ${stakeholder.color}40, ${stakeholder.color}20)`,
+//                           color: "white",
+//                           border: `1px solid ${stakeholder.color}60`,
+//                         }}
+//                       />
+//                     </Box>
+//                   </Box>
 
-                  <Divider sx={{ mb: 3, borderColor: "rgba(255, 255, 255, 0.1)" }} />
+//                   <Divider sx={{ mb: 3, borderColor: "rgba(255, 255, 255, 0.1)" }} />
 
-                  <Box mb={3}>
-                    <Typography variant="subtitle2" color="white" mb={2}>
-                      Specialization
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      {stakeholder.specialization}
-                    </Typography>
-                  </Box>
+//                   <Box mb={3}>
+//                     <Typography variant="subtitle2" color="white" mb={2}>
+//                       Specialization
+//                     </Typography>
+//                     <Typography variant="body2" color="text.secondary">
+//                       {stakeholder.specialization}
+//                     </Typography>
+//                   </Box>
 
-                  <Box mb={3}>
-                    <Typography variant="subtitle2" color="white" mb={2}>
-                      Experience
-                    </Typography>
-                    <Box display="flex" alignItems="center" gap={1}>
-                      <Schedule sx={{ color: stakeholder.color, fontSize: 20 }} />
-                      <Typography variant="body2" color="text.secondary">
-                        {stakeholder.experience}
-                      </Typography>
-                    </Box>
-                  </Box>
+//                   <Box mb={3}>
+//                     <Typography variant="subtitle2" color="white" mb={2}>
+//                       Experience
+//                     </Typography>
+//                     <Box display="flex" alignItems="center" gap={1}>
+//                       <Schedule sx={{ color: stakeholder.color, fontSize: 20 }} />
+//                       <Typography variant="body2" color="text.secondary">
+//                         {stakeholder.experience}
+//                       </Typography>
+//                     </Box>
+//                   </Box>
 
-                  <Box mb={3}>
-                    <Typography variant="subtitle2" color="white" mb={2}>
-                      Active Projects
-                    </Typography>
-                    <Stack direction="row" spacing={1} flexWrap="wrap">
-                      {stakeholder.projects.map((project, idx) => (
-                        <Chip
-                          key={idx}
-                          label={project}
-                          size="small"
-                          variant="outlined"
-                          sx={{ 
-                            color: "white", 
-                            borderColor: "rgba(255, 255, 255, 0.3)",
-                            mb: 1,
-                          }}
-                        />
-                      ))}
-                    </Stack>
-                  </Box>
+//                   <Box mb={3}>
+//                     <Typography variant="subtitle2" color="white" mb={2}>
+//                       Active Projects
+//                     </Typography>
+//                     <Stack direction="row" spacing={1} flexWrap="wrap">
+//                       {stakeholder.projects.map((project, idx) => (
+//                         <Chip
+//                           key={idx}
+//                           label={project}
+//                           size="small"
+//                           variant="outlined"
+//                           sx={{ 
+//                             color: "white", 
+//                             borderColor: "rgba(255, 255, 255, 0.3)",
+//                             mb: 1,
+//                           }}
+//                         />
+//                       ))}
+//                     </Stack>
+//                   </Box>
 
-                  <Divider sx={{ mb: 3, borderColor: "rgba(255, 255, 255, 0.1)" }} />
+//                   <Divider sx={{ mb: 3, borderColor: "rgba(255, 255, 255, 0.1)" }} />
 
-                  <Box>
-                    <Typography variant="subtitle2" color="white" mb={2}>
-                      Contact Information
-                    </Typography>
-                    <Stack spacing={1}>
-                      <Box display="flex" alignItems="center" gap={2}>
-                        <Email sx={{ color: stakeholder.color, fontSize: 18 }} />
-                        <Typography variant="body2" color="text.secondary">
-                          {stakeholder.email}
-                        </Typography>
-                      </Box>
-                      <Box display="flex" alignItems="center" gap={2}>
-                        <Phone sx={{ color: stakeholder.color, fontSize: 18 }} />
-                        <Typography variant="body2" color="text.secondary">
-                          {stakeholder.phone}
-                        </Typography>
-                      </Box>
-                    </Stack>
-                  </Box>
+//                   <Box>
+//                     <Typography variant="subtitle2" color="white" mb={2}>
+//                       Contact Information
+//                     </Typography>
+//                     <Stack spacing={1}>
+//                       <Box display="flex" alignItems="center" gap={2}>
+//                         <Email sx={{ color: stakeholder.color, fontSize: 18 }} />
+//                         <Typography variant="body2" color="text.secondary">
+//                           {stakeholder.email}
+//                         </Typography>
+//                       </Box>
+//                       <Box display="flex" alignItems="center" gap={2}>
+//                         <Phone sx={{ color: stakeholder.color, fontSize: 18 }} />
+//                         <Typography variant="body2" color="text.secondary">
+//                           {stakeholder.phone}
+//                         </Typography>
+//                       </Box>
+//                     </Stack>
+//                   </Box>
 
-                  <Button
-                    fullWidth
-                    endIcon={<ArrowForward />}
-                    sx={{
-                      mt: 3,
-                      background: `linear-gradient(135deg, ${stakeholder.color}40, ${stakeholder.color}20)`,
-                      color: "white",
-                      border: `1px solid ${stakeholder.color}60`,
-                      "&:hover": {
-                        background: `linear-gradient(135deg, ${stakeholder.color}60, ${stakeholder.color}40)`,
-                      },
-                    }}
-                  >
-                    View Profile
-                  </Button>
-                </CardContent>
-              </Card>
-            </Grow>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
-  );
-};
+//                   <Button
+//                     fullWidth
+//                     endIcon={<ArrowForward />}
+//                     sx={{
+//                       mt: 3,
+//                       background: `linear-gradient(135deg, ${stakeholder.color}40, ${stakeholder.color}20)`,
+//                       color: "white",
+//                       border: `1px solid ${stakeholder.color}60`,
+//                       "&:hover": {
+//                         background: `linear-gradient(135deg, ${stakeholder.color}60, ${stakeholder.color}40)`,
+//                       },
+//                     }}
+//                   >
+//                     View Profile
+//                   </Button>
+//                 </CardContent>
+//               </Card>
+//             </Grow>
+//           </Grid>
+//         ))}
+//       </Grid>
+//     </Container>
+//   );
+// };
 
 // Main Dashboard Component (original with navigation buttons)
 const DashboardPage = ({ onNavigate }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
+  const navigate = useNavigate()
+
+  const handleStakeholders = () => {
+    navigate("/portfolio/stakeholders")
+  }
+
+  const handleProjects = () => {
+    navigate("/portfolio/projects")
+  }
 
   const stakeholders = [
     {
@@ -884,7 +894,7 @@ const DashboardPage = ({ onNavigate }) => {
                   background: "linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(90, 200, 250, 0.05))",
                   border: "1px solid rgba(0, 122, 255, 0.2)",
                 }}
-                onClick={() => onNavigate("projects")}
+                onClick={handleProjects}
               >
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   <Box display="flex" alignItems="center" gap={3}>
@@ -922,7 +932,8 @@ const DashboardPage = ({ onNavigate }) => {
                   background: "linear-gradient(135deg, rgba(255, 149, 0, 0.1), rgba(255, 173, 51, 0.05))",
                   border: "1px solid rgba(255, 149, 0, 0.2)",
                 }}
-                onClick={() => onNavigate("stakeholders")}
+                // onClick={() => onNavigate("stakeholders")}
+                onClick={handleStakeholders}
               >
                 <Box display="flex" alignItems="center" justifyContent="space-between">
                   <Box display="flex" alignItems="center" gap={3}>
