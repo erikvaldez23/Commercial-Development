@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import { LocationOn, ArrowForward } from "@mui/icons-material";
 import FilterBar from "../Filter";
+import { useNavigate, useParams } from "react-router-dom"
 
 const appleTheme = createTheme({
   palette: {
@@ -180,7 +181,7 @@ const projectsData = [
     phase: "Design",
     progress: 72,
     budget: "$2.5M",
-    timeline: "30.95 - 29.25",
+    timeline: "1 Month Out",
     status: "Active",
     color: "#c9b49a",
     size: "15,000 sq ft",
@@ -195,7 +196,7 @@ const projectsData = [
     phase: "Construction",
     progress: 45,
     budget: "$4.2M",
-    timeline: "31.05 - 32.12",
+    timeline: "5 Months Out",
     status: "Active",
     color: "#c9b49a",
     size: "32,000 sq ft",
@@ -210,7 +211,7 @@ const projectsData = [
     phase: "Planning",
     progress: 15,
     budget: "$1.8M",
-    timeline: "31.08 - 33.02",
+    timeline: "8 Month Out",
     status: "Pending",
     color: "#c9b49a",
     size: "32,000 sq ft",
@@ -225,7 +226,7 @@ const projectsData = [
     phase: "Permits",
     progress: 30,
     budget: "$3.1M",
-    timeline: "31.03 - 32.08",
+    timeline: "11 Month Out",
     status: "Review",
     color: "#c9b49a",
     size: "32,000 sq ft",
@@ -240,7 +241,7 @@ const projectsData = [
     phase: "Construction",
     progress: 60,
     budget: "$5.5M",
-    timeline: "30.12 - 32.06",
+    timeline: "1 Year Out",
     status: "Active",
     color: "#c9b49a",
     size: "45,000 sq ft",
@@ -255,7 +256,7 @@ const projectsData = [
     phase: "Design",
     progress: 25,
     budget: "$3.8M",
-    timeline: "31.06 - 33.01",
+    timeline: "1 Year Out",
     status: "Pending",
     color: "#c9b49a",
     size: "28,000 sq ft",
@@ -266,6 +267,7 @@ const projectsData = [
 ];
 
 const ProjectsPage = ({ onNavigate }) => {
+  const { projectId } = useParams()
   const [visible, setVisible] = useState(false);
   const [filters, setFilters] = useState({
     category: "All",
@@ -273,6 +275,12 @@ const ProjectsPage = ({ onNavigate }) => {
     phase: "All Phases",
     search: "",
   });
+  const navigate = useNavigate()
+
+
+  const handleProjectClick = (projectId) => {
+    navigate(`/projects/${projectId}`)
+  }
 
   const handleCategoryChange = (category) => {
   setFilters((prev) => ({ ...prev, category }));
@@ -582,7 +590,7 @@ const handleClearFilters = () => {
                               boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
                             },
                           }}
-                          onClick={() => onNavigate && onNavigate(project)}
+                          onClick={ () => handleProjectClick(project.id) }
                         >
                           View Details
                         </Button>

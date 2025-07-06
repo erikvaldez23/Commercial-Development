@@ -295,10 +295,9 @@ export default function AboutUs() {
                     color: alpha("#fff", 0.87),
                   }}
                 >
-                  We believe the future of real estate isn’t about buildings.
-                  It’s about designing environments that learn, evolve, and
-                  serve generations to come. With AI in our tools and purpose in
-                  our process, we build with reverence.
+                  To create high-impact, intelligent, and globally connected
+                  developments that are sustainable, data-driven, and
+                  community-first.
                 </Typography>
               </Box>
             </Grid>
@@ -358,9 +357,10 @@ export default function AboutUs() {
                     color: alpha("#fff", 0.87),
                   }}
                 >
-                  To create high-impact, intelligent, and globally connected
-                  developments that are sustainable, data-driven, and
-                  community-first.
+                  We believe the future of real estate isn’t about buildings.
+                  It’s about designing environments that learn, evolve, and
+                  serve generations to come. With AI in our tools and purpose in
+                  our process, we build with reverence.
                 </Typography>
               </Box>
             </Grid>
@@ -431,7 +431,7 @@ export default function AboutUs() {
           </Grid>
 
           {/* PHILOSOPHY SECTION */}
-          <Grid container spacing={6} alignItems="center" sx={{ mb: 12 }}>
+          {/* <Grid container spacing={6} alignItems="center" sx={{ mb: 12 }}>
             <Grid item xs={12} md={6}>
               <Paper
                 elevation={10}
@@ -494,9 +494,9 @@ export default function AboutUs() {
                   </Typography>
                 </Box>
               </Paper>
-            </Grid>
+            </Grid> */}
 
-            <Grid item xs={12} md={6}>
+            {/* <Grid item xs={12} md={6}>
               <Box>
                 <Typography
                   variant="overline"
@@ -552,8 +552,8 @@ export default function AboutUs() {
                   "Some Quote"
                 </Typography>
               </Box>
-            </Grid>
-          </Grid>
+            </Grid> */}
+          {/* </Grid> */}
         </Container>
         <CallToAction />
       </Box>

@@ -25,10 +25,16 @@ import {
   ArrowForward as ArrowForwardIcon,
   PlayArrow as PlayArrowIcon,
 } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const ArkOSHero = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const navigate = useNavigate()
+
+  const handleStartClick = () => {
+    navigate("/portfolio")
+  }
 
   const features = [
     {
@@ -179,6 +185,7 @@ const ArkOSHero = () => {
                     },
                     transition: "all 0.3s cubic-bezier(0.23, 1, 0.320, 1)",
                   }}
+                  onClick={handleStartClick}
                 >
                   Get Started
                 </Button>

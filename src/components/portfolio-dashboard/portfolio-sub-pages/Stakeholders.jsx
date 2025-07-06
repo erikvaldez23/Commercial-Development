@@ -577,7 +577,7 @@ const Stakeholders = () => {
                     "&:hover": { background: "rgba(255, 255, 255, 0.2)" },
                   }}
                 >
-                  <ArrowBack sx={{ color: "white" }} />
+                  <ArrowBack onClick={handleArrowBack} sx={{ color: "white" }} />
                 </IconButton>
                 <Typography variant="h3" fontWeight={300} color="white">
                   Stakeholders

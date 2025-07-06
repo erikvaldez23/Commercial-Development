@@ -250,6 +250,13 @@ const ProjectsPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Statuses');
   const isSmallScreen = useMediaQuery(blackTheme.breakpoints.down('sm'));
+  const navigate = useNavigate();
+
+
+  const handleProjectClick = () => {
+    navivgate(`/projects/test`)
+    console.log("Routed")
+  }
 
   // Sample project data
   const projectsData = [
@@ -646,6 +653,7 @@ const ProjectsPage = () => {
                         py: 1.5,
                         fontWeight: 600,
                       }}
+                      onClick={handleProjectClick}
                     >
                       <span>View Project Details</span>
                       {/* Button shimmer effect */}

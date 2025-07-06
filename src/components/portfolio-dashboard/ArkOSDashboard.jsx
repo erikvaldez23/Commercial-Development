@@ -319,15 +319,15 @@ const DashboardPage = ({ onNavigate }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleStakeholders = () => {
-    navigate("/portfolio/stakeholders")
-  }
+    navigate("/portfolio/stakeholders");
+  };
 
   const handleProjects = () => {
-    navigate("/portfolio/projects")
-  }
+    navigate("/portfolio/projects");
+  };
 
   const stakeholders = [
     {
@@ -359,7 +359,7 @@ const DashboardPage = ({ onNavigate }) => {
     highlight = false,
     delay = 0,
   }) => (
-    <Fade in={visible} timeout={1000} style={{ transitionDelay: `${delay}ms` }}>
+    <Fade in={visible} timeout={1000}>
       <Box
         textAlign="center"
         sx={{
@@ -378,7 +378,7 @@ const DashboardPage = ({ onNavigate }) => {
             mb: 0.5,
             opacity: highlight ? 1 : 0.7,
             transition: "opacity 0.3s ease",
-            fontSize: "1.5rem"
+            fontSize: "1.5rem",
           }}
         >
           {label}
@@ -394,7 +394,7 @@ const DashboardPage = ({ onNavigate }) => {
             backgroundClip: highlight ? "text" : "inherit",
             WebkitBackgroundClip: highlight ? "text" : "inherit",
             WebkitTextFillColor: highlight ? "transparent" : "inherit",
-            fontSize: "1.5rem"
+            fontSize: "1.5rem",
           }}
         >
           {value}
@@ -574,17 +574,26 @@ const DashboardPage = ({ onNavigate }) => {
       <Box mb={6}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
-            <Grow in={visible} timeout={1000} style={{ transitionDelay: "400ms" }}>
+            <Grow
+              in={visible}
+              timeout={1000}
+              style={{ transitionDelay: "400ms" }}
+            >
               <Card
                 sx={{
                   p: 4,
                   cursor: "pointer",
-                  background: "linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(90, 200, 250, 0.05))",
+                  background:
+                    "linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(90, 200, 250, 0.05))",
                   border: "1px solid rgba(0, 122, 255, 0.2)",
                 }}
                 onClick={handleProjects}
               >
-                <Box display="flex" alignItems="center" justifyContent="space-between">
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
                   <Box display="flex" alignItems="center" gap={3}>
                     <Avatar
                       sx={{
@@ -597,7 +606,12 @@ const DashboardPage = ({ onNavigate }) => {
                       <FolderOpen sx={{ fontSize: 28 }} />
                     </Avatar>
                     <Box>
-                      <Typography variant="h6" fontWeight={500} color="white" mb={1}>
+                      <Typography
+                        variant="h6"
+                        fontWeight={500}
+                        color="white"
+                        mb={1}
+                      >
                         View All Projects
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -610,20 +624,29 @@ const DashboardPage = ({ onNavigate }) => {
               </Card>
             </Grow>
           </Grid>
-          
+
           <Grid item xs={12} md={6}>
-            <Grow in={visible} timeout={1000} style={{ transitionDelay: "500ms" }}>
+            <Grow
+              in={visible}
+              timeout={1000}
+              style={{ transitionDelay: "500ms" }}
+            >
               <Card
                 sx={{
                   p: 4,
                   cursor: "pointer",
-                  background: "linear-gradient(135deg, rgba(255, 149, 0, 0.1), rgba(255, 173, 51, 0.05))",
+                  background:
+                    "linear-gradient(135deg, rgba(255, 149, 0, 0.1), rgba(255, 173, 51, 0.05))",
                   border: "1px solid rgba(255, 149, 0, 0.2)",
                 }}
                 // onClick={() => onNavigate("stakeholders")}
                 onClick={handleStakeholders}
               >
-                <Box display="flex" alignItems="center" justifyContent="space-between">
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="space-between"
+                >
                   <Box display="flex" alignItems="center" gap={3}>
                     <Avatar
                       sx={{
@@ -636,7 +659,12 @@ const DashboardPage = ({ onNavigate }) => {
                       <Group sx={{ fontSize: 28 }} />
                     </Avatar>
                     <Box>
-                      <Typography variant="h6" fontWeight={500} color="white" mb={1}>
+                      <Typography
+                        variant="h6"
+                        fontWeight={500}
+                        color="white"
+                        mb={1}
+                      >
                         Team Stakeholders
                       </Typography>
                       <Typography variant="body2" color="text.secondary">
@@ -655,15 +683,11 @@ const DashboardPage = ({ onNavigate }) => {
       {/* All Projects Section */}
       <Box mb={6}>
         {/* Enhanced Map Area */}
-        <Grow
-          in={visible}
-          timeout={1200}
-          style={{ transitionDelay: "600ms" }}
-        >
+        <Grow in={visible} timeout={1200} style={{ transitionDelay: "600ms" }}>
           <Paper
             sx={{
               minHeight: 600,
-              background: "url(/map.jpg)",
+              background: "url(/commercial-mock1.jpeg)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",
@@ -680,41 +704,37 @@ const DashboardPage = ({ onNavigate }) => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                background: "radial-gradient(circle at 30% 30%, rgba(0, 122, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255, 149, 0, 0.05) 0%, transparent 50%)",
+                background:
+                  "radial-gradient(circle at 30% 30%, rgba(0, 122, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 70% 70%, rgba(255, 149, 0, 0.05) 0%, transparent 50%)",
               },
             }}
           >
-            {/* Central Lagos Tower */}
-            <Box position="relative" textAlign="center" sx={{ zIndex: 2 }}>
-              <Avatar
+            {/* Text Overlay */}
+            <Box position="absolute" sx={{ zIndex: 2, top: 0, mt: 2 }}>
+              <Paper
                 sx={{
-                  background: "linear-gradient(135deg, #FF9500, #FF6B00)",
-                  width: 72,
-                  height: 72,
-                  mx: "auto",
-                  mb: 3,
-                  boxShadow: "0 12px 48px rgba(255, 149, 0, 0.4)",
-                  transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                  "&:hover": {
-                    transform: "scale(1.1)",
-                    boxShadow: "0 16px 64px rgba(255, 149, 0, 0.6)",
-                  },
+                  p: 3,
+                  width: 1000,
+                  backdropFilter: "blur(10px)",
+                  borderRadius: 20,
                 }}
               >
-                <LocationOn sx={{ fontSize: 36, color: "white" }} />
-              </Avatar>
-              <Paper
-                sx={{ p: 3, maxWidth: 200, backdropFilter: "blur(20px)" }}
-              >
                 <Typography
-                  variant="h5"
+                  variant="h1"
+                  fontSize="3rem"
                   fontWeight={500}
                   color="white"
                   mb={1}
+                  textAlign="center"
                 >
                   Lagos Tower
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  textAlign="center"
+                  fontSize="2rem"
+                >
                   Lagos, Nigeria
                 </Typography>
               </Paper>
@@ -743,10 +763,11 @@ const DashboardPage = ({ onNavigate }) => {
               {/* Timeline */}
               <Box mb={4}>
                 <Typography
-                  variant="h6"
+                  variant="h1"
                   fontWeight={400}
                   color="white"
                   mb={2}
+                  sx={{ fontSize: "2rem" }}
                 >
                   Project Timeline
                 </Typography>
@@ -755,8 +776,9 @@ const DashboardPage = ({ onNavigate }) => {
                   color="text.secondary"
                   mb={2}
                   display="block"
+                  sx={{ fontSize: "1rem" }}
                 >
-                  30.95 - 29.25
+                  3 Months until completion
                 </Typography>
                 <LinearProgress
                   variant="determinate"
@@ -768,8 +790,7 @@ const DashboardPage = ({ onNavigate }) => {
                     label="Design"
                     size="small"
                     sx={{
-                      background:
-                        "linear-gradient(135deg, #007AFF, #5AC8FA)",
+                      background: "linear-gradient(135deg, #007AFF, #5AC8FA)",
                       color: "#000",
                       boxShadow: "0 4px 16px rgba(0, 122, 255, 0.3)",
                     }}
@@ -791,12 +812,7 @@ const DashboardPage = ({ onNavigate }) => {
 
               {/* Budget & ESG */}
               <Box>
-                <Typography
-                  variant="h6"
-                  fontWeight={400}
-                  color="white"
-                  mb={3}
-                >
+                <Typography variant="h6" fontWeight={400} color="white" mb={3}>
                   Budget & ESG
                 </Typography>
                 <Box display="flex" alignItems="center" gap={3}>
@@ -832,17 +848,16 @@ const DashboardPage = ({ onNavigate }) => {
                 p: 4,
                 height: "100%",
                 backgroundColor: "rgba(255, 255, 255, 0.05)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
                 borderRadius: 3,
                 border: "1px solid rgba(255, 255, 255, 0.2)",
               }}
             >
               <Typography
-                variant="h6"
+                variant="h1"
                 fontWeight={400}
                 color="white"
-                mb={3}
+                mb={2}
+                sx={{ fontSize: "2rem" }}
               >
                 Simulations
               </Typography>
@@ -899,12 +914,13 @@ const DashboardPage = ({ onNavigate }) => {
                 border: "1px solid rgba(255, 255, 255, 0.2)",
               }}
             >
-              <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
-                <Typography
-                  variant="h6"
-                  fontWeight={400}
-                  color="white"
-                >
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+                mb={3}
+              >
+                <Typography variant="h6" fontWeight={400} color="white">
                   Stakeholders
                 </Typography>
                 <IconButton
@@ -977,12 +993,7 @@ const DashboardPage = ({ onNavigate }) => {
                 borderRadius: 3,
               }}
             >
-              <Typography
-                variant="h6"
-                fontWeight={400}
-                color="white"
-                mb={3}
-              >
+              <Typography variant="h6" fontWeight={400} color="white" mb={3}>
                 Automation
               </Typography>
               <Paper
@@ -998,8 +1009,7 @@ const DashboardPage = ({ onNavigate }) => {
                     sx={{
                       width: 36,
                       height: 36,
-                      background:
-                        "linear-gradient(135deg, #007AFF, #5AC8FA)",
+                      background: "linear-gradient(135deg, #007AFF, #5AC8FA)",
                       boxShadow: "0 8px 32px rgba(0, 122, 255, 0.3)",
                     }}
                   >
@@ -1010,19 +1020,14 @@ const DashboardPage = ({ onNavigate }) => {
                       label="Suggestion"
                       size="small"
                       sx={{
-                        background:
-                          "linear-gradient(135deg, #007AFF, #5AC8FA)",
+                        background: "linear-gradient(135deg, #007AFF, #5AC8FA)",
                         color: "white",
                         mb: 1.5,
                         fontWeight: 500,
                       }}
                     />
-                    <Typography
-                      variant="body2"
-                      color="black"
-                      lineHeight={1.5}
-                    >
-                      Add rainwater reuse to improve ESG by +12%
+                    <Typography variant="body2" color="black" lineHeight={1.5}>
+                      Final completion has been accelerated by a month
                     </Typography>
                   </Box>
                 </Box>
@@ -1077,7 +1082,7 @@ const AppleArkOSDashboard = () => {
         }}
       >
         {renderPage()}
-        <CallToAction /> 
+        <CallToAction />
       </Box>
     </ThemeProvider>
   );
