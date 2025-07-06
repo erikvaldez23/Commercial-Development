@@ -62,7 +62,7 @@ export default function HeroSection({ loadingDone }) {
         flexDirection: "column",
         justifyContent: "center",
         color: "white",
-        backgroundImage: `url(/Commercial-Development/city.jpg)`,
+        backgroundImage: `url(/city.jpg)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -84,7 +84,7 @@ export default function HeroSection({ loadingDone }) {
           zIndex: 0,
         }}
       >
-        <source src={`/Commercial-Development/sunset.mp4`} type="video/mp4" />
+        <source src={`/sunset.mp4`} type="video/mp4" />
         Your browser does not support the video tag.
       </video>
 
@@ -257,9 +257,9 @@ export default function HeroSection({ loadingDone }) {
                   borderRadius: "30px",
                   fontSize: { xs: "0.9rem", md: "1.5rem" },
                   fontWeight: 600,
-                  py: 1.5,
+                  py: 2,
                   px: 4,
-                  width: "250px",
+                  width: "300px",
                   "&:hover": {
                     background:
                       "linear-gradient(90deg, rgba(201,180,154,0.9) 0%, rgba(188,164,134,0.9) 100%)",
@@ -278,9 +278,9 @@ export default function HeroSection({ loadingDone }) {
                   borderRadius: "30px",
                   fontSize: { xs: "0.9rem", md: "1.5rem" },
                   fontWeight: 600,
-                  py: 1.5,
+                  py: 2,
                   px: 4,
-                  width: "250px",
+                  width: "300px",
                   "&:hover": {
                     borderColor: "#c9b49a",
                     background: "rgba(201,180,154,0.08)",

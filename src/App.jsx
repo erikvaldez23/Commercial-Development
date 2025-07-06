@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
- import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import {
   CssBaseline,
   ThemeProvider,
@@ -76,7 +76,8 @@ export default function App() {
   const [chatbotOpen, setChatbotOpen] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [animationDone, setAnimationDone] = useState(false);
-
+  
+  const isHome = location.pathname === "/"
   const loading = !(pageLoaded && animationDone);
 
   const handleOpenChatbot = () => setChatbotOpen(true);
@@ -119,7 +120,7 @@ export default function App() {
           {/* <VideoBackground /> */}
         </Box>
 
-        {!loading && <Topbar handleOpenChatbot={handleOpenChatbot} />}
+        {( !isHome || !loading ) && <Topbar handleOpenChatbot={handleOpenChatbot} />}
 
         <>
           <Routes>

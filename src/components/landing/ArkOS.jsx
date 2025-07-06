@@ -92,7 +92,7 @@ const ArkOSHero = () => {
               }}
             >
               <img
-                src="/Commercial-Development/coin2.png"
+                src="/coin2.png"
                 alt="Ark OS Demo"
                 style={{
                   width: "100%",

@@ -527,7 +527,7 @@ const DashboardPage = ({ onNavigate }) => {
               }}
             >
               <img
-                src="/Commercial-Development/greenark-logo1.png"
+                src="/greenark-logo1.png"
                 alt="logo"
                 style={{
                   width: "80%",
@@ -663,7 +663,7 @@ const DashboardPage = ({ onNavigate }) => {
           <Paper
             sx={{
               minHeight: 600,
-              background: "url(/Commercial-Development/map.jpg)",
+              background: "url(/map.jpg)",
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

@@ -22,7 +22,7 @@ export default function AboutVideo() {
           objectFit: "cover",
         }}
       >
-        <source src="/Commercial-Development/about-video.mp4" type="video/mp4" />
+        <source src="/about-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </Box>

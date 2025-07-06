@@ -366,7 +366,7 @@ export default function Offer() {
               > */}
                   <Box
                     component="img"
-                    src="/Commercial-Development/coin2.png" // Replace with your actual path
+                    src="/coin2.png" // Replace with your actual path
                     alt="Coin Image"
                     sx={{
                       width: isMobile ? "280px" : "400px",

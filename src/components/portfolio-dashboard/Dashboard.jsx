@@ -259,7 +259,7 @@ const ModernDashboard = () => {
               >
                 <Box
                   component="img"
-                  src="/Commercial-Development/city2.jpg"
+                  src="/city2.jpg"
                   alt="Dashboard Visual"
                   sx={{
                     height: "100%",

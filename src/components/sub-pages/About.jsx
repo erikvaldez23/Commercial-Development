@@ -191,7 +191,7 @@ export default function AboutUs() {
               >
                 <Box
                   component="img"
-                  src="/Commercial-Development/city.jpg"
+                  src="/city.jpg"
                   alt="Modern office building"
                   sx={{
                     width: "100%",
@@ -378,7 +378,7 @@ export default function AboutUs() {
               >
                 <Box
                   component="img"
-                  src="/Commercial-Development/city.jpg"
+                  src="/city.jpg"
                   alt="Modern office building"
                   sx={{
                     width: "100%",
@@ -445,7 +445,7 @@ export default function AboutUs() {
               >
                 <Box
                   component="img"
-                  src="/Commercial-Development/city.jpg"
+                  src="/city.jpg"
                   alt="Modern office building"
                   sx={{
                     width: "100%",

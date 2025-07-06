@@ -82,7 +82,7 @@ export default function UpdatedLoader() {
             {/* Logo Image */}
             <div className="w-36 h-36 mb-6 bg-white rounded-full flex items-center justify-center overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-500">
               <img
-                src="/Commercial-Development/greenark-logo1.png"
+                src="/greenark-logo1.png"
                 alt="Company Logo"
                 className="w-28 h-28 object-contain"
               />

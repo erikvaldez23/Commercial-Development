@@ -586,7 +586,7 @@ export default function ContactForm() {
         minHeight: "100vh",
            background:
             "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
-        pt: { xs: 2, sm: 8 },
+        py: { xs: 2, sm: 8 },
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

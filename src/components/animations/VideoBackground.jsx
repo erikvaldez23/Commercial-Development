@@ -22,7 +22,7 @@ export default function VideoBackground() {
           objectFit: "cover",
         }}
       >
-        <source src="/Commercial-Development/output.webm" type="video/webm" />
+        <source src="/output.webm" type="video/webm" />
         Your browser does not support the video tag.
       </video>
     </Box>

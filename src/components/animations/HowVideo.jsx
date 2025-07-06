@@ -22,7 +22,7 @@ export default function HowVideo() {
           objectFit: "cover",
         }}
       >
-        <source src="/Commercial-Development/how-video.mp4" type="video/mp4" />
+        <source src="/how-video.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </Box>

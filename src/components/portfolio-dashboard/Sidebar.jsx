@@ -102,7 +102,7 @@ export default function Sidebar() {
         {!collapsed && (
           <Box
             component="img"
-            src="/Commercial-Development/greenark-logo1.png"
+            src="/greenark-logo1.png"
             alt="GreenArk Logo"
             sx={{
               height: 40,
