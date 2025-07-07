@@ -786,6 +786,12 @@ const DashboardPage = ({ onNavigate }) => {
                   sx={{ mb: 3 }}
                 />
                 <Box display="flex" gap={1} flexWrap="wrap">
+                <Chip
+                    label="Funding"
+                    size="small"
+                    variant="outlined"
+                    sx={{ color: "#000" }}
+                  />
                   <Chip
                     label="Design"
                     size="small"
@@ -796,13 +802,19 @@ const DashboardPage = ({ onNavigate }) => {
                     }}
                   />
                   <Chip
-                    label="Approvals"
+                    label="Permits"
                     size="small"
                     variant="outlined"
                     sx={{ color: "#000" }}
                   />
                   <Chip
-                    label="Funding"
+                    label="Construction"
+                    size="small"
+                    variant="outlined"
+                    sx={{ color: "#000" }}
+                  />
+                  <Chip
+                    label="Leasing"
                     size="small"
                     variant="outlined"
                     sx={{ color: "#000" }}
@@ -859,25 +871,9 @@ const DashboardPage = ({ onNavigate }) => {
                 mb={2}
                 sx={{ fontSize: "2rem" }}
               >
-                Simulations
+                Documents
               </Typography>
               <Grid container spacing={2}>
-                <Grid item xs={6}>
-                  <SimulationCard
-                    icon={WbSunny}
-                    label="Sunlight"
-                    color="warning"
-                    index={0}
-                  />
-                </Grid>
-                <Grid item xs={6}>
-                  <SimulationCard
-                    icon={DirectionsCar}
-                    label="Traffic"
-                    color="info"
-                    index={1}
-                  />
-                </Grid>
                 <Grid item xs={6}>
                   <SimulationCard
                     icon={Business}
@@ -890,6 +886,22 @@ const DashboardPage = ({ onNavigate }) => {
                   <SimulationCard
                     icon={Business}
                     label="Planning"
+                    color="primary"
+                    index={3}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <SimulationCard
+                    icon={Business}
+                    label="Permits"
+                    color="primary"
+                    index={3}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <SimulationCard
+                    icon={Business}
+                    label="Performance Metrics"
                     color="primary"
                     index={3}
                   />
@@ -918,10 +930,10 @@ const DashboardPage = ({ onNavigate }) => {
                 display="flex"
                 justifyContent="space-between"
                 alignItems="center"
-                mb={3}
+                mb={2}
               >
-                <Typography variant="h6" fontWeight={400} color="white">
-                  Stakeholders
+                <Typography variant="h6" fontWeight={400} color="white" sx={{ fontSize:"2rem"}}>
+                  Team
                 </Typography>
                 <IconButton
                   size="small"
@@ -993,8 +1005,8 @@ const DashboardPage = ({ onNavigate }) => {
                 borderRadius: 3,
               }}
             >
-              <Typography variant="h6" fontWeight={400} color="white" mb={3}>
-                Automation
+              <Typography variant="h6" fontWeight={400} color="white" mb={3} sx={{ fontSize: "2rem"}}>
+                Messages
               </Typography>
               <Paper
                 sx={{

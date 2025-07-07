@@ -98,11 +98,11 @@ const ArkOSHero = () => {
               }}
             >
               <img
-                src="/coin2.png"
+                src="/blue-logo.png"
                 alt="Ark OS Demo"
                 style={{
-                  width: "100%",
-                  height: "100%",
+                  width: "70%",
+                  height: "70%",
                   objectFit: "cover",
                   borderRadius: "24px",
                   filter: "drop-shadow(0 0 40px rgba(201, 180, 154, 0.4))",
@@ -137,7 +137,8 @@ const ArkOSHero = () => {
               <Typography
                 variant="h4"
                 sx={{
-                  color: "#c9b49a",
+                  // color: "#c9b49a",
+                  color: "#5EC1E3",
                   fontWeight: 700,
                   mb: 1,
                   fontSize: { xs: "1.5rem", md: "2rem" },
@@ -169,7 +170,7 @@ const ArkOSHero = () => {
                   size="large"
                   endIcon={<ArrowForwardIcon />}
                   sx={{
-                    backgroundColor: "#c9b49a",
+                    backgroundColor: "#5EC1E3",
                     color: "black",
                     fontWeight: 700,
                     px: 4,
