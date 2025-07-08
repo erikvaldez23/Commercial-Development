@@ -98,7 +98,7 @@ const ArkOSHero = () => {
               }}
             >
               <img
-                src="/blue-logo.png"
+                src="/blue-logo2.png"
                 alt="Ark OS Demo"
                 style={{
                   width: "70%",
@@ -183,6 +183,7 @@ const ArkOSHero = () => {
                       backgroundColor: "#b8a389",
                       transform: "translateY(-2px)",
                       boxShadow: "0 12px 35px rgba(201, 180, 154, 0.4)",
+                      background: "#fff"
                     },
                     transition: "all 0.3s cubic-bezier(0.23, 1, 0.320, 1)",
                   }}
@@ -204,7 +205,7 @@ const ArkOSHero = () => {
                     textTransform: "none",
                     fontSize: "1rem",
                     "&:hover": {
-                      borderColor: "#c9b49a",
+                      borderColor: "#fff",
                       backgroundColor: "rgba(201, 180, 154, 0.1)",
                       transform: "translateY(-1px)",
                     },
