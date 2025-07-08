@@ -522,12 +522,12 @@ const DashboardPage = ({ onNavigate }) => {
               sx={{
                 width: 100,
                 height: 100,
-                boxShadow: "0 8px 32px rgba(255, 149, 0, 0.3)",
+                boxShadow: "0 8px 32px #5EC1E3",
                 background: "rgba(0, 0, 0, 0.2)",
               }}
             >
               <img
-                src="/greenark-logo1.png"
+                src="/blue-logo.png"
                 alt="logo"
                 style={{
                   width: "80%",
@@ -586,6 +586,7 @@ const DashboardPage = ({ onNavigate }) => {
                   background:
                     "linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(90, 200, 250, 0.05))",
                   border: "1px solid rgba(0, 122, 255, 0.2)",
+                  borderRadius: 20
                 }}
                 onClick={handleProjects}
               >
@@ -638,6 +639,7 @@ const DashboardPage = ({ onNavigate }) => {
                   background:
                     "linear-gradient(135deg, rgba(255, 149, 0, 0.1), rgba(255, 173, 51, 0.05))",
                   border: "1px solid rgba(255, 149, 0, 0.2)",
+                  borderRadius: 20
                 }}
                 // onClick={() => onNavigate("stakeholders")}
                 onClick={handleStakeholders}

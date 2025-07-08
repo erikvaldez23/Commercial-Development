@@ -11,14 +11,20 @@ import {
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import logo from "/greenark-logo1.png";
+import { useNavigate } from "react-router-dom";
 
 export default function HeroSection({ loadingDone }) {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
   const [showContent, setShowContent] = useState(false); // <-- animation trigger delay
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handleExploreClick = () => {
+    navigate("/portfolio")
+  }
 
   useEffect(() => {
     if (loadingDone) {
@@ -267,6 +273,7 @@ export default function HeroSection({ loadingDone }) {
                   },
                   transition: "all 0.3s ease",
                 }}
+                onClick={handleExploreClick}
               >
                 Explore Projects
               </Button>

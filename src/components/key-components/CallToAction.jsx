@@ -27,6 +27,10 @@ export default function CallToAction() {
     console.log('Email submitted:', email);
   };
 
+  const handleGetStartedClick = () => {
+    navigate("/contact")
+  }
+
   return (
     <Box 
       sx={{ 
@@ -122,6 +126,8 @@ export default function CallToAction() {
                   transform: 'translateY(0)',
                 },
               }}
+              onClick={handleGetStartedClick}
+
             >
               Get Started
             </Button>

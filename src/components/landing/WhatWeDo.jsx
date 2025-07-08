@@ -61,7 +61,7 @@ const WhatWeDo = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <Box
+    <Box id="what-we-do"
       ref={sectionRef}
       sx={{
         background: "#000",
