@@ -585,8 +585,8 @@ const DashboardPage = ({ onNavigate }) => {
                   cursor: "pointer",
                   background:
                     "linear-gradient(135deg, rgba(0, 122, 255, 0.1), rgba(90, 200, 250, 0.05))",
-                  border: "1px solid rgba(0, 122, 255, 0.2)",
-                  borderRadius: 20
+                  border: "1px solid rxgba(0, 122, 255, 0.2)",
+                  borderRadius: 20,
                 }}
                 onClick={handleProjects}
               >
@@ -639,7 +639,7 @@ const DashboardPage = ({ onNavigate }) => {
                   background:
                     "linear-gradient(135deg, rgba(255, 149, 0, 0.1), rgba(255, 173, 51, 0.05))",
                   border: "1px solid rgba(255, 149, 0, 0.2)",
-                  borderRadius: 20
+                  borderRadius: 20,
                 }}
                 // onClick={() => onNavigate("stakeholders")}
                 onClick={handleStakeholders}
@@ -684,6 +684,19 @@ const DashboardPage = ({ onNavigate }) => {
 
       {/* All Projects Section */}
       <Box mb={6}>
+        <Fade in={visible} timeout={1200} style={{ transitionDelay: "600ms" }}>
+          <Typography
+            sx={{
+              fontSize: "5rem",
+              fontStyle: "italic",
+              textAlign: "center",
+              mb: 2,
+            }}
+          >
+            PROJECT SPOTLIGHT
+          </Typography>
+        </Fade>
+
         {/* Enhanced Map Area */}
         <Grow in={visible} timeout={1200} style={{ transitionDelay: "600ms" }}>
           <Paper
@@ -788,7 +801,7 @@ const DashboardPage = ({ onNavigate }) => {
                   sx={{ mb: 3 }}
                 />
                 <Box display="flex" gap={1} flexWrap="wrap">
-                <Chip
+                  <Chip
                     label="Funding"
                     size="small"
                     variant="outlined"
@@ -934,7 +947,12 @@ const DashboardPage = ({ onNavigate }) => {
                 alignItems="center"
                 mb={2}
               >
-                <Typography variant="h6" fontWeight={400} color="white" sx={{ fontSize:"2rem"}}>
+                <Typography
+                  variant="h6"
+                  fontWeight={400}
+                  color="white"
+                  sx={{ fontSize: "2rem" }}
+                >
                   Team
                 </Typography>
                 <IconButton
@@ -1007,7 +1025,13 @@ const DashboardPage = ({ onNavigate }) => {
                 borderRadius: 3,
               }}
             >
-              <Typography variant="h6" fontWeight={400} color="white" mb={3} sx={{ fontSize: "2rem"}}>
+              <Typography
+                variant="h6"
+                fontWeight={400}
+                color="white"
+                mb={3}
+                sx={{ fontSize: "2rem" }}
+              >
                 Messages
               </Typography>
               <Paper

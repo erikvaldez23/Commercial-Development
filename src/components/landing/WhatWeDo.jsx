@@ -38,22 +38,22 @@ const WhatWeDo = () => {
     {
       title: "Smart Cities",
       description: "Designed with AI, powered by purpose.",
-      icon: "/icons/smart.png",
+      icon: "/icons/smart1.png",
     },
     {
       title: "Mixed-Use Towers",
       description: "Modular, efficient, connected.",
-      icon: "/icons/towers.png",
+      icon: "/icons/towers1.png",
     },
     {
       title: "Eco Communities",
       description: "Off-grid carbon aware. Future ready.",
-      icon: "/icons/communities.png",
+      icon: "/icons/communities1.png",
     },
     {
       title: "Regenerative Projects",
       description: "Built to give back more than they take.",
-      icon: "/icons/projects.png",
+      icon: "/icons/projects1.png",
     },
   ];
 

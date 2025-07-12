@@ -45,7 +45,6 @@ import Stakeholders from "./components/portfolio-dashboard/portfolio-sub-pages/S
 import ArkOSDashboard from "./components/portfolio-dashboard/ArkOSDashboard";
 import ArkOS from "./components/landing/ArkOS";
 import ProjectsPage from "./components/portfolio-dashboard/portfolio-sub-pages/Projects2";
-import ProjectDetails from "./components/portfolio-dashboard/portfolio-sub-pages/ProjectDetails";
 
 // theme
 const theme = createTheme({
@@ -187,7 +186,6 @@ export default function App() {
             <Route path="/portfolio/buildings" element={<Projects />} />
             <Route path="/portfolio/stakeholders" element={<Stakeholders />} />
             <Route path="/portfolio/projects" element={<ProjectsPage />} />
-            <Route path="/portfolio/projects/:projectId" element={<ProjectDetails />} />
           </Routes>
 
           {/* <Chatbot open={chatbotOpen} onClose={handleCloseChatbot} />

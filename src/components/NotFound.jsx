@@ -4,7 +4,6 @@ import Topbar from "./key-components/Topbar";
 import Contact from "./key-components/Contact";
 import Footer from "./key-components/Footer";
 import CallToAction from "./key-components/CallToAction";
-import QuickLinks from "./key-components/QuickLinks";
 
 const NotFound = () => {
   return (
@@ -103,8 +102,6 @@ const NotFound = () => {
       <Box sx={{width: "100vw" }}>
         <Contact />
       </Box>
-
-      <QuickLinks />
     </Box>
   );
 };

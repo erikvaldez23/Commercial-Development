@@ -18,7 +18,8 @@ import {
 } from "@mui/material";
 import { LocationOn, ArrowForward } from "@mui/icons-material";
 import FilterBar from "../Filter";
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom";
+import ProjectDetailsModal from "./ProjectDetailsModal";
 
 const appleTheme = createTheme({
   palette: {
@@ -188,6 +189,11 @@ const projectsData = [
     investment: "$1.2M",
     description: "Modern commercial tower with sustainable features",
     category: "Office",
+    image: "/commercial-mock1.jpeg",
+    stakeholders: [
+      { name: "Person 1", role: "Role" },
+      { name: "Person 2", role: "Role" },
+    ],
   },
   {
     id: 2,
@@ -203,6 +209,10 @@ const projectsData = [
     investment: "$2.8M",
     description: "Mixed-use development with retail and office spaces",
     category: "Mixed-Use",
+    stakeholders: [
+      { name: "Person 1", role: "Role" },
+      { name: "Person 2", role: "Role" },
+    ],
   },
   {
     id: 3,
@@ -218,6 +228,10 @@ const projectsData = [
     investment: "$2.8M",
     description: "Eco-friendly commercial plaza with green technologies",
     category: "Retail",
+    stakeholders: [
+      { name: "Person 1", role: "Role" },
+      { name: "Person 2", role: "Role" },
+    ],
   },
   {
     id: 4,
@@ -233,6 +247,10 @@ const projectsData = [
     investment: "$2.8M",
     description: "Technology center for startups and innovation",
     category: "Office",
+    stakeholders: [
+      { name: "Person 1", role: "Role" },
+      { name: "Person 2", role: "Role" },
+    ],
   },
   {
     id: 5,
@@ -248,6 +266,10 @@ const projectsData = [
     investment: "$3.2M",
     description: "Modern industrial facility with logistics center",
     category: "Industrial",
+    stakeholders: [
+      { name: "Person 1", role: "Role" },
+      { name: "Person 2", role: "Role" },
+    ],
   },
   {
     id: 6,
@@ -263,11 +285,15 @@ const projectsData = [
     investment: "$2.1M",
     description: "Premium retail and entertainment complex",
     category: "Retail",
+    stakeholders: [
+      { name: "Person 1", role: "Role" },
+      { name: "Person 2", role: "Role" },
+    ],
   },
 ];
 
 const ProjectsPage = ({ onNavigate }) => {
-  const { projectId } = useParams()
+  const { projectId } = useParams();
   const [visible, setVisible] = useState(false);
   const [filters, setFilters] = useState({
     category: "All",
@@ -275,37 +301,38 @@ const ProjectsPage = ({ onNavigate }) => {
     phase: "All Phases",
     search: "",
   });
-  const navigate = useNavigate()
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
 
-
-  const handleProjectClick = (projectId) => {
-    navigate(`/projects/${projectId}`)
-  }
+  const handleProjectClick = (project) => {
+    setSelectedProject(project);
+    setDialogOpen(true);
+  };
 
   const handleCategoryChange = (category) => {
-  setFilters((prev) => ({ ...prev, category }));
-};
+    setFilters((prev) => ({ ...prev, category }));
+  };
 
-const handleStatusChange = (status) => {
-  setFilters((prev) => ({ ...prev, status }));
-};
+  const handleStatusChange = (status) => {
+    setFilters((prev) => ({ ...prev, status }));
+  };
 
-const handlePhaseChange = (phase) => {
-  setFilters((prev) => ({ ...prev, phase }));
-};
+  const handlePhaseChange = (phase) => {
+    setFilters((prev) => ({ ...prev, phase }));
+  };
 
-const handleSearchChange = (search) => {
-  setFilters((prev) => ({ ...prev, search }));
-};
+  const handleSearchChange = (search) => {
+    setFilters((prev) => ({ ...prev, search }));
+  };
 
-const handleClearFilters = () => {
-  setFilters({
-    category: "All",
-    status: "All Statuses",
-    phase: "All Phases",
-    search: "",
-  });
-};
+  const handleClearFilters = () => {
+    setFilters({
+      category: "All",
+      status: "All Statuses",
+      phase: "All Phases",
+      search: "",
+    });
+  };
 
   useEffect(() => {
     setVisible(true);
@@ -313,38 +340,41 @@ const handleClearFilters = () => {
 
   // Memoized filtered projects
   const filteredProjects = useMemo(() => {
-  return projectsData.filter((project) => {
-    if (filters.category !== "All" && project.category !== filters.category)
-      return false;
+    return projectsData.filter((project) => {
+      if (filters.category !== "All" && project.category !== filters.category)
+        return false;
 
-    if (filters.status !== "All Statuses" && project.status !== filters.status)
-      return false;
+      if (
+        filters.status !== "All Statuses" &&
+        project.status !== filters.status
+      )
+        return false;
 
-    if (filters.phase !== "All Phases" && project.phase !== filters.phase)
-      return false;
+      if (filters.phase !== "All Phases" && project.phase !== filters.phase)
+        return false;
 
-    if (filters.search) {
-      const searchLower = filters.search.toLowerCase();
-      return (
-        project.name.toLowerCase().includes(searchLower) ||
-        project.location.toLowerCase().includes(searchLower) ||
-        project.description.toLowerCase().includes(searchLower) ||
-        project.category.toLowerCase().includes(searchLower)
-      );
-    }
+      if (filters.search) {
+        const searchLower = filters.search.toLowerCase();
+        return (
+          project.name.toLowerCase().includes(searchLower) ||
+          project.location.toLowerCase().includes(searchLower) ||
+          project.description.toLowerCase().includes(searchLower) ||
+          project.category.toLowerCase().includes(searchLower)
+        );
+      }
 
-    return true;
-  });
-}, [filters]);
+      return true;
+    });
+  }, [filters]);
 
-    return (
+  return (
     <ThemeProvider theme={appleTheme}>
       <CssBaseline />
       <Box
         sx={{
           background:
             "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
-            pt: 10,
+          pt: 10,
           minHeight: "100vh",
           "&::before": {
             content: '""',
@@ -369,7 +399,8 @@ const handleClearFilters = () => {
                 Manage and monitor all your development projects
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {filteredProjects.length} of {projectsData.length} projects displayed
+                {filteredProjects.length} of {projectsData.length} projects
+                displayed
               </Typography>
             </Box>
           </Fade>
@@ -464,7 +495,13 @@ const handleClearFilters = () => {
                           >
                             <LocationOn />
                           </Avatar>
-                          <Box display="flex" flexDirection="column" gap={0.5} alignItems="end" sx={{width: "70px"}}>
+                          <Box
+                            display="flex"
+                            flexDirection="column"
+                            gap={0.5}
+                            alignItems="end"
+                            sx={{ width: "70px" }}
+                          >
                             <Chip
                               label={project.status}
                               size="small"
@@ -504,7 +541,11 @@ const handleClearFilters = () => {
                           {project.name}
                         </Typography>
 
-                        <Typography variant="body1" color="text.secondary" mb={2}>
+                        <Typography
+                          variant="body1"
+                          color="text.secondary"
+                          mb={2}
+                        >
                           {project.location}
                         </Typography>
 
@@ -512,7 +553,11 @@ const handleClearFilters = () => {
                           {project.description}
                         </Typography>
 
-                        <Box display="flex" justifyContent="space-between" mb={2}>
+                        <Box
+                          display="flex"
+                          justifyContent="space-between"
+                          mb={2}
+                        >
                           <Typography variant="body1" color="text.secondary">
                             Size: {project.size}
                           </Typography>
@@ -527,7 +572,10 @@ const handleClearFilters = () => {
                             justifyContent="space-between"
                             mb={1}
                           >
-                            <Typography variant="caption" color="text.secondary">
+                            <Typography
+                              variant="caption"
+                              color="text.secondary"
+                            >
                               Progress
                             </Typography>
                             <Typography variant="caption" color="white">
@@ -553,7 +601,6 @@ const handleClearFilters = () => {
                               background: `#000`,
                               color: "white",
                               border: "rgba(255, 255, 255, 0.8)",
-
                             }}
                           />
                           <Chip
@@ -590,7 +637,7 @@ const handleClearFilters = () => {
                               boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
                             },
                           }}
-                          onClick={ () => handleProjectClick(project.id) }
+                          onClick={() => handleProjectClick(project)}
                         >
                           View Details
                         </Button>
@@ -619,8 +666,10 @@ const handleClearFilters = () => {
                 <Typography variant="body2" color="text.secondary">
                   Showing {filteredProjects.length} projects
                   {filters.category !== "All" && ` in ${filters.category}`}
-                  {filters.status !== "All Statuses" && ` with ${filters.status} status`}
-                  {filters.phase !== "All Phases" && ` in ${filters.phase} phase`}
+                  {filters.status !== "All Statuses" &&
+                    ` with ${filters.status} status`}
+                  {filters.phase !== "All Phases" &&
+                    ` in ${filters.phase} phase`}
                   {filters.search && ` matching "${filters.search}"`}
                 </Typography>
               </Box>
@@ -628,9 +677,15 @@ const handleClearFilters = () => {
           )}
         </Container>
       </Box>
+      {selectedProject && (
+        <ProjectDetailsModal
+          open={dialogOpen}
+          onClose={() => setDialogOpen(false)}
+          project={selectedProject}
+        />
+      )}
     </ThemeProvider>
   );
 };
-
 
 export default ProjectsPage;
