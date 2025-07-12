@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -50,6 +50,69 @@ import {
 const ProjectDetailsModal = ({ open, onClose, project }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const allPhases = [
+    "Funding",
+    "Designing",
+    "Permits",
+    "Construction",
+    "Leasing",
+  ];
+
+  useEffect(() => {
+    if (open) {
+      // Store original body styles
+      const originalStyle = {
+        overflow: document.body.style.overflow,
+        position: document.body.style.position,
+        top: document.body.style.top,
+        width: document.body.style.width,
+      };
+
+      // Get current scroll position
+      const scrollY = window.scrollY;
+      
+      // Apply scroll lock styles
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+      document.body.style.top = `-${scrollY}px`;
+      document.body.style.width = '100%';
+      
+      // Also apply to html element for extra security
+      document.documentElement.style.overflow = 'hidden';
+
+      // Cleanup function
+      return () => {
+        // Restore original styles
+        document.body.style.overflow = originalStyle.overflow;
+        document.body.style.position = originalStyle.position;
+        document.body.style.top = originalStyle.top;
+        document.body.style.width = originalStyle.width;
+        
+        // Restore html element
+        document.documentElement.style.overflow = '';
+        
+        // Restore scroll position
+        window.scrollTo(0, scrollY);
+      };
+    }
+  }, [open]);
+
+  // Handle escape key
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && open) {
+        onClose();
+      }
+    };
+
+    if (open) {
+      document.addEventListener('keydown', handleEscape);
+    }
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, [open, onClose]);
 
   if (!project) return null;
 
@@ -107,6 +170,7 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
       fullScreen={fullScreen}
       maxWidth="lg"
       fullWidth
+      disableScrollLock={false}
       TransitionComponent={Fade}
       transitionDuration={300}
       PaperProps={{
@@ -119,7 +183,7 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
           maxHeight: "95vh",
           "&:hover": {
             background: "rgba(15, 15, 15, 0.3)",
-          }
+          },
         },
       }}
     >
@@ -131,6 +195,7 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
           position: "relative",
           overflow: "hidden",
           borderRadius: "24px 24px 0 0",
+          py: 5
         }}
       >
         <Box
@@ -176,6 +241,7 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
               "&:hover": {
                 backgroundColor: "rgba(255, 255, 255, 0.15)",
                 transform: "scale(1.05)",
+                cursor: "pointer"
               },
               transition: "all 0.3s ease",
             }}
@@ -198,14 +264,14 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                 borderRadius: "20px",
                 boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
                 overflow: "hidden",
-                mt: 3
+                mt: 3,
               }}
             >
               <Box
                 sx={{
                   height: 400,
-                  background: project.image 
-                    ? `url(${project.image})` 
+                  background: project.image
+                    ? `url(${project.image})`
                     : `linear-gradient(135deg, ${project.color}30, ${project.color}10)`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
@@ -265,17 +331,21 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                 borderRadius: "20px",
                 boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
                 height: 400,
-                mt: 3
+                mt: 3,
               }}
             >
               <CardContent sx={{ p: 3, height: "100%" }}>
                 <Typography variant="h6" color="white" mb={2} fontWeight={600}>
                   Project Overview
                 </Typography>
-                
+
                 <Box display="flex" flexDirection="column" gap={2} mb={3}>
                   <Box>
-                    <Typography variant="body2" color="rgba(255, 255, 255, 0.6)" mb={1}>
+                    <Typography
+                      variant="body2"
+                      color="rgba(255, 255, 255, 0.6)"
+                      mb={1}
+                    >
                       Project Type
                     </Typography>
                     <Chip
@@ -288,9 +358,13 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                       }}
                     />
                   </Box>
-                  
+
                   <Box>
-                    <Typography variant="body2" color="rgba(255, 255, 255, 0.6)" mb={1}>
+                    <Typography
+                      variant="body2"
+                      color="rgba(255, 255, 255, 0.6)"
+                      mb={1}
+                    >
                       Current Phase
                     </Typography>
                     <Box display="flex" alignItems="center" gap={2}>
@@ -308,7 +382,11 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                       >
                         {getPhaseIcon(project.phase)}
                       </Box>
-                      <Typography variant="body1" color="white" fontWeight={500}>
+                      <Typography
+                        variant="body1"
+                        color="white"
+                        fontWeight={500}
+                      >
                         {project.phase}
                       </Typography>
                     </Box>
@@ -319,22 +397,36 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                   <Box display="flex" alignItems="center" gap={2}>
                     <AttachMoney sx={{ color: "#34C759", fontSize: 20 }} />
                     <Box>
-                      <Typography variant="body2" color="rgba(255, 255, 255, 0.6)">
+                      <Typography
+                        variant="body2"
+                        color="rgba(255, 255, 255, 0.6)"
+                      >
                         Budget
                       </Typography>
-                      <Typography variant="body1" color="white" fontWeight={600}>
+                      <Typography
+                        variant="body1"
+                        color="white"
+                        fontWeight={600}
+                      >
                         {project.budget}
                       </Typography>
                     </Box>
                   </Box>
-                  
+
                   <Box display="flex" alignItems="center" gap={2}>
                     <Square sx={{ color: "#5AC8FA", fontSize: 20 }} />
                     <Box>
-                      <Typography variant="body2" color="rgba(255, 255, 255, 0.6)">
+                      <Typography
+                        variant="body2"
+                        color="rgba(255, 255, 255, 0.6)"
+                      >
                         Size
                       </Typography>
-                      <Typography variant="body1" color="white" fontWeight={600}>
+                      <Typography
+                        variant="body1"
+                        color="white"
+                        fontWeight={600}
+                      >
                         {project.size}
                       </Typography>
                     </Box>
@@ -379,54 +471,70 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                 border: "1px solid rgba(255, 255, 255, 0.08)",
                 borderRadius: "20px",
                 boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
-                height: 200
+                height: 300,
               }}
             >
               <CardContent sx={{ p: 3 }}>
                 <Typography variant="h6" color="white" mb={3} fontWeight={600}>
                   Project Timeline
                 </Typography>
-                
-                <Box display="flex" flexDirection="column" gap={3}>
-                  {project.timeline_steps?.map((step, index) => {
-                    const status = getTimelineStepStatus(step);
+
+                <Box
+                  display="flex"
+                  justifyContent="space-between"
+                  alignItems="center"
+                  flexWrap="wrap"
+                >
+                  {allPhases.map((phase, index) => {
+                    const isCurrent = phase === project.phase;
+                    const isCompleted =
+                      allPhases.indexOf(phase) <
+                      allPhases.indexOf(project.phase);
+
                     return (
-                      <Box key={index} display="flex" alignItems="center" gap={3}>
-                        <Box
+                      <Box
+                        key={phase}
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        flex="1"
+                        sx={{
+                          minWidth: 80,
+                          opacity: isCompleted || isCurrent ? 1 : 0.4,
+                        }}
+                      >
+                        <Avatar
                           sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
                             width: 40,
                             height: 40,
-                            borderRadius: "50%",
-                            background: `${status.color}20`,
-                            border: `2px solid ${status.color}`,
-                            color: status.color,
+                            mb: 1,
+                            bgcolor: isCurrent
+                              ? project.color
+                              : isCompleted
+                              ? `${project.color}40`
+                              : "rgba(255, 255, 255, 0.1)",
+                            color: isCurrent || isCompleted ? "#fff" : "#888",
+                            fontWeight: 600,
+                            border: `2px solid ${
+                              isCurrent ? "#fff" : "transparent"
+                            }`,
                           }}
                         >
-                          {status.icon}
-                        </Box>
-                        <Box flex={1}>
-                          <Typography variant="body1" color="white" fontWeight={500}>
-                            {step.title}
-                          </Typography>
-                          <Typography variant="body2" color="rgba(255, 255, 255, 0.6)">
-                            {step.duration} • {step.status}
-                          </Typography>
-                        </Box>
-                        {index < project.timeline_steps.length - 1 && (
-                          <Box
-                            sx={{
-                              position: "absolute",
-                              left: "39px",
-                              top: "50px",
-                              width: 2,
-                              height: 30,
-                              background: "rgba(255, 255, 255, 0.1)",
-                            }}
-                          />
-                        )}
+                          {index + 1}
+                        </Avatar>
+                        <Typography
+                          variant="caption"
+                          color={
+                            isCurrent || isCompleted
+                              ? "white"
+                              : "text.secondary"
+                          }
+                          fontWeight={isCurrent ? 700 : 400}
+                          textAlign="center"
+                        >
+                          {phase}
+                        </Typography>
                       </Box>
                     );
                   })}
@@ -434,7 +542,10 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
 
                 <Box mt={4}>
                   <Box display="flex" justifyContent="space-between" mb={2}>
-                    <Typography variant="body2" color="rgba(255, 255, 255, 0.6)">
+                    <Typography
+                      variant="body2"
+                      color="rgba(255, 255, 255, 0.6)"
+                    >
                       Overall Progress
                     </Typography>
                     <Typography variant="body2" color="white" fontWeight={700}>
@@ -469,14 +580,14 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                 border: "1px solid rgba(255, 255, 255, 0.08)",
                 borderRadius: "20px",
                 boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
-                height: 200
+                height: 300,
               }}
             >
               <CardContent sx={{ p: 3 }}>
                 <Typography variant="h6" color="white" mb={3} fontWeight={600}>
                   Project Stakeholders
                 </Typography>
-                
+
                 <List sx={{ p: 0 }}>
                   {project.stakeholders?.map((stakeholder, index) => (
                     <ListItem key={index} sx={{ px: 0, py: 1 }}>
@@ -494,12 +605,19 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                       </ListItemAvatar>
                       <ListItemText
                         primary={
-                          <Typography variant="body1" color="white" fontWeight={500}>
+                          <Typography
+                            variant="body1"
+                            color="white"
+                            fontWeight={500}
+                          >
                             {stakeholder.name}
                           </Typography>
                         }
                         secondary={
-                          <Typography variant="body2" color="rgba(255, 255, 255, 0.6)">
+                          <Typography
+                            variant="body2"
+                            color="rgba(255, 255, 255, 0.6)"
+                          >
                             {stakeholder.role}
                           </Typography>
                         }
@@ -526,7 +644,7 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                 <Typography variant="h6" color="white" mb={3} fontWeight={600}>
                   Important Documents
                 </Typography>
-                
+
                 <Grid container spacing={2}>
                   {project.documents?.map((doc, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>
@@ -561,10 +679,17 @@ const ProjectDetailsModal = ({ open, onClose, project }) => {
                             {getDocumentIcon(doc.type)}
                           </Box>
                           <Box flex={1}>
-                            <Typography variant="body1" color="white" fontWeight={500}>
+                            <Typography
+                              variant="body1"
+                              color="white"
+                              fontWeight={500}
+                            >
                               {doc.name}
                             </Typography>
-                            <Typography variant="body2" color="rgba(255, 255, 255, 0.6)">
+                            <Typography
+                              variant="body2"
+                              color="rgba(255, 255, 255, 0.6)"
+                            >
                               {doc.size} • {doc.type.toUpperCase()}
                             </Typography>
                           </Box>

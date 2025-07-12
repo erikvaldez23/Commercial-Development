@@ -213,7 +213,7 @@ const projectsData = [
     id: 1,
     name: "Lagos Tower",
     location: "Lagos, Nigeria",
-    phase: "Design",
+    phase: "Funding",
     progress: 72,
     budget: "$2.5M",
     timeline: "30.95 - 29.25",
