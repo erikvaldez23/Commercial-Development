@@ -236,13 +236,13 @@ export default function CallToAction() {
                       title: 'Company',
                       links: [
                         { label: 'About Us', path: '/about' },
-                        { label: 'Careers', path: '/careers' },
+                        // { label: 'Careers', path: '/careers' },
                       ],
                     },
                     {
                       title: 'Support',
                       links: [
-                        { label: 'Help Center', path: '/support' },
+                        // { label: 'Help Center', path: '/support' },
                         { label: 'Contact', path: '/contact' },
                       ],
                     },
@@ -250,7 +250,7 @@ export default function CallToAction() {
                       title: 'Legal',
                       links: [
                         { label: 'Privacy Policy', path: '/privacy' },
-                        { label: 'Terms of Use', path: '/terms' },
+                        // { label: 'Terms of Use', path: '/terms' },
                       ],
                     },
                   ].map((section, index) => (

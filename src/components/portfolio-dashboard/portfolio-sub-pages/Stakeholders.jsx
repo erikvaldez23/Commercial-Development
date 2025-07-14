@@ -28,10 +28,6 @@ import {
   ListItemAvatar,
   TextField,
   InputAdornment,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   FormControl,
   InputLabel,
   Select,
@@ -197,7 +193,6 @@ const Stakeholders = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterType, setFilterType] = useState("all");
   const [selectedStakeholder, setSelectedStakeholder] = useState(null);
-  const [dialogOpen, setDialogOpen] = useState(false);
   const navigate = useNavigate()
 
   const handleArrowBack = () => {
@@ -387,12 +382,7 @@ const Stakeholders = () => {
     >
       <Card
         sx={{
-          cursor: "pointer",
           height: "100%",
-        }}
-        onClick={() => {
-          setSelectedStakeholder(stakeholder);
-          setDialogOpen(true);
         }}
       >
         <CardContent sx={{ p: 3 }}>
@@ -700,141 +690,6 @@ const Stakeholders = () => {
               </Grid>
             ))}
           </Grid>
-
-          {/* Stakeholder Detail Dialog */}
-          <Dialog
-            open={dialogOpen}
-            onClose={() => setDialogOpen(false)}
-            maxWidth="md"
-            fullWidth
-            PaperProps={{
-              sx: {
-                background: "rgba(26, 26, 46, 0.95)",
-                backdropFilter: "blur(20px)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-              },
-            }}
-          >
-            {selectedStakeholder && (
-              <>
-                <DialogTitle>
-                  <Box display="flex" alignItems="center" gap={2}>
-                    <Avatar
-                      sx={{
-                        width: 48,
-                        height: 48,
-                        background: `linear-gradient(135deg, ${selectedStakeholder.color}, ${selectedStakeholder.color}CC)`,
-                      }}
-                    >
-                      {selectedStakeholder.avatar}
-                    </Avatar>
-                    <Box>
-                      <Typography variant="h5" color="white">
-                        {selectedStakeholder.name}
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {selectedStakeholder.role} at {selectedStakeholder.company}
-                      </Typography>
-                    </Box>
-                  </Box>
-                </DialogTitle>
-                <DialogContent>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <StakeholderStats stakeholder={selectedStakeholder} />
-                    </Grid>
-                    
-                    <Grid item xs={12} md={6}>
-                      <Typography variant="h6" color="white" mb={2}>
-                        Contact Information
-                      </Typography>
-                      <List>
-                        <ListItem>
-                          <ListItemIcon>
-                            <Email sx={{ color: "primary.main" }} />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={selectedStakeholder.email}
-                            secondary="Email"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <Phone sx={{ color: "success.main" }} />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={selectedStakeholder.phone}
-                            secondary="Phone"
-                          />
-                        </ListItem>
-                        <ListItem>
-                          <ListItemIcon>
-                            <LocationOn sx={{ color: "warning.main" }} />
-                          </ListItemIcon>
-                          <ListItemText
-                            primary={selectedStakeholder.location}
-                            secondary="Location"
-                          />
-                        </ListItem>
-                      </List>
-                    </Grid>
-
-                    <Grid item xs={12} md={6}>
-                      <Typography variant="h6" color="white" mb={2}>
-                        Specialties
-                      </Typography>
-                      <Box display="flex" gap={1} flexWrap="wrap" mb={3}>
-                        {selectedStakeholder.specialties.map((specialty, index) => (
-                          <Chip
-                            key={index}
-                            label={specialty}
-                            size="small"
-                            sx={{
-                              background: `linear-gradient(135deg, ${selectedStakeholder.color}20, ${selectedStakeholder.color}10)`,
-                              color: selectedStakeholder.color,
-                              border: `1px solid ${selectedStakeholder.color}40`,
-                            }}
-                          />
-                        ))}
-                      </Box>
-                      
-                      <Typography variant="h6" color="white" mb={2}>
-                        Recent Activity
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        {selectedStakeholder.recentActivity}
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </DialogContent>
-                <DialogActions sx={{ p: 3 }}>
-                  <Button
-                    startIcon={<Message />}
-                    variant="outlined"
-                    sx={{ mr: 1 }}
-                  >
-                    Send Message
-                  </Button>
-                  <Button
-                    startIcon={<VideoCall />}
-                    variant="outlined"
-                    sx={{ mr: 1 }}
-                  >
-                    Schedule Call
-                  </Button>
-                  {/* <Button
-                    startIcon={<Edit />}
-                    variant="contained"
-                    sx={{
-                      background: "linear-gradient(135deg, #007AFF, #5AC8FA)",
-                    }}
-                  >
-                    Edit Profile
-                  </Button> */}
-                </DialogActions>
-              </>
-            )}
-          </Dialog>
         </Container>
       </Box>
     </ThemeProvider>

@@ -15,6 +15,8 @@ import {
   createTheme,
   ThemeProvider,
   CssBaseline,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import { LocationOn, ArrowForward } from "@mui/icons-material";
 import FilterBar from "../Filter";
@@ -303,6 +305,8 @@ const ProjectsPage = ({ onNavigate }) => {
   });
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleProjectClick = (project) => {
     setSelectedProject(project);

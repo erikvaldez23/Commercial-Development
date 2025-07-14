@@ -7,6 +7,8 @@ import {
   Dialog,
   DialogContent,
   IconButton,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
 import { FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
@@ -18,13 +20,15 @@ export default function HeroSection({ loadingDone }) {
   const [open, setOpen] = useState(false);
   const [showTransition, setShowTransition] = useState(false);
   const [showContent, setShowContent] = useState(false); // <-- animation trigger delay
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleExploreClick = () => {
-    navigate("/portfolio")
-  }
+    navigate("/portfolio");
+  };
 
   useEffect(() => {
     if (loadingDone) {
@@ -165,7 +169,7 @@ export default function HeroSection({ loadingDone }) {
             alt="Company Logo"
             sx={{
               position: "absolute",
-              top: "-7%",
+              top: isMobile ? "-8%" : "-5%",
               left: "50%",
               transform: "translateX(-50%)",
               width: "100px",

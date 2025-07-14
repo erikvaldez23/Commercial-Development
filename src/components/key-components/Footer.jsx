@@ -9,6 +9,7 @@ import {
   Stack,
   useTheme,
   alpha,
+  useMediaQuery,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -72,7 +73,6 @@ const StyledLink = styled(Link)(({ theme }) => ({
   fontFamily:
     '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
   fontWeight: 400,
-  fontSize: "12px",
   lineHeight: 1.6,
   transition: "all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
   position: "relative",
@@ -107,30 +107,25 @@ const CopyrightText = styled(Typography)(({ theme }) => ({
 
 const footerLinks = [
   {
-    title: "Links",
-    links: [
-      { text: "ArkOS", href: "#" },
-      { text: "Ark Vision", href: "#" },
-      { text: "Ark Crypto", href: "#" },
-      { text: "Our Story", href: "#" },
-    ],
-  },
-  {
     title: "Services",
     links: [
-      { text: "Consulting", href: "#" },
-      { text: "Implementation", href: "#" },
-      { text: "Support", href: "#" },
-      { text: "Training", href: "#" },
+      { text: "Ark OS", href: "/portfolio" },
+      { text: "Ark Vision", href: "/ark-vision" },
+      { text: "Ark Crypto", href: "/ark-crypto" },
     ],
   },
+  // {
+  //   title: "Services",
+  //   links: [
+  //     { text: "Consulting", href: "#" },
+  //     { text: "Implementation", href: "#" },
+  //   ],
+  // },
   {
     title: "Company",
     links: [
-      { text: "About", href: "#" },
-      { text: "Careers", href: "#" },
-      { text: "Press", href: "#" },
-      { text: "Contact", href: "#" },
+      { text: "About", href: "/about" },
+      { text: "Contact", href: "/contact" },
     ],
   },
   {
@@ -139,13 +134,14 @@ const footerLinks = [
       { text: "Twitter", href: "#" },
       { text: "LinkedIn", href: "#" },
       { text: "Instagram", href: "#" },
-      { text: "Newsletter", href: "#" },
     ],
   },
 ];
 
 const Footer = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   useEffect(() => {
     const timer = setTimeout(() => setIsVisible(true), 100);
@@ -175,7 +171,7 @@ const Footer = () => {
           <StyledBrandText
             variant="h1"
             sx={{
-              fontSize: { xs: "3rem", sm: "4rem", md: "6rem", lg: "8rem" },
+              fontSize: { xs: "5rem", sm: "5rem", md: "6rem", lg: "8rem" },
               mb: 2,
             }}
           >
@@ -184,7 +180,7 @@ const Footer = () => {
           <Typography
             sx={{
               color: "rgba(255, 255, 255, 0.6)",
-              fontSize: { xs: "14px", md: "16px" },
+              fontSize: { xs: "20px", md: "28px" },
               fontFamily:
                 '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
               fontWeight: 300,
@@ -208,7 +204,7 @@ const Footer = () => {
           {footerLinks.map((section, idx) => (
             <Grid
               item
-              xs={6}
+              xs={4}
               sm={3}
               key={idx}
               sx={{
@@ -242,19 +238,21 @@ const Footer = () => {
         <StyledDivider />
 
         {/* Copyright */}
-        <Box sx={{ textAlign: "center" }}>
+        <Box sx={{ mt: 1, textAlign: "center" }}>
+          <StyledLink href="/privacy-policy" sx={{ mr: 3 }}>
+            Privacy Policy
+          </StyledLink>
+        </Box>
+        <Box
+          sx={{
+            textAlign: "center",
+            mt: 1,
+            fontSize: isMobile ? "18px" : "24px",
+          }}
+        >
           <CopyrightText>
             Copyright © 2025 Green Ark Inc. All rights reserved.
           </CopyrightText>
-          <Box sx={{ mt: 1 }}>
-            <StyledLink href="#" sx={{ mr: 3 }}>
-              Privacy Policy
-            </StyledLink>
-            <StyledLink href="#" sx={{ mr: 3 }}>
-              Terms of Service
-            </StyledLink>
-            <StyledLink href="#">Legal</StyledLink>
-          </Box>
         </Box>
       </Container>
     </StyledFooterBox>

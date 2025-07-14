@@ -159,7 +159,7 @@ const PrivacyPolicy = () => {
 
       {/* Main Content */}
       <Container
-        maxWidth="md"
+        maxWidth="lg"
         sx={{
           flexGrow: 1,
           display: "flex",

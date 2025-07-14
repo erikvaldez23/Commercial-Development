@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 
 // Your nav items
 const navItems = [
+  { label: "Home", path: "/", mobileOnly: true },
   { label: "Ark Vision", path: "/ark-vision" },
   { label: "Ark OS", path: "/portfolio" },
   { label: "Ark Crypto", path: "/ark-crypto" },
@@ -89,13 +90,13 @@ const NavItem = styled(motion.div)(({ theme }) => ({
 // Modern mobile menu button
 const MenuButton = styled(IconButton)(({ theme }) => ({
   color: '#c9b49a',
-  background: 'rgba(0, 0, 0, 0.7)',
-  backdropFilter: 'blur(15px)',
-  border: '1px solid rgba(201,180,154,0.3)',
-  boxShadow: '0 8px 25px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
-  borderRadius: '12px',
-  width: 48,
-  height: 48,
+  // background: 'rgba(0, 0, 0, 0.7)',
+  // backdropFilter: 'blur(15px)',
+  // border: '1px solid rgba(201,180,154,0.3)',
+  // boxShadow: '0 8px 25px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)',
+  // borderRadius: '12px',
+  // width: 48,
+  // height: 48,
   '&:hover': {
     background: 'rgba(201,180,154,0.1)',
     transform: 'scale(1.05)',
@@ -268,7 +269,11 @@ export default function FuturisticTopbar() {
       
       {/* Modern menu items with micro-interactions */}
       <List sx={{ flex: 1, px: 2, py: 3 }}>
-        {navItems.map((item, index) => (
+        {navItems
+  .filter(item => isMobile ? true : !item.mobileOnly)
+  .map((item, index) => (
+
+          
           <ListItem 
             key={item.label}
             onClick={() => handleNavigation(item)}
@@ -407,7 +412,9 @@ export default function FuturisticTopbar() {
               <AnimatedLogo handleClick={handleLogoClick} />
               
               {/* Links with hover effects */}
-              {navItems.map((item, index) => (
+                 {navItems
+  .filter(item => isMobile ? true : !item.mobileOnly)
+  .map((item, index) => (
                 <NavItem
                   key={item.label}
                   initial={{ y: -20, opacity: 0 }}
@@ -431,17 +438,15 @@ export default function FuturisticTopbar() {
           </Fade>
         ) : (
           // Mobile view with enhanced menu button
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', px: 2, pt: 1 }}>
-            <AnimatedLogo handleClick={handleLogoClick} />
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', pt: 1 }}>
             
             <MenuButton
               color="inherit"
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              size="large"
             >
-              <MenuIcon />
+              <MenuIcon sx={{ fontSize: 50}} />
             </MenuButton>
           </Box>
         )}

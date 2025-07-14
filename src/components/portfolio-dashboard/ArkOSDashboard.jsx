@@ -10,10 +10,6 @@ import {
   CircularProgress,
   Card,
   CardContent,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   Container,
   createTheme,
   ThemeProvider,
@@ -23,11 +19,8 @@ import {
   Zoom,
   Button,
   IconButton,
-  AppBar,
-  Toolbar,
-  Badge,
-  Divider,
-  Stack,
+  useTheme, 
+  useMediaQuery
 } from "@mui/material";
 import {
   ChevronLeft,
@@ -320,6 +313,8 @@ const DashboardPage = ({ onNavigate }) => {
   const [progress, setProgress] = useState(0);
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleStakeholders = () => {
     navigate("/portfolio/stakeholders");
@@ -687,7 +682,7 @@ const DashboardPage = ({ onNavigate }) => {
         <Fade in={visible} timeout={1200} style={{ transitionDelay: "600ms" }}>
           <Typography
             sx={{
-              fontSize: "5rem",
+              fontSize: isMobile ? "3rem" : "5rem",
               fontStyle: "italic",
               textAlign: "center",
               mb: 2,
@@ -955,13 +950,13 @@ const DashboardPage = ({ onNavigate }) => {
                 >
                   Team
                 </Typography>
-                <IconButton
+                {/* <IconButton
                   size="small"
                   onClick={() => onNavigate("stakeholders")}
                   sx={{ color: "#007AFF" }}
                 >
                   <ArrowForward />
-                </IconButton>
+                </IconButton> */}
               </Box>
               <Grid container spacing={3}>
                 {stakeholders.map((person, index) => (
