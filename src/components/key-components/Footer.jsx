@@ -109,9 +109,9 @@ const footerLinks = [
   {
     title: "Services",
     links: [
-      { text: "Ark OS", href: "/portfolio" },
-      { text: "Ark Vision", href: "/ark-vision" },
-      { text: "Ark Crypto", href: "/ark-crypto" },
+      { text: "Ark OS", href: "/#/portfolio" },
+      { text: "Ark Vision", href: "/#/ark-vision" },
+      { text: "Ark Crypto", href: "/#/ark-crypto" },
     ],
   },
   // {
@@ -124,8 +124,8 @@ const footerLinks = [
   {
     title: "Company",
     links: [
-      { text: "About", href: "/about" },
-      { text: "Contact", href: "/contact" },
+      { text: "About", href: "/#/about" },
+      { text: "Contact", href: "/#/contact" },
     ],
   },
   {

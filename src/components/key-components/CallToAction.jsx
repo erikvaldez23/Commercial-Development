@@ -235,7 +235,7 @@ export default function CallToAction() {
                     {
                       title: 'Company',
                       links: [
-                        { label: 'About Us', path: '/about' },
+                        { label: 'About Us', path: '/#/about' },
                         // { label: 'Careers', path: '/careers' },
                       ],
                     },
@@ -243,13 +243,13 @@ export default function CallToAction() {
                       title: 'Support',
                       links: [
                         // { label: 'Help Center', path: '/support' },
-                        { label: 'Contact', path: '/contact' },
+                        { label: 'Contact', path: '/#/contact' },
                       ],
                     },
                     {
                       title: 'Legal',
                       links: [
-                        { label: 'Privacy Policy', path: '/privacy' },
+                        { label: 'Privacy Policy', path: '/#/privacy' },
                         // { label: 'Terms of Use', path: '/terms' },
                       ],
                     },
