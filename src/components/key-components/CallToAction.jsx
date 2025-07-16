@@ -249,7 +249,7 @@ export default function CallToAction() {
                     {
                       title: 'Legal',
                       links: [
-                        { label: 'Privacy Policy', path: '/privacy' },
+                        { label: 'Privacy Policy', path: '/privacy-policy' },
                         // { label: 'Terms of Use', path: '/terms' },
                       ],
                     },

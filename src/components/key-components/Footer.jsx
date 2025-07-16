@@ -239,7 +239,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <Box sx={{ mt: 1, textAlign: "center" }}>
-          <StyledLink href="/privacy-policy" sx={{ mr: 3 }}>
+          <StyledLink href="/#/privacy-policy" sx={{ mr: 3 }}>
             Privacy Policy
           </StyledLink>
         </Box>
