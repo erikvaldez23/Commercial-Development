@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
- import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import {
   CssBaseline,
   ThemeProvider,
@@ -7,20 +7,11 @@ import {
   Box,
   IconButton,
 } from "@mui/material";
-import ChatIcon from "@mui/icons-material/Chat";
-
 import "./App.css";
 
 // core components
 import Topbar from "./components/key-components/Topbar";
 import Footer from "./components/key-components/Footer";
-// import Loader from "./components/loader/Loader";
-import UpdatedLoader from "./components/loader/UpdatedLoader";
-import Chatbot from "./ChatBot";
-import RevealSection from "./components/animations/RevealSection";
-import VideoBackground from "./components/animations/VideoBackground";
-import SlideUpReveal from "./components/animations/SlideUpReveal";
-import OceanLoader from "./components/loader/Loader3";
 import LottieLoader from "./components/animations/LottieLoader";
 
 // landing & sub-pages
@@ -28,17 +19,14 @@ import Hero from "./components/hero/Hero";
 import WhatWeDo from "./components/landing/WhatWeDo";
 import WhyInvestWithUs from "./components/landing/WhyInvestWithUs";
 import CallToAction from "./components/key-components/CallToAction";
-import QuickLinks from "./components/key-components/QuickLinks";
 import Contact from "./components/key-components/Contact";
 import PrivacyPolicy from "./components/sub-pages/PrivacyPolicy";
 import ArkCrypto from "./components/sub-pages/Crypto";
 import About from "./components/sub-pages/About";
 import ArkVision from "./components/sub-pages/Vision";
-import Portfolio from "./components/sub-pages/Portfolio";
 import Team from "./components/sub-pages/Team";
 import NotFound from "./components/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
-import Dashboard from "./components/portfolio-dashboard/Dashboard"
 import Projects from "./components/portfolio-dashboard/portfolio-sub-pages/Proejcts";
 import Stakeholders from "./components/portfolio-dashboard/portfolio-sub-pages/Stakeholders";
 

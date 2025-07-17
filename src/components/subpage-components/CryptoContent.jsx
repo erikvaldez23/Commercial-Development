@@ -30,10 +30,12 @@ const CryptoContent = () => {
 
   return (
     <Box
+      id="section"
       sx={{
         py: 8,
         position: 'relative',
         overflow: 'hidden',
+        scrollMarginTop: "80px",
         '&::before': {
           content: '""',
           position: 'absolute',

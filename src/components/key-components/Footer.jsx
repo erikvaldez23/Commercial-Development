@@ -60,7 +60,7 @@ const StyledSectionTitle = styled(Typography)(({ theme }) => ({
   fontFamily:
     '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
   fontWeight: 600,
-  fontSize: "1.5rem",
+  fontSize: "1.2rem",
   letterSpacing: "0.3px",
   textTransform: "none",
   marginBottom: theme.spacing(2),
@@ -89,8 +89,8 @@ const StyledLink = styled(Link)(({ theme }) => ({
 }));
 
 const StyledDivider = styled(Divider)(({ theme }) => ({
-  background: "rgba(255, 255, 255, 0.08)",
-  height: "1px",
+  background: "linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,1) 50%, rgba(201,180,154,0) 100%)",
+  height: "1.2px",
   border: "none",
   margin: theme.spacing(4, 0, 3, 0),
 }));
@@ -151,7 +151,7 @@ const Footer = () => {
   return (
     <StyledFooterBox
       sx={{
-        py: { xs: 6, md: 8 },
+        py: { xs: 2, md: 4 },
         minHeight: { xs: "auto", md: "70vh" },
         display: "flex",
         flexDirection: "column",
@@ -167,11 +167,11 @@ const Footer = () => {
         }}
       >
         {/* Brand Section */}
-        <Box sx={{ textAlign: "center", mb: { xs: 6, md: 8 } }}>
+        <Box sx={{ textAlign: "center", mb: { xs: 2, md: 5 } }}>
           <StyledBrandText
             variant="h1"
             sx={{
-              fontSize: { xs: "5rem", sm: "5rem", md: "6rem", lg: "8rem" },
+              fontSize: { xs: "4rem", sm: "4rem", md: "4rem", lg: "6rem" },
               mb: 2,
             }}
           >
@@ -180,7 +180,7 @@ const Footer = () => {
           <Typography
             sx={{
               color: "rgba(255, 255, 255, 0.6)",
-              fontSize: { xs: "20px", md: "28px" },
+              fontSize: { xs: "18px", md: "22px" },
               fontFamily:
                 '-apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif',
               fontWeight: 300,

@@ -101,8 +101,8 @@ const ArkOSHero = () => {
                 src="/blue-logo2.png"
                 alt="Ark OS Demo"
                 style={{
-                  width: "70%",
-                  height: "70%",
+                  width: "50%",
+                  height: "50%",
                   objectFit: "cover",
                   borderRadius: "24px",
                   filter: "drop-shadow(0 0 40px rgba(201, 180, 154, 0.4))",
@@ -121,7 +121,7 @@ const ArkOSHero = () => {
                   color: "white",
                   fontWeight: 900,
                   mb: 1,
-                  fontSize: { xs: "2.5rem", md: "5rem" },
+                  fontSize: { xs: "2.5rem", md: "3rem" },
                   lineHeight: 1.1,
                   letterSpacing: "-0.02em",
                   background:
@@ -141,7 +141,7 @@ const ArkOSHero = () => {
                   color: "#5EC1E3",
                   fontWeight: 700,
                   mb: 1,
-                  fontSize: { xs: "1.5rem", md: "2rem" },
+                  fontSize: { xs: "1rem", md: "1.5rem" },
                   lineHeight: 1.2,
                 }}
               >
@@ -152,10 +152,10 @@ const ArkOSHero = () => {
                 variant="h6"
                 sx={{
                   color: "#b8b8b8",
-                  mb: 4,
+                  mb: 2,
                   lineHeight: 1.7,
                   fontWeight: 400,
-                  fontSize: "1.5rem",
+                  fontSize: "1rem",
                 }}
               >
                 ArkOS is the operational brain of every Green Ark project. From
@@ -252,7 +252,7 @@ const ArkOSHero = () => {
                               alignItems: "center",
                               justifyContent: "center",
                               minWidth: 48,
-                              height: 48,
+                              height: 35,
                             }}
                           >
                             <Box

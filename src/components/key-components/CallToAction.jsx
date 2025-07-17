@@ -60,7 +60,7 @@ export default function CallToAction() {
             flexDirection: 'column',
             justifyContent: 'center',
             py: { xs: 6, md: 10 },
-            gap: { xs: 8, md: 12 },
+            gap: { xs: 8, md: 3 },
           }}
         >
           {/* Hero Section */}
@@ -142,7 +142,7 @@ export default function CallToAction() {
               border: '1px solid rgba(255, 255, 255, 0.08)',
               borderRadius: { xs: 3, md: 4 },
               p: { xs: 4, md: 6 },
-              mt: 'auto',
+              mt: 2,
             }}
           >
             <Grid container spacing={{ xs: 4, md: 6 }} alignItems="flex-start">
@@ -192,6 +192,7 @@ export default function CallToAction() {
                       },
                       '& .MuiOutlinedInput-input': {
                         padding: '12px 16px',
+                        letterSpacing: "1px",
                         '&::placeholder': {
                           color: 'rgba(255, 255, 255, 0.5)',
                         },

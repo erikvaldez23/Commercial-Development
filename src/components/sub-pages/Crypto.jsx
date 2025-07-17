@@ -190,6 +190,13 @@ export default function Offer() {
   const [loaded, setLoaded] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  const handleLearnMore = () => {
+    const section = document.getElementById("section")
+    if(section) {
+      section.scrollIntoView({behavior: "smooth"})
+    }
+  }
+
   const handleChange = (event, newValue) => {
     setActiveTab(newValue);
   };
@@ -234,7 +241,7 @@ export default function Offer() {
 
         <Container
           maxWidth="lg"
-          sx={{ flex: 1, display: "flex", alignItems: "center", py: 4 }}
+          sx={{ flex: 1, display: "flex", alignItems: "center", py: 4, mt: 10 }}
         >
           <Grid container spacing={6} alignItems="center">
             {/* Left Column */}
@@ -266,7 +273,7 @@ export default function Offer() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   variant="h1"
                   sx={{
-                    fontSize: { xs: "2.5rem", md: "4rem", lg: "5rem" },
+                    fontSize: { xs: "2.5rem", md: "3rem", lg: "4rem" },
                     fontWeight: 700,
                     lineHeight: 1.1,
                     mb: 3,
@@ -317,7 +324,7 @@ export default function Offer() {
                   >
                     Get Started Now
                   </ModernButton>
-                  <ModernButton variant="outlined" size="large">
+                  <ModernButton variant="outlined" size="large" onClick={handleLearnMore}>
                     Learn More
                   </ModernButton>
                 </Stack>

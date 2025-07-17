@@ -373,7 +373,7 @@ const DashboardPage = ({ onNavigate }) => {
             mb: 0.5,
             opacity: highlight ? 1 : 0.7,
             transition: "opacity 0.3s ease",
-            fontSize: "1.5rem",
+            fontSize: "1rem",
           }}
         >
           {label}
@@ -416,7 +416,6 @@ const DashboardPage = ({ onNavigate }) => {
           backdropFilter: "blur(10px)",
           WebkitBackdropFilter: "blur(10px)",
           borderRadius: 3,
-          border: "1px solid rgba(255, 255, 255, 0.2)",
         }}
       >
         <CardContent sx={{ py: 3 }}>
@@ -503,7 +502,7 @@ const DashboardPage = ({ onNavigate }) => {
   );
 
   return (
-    <Container maxWidth="xl" sx={{ py: 15 }}>
+    <Container maxWidth="lg" sx={{ py: 15 }}>
       {/* Header */}
       <Box
         display="flex"
@@ -531,7 +530,7 @@ const DashboardPage = ({ onNavigate }) => {
                 }}
               />
             </Avatar>
-            <Typography variant="h2" fontWeight={300} color="white">
+            <Typography variant="h4" fontWeight={300} color="white">
               ArkOS
             </Typography>
           </Box>
@@ -566,7 +565,7 @@ const DashboardPage = ({ onNavigate }) => {
       </Box>
 
       {/* Quick Action Cards */}
-      <Box mb={6}>
+      <Box mb={6} sx={{maxWidth: "1400px", mx:"auto"}}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6}>
             <Grow
@@ -636,7 +635,6 @@ const DashboardPage = ({ onNavigate }) => {
                   border: "1px solid rgba(255, 149, 0, 0.2)",
                   borderRadius: 20,
                 }}
-                // onClick={() => onNavigate("stakeholders")}
                 onClick={handleStakeholders}
               >
                 <Box
@@ -682,7 +680,7 @@ const DashboardPage = ({ onNavigate }) => {
         <Fade in={visible} timeout={1200} style={{ transitionDelay: "600ms" }}>
           <Typography
             sx={{
-              fontSize: isMobile ? "3rem" : "5rem",
+              fontSize: isMobile ? "3rem" : "4rem",
               fontStyle: "italic",
               textAlign: "center",
               mb: 2,
@@ -696,7 +694,7 @@ const DashboardPage = ({ onNavigate }) => {
         <Grow in={visible} timeout={1200} style={{ transitionDelay: "600ms" }}>
           <Paper
             sx={{
-              minHeight: 600,
+              minHeight: 500,
               background: "url(/commercial-mock1.jpeg)",
               backgroundSize: "cover",
               backgroundPosition: "center",
@@ -724,14 +722,14 @@ const DashboardPage = ({ onNavigate }) => {
               <Paper
                 sx={{
                   p: 3,
-                  width: 1000,
+                  width: 500,
                   backdropFilter: "blur(10px)",
                   borderRadius: 20,
                 }}
               >
                 <Typography
                   variant="h1"
-                  fontSize="3rem"
+                  fontSize="2rem"
                   fontWeight={500}
                   color="white"
                   mb={1}
@@ -740,7 +738,7 @@ const DashboardPage = ({ onNavigate }) => {
                   Lagos Tower
                 </Typography>
                 <Typography
-                  variant="body2"
+                  variant="body1"
                   color="text.secondary"
                   textAlign="center"
                   fontSize="2rem"
@@ -786,7 +784,7 @@ const DashboardPage = ({ onNavigate }) => {
                   color="text.secondary"
                   mb={2}
                   display="block"
-                  sx={{ fontSize: "1rem" }}
+                  sx={{ fontSize: "0.8rem" }}
                 >
                   3 Months until completion
                 </Typography>
@@ -883,7 +881,7 @@ const DashboardPage = ({ onNavigate }) => {
               >
                 Documents
               </Typography>
-              <Grid container spacing={2}>
+              <Grid container spacing={1}>
                 <Grid item xs={6}>
                   <SimulationCard
                     icon={Business}
@@ -1014,7 +1012,7 @@ const DashboardPage = ({ onNavigate }) => {
           >
             <Paper
               sx={{
-                p: 4,
+                p: 2,
                 height: "100%",
                 border: "1px solid rgba(255, 255, 255, 0.2)",
                 borderRadius: 3,

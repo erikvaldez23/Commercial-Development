@@ -169,7 +169,7 @@ export default function HeroSection({ loadingDone }) {
             alt="Company Logo"
             sx={{
               position: "absolute",
-              top: isMobile ? "-8%" : "-5%",
+              top: isMobile ? "-8%" : "-6%",
               left: "50%",
               transform: "translateX(-50%)",
               width: "100px",
@@ -206,7 +206,7 @@ export default function HeroSection({ loadingDone }) {
               variant="h1"
               sx={{
                 fontWeight: 900,
-                fontSize: { xs: "3.5rem", sm: "3.5rem", md: "6rem" },
+                fontSize: { xs: "3.5rem", sm: "2rem", md: "4rem" },
                 mb: 2,
                 background: "linear-gradient(90deg, #ffffff 0%, #c9b49a 100%)",
                 WebkitBackgroundClip: "text",
@@ -229,12 +229,12 @@ export default function HeroSection({ loadingDone }) {
             <Typography
               variant="body1"
               sx={{
-                fontSize: { xs: "1.1rem", md: "1.8rem" },
+                fontSize: { xs: "1.1rem", md: "1.5rem" },
                 fontWeight: 300,
                 color: "rgba(255,255,255,0.85)",
                 maxWidth: "700px",
                 margin: "0 auto",
-                mb: 5,
+                mb: 2,
                 lineHeight: 1.7,
                 filter: "drop-shadow(0 2px 6px rgba(0, 0, 0, 1))",
               }}
@@ -265,11 +265,11 @@ export default function HeroSection({ loadingDone }) {
                     "linear-gradient(90deg, #c9b49a 0%, #bca486 100%)",
                   color: "#0a0f14",
                   borderRadius: "30px",
-                  fontSize: { xs: "0.9rem", md: "1.5rem" },
+                  fontSize: { xs: "0.9rem", md: "1rem" },
                   fontWeight: 600,
                   py: 2,
                   px: 4,
-                  width: "300px",
+                  width: "200px",
                   "&:hover": {
                     background:
                       "linear-gradient(90deg, rgba(201,180,154,0.9) 0%, rgba(188,164,134,0.9) 100%)",
@@ -287,14 +287,14 @@ export default function HeroSection({ loadingDone }) {
                   border: "3px solid #c9b49a",
                   color: "#c9b49a",
                   borderRadius: "30px",
-                  fontSize: { xs: "0.9rem", md: "1.5rem" },
+                  fontSize: { xs: "0.9rem", md: "1rem" },
                   fontWeight: 600,
                   py: 2,
                   px: 4,
-                  width: "300px",
+                  width: "200px",
                   "&:hover": {
                     borderColor: "#c9b49a",
-                    background: "rgba(201,180,154,0.08)",
+                    background: "rgba(201,180,154,0.4)",
                     boxShadow: "0 0 15px rgba(201,180,154,0.2)",
                   },
                   transition: "all 0.3s ease",

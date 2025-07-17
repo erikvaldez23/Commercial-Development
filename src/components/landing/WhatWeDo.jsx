@@ -13,7 +13,9 @@ const WhatWeDo = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
-  const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)');
+  const prefersReducedMotion = useMediaQuery(
+    "(prefers-reduced-motion: reduce)"
+  );
 
   const sectionRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -22,7 +24,10 @@ const WhatWeDo = () => {
   });
 
   const titleRef = useRef(null);
-  const isInView = useInView(titleRef, { once: false, amount: isMobile ? 0.1 : 0.3 });
+  const isInView = useInView(titleRef, {
+    once: false,
+    amount: isMobile ? 0.1 : 0.3,
+  });
 
   const titleY = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
@@ -61,13 +66,14 @@ const WhatWeDo = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <Box id="what-we-do"
+    <Box
+      id="what-we-do"
       ref={sectionRef}
       sx={{
         background: "#000",
         height: { xs: "auto", md: "100vh" },
         minHeight: { xs: "100vh" },
-        py: { xs: 8, sm: 10, md: 16 },
+        py: { xs: 8, sm: 10, md: 6 },
         position: "relative",
         overflow: "hidden",
         "&::before": {
@@ -84,12 +90,12 @@ const WhatWeDo = () => {
         },
       }}
     >
-      <Container 
-        maxWidth="lg" 
-        sx={{ 
-          position: "relative", 
+      <Container
+        maxWidth="lg"
+        sx={{
+          position: "relative",
           zIndex: 2,
-          px: { xs: 2, sm: 3 }
+          px: { xs: 2, sm: 3 },
         }}
       >
         <motion.div
@@ -103,11 +109,11 @@ const WhatWeDo = () => {
             variant="h1"
             align="center"
             sx={{
-              fontSize: { 
-                xs: "3rem",
-                sm: "2.5rem", 
-                md: "3.5rem", 
-                lg: "4.5rem" 
+              fontSize: {
+                xs: "2rem",
+                sm: "2rem",
+                md: "3rem",
+                lg: "4rem",
               },
               letterSpacing: { xs: 1, md: 2 },
               color: "#e2c799",
@@ -136,11 +142,10 @@ const WhatWeDo = () => {
         <Box
           sx={{
             display: "grid",
-    gridTemplateColumns: {
-  xs: "repeat(2, 1fr)",
-  md: "repeat(4, 1fr)",
-},
-
+            gridTemplateColumns: {
+              xs: "repeat(2, 1fr)",
+              md: "repeat(4, 1fr)",
+            },
 
             gap: { xs: 2, sm: 3, md: 4 },
             my: { xs: 3, sm: 4, md: 8 },
@@ -150,15 +155,19 @@ const WhatWeDo = () => {
             <motion.div
               key={index}
               initial={prefersReducedMotion ? {} : { opacity: 0, y: 50 }}
-              whileInView={prefersReducedMotion ? {} : {
-                opacity: 1,
-                y: 0,
-                transition: {
-                  duration: isMobile ? 0.4 : 0.7,
-                  delay: index * (isMobile ? 0.1 : 0.15),
-                  ease: [0.215, 0.61, 0.355, 1],
-                },
-              }}
+              whileInView={
+                prefersReducedMotion
+                  ? {}
+                  : {
+                      opacity: 1,
+                      y: 0,
+                      transition: {
+                        duration: isMobile ? 0.4 : 0.7,
+                        delay: index * (isMobile ? 0.1 : 0.15),
+                        ease: [0.215, 0.61, 0.355, 1],
+                      },
+                    }
+              }
               viewport={{ once: true, amount: isMobile ? 0.1 : 0.3 }}
               onMouseEnter={() => !isMobile && setHoveredIndex(index)}
               onMouseLeave={() => !isMobile && setHoveredIndex(null)}
@@ -173,7 +182,7 @@ const WhatWeDo = () => {
                   height: "100%",
                   p: { xs: 2, sm: 3 },
                   borderRadius: 2,
-                  minHeight: { xs: 200, sm: 250 },
+                  minHeight: { xs: 200, sm: 60 },
                   background:
                     hoveredIndex === index
                       ? "linear-gradient(145deg, rgba(30,30,30,0.3) 0%, rgba(10,10,10,0.3) 100%)"
@@ -258,7 +267,7 @@ const WhatWeDo = () => {
                   sx={{
                     fontWeight: 600,
                     mb: 1,
-                    fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.7rem" },
+                    fontSize: { xs: "1.1rem", sm: "1.25rem", md: "1.2rem" },
                     transition: "color 0.3s ease",
                     color: hoveredIndex === index ? "#e2c799" : "#fff",
                   }}
@@ -271,7 +280,7 @@ const WhatWeDo = () => {
                     color: "#aaa",
                     maxWidth: { xs: "180px", sm: "220px" },
                     mx: "auto",
-                    fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1.5rem" },
+                    fontSize: { xs: "0.85rem", sm: "0.9rem", md: "1rem" },
                     opacity: 0.8,
                     lineHeight: { xs: 1.3, sm: 1.4 },
                   }}
@@ -285,22 +294,16 @@ const WhatWeDo = () => {
 
         <Divider
           sx={{
-            my: { xs: 4, sm: 5, md: 8 },
             background:
               "linear-gradient(90deg, rgba(201,180,154,0) 0%, rgba(201,180,154,1) 50%, rgba(201,180,154,0) 100%)",
             height: "2px",
             width: "100%",
             mx: "auto",
             boxShadow: "0 0 10px rgba(201,180,154,0.3)",
+            mb: 5
           }}
         />
 
-        <motion.div
-          style={{
-            opacity: prefersReducedMotion ? 1 : quoteOpacity,
-            y: prefersReducedMotion ? 0 : quoteY,
-          }}
-        >
           <Typography
             variant="h4"
             align="center"
@@ -308,17 +311,15 @@ const WhatWeDo = () => {
               color: "#bfae90",
               fontWeight: 300,
               fontStyle: "italic",
-              fontSize: { xs: "2rem", sm: "2rem", md: "3rem" },
+              fontSize: { xs: "2rem", sm: "2rem", md: "2.5rem" },
               textShadow: "0 0 20px rgba(191,174,144,0.2)",
               letterSpacing: { xs: 0.5, md: 1 },
               lineHeight: { xs: 1.3, md: 1.5 },
               px: { xs: 3, sm: 0 },
-              mt: { xs: 3, md: 0 },
             }}
           >
             "The best way to predict the future is to create it"
           </Typography>
-        </motion.div>
       </Container>
     </Box>
   );

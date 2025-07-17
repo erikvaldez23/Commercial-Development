@@ -164,49 +164,18 @@ const FloatingParticles = () => (
   </Box>
 );
 
-const AnimatedCounter = ({ end, duration = 2, suffix = "" }) => {
-  const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const ref = useRef();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          let start = 0;
-          const increment = end / (duration * 60);
-          const timer = setInterval(() => {
-            start += increment;
-            if (start >= end) {
-              setCount(end);
-              clearInterval(timer);
-            } else {
-              setCount(Math.floor(start));
-            }
-          }, 1000 / 60);
-          return () => clearInterval(timer);
-        }
-      },
-      { threshold: 0.1 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
-  }, [end, duration, hasAnimated]);
-
-  return (
-    <span ref={ref}>
-      {count.toLocaleString()}
-      {suffix}
-    </span>
-  );
-};
-
 export default function ModernArkVision() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const [loaded, setLoaded] = useState(false);
   const [activeFeature, setActiveFeature] = useState(null);
+
+  const handleLearnMoreClick = () => {
+    const section = document.getElementById("key-features");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useEffect(() => {
     setLoaded(true);
@@ -217,7 +186,7 @@ export default function ModernArkVision() {
       icon: (
         <Architecture
           className="feature-icon"
-          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+          sx={{ fontSize: 30, transition: "all 0.3s ease" }}
         />
       ),
       title: "AI-Generated Site Planning",
@@ -230,7 +199,7 @@ export default function ModernArkVision() {
       icon: (
         <WbSunny
           className="feature-icon"
-          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+          sx={{ fontSize: 30, transition: "all 0.3s ease" }}
         />
       ),
       title: "Environmental Simulation",
@@ -243,7 +212,7 @@ export default function ModernArkVision() {
       icon: (
         <Assessment
           className="feature-icon"
-          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+          sx={{ fontSize: 30, transition: "all 0.3s ease" }}
         />
       ),
       title: "ESG Optimization",
@@ -256,7 +225,7 @@ export default function ModernArkVision() {
       icon: (
         <CloudDownload
           className="feature-icon"
-          sx={{ fontSize: 48, transition: "all 0.3s ease" }}
+          sx={{ fontSize: 30, transition: "all 0.3s ease" }}
         />
       ),
       title: "ArkOS Integration",
@@ -282,7 +251,7 @@ export default function ModernArkVision() {
       <Container maxWidth="lg" sx={{ position: "relative", zIndex: 2 }}>
         {/* Hero */}
         <Fade in={loaded} timeout={1000}>
-          <Box sx={{ textAlign: "center", py: { xs: 8, md: 30 } }}>
+          <Box sx={{ textAlign: "center", py: { xs: 8, md: 15 } }}>
             <Avatar
               sx={{
                 width: 120,
@@ -299,10 +268,10 @@ export default function ModernArkVision() {
             </Avatar>
             <GradientText
               variant="h1"
-              sx={{ 
+              sx={{
                 fontSize: { xs: "3rem", sm: "4rem", md: "5rem" },
                 pb: 2,
-            }}
+              }}
             >
               ARKVISION™
             </GradientText>
@@ -335,6 +304,7 @@ export default function ModernArkVision() {
               </ModernButton>
               <ModernButton
                 variant="outlined"
+                onClick={handleLearnMoreClick}
                 size="large"
                 startIcon={<Engineering />}
                 sx={{ minWidth: 200 }}
@@ -346,7 +316,7 @@ export default function ModernArkVision() {
         </Fade>
 
         {/* Features */}
-        <Box sx={{ mb: 10 }}>
+        <Box id="key-features" sx={{ mb: 10, mt: 15, scrollMarginTop: "100px" }}>
           <Typography
             variant="h3"
             sx={{ textAlign: "center", mb: 2, fontWeight: 700 }}
@@ -377,8 +347,8 @@ export default function ModernArkVision() {
                     <CardContent sx={{ p: 4, height: "100%" }}>
                       <Box
                         sx={{
-                          width: 80,
-                          height: 80,
+                          width: 40,
+                          height: 40,
                           borderRadius: "20px",
                           background: f.gradient,
                           display: "flex",

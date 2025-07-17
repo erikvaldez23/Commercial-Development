@@ -37,7 +37,7 @@ const NavWrapper = styled(Box)(({ theme }) => ({
   display: "inline-flex",
   alignItems: "center",
   gap: theme.spacing(4),
-  padding: theme.spacing(2, 4),
+  padding: theme.spacing(0.5, 4),
   backdropFilter: "blur(12px)",
   borderRadius: theme.shape.borderRadius * 6,
   boxShadow: "0 8px 32px rgba(0,0,0,0.2), 0 0 0 1px rgba(201,180,154,0.15)",
@@ -204,7 +204,7 @@ export default function FuturisticTopbar() {
   const drawer = (
     <Box
       sx={{
-        width: 320,
+        width: 280,
         height: "100%",
         background:
           "linear-gradient(135deg, #000000 0%, #1a1a1a 50%, #0a0a0a 100%)",
@@ -434,7 +434,7 @@ export default function FuturisticTopbar() {
                       sx={{
                         fontWeight: 500,
                         letterSpacing: "0.05em",
-                        fontSize: "1.5rem",
+                        fontSize: "1rem",
                       }}
                     >
                       {item.label}

@@ -6,57 +6,57 @@ import { motion } from "framer-motion";
 const cities = [
   {
     name: "New York",
-    top: "40%",
-    left: "27%",
+    top: "42%",
+    left: "70%",
     description:
       "Our flagship sustainable skyscraper featuring 40% reduced energy consumption",
     stat: "3.2M sq ft",
     yearCompleted: "2023",
   },
-  {
-    name: "Place 2",
-    top: "52%",
-    left: "47%",
-    description:
-      "Africa's first carbon-negative commercial development with integrated urban farming",
-    stat: "1.8M sq ft",
-    yearCompleted: "2024",
-  },
-  {
-    name: "Place 3",
-    top: "48%",
-    left: "58%",
-    description:
-      "Desert-adapted complex with innovative water reclamation systems",
-    stat: "2.5M sq ft",
-    yearCompleted: "2022",
-  },
-  {
-    name: "Place 4",
-    top: "32%",
-    left: "14%",
-    description:
-      "Timber-hybrid construction using sustainably sourced materials",
-    stat: "1.5M sq ft",
-    yearCompleted: "2023",
-  },
-  {
-    name: "Place 5",
-    top: "56%",
-    left: "72%",
-    description:
-      "Vertical forest integration with 30,000 plants providing natural cooling",
-    stat: "2.1M sq ft",
-    yearCompleted: "2024",
-  },
-  {
-    name: "Place 6",
-    top: "28%",
-    left: "47%",
-    description: "Net-zero energy retail complex powered by geothermal heating",
-    stat: "0.9M sq ft",
-    yearCompleted: "2022",
-  },
+  // {
+  //   name: "Place 2",
+  //   top: "52%",
+  //   left: "47%",
+  //   description:
+  //     "Africa's first carbon-negative commercial development with integrated urban farming",
+  //   stat: "1.8M sq ft",
+  //   yearCompleted: "2024",
+  // },
+  // {
+  //   name: "Place 3",
+  //   top: "48%",
+  //   left: "58%",
+  //   description:
+  //     "Desert-adapted complex with innovative water reclamation systems",
+  //   stat: "2.5M sq ft",
+  //   yearCompleted: "2022",
+  // },
+  // {
+  //   name: "Place 4",
+  //   top: "32%",
+  //   left: "14%",
+  //   description:
+  //     "Timber-hybrid construction using sustainably sourced materials",
+  //   stat: "1.5M sq ft",
+  //   yearCompleted: "2023",
+  // },
+  // {
+  //   name: "Place 5",
+  //   top: "56%",
+  //   left: "72%",
+  //   description:
+  //     "Vertical forest integration with 30,000 plants providing natural cooling",
+  //   stat: "2.1M sq ft",
+  //   yearCompleted: "2024",
+  // },
+  // {
+  //   name: "Place 6",
+  //   top: "28%",
+  //   left: "47%",
+  //   description: "Net-zero energy retail complex powered by geothermal heating",
+  //   stat: "0.9M sq ft",
+  //   yearCompleted: "2022",
+  // },
 ];
 
 const ModernStewardsOfSpace = () => {
@@ -134,7 +134,7 @@ const ModernStewardsOfSpace = () => {
           flexDirection: "column",
           alignItems: { xs: "flex-start", md: "flex-start" },
           justifyContent: { xs: "flex-start", md: "center" },
-          padding: { xs: 3, md: 10 },
+          padding: { xs: 3, md: 4 },
           overflow: "hidden",
         }}
       >
@@ -229,7 +229,7 @@ const ModernStewardsOfSpace = () => {
           initial="hidden"
           animate={visible ? "visible" : "hidden"}
           sx={{
-            maxWidth: { xs: "100%", md: 650 },
+            maxWidth: { xs: "100%", md: 550 },
             zIndex: 3,
             position: "relative",
           }}
@@ -242,7 +242,7 @@ const ModernStewardsOfSpace = () => {
                 letterSpacing: 3,
                 fontWeight: 600,
                 opacity: 0.9,
-                fontSize: "0.9rem",
+                fontSize: "1rem",
               }}
             >
               GLOBAL PRESENCE
@@ -255,13 +255,13 @@ const ModernStewardsOfSpace = () => {
                 color: "#e2c799",
                 lineHeight: 1.2,
                 mb: 2,
-                fontSize: { xs: "2rem", sm: "2.5rem", md: "6rem" },
+                fontSize: { xs: "2rem", sm: "2.5rem", md: "4.2rem" },
                 textShadow: "0 2px 10px rgba(0,0,0,0.3)",
               }}
             >
-              WE'RE NOT DEVELOPERS.
+              WE'RE NOT DEVELOPERS. WE'RE
               <br />
-              WE'RE STEWARDS OF SPACE
+              STEWARDS OF SPACE
             </Typography>
           </Box>
 
@@ -270,15 +270,16 @@ const ModernStewardsOfSpace = () => {
               component={motion.div}
               variants={textVariants}
               sx={{
-                mt: 4,
+                mt: 2,
+                mb: 2,
                 p: 3,
                 backdropFilter: "blur(10px)",
-                backgroundColor: "rgba(0, 0, 0, 0.5)",
+                backgroundColor: "rgba(0, 0, 0, 0.1)",
                 borderLeft: "4px solid #e2c799",
                 borderRadius: "0 8px 8px 0",
               }}
             >
-              <Typography>
+              <Typography sx={{fontSize: "0.8rem"}}>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus
                 fugit accusantium reprehenderit quas possimus delectus ullam ab
                 quae rem temporibus suscipit facere, mollitia consequuntur
@@ -292,7 +293,6 @@ const ModernStewardsOfSpace = () => {
               <Fade in={!!selectedCity} timeout={600}>
                 <Box
                   sx={{
-                    mt: 4,
                     p: 3,
                     backgroundColor: "rgba(226, 199, 153, 0.15)",
                     backdropFilter: "blur(10px)",
@@ -308,14 +308,14 @@ const ModernStewardsOfSpace = () => {
                   >
                     {selectedCity.name}
                   </Typography>
-                  <Typography variant="body1" color="#f5f5f5" sx={{ mb: 2 }}>
+                  <Typography variant="body1" color="#f5f5f5" sx={{ mb: 2, fontSize: "0.9rem"}}>
                     {selectedCity.description}
                   </Typography>
                   <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <Box>
-                      <Typography variant="caption" color="#e2c799">
+                      <Typography variant="caption" color="#e2c799" sx={{fontSize: "1rem"}}>
                         Development Size
                       </Typography>
                       <Typography variant="body1" fontWeight={500} color="#fff">
@@ -421,7 +421,6 @@ const ModernStewardsOfSpace = () => {
           </Box>
         ))}
 
-        {/* Additional decorative elements */}
         <Box
           component={motion.div}
           initial={{ opacity: 0 }}
@@ -430,7 +429,7 @@ const ModernStewardsOfSpace = () => {
           sx={{
             position: "absolute",
             bottom: { xs: "5%", md: "10%" },
-            right: { xs: "5%", md: "10%" },
+            right: { xs: "5%", md: "2%" },
             zIndex: 2,
             display: { xs: "none", md: "block" },
           }}
@@ -440,7 +439,7 @@ const ModernStewardsOfSpace = () => {
             sx={{
               fontWeight: 300,
               color: "#e2c799",
-              opacity: 0.6,
+              opacity: 0.8,
               fontStyle: "italic",
             }}
           >

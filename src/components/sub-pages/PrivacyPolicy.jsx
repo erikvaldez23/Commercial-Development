@@ -45,7 +45,7 @@ const PrivacyPolicy = () => {
       title: "Use of Collected Information",
       content: [
         "Green Ark does not now, nor will it in the future, sell, rent or lease any of its customer lists and/or names to any third parties.",
-        "Green Ark may collect and may make use of personal information to assist in the operation of our website and to ensure delivery of the services you need and request. At times, we may find it necessary to use personally identifiable information as a means to keep you informed of other possible products and/or services that may be available to you from www.tinttekplus.com",
+        "Green Ark may collect and may make use of personal information to assist in the operation of our website and to ensure delivery of the services you need and request. At times, we may find it necessary to use personally identifiable information as a means to keep you informed of other possible products and/or services that may be available to you from www.greenarkinvestments.com",
         "Green Ark may also be in contact with you with regards to completing surveys and/or research questionnaires related to your opinion of current or potential future services that may be offered.",
       ],
     },
@@ -80,7 +80,7 @@ const PrivacyPolicy = () => {
     {
       title: "Unsubscribe or Opt-Out",
       content: [
-        "All users and visitors to our website have the option to discontinue receiving communications from us by way of email or newsletters. To discontinue or unsubscribe from our website please send an email that you wish to unsubscribe to info@tinttekplus.com. If you wish to unsubscribe or opt-out from any third-party websites, you must go to that specific website to unsubscribe or opt-out. Green Ark will continue to adhere to this Policy with respect to any personal information previously collected.",
+        "All users and visitors to our website have the option to discontinue receiving communications from us by way of email or newsletters. To discontinue or unsubscribe from our website please send an email that you wish to unsubscribe to info@greenarkinvestments.com. If you wish to unsubscribe or opt-out from any third-party websites, you must go to that specific website to unsubscribe or opt-out. Green Ark will continue to adhere to this Policy with respect to any personal information previously collected.",
       ],
     },
     {
@@ -113,9 +113,7 @@ const PrivacyPolicy = () => {
       content: [
         "If you have any questions or concerns regarding the Privacy Policy Agreement related to our website, please feel free to contact us at the following email, telephone number or mailing address.",
         [
-          "Email: info@tinttekplus.com",
-          "Telephone Number: +1 (972) 362-8468",
-          "Mailing Address: Tint Tek Plus 2518 West Kingsley Rd, Garland, TX 75041",
+          "Email: info@greenarkinvestments.com",
         ],
       ],
     },
