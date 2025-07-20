@@ -107,7 +107,7 @@ export default function HeroSection({ loadingDone }) {
           width: "100%",
           height: "100%",
           background:
-            "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.1))",
+            "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.4))",
           zIndex: 1,
         }}
       />

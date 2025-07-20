@@ -150,32 +150,26 @@ const ModernStewardsOfSpace = () => {
             zIndex: 1,
           }}
         />
-
-        {/* Top gradient overlay */}
         <Box
           sx={{
             position: "absolute",
             top: 0,
             left: 0,
             right: 0,
-            height: "80px", // adjust height as needed
-            background:
-              "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent)",
-            zIndex: 2, // should be above the background image, but below content
-            pointerEvents: "none", // ensure it doesn't block clicks
+            height: "80px",
+            background: "linear-gradient(to bottom, #000, transparent)", // Solid black to transparent
+            zIndex: 2,
+            pointerEvents: "none",
           }}
         />
-
-        {/* Bottom gradient overlay */}
         <Box
           sx={{
             position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
-            height: "80px", // adjust as needed
-            background:
-              "linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent)",
+            height: "80px",
+            background: "linear-gradient(to top, #000, transparent)",
             zIndex: 2,
             pointerEvents: "none",
           }}
@@ -261,7 +255,7 @@ const ModernStewardsOfSpace = () => {
             >
               WE'RE NOT DEVELOPERS. WE'RE
               <br />
-              STEWARDS OF SPACE
+              STEWARDS OF SPACE.
             </Typography>
           </Box>
 
@@ -279,7 +273,7 @@ const ModernStewardsOfSpace = () => {
                 borderRadius: "0 8px 8px 0",
               }}
             >
-              <Typography sx={{fontSize: "0.8rem"}}>
+              <Typography sx={{ fontSize: "0.8rem" }}>
                 Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus
                 fugit accusantium reprehenderit quas possimus delectus ullam ab
                 quae rem temporibus suscipit facere, mollitia consequuntur
@@ -308,14 +302,22 @@ const ModernStewardsOfSpace = () => {
                   >
                     {selectedCity.name}
                   </Typography>
-                  <Typography variant="body1" color="#f5f5f5" sx={{ mb: 2, fontSize: "0.9rem"}}>
+                  <Typography
+                    variant="body1"
+                    color="#f5f5f5"
+                    sx={{ mb: 2, fontSize: "0.9rem" }}
+                  >
                     {selectedCity.description}
                   </Typography>
                   <Box
                     sx={{ display: "flex", justifyContent: "space-between" }}
                   >
                     <Box>
-                      <Typography variant="caption" color="#e2c799" sx={{fontSize: "1rem"}}>
+                      <Typography
+                        variant="caption"
+                        color="#e2c799"
+                        sx={{ fontSize: "1rem" }}
+                      >
                         Development Size
                       </Typography>
                       <Typography variant="body1" fontWeight={500} color="#fff">

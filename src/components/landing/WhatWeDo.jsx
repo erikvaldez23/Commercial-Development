@@ -12,7 +12,7 @@ import { motion, useScroll, useTransform, useInView } from "framer-motion";
 const WhatWeDo = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+  const [gridAnimationComplete, setGridAnimationComplete] = useState(false);
   const prefersReducedMotion = useMediaQuery(
     "(prefers-reduced-motion: reduce)"
   );
@@ -24,20 +24,20 @@ const WhatWeDo = () => {
   });
 
   const titleRef = useRef(null);
-  const isInView = useInView(titleRef, {
-    once: false,
-    amount: isMobile ? 0.1 : 0.3,
-  });
-
   const titleY = useTransform(scrollYProgress, [0, 0.2], [100, 0]);
   const titleOpacity = useTransform(scrollYProgress, [0, 0.15], [0, 1]);
-  const dividerWidth = useTransform(
-    scrollYProgress,
-    [0.6, 0.8],
-    ["0%", "100%"]
-  );
-  const quoteOpacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
-  const quoteY = useTransform(scrollYProgress, [0.4, 0.6], [30, 0]);
+
+  const quoteVariants = {
+    hidden: { opacity: 0, y: 40 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+        ease: [0.215, 0.61, 0.355, 1],
+      },
+    },
+  };
 
   const items = [
     {
@@ -154,7 +154,7 @@ const WhatWeDo = () => {
           {items.map((item, index) => (
             <motion.div
               key={index}
-              initial={prefersReducedMotion ? {} : { opacity: 0, y: 50 }}
+              initial={prefersReducedMotion ? {} : { opacity: 0, y: 80 }}
               whileInView={
                 prefersReducedMotion
                   ? {}
@@ -163,12 +163,17 @@ const WhatWeDo = () => {
                       y: 0,
                       transition: {
                         duration: isMobile ? 0.4 : 0.7,
-                        delay: index * (isMobile ? 0.1 : 0.15),
+                        delay: index * (isMobile ? 0.1 : 0.3),
                         ease: [0.215, 0.61, 0.355, 1],
                       },
                     }
               }
-              viewport={{ once: true, amount: isMobile ? 0.1 : 0.3 }}
+              viewport={{ once: false, amount: isMobile ? 0.1 : 0.3 }}
+              onAnimationComplete={() => {
+                if (index === items.length - 1) {
+                  setGridAnimationComplete(true);
+                }
+              }}
               onMouseEnter={() => !isMobile && setHoveredIndex(index)}
               onMouseLeave={() => !isMobile && setHoveredIndex(null)}
               onTouchStart={() => setHoveredIndex(index)}
@@ -300,10 +305,14 @@ const WhatWeDo = () => {
             width: "100%",
             mx: "auto",
             boxShadow: "0 0 10px rgba(201,180,154,0.3)",
-            mb: 5
+            mb: 5,
           }}
         />
-
+        <motion.div
+          variants={quoteVariants}
+          initial="hidden"
+          animate={gridAnimationComplete ? "visible" : "hidden"}
+        >
           <Typography
             variant="h4"
             align="center"
@@ -318,8 +327,9 @@ const WhatWeDo = () => {
               px: { xs: 3, sm: 0 },
             }}
           >
-            "The best way to predict the future is to create it"
+            "The best way to predict the future is to create it."
           </Typography>
+        </motion.div>
       </Container>
     </Box>
   );

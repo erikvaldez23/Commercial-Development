@@ -220,7 +220,7 @@ export default function Offer() {
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
         sx={{
-          height: "90vh",
+          height: "100vh",
           display: "flex",
           flexDirection: "column",
           position: "relative",
@@ -241,7 +241,7 @@ export default function Offer() {
 
         <Container
           maxWidth="lg"
-          sx={{ flex: 1, display: "flex", alignItems: "center", py: 4, mt: 10 }}
+          sx={{ flex: 1, display: "flex", alignItems: "center", py: 4 }}
         >
           <Grid container spacing={6} alignItems="center">
             {/* Left Column */}
