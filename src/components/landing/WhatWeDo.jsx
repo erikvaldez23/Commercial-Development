@@ -325,6 +325,7 @@ const WhatWeDo = () => {
               letterSpacing: { xs: 0.5, md: 1 },
               lineHeight: { xs: 1.3, md: 1.5 },
               px: { xs: 3, sm: 0 },
+              py: 6,
             }}
           >
             "The best way to predict the future is to create it."
