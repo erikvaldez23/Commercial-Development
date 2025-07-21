@@ -253,9 +253,9 @@ const ModernStewardsOfSpace = () => {
                 textShadow: "0 2px 10px rgba(0,0,0,0.3)",
               }}
             >
-              WE'RE NOT DEVELOPERS. WE'RE
+              WE DONT JUST BUILD SPACES.
               <br />
-              STEWARDS OF SPACE.
+              WE SHAPE FUTURES.
             </Typography>
           </Box>
 
