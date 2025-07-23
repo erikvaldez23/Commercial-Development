@@ -536,7 +536,10 @@ const DashboardPage = ({ onNavigate }) => {
           </Box>
         </Fade>
 
-        <Box display="flex" gap={6}>
+        <Box sx={{display: {
+      xs: 'none',   // hide on mobile (xs)
+      sm: 'flex'    // show from sm up
+    },}} gap={6}>
           <HeaderMetric
             label="ESS Score"
             value="72"

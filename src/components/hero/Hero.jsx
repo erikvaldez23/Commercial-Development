@@ -206,7 +206,7 @@ export default function HeroSection({ loadingDone }) {
               variant="h1"
               sx={{
                 fontWeight: 900,
-                fontSize: { xs: "3.5rem", sm: "2rem", md: "4rem" },
+                fontSize: { xs: "3rem", sm: "3rem", md: "4rem" },
                 mb: 2,
                 background: "linear-gradient(90deg, #ffffff 0%, #c9b49a 100%)",
                 WebkitBackgroundClip: "text",

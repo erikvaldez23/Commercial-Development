@@ -34,8 +34,8 @@ import { Call } from "@mui/icons-material";
 
 const ModernButton = styled(Button)(({ theme, variant: buttonVariant }) => ({
   borderRadius: "50px",
-  padding: "16px 32px",
-  fontSize: "1.1rem",
+  padding: theme.spacing(1.5, 3), // Reduced padding for mobile
+  fontSize: { xs: "0.95rem", sm: "1.1rem" }, // Responsive font size
   fontWeight: 600,
   textTransform: "none",
   position: "relative",
@@ -85,14 +85,8 @@ const FloatingParticles = () => {
             borderRadius: "50%",
             left: `${Math.random() * 100}%`,
           }}
-          initial={{
-            y: "100vh",
-            opacity: 0,
-          }}
-          animate={{
-            y: "-100px",
-            opacity: [0, 1, 0],
-          }}
+          initial={{ y: "100vh", opacity: 0 }}
+          animate={{ y: "-100px", opacity: [0, 1, 0] }}
           transition={{
             duration: Math.random() * 8 + 6,
             repeat: Infinity,
@@ -189,13 +183,12 @@ export default function Offer() {
   const [activeTab, setActiveTab] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isSmallMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
   const handleLearnMore = () => {
-    const section = document.getElementById("section")
-    if(section) {
-      section.scrollIntoView({behavior: "smooth"})
-    }
-  }
+    const section = document.getElementById("section");
+    if (section) section.scrollIntoView({ behavior: "smooth" });
+  };
 
   const handleChange = (event, newValue) => {
     setActiveTab(newValue);
@@ -213,14 +206,14 @@ export default function Offer() {
     <Box sx={{ bgcolor: "#000", color: "white" }}>
       <FloatingParticles />
 
-      {/* Hero Section */}
+      {/* Hero Section - Mobile Optimized */}
       <Box
         component={motion.section}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
         sx={{
-          height: "100vh",
+          minHeight: { xs: "100svh", md: "100vh" }, // Use svh for mobile Safari
           display: "flex",
           flexDirection: "column",
           position: "relative",
@@ -241,14 +234,92 @@ export default function Offer() {
 
         <Container
           maxWidth="lg"
-          sx={{ flex: 1, display: "flex", alignItems: "center", py: 4 }}
+          sx={{ 
+            flex: 1, 
+            display: "flex", 
+            alignItems: "center", 
+            py: { xs: 2, md: 4 },
+            px: { xs: 2, sm: 3 } // Reduced horizontal padding on mobile
+          }}
         >
-          <Grid container spacing={6} alignItems="center">
-            {/* Left Column */}
-            <Grid item xs={12} lg={6}>
+          <Grid container spacing={{ xs: 3, md: 6 }} alignItems="center">
+            {/* Coin Image - Optimized for mobile */}
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              sx={{ 
+                order: { xs: 1, lg: 2 },
+                textAlign: "center"
+              }}
+            >
               <Box
                 component={motion.div}
-                initial={{ opacity: 0, x: -50 }}
+                initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
+                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+                transition={{ duration: 1, delay: 0.5 }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  position: "relative",
+                  mb: { xs: 2, lg: 0 }
+                }}
+              >
+                <Box
+                  sx={{
+                    position: "relative",
+                    "&::before": {
+                      content: '""',
+                      position: "absolute",
+                      inset: { xs: -10, md: -20 }, // Reduced glow on mobile
+                      background:
+                        "conic-gradient(from 0deg, rgba(201, 180, 154, 0.3), transparent, rgba(201, 180, 154, 0.3))",
+                      borderRadius: "50%",
+                      filter: "blur(20px)",
+                      animation: "spin 10s linear infinite",
+                    },
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src="/coin2.png"
+                    alt="Coin Image"
+                    sx={{
+                      width: { 
+                        xs: isSmallMobile ? "280px" : "280px", 
+                        sm: "280px", 
+                        md: "320px",
+                        lg: "400px" 
+                      },
+                      height: { 
+                        xs: isSmallMobile ? "200px" : "240px", 
+                        sm: "280px", 
+                        md: "320px",
+                        lg: "400px" 
+                      },
+                      objectFit: "contain",
+                      filter: "drop-shadow(0 0 40px rgba(201, 180, 154, 0.4))",
+                      maxWidth: "100%",
+                      height: "auto",
+                    }}
+                  />
+                </Box>
+              </Box>
+            </Grid>
+
+            {/* Text Content - Mobile optimized */}
+            <Grid
+              item
+              xs={12}
+              lg={6}
+              sx={{ 
+                order: { xs: 2, lg: 1 },
+                textAlign: { xs: "center", lg: "left" }
+              }}
+            >
+              <Box
+                component={motion.div}
+                initial={{ opacity: 0, x: isMobile ? 0 : -50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
@@ -260,9 +331,10 @@ export default function Offer() {
                     border: "1px solid rgba(201, 180, 154, 0.3)",
                     color: primaryColor,
                     fontWeight: 600,
-                    letterSpacing: 2,
-                    mb: 1,
-                    mt: 5,
+                    letterSpacing: { xs: 1, sm: 2 },
+                    mb: { xs: 2, md: 1 },
+                    mt: { xs: 0, md: 5 },
+                    fontSize: { xs: "0.7rem", sm: "0.8rem" }
                   }}
                 />
 
@@ -273,10 +345,18 @@ export default function Offer() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   variant="h1"
                   sx={{
-                    fontSize: { xs: "2.5rem", md: "3rem", lg: "4rem" },
+                    fontSize: { 
+                      xs: "1.8rem", 
+                      sm: "2.2rem", 
+                      md: "2.8rem", 
+                      lg: "3.5rem",
+                      xl: "4rem" 
+                    },
                     fontWeight: 700,
-                    lineHeight: 1.1,
-                    mb: 3,
+                    lineHeight: { xs: 1.2, md: 1.1 },
+                    mb: { xs: 2, md: 3 },
+                    wordBreak: "break-word",
+                    hyphens: "auto"
                   }}
                 >
                   <Box component="span" sx={{ color: "white" }}>
@@ -293,13 +373,15 @@ export default function Offer() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.8, delay: 0.6 }}
-                  variant="h6"
+                  variant="body1"
                   sx={{
                     color: "rgba(255, 255, 255, 0.8)",
                     fontWeight: 300,
                     lineHeight: 1.6,
-                    mb: 4,
+                    mb: { xs: 3, md: 4 },
                     maxWidth: "600px",
+                    fontSize: { xs: "0.95rem", sm: "1.1rem", md: "1.25rem" },
+                    mx: { xs: "auto", lg: 0 }
                   }}
                 >
                   Ark is the utility token powering access, governance, and
@@ -315,74 +397,35 @@ export default function Offer() {
                   transition={{ duration: 0.8, delay: 0.8 }}
                   direction={{ xs: "column", sm: "row" }}
                   spacing={2}
-                  sx={{ mb: 4 }}
+                  sx={{ 
+                    mb: { xs: 2, md: 4 },
+                    alignItems: "center",
+                    justifyContent: { xs: "center", lg: "flex-start" }
+                  }}
                 >
                   <ModernButton
                     variant="gradient"
-                    size="large"
+                    size={isMobile ? "medium" : "large"}
                     endIcon={<ArrowForwardIcon />}
+                    sx={{
+                      width: { xs: "100%", sm: "auto" },
+                      maxWidth: { xs: "280px", sm: "none" }
+                    }}
                   >
                     Get Started Now
                   </ModernButton>
-                  <ModernButton variant="outlined" size="large" onClick={handleLearnMore}>
+                  <ModernButton
+                    variant="outlined"
+                    size={isMobile ? "medium" : "large"}
+                    onClick={handleLearnMore}
+                    sx={{
+                      width: { xs: "100%", sm: "auto" },
+                      maxWidth: { xs: "280px", sm: "none" }
+                    }}
+                  >
                     Learn More
                   </ModernButton>
                 </Stack>
-              </Box>
-            </Grid>
-
-            {/* Right Column - Coin Animation */}
-            <Grid item xs={12} lg={6}>
-              <Box
-                component={motion.div}
-                initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
-                animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-                transition={{ duration: 1, delay: 0.5 }}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  position: "relative",
-                }}
-              >
-                <Box
-                  sx={{
-                    position: "relative",
-                    "&::before": {
-                      content: '""',
-                      position: "absolute",
-                      inset: -20,
-                      background:
-                        "conic-gradient(from 0deg, rgba(201, 180, 154, 0.3), transparent, rgba(201, 180, 154, 0.3))",
-                      borderRadius: "50%",
-                      filter: "blur(20px)",
-                      animation: "spin 10s linear infinite",
-                    },
-                  }}
-                >
-                  {/* <Box
-                component={motion.div}
-                animate={{ 
-                  rotateY: [0, 360],
-                  scale: [1, 1.05, 1]
-                }}
-                transition={{ 
-                  rotateY: { duration: 8, repeat: Infinity, ease: "linear" },
-                  scale: { duration: 4, repeat: Infinity, ease: "easeInOut" }
-                }}
-                sx={{ position: 'relative', zIndex: 1 }}
-              > */}
-                  <Box
-                    component="img"
-                    src="/coin2.png" // Replace with your actual path
-                    alt="Coin Image"
-                    sx={{
-                      width: isMobile ? "280px" : "400px",
-                      height: isMobile ? "280px" : "400px",
-                      objectFit: "contain",
-                      filter: "drop-shadow(0 0 40px rgba(201, 180, 154, 0.4))",
-                    }}
-                  />
-                </Box>
               </Box>
             </Grid>
           </Grid>
