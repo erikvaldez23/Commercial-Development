@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Container } from '@mui/material';
+import { Box, Typography, Container, useMediaQuery, useTheme } from '@mui/material';
 import { TrendingUp, HowToVote, Insights } from '@mui/icons-material';
 
 const gold = '#c9b49a';
@@ -7,6 +7,10 @@ const goldLight = '#e6d4a8';
 const goldDark = '#b8a389';
 
 const CryptoContent = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+
   const features = [
     {
       title: "Fractional Ownership",

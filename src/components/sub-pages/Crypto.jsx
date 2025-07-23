@@ -219,6 +219,7 @@ export default function Offer() {
           position: "relative",
           background:
             "radial-gradient(circle at 50% 50%, rgba(201, 180, 154, 0.1) 0%, transparent 70%)",
+          pb: 20, 
         }}
       >
         {/* Background gradients */}
