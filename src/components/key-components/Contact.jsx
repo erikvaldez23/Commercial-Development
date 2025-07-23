@@ -587,7 +587,7 @@ export default function ContactForm() {
            background:
             "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
         py: { xs: 2, sm: 8 },
-        px: 20,
+        px: isMobile ? 1 : 20,
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
