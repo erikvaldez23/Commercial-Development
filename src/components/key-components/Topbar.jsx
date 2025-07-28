@@ -18,14 +18,24 @@ import { motion } from "framer-motion";
 import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 
-// Your nav items
+// Hash routes
+// const navItems = [
+//   { label: "Home", path: "/#/", mobileOnly: true },
+//   { label: "Ark Vision", path: "/#/ark-vision" },
+//   { label: "Ark OS", path: "/#/portfolio" },
+//   { label: "Ark Crypto", path: "/#/ark-crypto" },
+//   { label: "Our Story", path: "/#/about" },
+//   { label: "Get In Touch", path: "/#/contact" },
+// ];
+
+// Browser router paths
 const navItems = [
-  { label: "Home", path: "/#/", mobileOnly: true },
-  { label: "Ark Vision", path: "/#/ark-vision" },
-  { label: "Ark OS", path: "/#/portfolio" },
-  { label: "Ark Crypto", path: "/#/ark-crypto" },
-  { label: "Our Story", path: "/#/about" },
-  { label: "Get In Touch", path: "/#/contact" },
+  { label: "Home", path: "/", mobileOnly: true },
+  { label: "Ark Vision", path: "/ark-vision" },
+  { label: "Ark OS", path: "/portfolio" },
+  { label: "Ark Crypto", path: "/ark-crypto" },
+  { label: "Our Story", path: "/about" },
+  { label: "Get In Touch", path: "/contact" },
 ];
 
 // The "pill" wrapper with enhanced styling
