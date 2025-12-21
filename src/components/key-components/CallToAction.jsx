@@ -32,9 +32,10 @@ export default function CallToAction() {
   }
 
   return (
-    <Box 
-      sx={{ 
-        background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+    <Box
+      sx={{
+        // background: 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)',
+        background: '#000',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -52,7 +53,7 @@ export default function CallToAction() {
           filter: 'blur(60px)',
         }}
       />
-      
+
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box
           sx={{
@@ -85,7 +86,7 @@ export default function CallToAction() {
                 GREEN ARK
               </Box>
             </Typography>
-            
+
             <Typography
               variant="h5"
               sx={{
@@ -97,10 +98,10 @@ export default function CallToAction() {
                 maxWidth: { md: '80%' },
               }}
             >
-              Experience the future of sustainable technology with our innovative 
+              Experience the future of sustainable technology with our innovative
               platform designed to make a difference.
             </Typography>
-            
+
             <Button
               variant="contained"
               size="large"
@@ -160,7 +161,7 @@ export default function CallToAction() {
                 >
                   STAY UPDATED
                 </Typography>
-                
+
                 <Box
                   component="form"
                   onSubmit={handleEmailSubmit}
@@ -202,7 +203,7 @@ export default function CallToAction() {
                       },
                     }}
                   />
-                  
+
                   <Button
                     type="submit"
                     variant="contained"
@@ -268,7 +269,7 @@ export default function CallToAction() {
                         >
                           {section.title}
                         </Typography>
-                        
+
                         {section.links.map((link, linkIndex) => (
                           <Typography
                             key={linkIndex}

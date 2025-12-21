@@ -15,9 +15,10 @@ import { styled } from "@mui/material/styles";
 
 // Apple-inspired styled components
 const StyledFooterBox = styled(Box)(({ theme }) => ({
-  background: `linear-gradient(180deg, 
-    rgba(0, 0, 0, 0.95) 0%, 
-    rgba(10, 10, 10, 0.98) 100%)`,
+  // background: `linear-gradient(180deg, 
+  //   rgba(0, 0, 0, 0.95) 0%, 
+  //   rgba(10, 10, 10, 0.98) 100%)`,
+  background: "#000",
   backdropFilter: "blur(20px)",
   WebkitBackdropFilter: "blur(20px)",
   position: "relative",
@@ -212,9 +213,8 @@ const Footer = () => {
                 justifyContent: "center",
                 opacity: isVisible ? 1 : 0,
                 transform: isVisible ? "translateY(0)" : "translateY(20px)",
-                transition: `all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${
-                  idx * 0.1
-                }s`,
+                transition: `all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${idx * 0.1
+                  }s`,
               }}
             >
               <Box sx={{ textAlign: "left" }}>
