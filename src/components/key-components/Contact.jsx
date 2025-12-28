@@ -45,236 +45,176 @@ import {
 import CTA from "../subpage-components/CTA";
 
 
-const appleTheme = createTheme({
+const premiumTheme = createTheme({
   palette: {
     mode: "dark",
     background: {
-      default: "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
-      paper: "rgba(255, 255, 255, 0.05)",
+      default: "#000000",
+      paper: "#0a0a0a",
     },
     primary: {
-      main: "#007AFF",
-      light: "#5AC8FA",
-      dark: "#0051D5",
+      main: "#c9b49a", // Gold
+      light: "#d4bf9f",
+      dark: "#a08d7a",
     },
     secondary: {
-      main: "#FF9500",
-      light: "#FFAD33",
-      dark: "#CC7700",
-    },
-    success: {
-      main: "#34C759",
-    },
-    warning: {
-      main: "#FF9500",
-    },
-    error: {
-      main: "#FF3B30",
-    },
-    info: {
-      main: "#5AC8FA",
+      main: "#ffffff",
     },
     text: {
-      primary: "#FFFFFF",
-      secondary: "rgba(255, 255, 255, 0.6)",
+      primary: "#ffffff",
+      secondary: "rgba(255, 255, 255, 0.7)",
     },
   },
   typography: {
-    fontFamily:
-      '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    h1: {
-      fontWeight: 300,
-      letterSpacing: "-0.025em",
-    },
+    fontFamily: '"Outfit", "Inter", sans-serif',
     h2: {
-      fontWeight: 300,
-      letterSpacing: "-0.025em",
-    },
-    h3: {
-      fontWeight: 400,
+      fontWeight: 700,
       letterSpacing: "-0.02em",
-    },
-    h4: {
-      fontWeight: 400,
-      letterSpacing: "-0.02em",
-    },
-    h5: {
-      fontWeight: 500,
-      letterSpacing: "-0.015em",
     },
     h6: {
-      fontWeight: 500,
-      letterSpacing: "-0.015em",
-    },
-    body1: {
       fontWeight: 400,
-      lineHeight: 1.5,
-    },
-    body2: {
-      fontWeight: 400,
-      lineHeight: 1.4,
-    },
-    caption: {
-      fontWeight: 500,
-      letterSpacing: "0.05em",
-      textTransform: "uppercase",
+      letterSpacing: "0.01em",
     },
   },
   shape: {
-    borderRadius: 16,
+    borderRadius: 24,
   },
 });
 
-
-// Apple-inspired styled components with dark theme
-const AppleCard = styled(Card)(({ theme }) => ({
-  background: "rgba(0, 0, 0, 0.9)",
-  borderRadius: "24px",
-  backdropFilter: "blur(60px) saturate(180%)",
-  WebkitBackdropFilter: "blur(60px) saturate(180%)",
-  boxShadow:
-    "0 16px 64px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(201, 180, 154, 0.08), inset 0 1px 0 rgba(201, 180, 154, 0.1)",
-  border: "1px solid rgba(201, 180, 154, 0.15)",
+// Premium styled components
+const PremiumCard = styled(Card)(({ theme }) => ({
+  background: "rgba(10, 10, 10, 0.6)",
+  borderRadius: "32px",
+  backdropFilter: "blur(40px)",
+  WebkitBackdropFilter: "blur(40px)",
+  boxShadow: "0 24px 48px rgba(0, 0, 0, 0.5)",
+  border: "1px solid rgba(255, 255, 255, 0.05)",
   overflow: "hidden",
   position: "relative",
-  transition: "all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-  "&:before": {
-    content: '""',
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: "1px",
-    background:
-      "linear-gradient(90deg, transparent, rgba(201, 180, 154, 0.3), transparent)",
+  transition: "transform 0.4s ease, box-shadow 0.4s ease",
+  "&:hover": {
+    transform: "translateY(-4px)",
+    boxShadow: "0 32px 64px rgba(0, 0, 0, 0.6)",
   },
 }));
 
-const AppleTextField = styled(TextField)(({ theme }) => ({
+const PremiumTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     borderRadius: "16px",
-    backgroundColor: "rgba(255, 255, 255, 0.05)",
-    border: "1px solid rgba(201, 180, 154, 0.2)",
-    transition: "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-    fontSize: "17px",
+    backgroundColor: "rgba(255, 255, 255, 0.03)",
+    border: "1px solid rgba(255, 255, 255, 0.08)",
+    transition: "all 0.3s ease",
+    fontSize: "16px",
     fontWeight: 400,
-    backdropFilter: "blur(20px)",
+    color: "#fff",
     "& input": {
-      padding: "18px 16px",
-      fontSize: "17px",
-      fontWeight: 400,
-      color: "rgba(255, 255, 255, 0.95)",
+      padding: "16px 20px",
       "&::placeholder": {
-        color: "rgba(201, 180, 154, 0.6)",
+        color: "rgba(255, 255, 255, 0.4)",
         opacity: 1,
-        fontSize: "17px",
       },
     },
     "& textarea": {
-      fontSize: "17px",
-      fontWeight: 400,
-      color: "rgba(255, 255, 255, 0.95)",
       "&::placeholder": {
-        color: "rgba(201, 180, 154, 0.6)",
+        color: "rgba(255, 255, 255, 0.4)",
         opacity: 1,
-        fontSize: "17px",
       },
     },
     "& fieldset": {
       border: "none",
     },
     "&:hover": {
-      backgroundColor: "rgba(255, 255, 255, 0.08)",
-      borderColor: "rgba(201, 180, 154, 0.4)",
-      boxShadow: "0 0 0 1px rgba(201, 180, 154, 0.1)",
+      backgroundColor: "rgba(255, 255, 255, 0.06)",
+      border: "1px solid rgba(201, 180, 154, 0.3)",
     },
     "&.Mui-focused": {
       backgroundColor: "rgba(255, 255, 255, 0.08)",
-      borderColor: "#c9b49a",
-      borderWidth: "2px",
-      boxShadow:
-        "0 0 0 4px rgba(201, 180, 154, 0.15), 0 4px 20px rgba(201, 180, 154, 0.1)",
+      border: "1px solid #c9b49a",
+      boxShadow: "0 0 0 4px rgba(201, 180, 154, 0.1)",
     },
   },
   "& .MuiInputLabel-root": {
-    color: "rgba(201, 180, 154, 0.8)",
-    fontSize: "17px",
-    fontWeight: 400,
-    transform: "translate(16px, 18px) scale(1)",
+    color: "rgba(255, 255, 255, 0.5)",
+    fontSize: "16px",
+    transform: "translate(20px, 16px) scale(1)",
     "&.MuiInputLabel-shrink": {
-      transform: "translate(16px, -9px) scale(0.8)",
-      fontSize: "14px",
-      fontWeight: 500,
+      transform: "translate(20px, -10px) scale(0.75)",
+      color: "#c9b49a",
+      fontWeight: 600,
+    },
+    "&.Mui-focused": {
       color: "#c9b49a",
     },
   },
   "& .MuiFormHelperText-root": {
-    color: "#FF6B6B",
-    marginTop: "8px",
+    marginLeft: "8px",
     fontSize: "13px",
-    fontWeight: 400,
-    marginLeft: "4px",
   },
   "& .MuiInputAdornment-root svg": {
-    color: "rgba(201, 180, 154, 0.7)",
-    width: "20px",
-    height: "20px",
+    color: "rgba(255, 255, 255, 0.4)",
   },
 }));
 
-const AppleSelect = styled(Select)(({ theme }) => ({
+const PremiumSelect = styled(Select)(({ theme }) => ({
   borderRadius: "16px",
-  backgroundColor: "rgba(255, 255, 255, 0.05)",
-  border: "1px solid rgba(201, 180, 154, 0.2)",
-  fontSize: "17px",
-  fontWeight: 400,
-  backdropFilter: "blur(20px)",
-  color: "rgba(255, 255, 255, 0.95)",
+  backgroundColor: "rgba(255, 255, 255, 0.03)",
+  border: "1px solid rgba(255, 255, 255, 0.08)",
+  color: "#fff",
+  fontSize: "16px",
   "& .MuiSelect-select": {
-    padding: "18px 16px",
-    fontSize: "17px",
-    fontWeight: 400,
-    color: "rgba(255, 255, 255, 0.95)",
+    padding: "16px 20px",
   },
   "& .MuiSvgIcon-root": {
-    color: "rgba(201, 180, 154, 0.7)",
+    color: "rgba(255, 255, 255, 0.4)",
     right: "12px",
   },
   "& fieldset": {
     border: "none",
   },
   "&:hover": {
-    backgroundColor: "rgba(255, 255, 255, 0.08)",
-    borderColor: "rgba(201, 180, 154, 0.4)",
+    backgroundColor: "rgba(255, 255, 255, 0.06)",
+    border: "1px solid rgba(201, 180, 154, 0.3)",
   },
   "&.Mui-focused": {
     backgroundColor: "rgba(255, 255, 255, 0.08)",
-    borderColor: "#c9b49a",
-    borderWidth: "2px",
-    boxShadow: "0 0 0 4px rgba(201, 180, 154, 0.15)",
+    border: "1px solid #c9b49a",
+    boxShadow: "0 0 0 4px rgba(201, 180, 154, 0.1)",
   },
 }));
 
-const AppleMenuItem = styled(MenuItem)(({ theme }) => ({
-  fontSize: "17px",
-  fontWeight: 400,
-  padding: "12px 16px",
-  color: "rgba(255, 255, 255, 0.95)",
-  backgroundColor: "rgba(0, 0, 0, 0.9)",
+const PremiumMenuItem = styled(MenuItem)(({ theme }) => ({
+  fontSize: "16px",
+  padding: "12px 20px",
+  color: "#fff",
   "&:hover": {
-    backgroundColor: "rgba(201, 180, 154, 0.15)",
+    backgroundColor: "rgba(201, 180, 154, 0.1)",
   },
   "&.Mui-selected": {
     backgroundColor: "rgba(201, 180, 154, 0.2)",
+    color: "#c9b49a",
+    fontWeight: 600,
+    "&:hover": {
+      backgroundColor: "rgba(201, 180, 154, 0.25)",
+    },
   },
 }));
+
+const PremiumHeader = styled(Typography)(({ theme }) => ({
+  background: "linear-gradient(135deg, #fff 0%, #c9b49a 100%)",
+  WebkitBackgroundClip: "text",
+  WebkitTextFillColor: "transparent",
+  fontWeight: 700,
+  letterSpacing: "-0.02em",
+}));
+
+
 
 const SectionTitle = styled(Typography)(({ theme }) => ({
   fontSize: "22px",
   fontWeight: 600,
-  color: "rgba(255, 255, 255, 0.95)",
+  color: "#fff",
   marginBottom: "28px",
-  letterSpacing: "-0.4px",
+  letterSpacing: "-0.01em",
   display: "flex",
   alignItems: "center",
   gap: "16px",
@@ -293,8 +233,8 @@ const IconWrapper = styled(Box)(({ theme }) => ({
     "0 4px 16px rgba(201, 180, 154, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1)",
 }));
 
-const AppleDivider = styled(Divider)(({ theme }) => ({
-  backgroundColor: "rgba(201, 180, 154, 0.2)",
+const PremiumDivider = styled(Divider)(({ theme }) => ({
+  backgroundColor: "rgba(255, 255, 255, 0.1)",
   height: "1px",
   marginBottom: "36px",
   position: "relative",
@@ -306,11 +246,11 @@ const AppleDivider = styled(Divider)(({ theme }) => ({
     transform: "translate(-50%, -50%)",
     width: "60px",
     height: "1px",
-    background: "linear-gradient(90deg, transparent, #c9b49a, transparent)",
+    background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent)",
   },
 }));
 
-const AppleButton = styled(Button)(({ theme }) => ({
+const PremiumButton = styled(Button)(({ theme }) => ({
   background: "linear-gradient(135deg, #c9b49a 0%, #b5a088 50%, #a08d7a 100%)",
   borderRadius: "16px",
   padding: "20px 32px",
@@ -336,13 +276,13 @@ const AppleButton = styled(Button)(({ theme }) => ({
       "0 4px 16px rgba(201, 180, 154, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2)",
   },
   "&.Mui-disabled": {
-    background: "rgba(201, 180, 154, 0.3)",
-    color: "rgba(255, 255, 255, 0.4)",
+    background: "rgba(255, 255, 255, 0.1)",
+    color: "rgba(255, 255, 255, 0.3)",
     boxShadow: "none",
   },
 }));
 
-const AppleSlider = styled(Slider)(({ theme }) => ({
+const PremiumSlider = styled(Slider)(({ theme }) => ({
   color: "#c9b49a",
   height: "6px",
   padding: "20px 0",
@@ -353,7 +293,7 @@ const AppleSlider = styled(Slider)(({ theme }) => ({
     borderRadius: "3px",
   },
   "& .MuiSlider-rail": {
-    backgroundColor: "rgba(201, 180, 154, 0.2)",
+    backgroundColor: "rgba(255, 255, 255, 0.1)",
     height: "6px",
     borderRadius: "3px",
   },
@@ -385,7 +325,7 @@ const AppleSlider = styled(Slider)(({ theme }) => ({
     },
   },
   "& .MuiSlider-mark": {
-    backgroundColor: "rgba(201, 180, 154, 0.4)",
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
     height: "6px",
     width: "3px",
     borderRadius: "1.5px",
@@ -396,13 +336,13 @@ const AppleSlider = styled(Slider)(({ theme }) => ({
   "& .MuiSlider-markLabel": {
     fontSize: "13px",
     fontWeight: 500,
-    color: "rgba(201, 180, 154, 0.8)",
+    color: "rgba(255, 255, 255, 0.6)",
     marginTop: "12px",
   },
 }));
 
-const AppleRadio = styled(Radio)(({ theme }) => ({
-  color: "rgba(201, 180, 154, 0.6)",
+const PremiumRadio = styled(Radio)(({ theme }) => ({
+  color: "rgba(255, 255, 255, 0.4)",
   "&.Mui-checked": {
     color: "#c9b49a",
   },
@@ -411,8 +351,8 @@ const AppleRadio = styled(Radio)(({ theme }) => ({
   },
 }));
 
-const AppleCheckbox = styled(Checkbox)(({ theme }) => ({
-  color: "rgba(201, 180, 154, 0.6)",
+const PremiumCheckbox = styled(Checkbox)(({ theme }) => ({
+  color: "rgba(255, 255, 255, 0.4)",
   "&.Mui-checked": {
     color: "#c9b49a",
   },
@@ -430,8 +370,6 @@ const propertyTypesOptions = [
 
 const budgetMarks = [
   { value: 100000, label: "$100K" },
-  { value: 500000, label: "$500K" },
-  { value: 1000000, label: "$1M" },
   { value: 5000000, label: "$5M" },
   { value: 10000000, label: "$10M+" },
 ];
@@ -491,16 +429,16 @@ export default function ContactForm() {
         return !value.trim()
           ? "Email is required"
           : !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)
-          ? "Please enter a valid email address"
-          : "";
+            ? "Please enter a valid email address"
+            : "";
       case "phone":
         return !value.trim()
           ? "Phone number is required"
           : !/^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/im.test(
-              value
-            )
-          ? "Please enter a valid phone number"
-          : "";
+            value
+          )
+            ? "Please enter a valid phone number"
+            : "";
       case "message":
         return !value.trim() ? "Message is required" : "";
       case "propertyType":
@@ -580,19 +518,18 @@ export default function ContactForm() {
   };
 
   return (
-    <ThemeProvider theme={appleTheme}>
-    <Box
-      sx={{
-        minHeight: "100vh",
-           background:
-            "linear-gradient(145deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)",
-        py: { xs: 2, sm: 8 },
-        px: isMobile ? 1 : 20,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "relative",
-        "&::before": {
+    <ThemeProvider theme={premiumTheme}>
+      <Box
+        sx={{
+          minHeight: "100vh",
+          background: "#000",
+          py: { xs: 8, sm: 12 },
+          px: isMobile ? 1 : 20,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          position: "relative",
+          "&::before": {
             content: '""',
             position: "absolute",
             top: 0,
@@ -600,62 +537,61 @@ export default function ContactForm() {
             right: 0,
             bottom: 0,
             background:
-              "radial-gradient(circle at 20% 50%, rgba(0, 122, 255, 0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255, 149, 0, 0.1) 0%, transparent 50%)",
+              "radial-gradient(circle at 50% 10%, rgba(201, 180, 154, 0.08) 0%, transparent 50%)",
             pointerEvents: "none",
           },
-      }}
-    >
-      <Box
-        sx={{
-          maxWidth: "1600px",
-          width: "100%",
-          pt: 8,
-          position: "relative",
-          zIndex: 1,
         }}
       >
-        {/* Header */}
-        <Fade in timeout={1000}>
-          <Box sx={{ textAlign: "left", mb: 8, pl: 2 }}>
-            <Typography
-              variant={isMobile ? "h3" : "h2"}
-              sx={{
-                fontSize: { xs: "38px", md: "72px" },
-                fontWeight: 700,
-                background: "linear-gradient(135deg, #fff 0%, #c9b49a 100%)",
-                backgroundClip: "text",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                marginBottom: "20px",
-                lineHeight: 1.05,
-                letterSpacing: "-1.5px",
-              }}
-            >
-              Let's Connect
-            </Typography>
-            <Typography
-              variant="h6"
-              sx={{
-                fontSize: "22px",
-                fontWeight: 400,
-                color: "rgba(201, 180, 154, 0.9)",
-                maxWidth: "700px",
-                lineHeight: 1.5,
-                letterSpacing: "-0.2px",
-              }}
-            >
-              Ready to explore exceptional investment opportunities? Share your
-              vision and let's create something extraordinary together.
-            </Typography>
-          </Box>
-        </Fade>
+        <Box
+          sx={{
+            maxWidth: "1400px",
+            width: "100%",
+            pt: 8,
+            position: "relative",
+            zIndex: 1,
+          }}
+        >
+          {/* Header */}
+          <Fade in timeout={1000}>
+            <Box sx={{ textAlign: "left", mb: 8, pl: 2 }}>
+              <Typography
+                variant={isMobile ? "h3" : "h2"}
+                sx={{
+                  fontSize: { xs: "38px", md: "72px" },
+                  fontWeight: 700,
+                  background: "linear-gradient(90deg, #fff 30%, #c9b49a 100%)",
+                  backgroundClip: "text",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  marginBottom: "20px",
+                  lineHeight: 1.05,
+                  letterSpacing: "-1.5px",
+                }}
+              >
+                Let's Connect
+              </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontSize: "22px",
+                  fontWeight: 400,
+                  color: "rgba(255, 255, 255, 0.6)",
+                  maxWidth: "700px",
+                  lineHeight: 1.5,
+                  letterSpacing: "-0.2px",
+                }}
+              >
+                Ready to explore exceptional investment opportunities? Share your
+                vision and let's create something extraordinary together.
+              </Typography>
+            </Box>
+          </Fade>
 
-        {/* Form Card */}
-        <Grow in timeout={1200}>
-          <AppleCard>
-            <CardContent sx={{ p: { xs: 4, sm: 8 } }}>
+          {/* Form Content */}
+          <Grow in timeout={1200}>
+            <Box sx={{ p: { xs: 0, sm: 2 } }}>
               <form onSubmit={handleSubmit} noValidate>
-                <Grid container spacing={5}>
+                <Grid container spacing={3}>
                   {/* Personal Information */}
                   <Grid item xs={12}>
                     <SectionTitle>
@@ -664,11 +600,11 @@ export default function ContactForm() {
                       </IconWrapper>
                       Personal Information
                     </SectionTitle>
-                    <AppleDivider />
+                    <PremiumDivider />
                   </Grid>
 
                   <Grid item xs={12} md={6}>
-                    <AppleTextField
+                    <PremiumTextField
                       fullWidth
                       label="Full Name"
                       name="name"
@@ -682,7 +618,7 @@ export default function ContactForm() {
                   </Grid>
 
                   <Grid item xs={12} md={6}>
-                    <AppleTextField
+                    <PremiumTextField
                       fullWidth
                       label="Company Name"
                       name="company"
@@ -692,7 +628,7 @@ export default function ContactForm() {
                   </Grid>
 
                   <Grid item xs={12} md={6}>
-                    <AppleTextField
+                    <PremiumTextField
                       fullWidth
                       label="Email Address"
                       name="email"
@@ -714,7 +650,7 @@ export default function ContactForm() {
                   </Grid>
 
                   <Grid item xs={12} md={6}>
-                    <AppleTextField
+                    <PremiumTextField
                       fullWidth
                       label="Phone Number"
                       name="phone"
@@ -743,7 +679,7 @@ export default function ContactForm() {
                       </IconWrapper>
                       Investment Requirements
                     </SectionTitle>
-                    <AppleDivider />
+                    <PremiumDivider />
                   </Grid>
 
                   <Grid item xs={12} md={6}>
@@ -762,7 +698,7 @@ export default function ContactForm() {
                       >
                         Property Type
                       </FormLabel>
-                      <AppleSelect
+                      <PremiumSelect
                         name="propertyType"
                         value={formData.propertyType}
                         onChange={handleChange}
@@ -780,18 +716,18 @@ export default function ContactForm() {
                           },
                         }}
                       >
-                        <AppleMenuItem value="" disabled>
+                        <PremiumMenuItem value="" disabled>
                           Select property type
-                        </AppleMenuItem>
+                        </PremiumMenuItem>
                         {propertyTypesOptions.map((option) => (
-                          <AppleMenuItem
+                          <PremiumMenuItem
                             key={option.value}
                             value={option.value}
                           >
                             {option.label}
-                          </AppleMenuItem>
+                          </PremiumMenuItem>
                         ))}
-                      </AppleSelect>
+                      </PremiumSelect>
                       {touched.propertyType && errors.propertyType && (
                         <FormHelperText
                           sx={{ color: "#FF6B6B", fontSize: "13px", mt: 1 }}
@@ -818,7 +754,7 @@ export default function ContactForm() {
                         <DollarSign size={18} /> Investment Budget
                       </FormLabel>
                       <Box sx={{ px: 3, pt: 2, pb: 2 }}>
-                        <AppleSlider
+                        <PremiumSlider
                           value={formData.budget}
                           onChange={handleSliderChange}
                           min={100000}
@@ -852,11 +788,11 @@ export default function ContactForm() {
                       </IconWrapper>
                       Share Your Vision
                     </SectionTitle>
-                    <AppleDivider />
+                    <PremiumDivider />
                   </Grid>
 
                   <Grid item xs={12}>
-                    <AppleTextField
+                    <PremiumTextField
                       fullWidth
                       label="Message"
                       name="message"
@@ -867,7 +803,7 @@ export default function ContactForm() {
                       helperText={touched.message && errors.message}
                       required
                       multiline
-                      rows={5}
+                      rows={4}
                       placeholder="Tell us about your investment goals, timeline, and what makes this opportunity special to you..."
                     />
                   </Grid>
@@ -880,7 +816,7 @@ export default function ContactForm() {
                       </IconWrapper>
                       Communication Preferences
                     </SectionTitle>
-                    <AppleDivider />
+                    <PremiumDivider />
                   </Grid>
 
                   <Grid item xs={12} md={6}>
@@ -895,6 +831,7 @@ export default function ContactForm() {
                         How would you prefer to be contacted?
                       </FormLabel>
                       <RadioGroup
+                        row
                         name="contactPreference"
                         value={formData.contactPreference}
                         onChange={handleChange}
@@ -902,7 +839,7 @@ export default function ContactForm() {
                       >
                         <FormControlLabel
                           value="email"
-                          control={<AppleRadio />}
+                          control={<PremiumRadio />}
                           label={
                             <Typography
                               sx={{ fontSize: "20px", fontWeight: 400, color: "#fff" }}
@@ -913,7 +850,7 @@ export default function ContactForm() {
                         />
                         <FormControlLabel
                           value="phone"
-                          control={<AppleRadio />}
+                          control={<PremiumRadio />}
                           label={
                             <Typography
                               sx={{ fontSize: "20px", fontWeight: 400, color: "#fff" }}
@@ -924,7 +861,7 @@ export default function ContactForm() {
                         />
                         <FormControlLabel
                           value="either"
-                          control={<AppleRadio />}
+                          control={<PremiumRadio />}
                           label={
                             <Typography
                               sx={{ fontSize: "20px", fontWeight: 400, color: "#fff" }}
@@ -940,7 +877,7 @@ export default function ContactForm() {
                   <Grid item xs={12} md={6}>
                     <FormControlLabel
                       control={
-                        <AppleCheckbox
+                        <PremiumCheckbox
                           checked={formData.newsletter}
                           onChange={handleChange}
                           name="newsletter"
@@ -961,8 +898,8 @@ export default function ContactForm() {
                   </Grid>
 
                   {/* Submit Button */}
-                  <Grid item xs={12} sx={{ mt: 4 }}>
-                    <AppleButton
+                  <Grid item xs={12} sx={{ mt: 2 }}>
+                    <PremiumButton
                       type="submit"
                       fullWidth
                       disabled={isSubmitting}
@@ -975,63 +912,62 @@ export default function ContactForm() {
                       }
                     >
                       {isSubmitting ? "Sending..." : "Send Message"}
-                    </AppleButton>
+                    </PremiumButton>
                   </Grid>
                 </Grid>
               </form>
-            </CardContent>
-          </AppleCard>
-        </Grow>
+            </Box>
+          </Grow>
 
-        {/* Success Snackbar */}
-        <Snackbar
-          open={isSubmitted}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-          <Alert
+          {/* Success Snackbar */}
+          <Snackbar
+            open={isSubmitted}
+            autoHideDuration={6000}
             onClose={handleCloseSnackbar}
-            severity="success"
-            variant="filled"
-            sx={{
-              borderRadius: "12px",
-              fontSize: "17px",
-              fontWeight: 400,
-              bgcolor: "#34C759",
-              color: "#fff",
-              boxShadow: "0 8px 32px rgba(52, 199, 89, 0.24)",
-            }}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
           >
-            Message sent successfully! We'll be in touch soon.
-          </Alert>
-        </Snackbar>
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity="success"
+              variant="filled"
+              sx={{
+                borderRadius: "12px",
+                fontSize: "17px",
+                fontWeight: 400,
+                bgcolor: "#34C759",
+                color: "#fff",
+                boxShadow: "0 8px 32px rgba(52, 199, 89, 0.24)",
+              }}
+            >
+              Message sent successfully! We'll be in touch soon.
+            </Alert>
+          </Snackbar>
 
-        {/* Error Snackbar */}
-        <Snackbar
-          open={!!submitError}
-          autoHideDuration={6000}
-          onClose={handleCloseSnackbar}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-        >
-          <Alert
+          {/* Error Snackbar */}
+          <Snackbar
+            open={!!submitError}
+            autoHideDuration={6000}
             onClose={handleCloseSnackbar}
-            severity="error"
-            variant="filled"
-            sx={{
-              borderRadius: "12px",
-              fontSize: "17px",
-              fontWeight: 400,
-              bgcolor: "#FF3B30",
-              color: "#fff",
-              boxShadow: "0 8px 32px rgba(255, 59, 48, 0.24)",
-            }}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
           >
-            {submitError}
-          </Alert>
-        </Snackbar>
+            <Alert
+              onClose={handleCloseSnackbar}
+              severity="error"
+              variant="filled"
+              sx={{
+                borderRadius: "12px",
+                fontSize: "17px",
+                fontWeight: 400,
+                bgcolor: "#FF3B30",
+                color: "#fff",
+                boxShadow: "0 8px 32px rgba(255, 59, 48, 0.24)",
+              }}
+            >
+              {submitError}
+            </Alert>
+          </Snackbar>
+        </Box>
       </Box>
-    </Box>
     </ThemeProvider>
   );
 } 

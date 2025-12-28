@@ -126,14 +126,14 @@ export default function AboutUs() {
   return (
     <>
       <FloatingParticles />
-      <Box sx={{ background: "#000", color: "white", minHeight: "100vh"}}>
+      <Box sx={{ background: "#000", color: "white", minHeight: "100vh" }}>
         {/* Hero Section */}
         <Box
           sx={{
             height: isMobile ? "50vh" : "70vh",
             position: "relative",
             mb: 8,
-            pt: 20, 
+            pt: 20,
             display: "flex",
             alignItems: "center",
           }}
@@ -177,7 +177,7 @@ export default function AboutUs() {
         </Box>
 
         {/* Vision Section */}
-        <Container maxWidth="lg">
+        <Container maxWidth="xl">
           <Grid container spacing={6} alignItems="center" sx={{ pb: 20, pt: 20 }}>
             <Grid item xs={12} md={6}>
               <Paper
@@ -497,7 +497,7 @@ export default function AboutUs() {
               </Paper>
             </Grid> */}
 
-            {/* <Grid item xs={12} md={6}>
+          {/* <Grid item xs={12} md={6}>
               <Box>
                 <Typography
                   variant="overline"

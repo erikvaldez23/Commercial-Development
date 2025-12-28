@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import {
   CssBaseline,
   ThemeProvider,
@@ -64,7 +64,7 @@ export default function App() {
   const [chatbotOpen, setChatbotOpen] = useState(false);
   const [pageLoaded, setPageLoaded] = useState(false);
   const [animationDone, setAnimationDone] = useState(false);
-  
+
   const isHome = location.pathname === "/"
   const loading = !(pageLoaded && animationDone);
 
@@ -108,7 +108,7 @@ export default function App() {
           {/* <VideoBackground /> */}
         </Box>
 
-        {( !isHome || !loading ) && <Topbar handleOpenChatbot={handleOpenChatbot} />}
+        {(!isHome || !loading) && <Topbar handleOpenChatbot={handleOpenChatbot} />}
 
         <>
           <Routes>
@@ -130,27 +130,27 @@ export default function App() {
                           zIndex: 1,
                         }}
                       > */}
-                        <Hero loadingDone />
+                      <Hero loadingDone />
                       {/* </Box> */}
 
                       {/* <Box sx={{ height: "100vh" }} /> */}
 
                       {/* <SlideUpReveal zIndex={2}> */}
-                        <WhatWeDo />
+                      <WhatWeDo />
                       {/* </SlideUpReveal> */}
 
                       {/* <SlideUpReveal zIndex={3}> */}
-                        <WhyInvestWithUs />
+                      <WhyInvestWithUs />
                       {/* </SlideUpReveal> */}
 
                       <ArkOS />
 
                       {/* <SlideUpReveal zIndex={4}> */}
-                        <CallToAction />
+                      <CallToAction />
                       {/* </SlideUpReveal> */}
 
                       {/* <SlideUpReveal zIndex={6}> */}
-                        {/* <Contact /> */}
+                      {/* <Contact /> */}
                       {/* </SlideUpReveal> */}
                     </>
                   )}

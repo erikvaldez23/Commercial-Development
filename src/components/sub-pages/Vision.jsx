@@ -25,13 +25,14 @@ import {
   LocationCity,
   WbSunny,
   Air,
-  Traffic,
   Assessment,
   CloudDownload,
   PlayArrow,
   AutoAwesome,
   Engineering,
   TrendingUp,
+  Traffic,
+  ArrowForward,
 } from "@mui/icons-material";
 import GradeOutlinedIcon from "@mui/icons-material/GradeOutlined";
 import CallToAction from "../key-components/CallToAction";
@@ -46,18 +47,17 @@ const GradientText = styled(Typography)(({ theme }) => ({
 }));
 
 const GlassCard = styled(Card)(({ theme }) => ({
-  background: "rgba(255, 255, 255, 0.03)",
-  backdropFilter: "blur(20px)",
-  border: "1px solid rgba(201, 180, 154, 0.1)",
-  borderRadius: "24px",
+  background: "rgba(10, 10, 10, 0.4)", // Darker, more premium base
+  backdropFilter: "blur(24px)",
+  border: "1px solid rgba(255, 255, 255, 0.05)",
+  borderRadius: "32px",
   transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
   position: "relative",
   overflow: "hidden",
   "&:hover": {
-    background: "rgba(255, 255, 255, 0.08)",
-    border: "1px solid rgba(201, 180, 154, 0.3)",
+    background: "rgba(15, 15, 15, 0.6)",
     transform: "translateY(-8px)",
-    boxShadow: "0 20px 40px rgba(201, 180, 154, 0.15)",
+    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.4)",
   },
   "&::before": {
     content: '""',
@@ -67,23 +67,52 @@ const GlassCard = styled(Card)(({ theme }) => ({
     right: 0,
     bottom: 0,
     background:
-      "linear-gradient(135deg, rgba(201, 180, 154, 0.1) 0%, transparent 50%)",
-    opacity: 0,
-    transition: "opacity 0.4s ease",
-  },
-  "&:hover::before": {
-    opacity: 1,
+      "linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, transparent 100%)",
+    pointerEvents: "none",
   },
 }));
 
-const FeatureCard = styled(GlassCard)(({ theme }) => ({
+const FeatureCard = styled(GlassCard)(({ theme, customcolor }) => ({
   height: "100%",
   display: "flex",
   flexDirection: "column",
   cursor: "pointer",
+  transition: "all 0.5s cubic-bezier(0.4, 0, 0.2, 1)",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    inset: -1,
+    borderRadius: "33px",
+    padding: "1px",
+    background: `linear-gradient(135deg, ${customcolor}40, transparent 60%)`, // Subtle colored border gradient
+    WebkitMask:
+      "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    WebkitMaskComposite: "xor",
+    maskComposite: "exclude",
+    opacity: 0.5,
+    transition: "opacity 0.5s ease",
+  },
+  "&:hover": {
+    transform: "translateY(-12px) scale(1.02)",
+    boxShadow: `0 20px 50px -10px ${customcolor}30`,
+    border: `1px solid ${customcolor}30`,
+  },
+  "&:hover::after": {
+    opacity: 1,
+    background: `linear-gradient(135deg, ${customcolor}, transparent 40%)`,
+  },
+  "&:hover .feature-icon-box": {
+    background: customcolor,
+    transform: "rotate(15deg) scale(1.1)",
+    boxShadow: `0 10px 30px -5px ${customcolor}60`,
+  },
   "&:hover .feature-icon": {
-    transform: "scale(1.1) rotate(5deg)",
-    color: "#c9b49a",
+    color: "#000",
+  },
+  "&:hover .learn-more-arrow": {
+    opacity: 1,
+    transform: "translateX(0)",
+    color: customcolor,
   },
 }));
 
@@ -98,22 +127,22 @@ const ModernButton = styled(Button)(({ theme, variant: buttonVariant }) => ({
   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
   ...(buttonVariant === "gradient"
     ? {
+      background: "linear-gradient(45deg, #c9b49a 30%, #c9b49a 90%)",
+      color: "#000",
+      "&:hover": {
         background: "linear-gradient(45deg, #c9b49a 30%, #c9b49a 90%)",
-        color: "#000",
-        "&:hover": {
-          background: "linear-gradient(45deg, #c9b49a 30%, #c9b49a 90%)",
-          transform: "scale(1.05)",
-          boxShadow: "0 10px 30px rgba(201, 180, 154, 0.3)",
-        },
-      }
+        transform: "scale(1.05)",
+        boxShadow: "0 10px 30px rgba(201, 180, 154, 0.3)",
+      },
+    }
     : {
-        border: "2px solid #c9b49a",
-        color: "#c9b49a",
-        "&:hover": {
-          background: "rgba(201, 180, 154, 0.1)",
-          transform: "scale(1.05)",
-        },
-      }),
+      border: "2px solid #c9b49a",
+      color: "#c9b49a",
+      "&:hover": {
+        background: "rgba(201, 180, 154, 0.1)",
+        transform: "scale(1.05)",
+      },
+    }),
 }));
 
 const FloatingParticles = () => (
@@ -338,41 +367,93 @@ export default function ModernArkVision() {
           </Typography>
           <Grid container spacing={4}>
             {keyFeatures.map((f, idx) => (
-              <Grid item xs={12} md={6} key={idx}>
+              <Grid item xs={12} md={6} lg={3} key={idx}>
                 <Grow in={loaded} timeout={1000 + idx * 200}>
                   <FeatureCard
+                    customcolor={f.color}
                     onMouseEnter={() => setActiveFeature(idx)}
                     onMouseLeave={() => setActiveFeature(null)}
+                    elevation={0}
                   >
-                    <CardContent sx={{ p: 4, height: "100%" }}>
+                    <CardContent
+                      sx={{
+                        p: 4,
+                        height: "100%",
+                        display: "flex",
+                        flexDirection: "column",
+                      }}
+                    >
                       <Box
+                        className="feature-icon-box"
                         sx={{
-                          width: 40,
-                          height: 40,
-                          borderRadius: "20px",
-                          background: f.gradient,
+                          width: 48,
+                          height: 48,
+                          borderRadius: "16px",
+                          background: `rgba(255,255,255,0.05)`,
+                          border: `1px solid ${f.color}30`,
                           display: "flex",
                           alignItems: "center",
                           justifyContent: "center",
                           mb: 3,
-                          color: "white",
+                          transition: "all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
                         }}
                       >
-                        {f.icon}
+                        {React.cloneElement(f.icon, {
+                          className: "feature-icon",
+                          sx: {
+                            fontSize: 24,
+                            color: f.color,
+                            transition: "all 0.3s ease",
+                          },
+                        })}
                       </Box>
                       <Typography
                         variant="h5"
                         sx={{
-                          fontWeight: 600,
+                          fontWeight: 700,
                           mb: 2,
-                          color: activeFeature === idx ? "#c9b49a" : "white",
+                          color: "white",
+                          fontSize: "1.25rem",
+                          letterSpacing: "-0.01em",
                         }}
                       >
                         {f.title}
                       </Typography>
-                      <Typography sx={{ color: "rgba(255,255,255,0.7)" }}>
+                      <Typography
+                        sx={{
+                          color: "rgba(255,255,255,0.6)",
+                          mb: 4,
+                          flexGrow: 1,
+                          lineHeight: 1.7,
+                          fontSize: "0.95rem",
+                        }}
+                      >
                         {f.description}
                       </Typography>
+                      <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <Typography
+                          variant="button"
+                          sx={{
+                            color: f.color,
+                            fontWeight: 700,
+                            fontSize: "0.75rem",
+                            letterSpacing: "0.1em",
+                          }}
+                        >
+                          EXPLORE
+                        </Typography>
+                        <ArrowForward
+                          className="learn-more-arrow"
+                          sx={{
+                            fontSize: 16,
+                            ml: 1,
+                            opacity: 0,
+                            transform: "translateX(-10px)",
+                            transition: "all 0.3s ease",
+                            color: f.color,
+                          }}
+                        />
+                      </Box>
                     </CardContent>
                   </FeatureCard>
                 </Grow>

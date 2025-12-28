@@ -31,11 +31,11 @@ import { useNavigate } from "react-router-dom";
 // Browser router paths
 const navItems = [
   { label: "Home", path: "/", mobileOnly: true },
-  { label: "Ark Vision", path: "/ark-vision" },
-  { label: "Ark OS", path: "/portfolio" },
-  { label: "Ark Crypto", path: "/ark-crypto" },
-  { label: "Our Story", path: "/about" },
-  { label: "Get In Touch", path: "/contact" },
+  { label: "Ark Vision", path: "/#/ark-vision" },
+  { label: "Ark OS", path: "/#/portfolio" },
+  { label: "Ark Crypto", path: "/#/ark-crypto" },
+  { label: "Our Story", path: "/#/about" },
+  { label: "Get In Touch", path: "/#/contact" },
 ];
 
 // The "pill" wrapper with enhanced styling

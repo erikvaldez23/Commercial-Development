@@ -125,7 +125,7 @@ const ModernStewardsOfSpace = () => {
         id="stewards-container"
         sx={{
           position: "relative",
-          background: `url('/map3.png')`,
+          background: `url('/map4.png')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           height: { xs: "100vh", md: "100vh" },
