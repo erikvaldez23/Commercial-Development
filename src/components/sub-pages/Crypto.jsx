@@ -43,22 +43,22 @@ const ModernButton = styled(Button)(({ theme, variant: buttonVariant }) => ({
   transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
   ...(buttonVariant === "gradient"
     ? {
-        background: "linear-gradient(45deg, #c9b49a 30%, #f4e4bc 90%)",
-        color: "#000",
-        "&:hover": {
-          background: "linear-gradient(45deg, #b8a389 30%, #e6d4a8 90%)",
-          transform: "scale(1.05)",
-          boxShadow: "0 10px 30px rgba(201, 180, 154, 0.3)",
-        },
-      }
+      background: "linear-gradient(45deg, #c9b49a 30%, #f4e4bc 90%)",
+      color: "#000",
+      "&:hover": {
+        background: "linear-gradient(45deg, #b8a389 30%, #e6d4a8 90%)",
+        transform: "scale(1.05)",
+        boxShadow: "0 10px 30px rgba(201, 180, 154, 0.3)",
+      },
+    }
     : {
-        border: "2px solid #c9b49a",
-        color: "#c9b49a",
-        "&:hover": {
-          background: "rgba(201, 180, 154, 0.1)",
-          transform: "scale(1.05)",
-        },
-      }),
+      border: "2px solid #c9b49a",
+      color: "#c9b49a",
+      "&:hover": {
+        background: "rgba(201, 180, 154, 0.1)",
+        transform: "scale(1.05)",
+      },
+    }),
 }));
 
 const FloatingParticles = () => {
@@ -219,7 +219,7 @@ export default function Offer() {
           position: "relative",
           background:
             "radial-gradient(circle at 50% 50%, rgba(201, 180, 154, 0.1) 0%, transparent 70%)",
-          pb: isMobile ? 20 : 0, 
+          pb: isMobile ? 20 : 0,
         }}
       >
         {/* Background gradients */}
@@ -235,10 +235,10 @@ export default function Offer() {
 
         <Container
           maxWidth="lg"
-          sx={{ 
-            flex: 1, 
-            display: "flex", 
-            alignItems: "center", 
+          sx={{
+            flex: 1,
+            display: "flex",
+            alignItems: "center",
             py: { xs: 2, md: 4 },
             px: { xs: 2, sm: 3 } // Reduced horizontal padding on mobile
           }}
@@ -249,7 +249,7 @@ export default function Offer() {
               item
               xs={12}
               lg={6}
-              sx={{ 
+              sx={{
                 order: { xs: 1, lg: 2 },
                 textAlign: "center"
               }}
@@ -286,22 +286,21 @@ export default function Offer() {
                     src="/coin2.png"
                     alt="Coin Image"
                     sx={{
-                      width: { 
-                        xs: isSmallMobile ? "280px" : "280px", 
-                        sm: "280px", 
+                      width: {
+                        xs: isSmallMobile ? "280px" : "280px",
+                        sm: "280px",
                         md: "320px",
-                        lg: "400px" 
+                        lg: "400px"
                       },
-                      height: { 
-                        xs: isSmallMobile ? "200px" : "240px", 
-                        sm: "280px", 
+                      height: {
+                        xs: isSmallMobile ? "200px" : "240px",
+                        sm: "280px",
                         md: "320px",
-                        lg: "400px" 
+                        lg: "400px"
                       },
                       objectFit: "contain",
                       filter: "drop-shadow(0 0 40px rgba(201, 180, 154, 0.4))",
                       maxWidth: "100%",
-                      height: "auto",
                     }}
                   />
                 </Box>
@@ -313,7 +312,7 @@ export default function Offer() {
               item
               xs={12}
               lg={6}
-              sx={{ 
+              sx={{
                 order: { xs: 2, lg: 1 },
                 textAlign: { xs: "center", lg: "left" }
               }}
@@ -346,12 +345,12 @@ export default function Offer() {
                   transition={{ duration: 0.8, delay: 0.4 }}
                   variant="h1"
                   sx={{
-                    fontSize: { 
-                      xs: "1.8rem", 
-                      sm: "2.2rem", 
-                      md: "2.8rem", 
+                    fontSize: {
+                      xs: "1.8rem",
+                      sm: "2.2rem",
+                      md: "2.8rem",
                       lg: "3.5rem",
-                      xl: "4rem" 
+                      xl: "4rem"
                     },
                     fontWeight: 700,
                     lineHeight: { xs: 1.2, md: 1.1 },
@@ -398,7 +397,7 @@ export default function Offer() {
                   transition={{ duration: 0.8, delay: 0.8 }}
                   direction={{ xs: "column", sm: "row" }}
                   spacing={2}
-                  sx={{ 
+                  sx={{
                     mb: { xs: 2, md: 4 },
                     alignItems: "center",
                     justifyContent: { xs: "center", lg: "flex-start" }
