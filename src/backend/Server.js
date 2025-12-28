@@ -2,6 +2,7 @@ require("dotenv").config({ path: require("path").resolve(__dirname, "../../.env"
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
+const path = require("path");
 const mongoose = require("mongoose");
 const { OpenAI } = require("openai");
 const Message = require("./models/Message"); // Message model
@@ -9,6 +10,9 @@ const Message = require("./models/Message"); // Message model
 const app = express();
 app.use(cors());
 app.use(express.json());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "../../dist")));
 
 const PORT = process.env.PORT || 5001;
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
@@ -194,4 +198,9 @@ app.post("/chat", async (req, res) => {
       reply: "Oops! Something went wrong. Please contact us at (972) 362-8468.",
     });
   }
+});
+
+// Handle client-side routing by returning index.html for all non-API requests
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../../dist/index.html"));
 });
